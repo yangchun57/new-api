@@ -143,7 +143,10 @@ export function LogStatCards(props: LogStatCardsProps) {
   })
 
   return (
-    <div className='overflow-hidden rounded-lg border'>
+    <div
+      data-slot='card'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+    >
       <div className='divide-border/60 grid min-w-0 grid-cols-2 divide-x sm:grid-cols-3 lg:grid-cols-5'>
         {items.map((it, idx) => {
           const Icon = it.icon

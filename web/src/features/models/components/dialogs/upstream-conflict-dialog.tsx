@@ -528,12 +528,15 @@ export function UpstreamConflictDialog({
                 {t('No conflicts match your search.')}
               </div>
             ) : (
-              <div className='flex min-h-0 flex-1 flex-col overflow-hidden rounded-md border'>
+              <div
+                data-slot='card'
+                className='group/card bg-card text-card-foreground border-border/70 shadow-card flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border'
+              >
                 <div className='flex-1 overflow-auto'>
                   <DataTableView
                     table={table}
                     rows={paginatedRows}
-                    containerClassName='border-0'
+                    containerClassName='rounded-none border-0 bg-transparent shadow-none'
                     tableContainerClassName={
                       isMobile ? 'min-w-full' : 'min-w-[720px]'
                     }

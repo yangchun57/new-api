@@ -115,7 +115,10 @@ const LazyFlowCharts = lazy(() =>
 
 function LogStatCardsFallback() {
   return (
-    <div className='overflow-hidden rounded-lg border'>
+    <div
+      data-slot='card'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+    >
       <div className='divide-border/60 grid grid-cols-2 divide-x sm:grid-cols-3 lg:grid-cols-5'>
         {LOG_STAT_CARD_FALLBACK_KEYS.map((key, index) => (
           <div
@@ -141,12 +144,15 @@ function LogStatCardsFallback() {
 
 function ModelChartsFallback() {
   return (
-    <div className='overflow-hidden rounded-lg border'>
-      <div className='flex items-center justify-between border-b px-4 py-3 sm:px-5'>
+    <div
+      data-slot='card'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5'
+    >
+      <div className='flex items-center justify-between'>
         <Skeleton className='h-5 w-32' />
         <Skeleton className='h-8 w-72' />
       </div>
-      <div className='h-96 p-2'>
+      <div className='h-96'>
         <Skeleton className='h-full w-full' />
       </div>
     </div>
@@ -155,8 +161,11 @@ function ModelChartsFallback() {
 
 function PerformanceOverviewFallback() {
   return (
-    <div className='overflow-hidden rounded-lg border'>
-      <div className='flex flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-5'>
+    <div
+      data-slot='card'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border p-4 sm:p-5'
+    >
+      <div className='flex flex-wrap items-center gap-x-6 gap-y-2'>
         <div className='flex items-center gap-2'>
           <Skeleton className='h-4 w-24' />
         </div>

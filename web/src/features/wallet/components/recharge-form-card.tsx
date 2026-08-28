@@ -22,7 +22,6 @@ import { useTranslation } from 'react-i18next'
 
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { IconBadge } from '@/components/ui/icon-badge'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -145,12 +144,15 @@ export function RechargeFormCard({
 
   if (loading) {
     return (
-      <Card data-card-hover='false' className='gap-0 overflow-hidden py-0'>
-        <CardHeader className='border-b p-3 !pb-3 sm:p-5 sm:!pb-5'>
+      <div
+        data-slot='card'
+        className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 rounded-lg border p-4 sm:p-5'
+      >
+        <div>
           <Skeleton className='h-6 w-32' />
           <Skeleton className='mt-2 h-4 w-48' />
-        </CardHeader>
-        <CardContent className='space-y-4 p-3 sm:space-y-6 sm:p-5'>
+        </div>
+        <div className='space-y-4 sm:space-y-6'>
           <div className='space-y-4 sm:space-y-6'>
             {/* Preset Amounts Skeleton */}
             <div className='space-y-3'>
@@ -189,8 +191,8 @@ export function RechargeFormCard({
               <Skeleton className='h-10 w-20' />
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     )
   }
 

@@ -236,7 +236,7 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
   const { t, i18n } = useTranslation()
 
   return (
-    <div className='overflow-x-auto rounded-md border'>
+    <div className='overflow-x-auto'>
       <Table className='min-w-[1230px]'>
         <TableHeader>
           <TableRow className='bg-muted/40 hover:bg-muted/40'>
@@ -628,7 +628,10 @@ export function SystemInstancesPanel() {
 
   return (
     <>
-      <section className='bg-card overflow-hidden rounded-lg border shadow-xs'>
+      <section
+        data-slot='card'
+        className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+      >
         <div className='flex flex-col gap-3 border-b px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5'>
           <div className='min-w-0'>
             <div className='flex items-center gap-2'>

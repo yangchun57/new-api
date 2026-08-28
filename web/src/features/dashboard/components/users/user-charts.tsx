@@ -228,16 +228,17 @@ export function UserCharts(props: UserChartsProps) {
           return (
             <div
               key={chart.value}
-              className='overflow-hidden rounded-lg border'
+              data-slot='card'
+              className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5'
             >
-              <div className='flex w-full items-center gap-2 border-b px-3 py-2 sm:px-5 sm:py-3'>
+              <div className='flex w-full items-center gap-2'>
                 <IconBadge tone='info' size='sm'>
                   <Users />
                 </IconBadge>
                 <div className='text-sm font-semibold'>{t(chart.labelKey)}</div>
               </div>
 
-              <div className='h-[300px] p-1.5 sm:h-96 sm:p-2'>
+              <div className='h-[300px] sm:h-96'>
                 {isLoading ? (
                   <Skeleton className='h-full w-full' />
                 ) : (

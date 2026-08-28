@@ -29,7 +29,6 @@ import {
 import { cn } from '@/lib/utils'
 
 import { TruncatedCell } from '../core/truncated-cell'
-import { staticDataTableClassNames } from './static-data-table-classnames'
 
 type StaticDataTableBaseProps = {
   className?: string
@@ -78,7 +77,12 @@ export function StaticDataTable<TData = unknown>(
 
   return (
     <div
-      className={cn(staticDataTableClassNames.container, className)}
+      data-slot='card'
+      data-card-hover='false'
+      className={cn(
+        'group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border',
+        className
+      )}
       {...containerProps}
     >
       <Table className={tableClassName} {...tableProps}>

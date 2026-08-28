@@ -421,20 +421,24 @@ function QuickActionItem(props: { action: QuickAction }) {
   return (
     <Button
       variant='outline'
-      className='h-auto justify-start rounded-xl px-3 py-3 text-left'
+      className='h-auto justify-start gap-2.5 rounded-lg px-3 py-2.5 text-left'
       render={<Link to={props.action.to} />}
     >
-      <span className='bg-muted flex size-9 shrink-0 items-center justify-center rounded-lg'>
+      <span className='bg-muted flex size-8 shrink-0 items-center justify-center rounded-md'>
         <Icon className='size-4' aria-hidden='true' />
       </span>
       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
         <span className='truncate text-sm font-medium'>
           {props.action.title}
         </span>
-        <span className='text-muted-foreground line-clamp-2 text-xs leading-relaxed'>
+        <span className='text-muted-foreground line-clamp-1 text-xs'>
           {props.action.description}
         </span>
       </span>
+      <ArrowRight
+        className='text-muted-foreground size-4 shrink-0'
+        aria-hidden='true'
+      />
     </Button>
   )
 }
@@ -620,9 +624,9 @@ export function OverviewDashboard() {
   return (
     <div className='flex flex-col gap-4'>
       {setupGuideExpanded ? (
-        <CardStaggerContainer className='grid items-stretch gap-4 xl:grid-cols-[minmax(0,1fr)_22rem]'>
-          <CardStaggerItem className='bg-card h-full overflow-hidden rounded-2xl border shadow-xs'>
-            <div className='relative h-full overflow-hidden p-4 sm:p-5'>
+        <CardStaggerContainer>
+          <CardStaggerItem className='h-full overflow-hidden'>
+            <div className='relative h-full overflow-hidden py-1'>
               <SetupGuideBackdrop />
               <div className='relative grid gap-5 lg:grid-cols-[minmax(0,1fr)_21rem]'>
                 <div className='flex min-w-0 flex-col gap-5'>
@@ -657,7 +661,7 @@ export function OverviewDashboard() {
                     </div>
                   </div>
 
-                  <ol className='bg-background/45 rounded-2xl border p-2 backdrop-blur'>
+                  <ol className='pt-1'>
                     {startSteps.map((step, index) => (
                       <StartStepItem
                         key={step.title}
@@ -674,31 +678,24 @@ export function OverviewDashboard() {
                   signals={heroSignals}
                 />
               </div>
-            </div>
-          </CardStaggerItem>
 
-          <CardStaggerItem className='bg-card h-full rounded-2xl border p-4 shadow-xs sm:p-5'>
-            <div className='flex h-full flex-col gap-4'>
-              <div className='flex flex-col gap-1'>
+              <div className='relative mt-5 flex flex-col gap-2 border-t pt-4'>
                 <div className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
                   {t('Recommended actions')}
                 </div>
-                <h3 className='text-lg font-semibold tracking-tight'>
-                  {t('Keep the platform ready')}
-                </h3>
-              </div>
-              <div className='grid gap-2'>
-                {visibleQuickActions.map((action) => (
-                  <QuickActionItem key={action.title} action={action} />
-                ))}
+                <div className='grid gap-2 sm:grid-cols-2 xl:grid-cols-4'>
+                  {visibleQuickActions.map((action) => (
+                    <QuickActionItem key={action.title} action={action} />
+                  ))}
+                </div>
               </div>
             </div>
           </CardStaggerItem>
         </CardStaggerContainer>
       ) : (
         <CardStaggerContainer>
-          <CardStaggerItem className='bg-card overflow-hidden rounded-2xl border shadow-xs'>
-            <div className='relative overflow-hidden px-4 py-3 sm:px-5'>
+          <CardStaggerItem className='overflow-hidden'>
+            <div className='relative overflow-hidden py-1'>
               <SetupGuideBackdrop compact />
               <div className='relative flex flex-wrap items-center justify-between gap-3'>
                 <div className='flex min-w-0 items-center gap-3'>

@@ -144,7 +144,7 @@ export function AmountDiscountVisualEditor({
         <div className='rounded-md border'>
           {/* Desktop table view */}
           <StaticDataTable
-            className='hidden rounded-none border-0 sm:block'
+            className='hidden rounded-none border-0 bg-transparent shadow-none sm:block'
             data={discounts}
             getRowKey={(discount) => discount.amount}
             columns={[

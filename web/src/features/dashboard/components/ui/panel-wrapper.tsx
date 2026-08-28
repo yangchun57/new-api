@@ -50,7 +50,7 @@ function PanelHeader(props: {
   )
 
   return (
-    <div className='border-b px-4 py-3 sm:px-5'>
+    <div className='flex flex-col gap-1'>
       {props.actions != null ? (
         <div className='flex items-start justify-between gap-2'>
           {heading}
@@ -68,15 +68,15 @@ export function PanelWrapper(props: PanelWrapperProps) {
   const resolvedEmptyMessage = props.emptyMessage ?? t('No data available')
   const height = props.height ?? 'h-64'
   const frameClassName = cn(
-    'overflow-hidden rounded-2xl border bg-card shadow-xs',
+    'group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5',
     props.className
   )
 
   if (props.loading) {
     return (
-      <div className={frameClassName}>
+      <div data-slot='card' className={frameClassName}>
         <PanelHeader title={props.title} description={props.description} />
-        <div className={cn('p-4 sm:p-5', props.contentClassName)}>
+        <div className={cn('min-w-0', props.contentClassName)}>
           <Skeleton className={`w-full ${height}`} />
         </div>
       </div>
@@ -85,11 +85,11 @@ export function PanelWrapper(props: PanelWrapperProps) {
 
   if (props.empty) {
     return (
-      <div className={frameClassName}>
+      <div data-slot='card' className={frameClassName}>
         <PanelHeader title={props.title} description={props.description} />
         <div
           className={cn(
-            'text-muted-foreground flex items-center justify-center px-4 text-sm',
+            'text-muted-foreground flex items-center justify-center text-sm',
             height,
             props.contentClassName
           )}
@@ -101,13 +101,13 @@ export function PanelWrapper(props: PanelWrapperProps) {
   }
 
   return (
-    <div className={frameClassName}>
+    <div data-slot='card' className={frameClassName}>
       <PanelHeader
         title={props.title}
         description={props.description}
         actions={props.headerActions}
       />
-      <div className={cn('p-4 sm:p-5', props.contentClassName)}>
+      <div className={cn('min-w-0', props.contentClassName)}>
         {props.children}
       </div>
     </div>

@@ -61,8 +61,10 @@ export function DataTableView<TData>(props: DataTableViewProps<TData>) {
 
   return (
     <div
+      data-slot='card'
+      data-card-hover='false'
       className={cn(
-        'overflow-hidden rounded-lg border',
+        'group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border',
         props.containerClassName
       )}
       {...props.containerProps}

@@ -874,7 +874,7 @@ function GroupOverrideRules({
                       {userGroupData.overrides.length > 0 && (
                         <div className='border-t'>
                           <StaticDataTable
-                            className='rounded-none border-0'
+                            className='rounded-none border-0 bg-transparent shadow-none'
                             data={userGroupData.overrides}
                             getRowKey={(override) => override.targetGroup}
                             columns={[

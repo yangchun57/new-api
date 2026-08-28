@@ -348,7 +348,7 @@ export function DynamicPricingBreakdown({
             })}
           </div>
           <StaticDataTable
-            className='hidden rounded-none border-0 sm:block'
+            className='hidden rounded-none border-0 bg-transparent shadow-none sm:block'
             tableClassName={
               compact
                 ? '[&_td]:text-xs [&_td_*]:text-xs [&_th]:text-xs [&_th_*]:text-xs'

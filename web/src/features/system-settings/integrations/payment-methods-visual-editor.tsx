@@ -306,7 +306,7 @@ export function PaymentMethodsVisualEditor({
         <div className='rounded-md border'>
           {/* Desktop table view */}
           <StaticDataTable
-            className='hidden rounded-none border-0 md:block'
+            className='hidden rounded-none border-0 bg-transparent shadow-none md:block'
             data={filteredMethods}
             getRowKey={(method, index) => `${method.type}-${index}`}
             columns={[

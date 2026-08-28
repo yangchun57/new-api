@@ -388,7 +388,7 @@ export function MultiKeyManageDialog({
               </div>
             ) : (
               <StaticDataTable
-                className='rounded-none border-0'
+                className='rounded-none border-0 bg-transparent shadow-none'
                 tableClassName='min-w-[800px]'
                 data={keys}
                 getRowKey={(key) => key.index}

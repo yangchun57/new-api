@@ -1047,7 +1047,7 @@ function GroupPricingSection(props: {
       <SectionTitle>{t('Pricing by Group')}</SectionTitle>
       <AutoGroupChain model={props.model} autoGroups={props.autoGroups} />
       <StaticDataTable
-        className='-mx-4 rounded-none border-0 sm:mx-0'
+        className='-mx-4 rounded-none border-0 bg-transparent shadow-none sm:mx-0'
         tableClassName='text-sm'
         headerRowClassName='hover:bg-transparent'
         data={availableGroups}
