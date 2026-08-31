@@ -197,6 +197,7 @@ export function EmailSettingsSection({
                   <Input
                     autoComplete='off'
                     placeholder={t('smtp.example.com')}
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                     onChange={(event) => field.onChange(event.target.value)}
                   />
@@ -221,6 +222,7 @@ export function EmailSettingsSection({
                       autoComplete='off'
                       type='number'
                       placeholder='587'
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       {...field}
                       onChange={(event) => field.onChange(event.target.value)}
                     />
@@ -349,6 +351,7 @@ export function EmailSettingsSection({
                   <Input
                     autoComplete='off'
                     placeholder={t('noreply@example.com')}
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                     onChange={(event) => field.onChange(event.target.value)}
                   />
@@ -371,6 +374,7 @@ export function EmailSettingsSection({
                   <Input
                     autoComplete='off'
                     placeholder={t('New API &lt;noreply@example.com&gt;')}
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                     onChange={(event) => field.onChange(event.target.value)}
                   />
@@ -394,6 +398,7 @@ export function EmailSettingsSection({
                     autoComplete='off'
                     type='password'
                     placeholder={t('Enter new token to update')}
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                     onChange={(event) => field.onChange(event.target.value)}
                   />

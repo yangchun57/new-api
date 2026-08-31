@@ -180,13 +180,13 @@ export function TwoFASetupDialog({
         {initializing ? (
           <div className='flex flex-col items-center justify-center gap-3 py-8'>
             <div className='border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent' />
-            <div className='text-muted-foreground text-sm'>
+            <div className='text-[13px] text-[#5A6478]'>
               {t('Setting up 2FA...')}
             </div>
           </div>
         ) : !setupData ? (
           <div className='flex justify-center py-8'>
-            <div className='text-muted-foreground'>
+            <div className='text-[#5A6478]'>
               {t('Failed to load setup data')}
             </div>
           </div>
@@ -195,21 +195,21 @@ export function TwoFASetupDialog({
             {/* Step 0: QR Code */}
             {step === 0 && (
               <div className='space-y-4'>
-                <p className='text-muted-foreground text-sm'>
+                <p className='text-[13px] leading-relaxed text-[#5A6478]'>
                   {t(
                     'Scan this QR code with your authenticator app (Google Authenticator, Microsoft Authenticator, etc.)'
                   )}
                 </p>
-                <div className='flex justify-center rounded-lg bg-white p-4'>
+                <div className='flex justify-center rounded-xl bg-white p-4'>
                   <QRCodeSVG value={setupData.qr_code_data} size={200} />
                 </div>
-                <div className='bg-muted rounded-lg p-3'>
+                <div className='bg-[#F7F8FA] rounded-xl p-3'>
                   <div className='flex items-center justify-between'>
                     <div>
-                      <p className='text-muted-foreground text-xs'>
+                      <p className='text-[12px] text-[#8A93A4]'>
                         {t('Or enter this key manually:')}
                       </p>
-                      <code className='font-mono text-sm'>
+                      <code className='font-mono text-[13px]'>
                         {setupData.secret}
                       </code>
                     </div>
@@ -234,12 +234,12 @@ export function TwoFASetupDialog({
                     )}
                   </AlertDescription>
                 </Alert>
-                <div className='rounded-lg border p-4'>
+                <div className='rounded-xl border p-4'>
                   <div className='grid grid-cols-2 gap-2'>
                     {setupData.backup_codes.map((code, index) => (
                       <div
                         key={index}
-                        className='bg-muted rounded-md p-2 text-center font-mono text-sm'
+                        className='bg-[#F7F8FA] rounded-md p-2 text-center font-mono text-[13px]'
                       >
                         {code}
                       </div>
@@ -273,7 +273,7 @@ export function TwoFASetupDialog({
                     maxLength={6}
                     disabled={loading}
                   />
-                  <p className='text-muted-foreground text-xs'>
+                  <p className='text-[12px] text-[#8A93A4]'>
                     {t('Enter the 6-digit code from your authenticator app')}
                   </p>
                 </div>

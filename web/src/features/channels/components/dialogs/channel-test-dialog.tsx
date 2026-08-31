@@ -1026,7 +1026,7 @@ function ChannelTestDialogContent({
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t(
                   'Override the endpoint used for testing. Leave empty to auto detect.'
                 )}
@@ -1041,11 +1041,11 @@ function ChannelTestDialogContent({
                   onCheckedChange={setIsStreamTest}
                   disabled={streamDisabled}
                 />
-                <span className='text-sm'>
+                <span className='text-[#5A6478] text-[13px]'>
                   {effectiveStreamTest ? t('Enabled') : t('Disabled')}
                 </span>
               </div>
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t('Enable streaming mode for the test request.')}
               </p>
             </div>
@@ -1054,8 +1054,8 @@ function ChannelTestDialogContent({
           <div className='space-y-3 max-sm:has-[div[role="toolbar"]]:pb-16'>
             <div className='flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>
               <div className='min-w-0 space-y-2'>
-                <p className='text-sm font-medium'>{t('Channel models')}</p>
-                <p className='text-muted-foreground text-xs'>
+                <p className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Channel models')}</p>
+                <p className='text-[#8A93A4] text-[12px]'>
                   {t('Select models to run batch tests.')}
                 </p>
                 <div className='flex flex-wrap items-center gap-2'>
@@ -1151,7 +1151,7 @@ function ChannelTestDialogContent({
                     ? t('No models matched your search.')
                     : t('This channel has no configured models.')
                 }
-                emptyCellClassName='text-muted-foreground h-16 text-center text-sm'
+                emptyCellClassName='text-[#8A93A4] h-16 text-center text-[12px]'
               />
 
               <DataTablePagination table={table} />
@@ -1227,12 +1227,12 @@ function TestResultCell({
   const { t } = useTranslation()
 
   if (!result || result.status === 'idle') {
-    return <span className='text-muted-foreground text-sm'>-</span>
+    return <span className='text-[#8A93A4] text-[12px]'>-</span>
   }
 
   if (result.status === 'testing') {
     return (
-      <div className='text-muted-foreground flex min-w-0 items-center gap-2 text-sm'>
+      <div className='text-[#8A93A4] flex min-w-0 items-center gap-2 text-[12px]'>
         <Loader2 className='size-4 shrink-0 animate-spin' />
         <span className='truncate'>{t('Testing...')}</span>
       </div>
@@ -1241,11 +1241,11 @@ function TestResultCell({
 
   if (result.status === 'success') {
     return typeof result.responseTime === 'number' ? (
-      <span className='text-muted-foreground text-sm'>
+      <span className='text-[#8A93A4] text-[12px]'>
         {formatResponseTime(result.responseTime, t)}
       </span>
     ) : (
-      <span className='text-muted-foreground text-sm'>-</span>
+      <span className='text-[#8A93A4] text-[12px]'>-</span>
     )
   }
 
@@ -1281,8 +1281,8 @@ function FailureResultContent({
   })
 
   return (
-    <div className='flex min-w-0 items-center gap-2 text-xs whitespace-normal'>
-      <p className='text-muted-foreground line-clamp-2 min-w-0 flex-1 leading-snug wrap-break-word'>
+    <div className='flex min-w-0 items-center gap-2 text-[12px] whitespace-normal'>
+      <p className='text-[#5A6478] line-clamp-2 min-w-0 flex-1 leading-snug wrap-break-word'>
         {summary}
       </p>
       <div className='flex shrink-0 flex-wrap items-center justify-end gap-1.5'>
@@ -1290,7 +1290,7 @@ function FailureResultContent({
           <Button
             variant='outline'
             size='sm'
-            className='h-7 w-fit px-2 text-xs'
+            className='h-7 w-fit px-2 text-[12px]'
             onClick={() =>
               window.open('/system-settings/billing/model-pricing', '_blank')
             }
@@ -1303,7 +1303,7 @@ function FailureResultContent({
           <Button
             variant='ghost'
             size='sm'
-            className='h-7 w-fit px-2 text-xs'
+            className='h-7 w-fit px-2 text-[12px]'
             aria-haspopup='dialog'
             onClick={() => onOpenDetails({ model, summary, details })}
           >
@@ -1347,24 +1347,24 @@ function FailureDetailsSheet({
             </SheetHeader>
             <div className={sideDrawerFormClassName('gap-4 sm:px-5')}>
               <section className='space-y-1'>
-                <div className='text-muted-foreground text-xs font-medium'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Model')}
                 </div>
-                <p className='text-sm font-medium break-all'>{details.model}</p>
+                <p className='text-[#0A0E1A] text-[13px] font-medium break-all font-mono'>{details.model}</p>
               </section>
               <section className='space-y-1'>
-                <div className='text-muted-foreground text-xs font-medium'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Failed')}
                 </div>
-                <p className='text-muted-foreground text-sm leading-relaxed wrap-break-word'>
+                <p className='text-[#5A6478] text-[13px] leading-relaxed wrap-break-word'>
                   {details.summary}
                 </p>
               </section>
               <section className='space-y-2'>
-                <div className='text-muted-foreground text-xs font-medium'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Details')}
                 </div>
-                <pre className='bg-muted/30 text-muted-foreground m-0 max-w-full rounded-md border p-3 text-xs leading-relaxed wrap-break-word whitespace-pre-wrap'>
+                <pre className='bg-[#F7F8FA]/60 text-[#5A6478] m-0 max-w-full rounded-md border p-3 text-[12px] leading-relaxed wrap-break-word whitespace-pre-wrap'>
                   {details.details}
                 </pre>
               </section>

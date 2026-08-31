@@ -174,28 +174,28 @@ export function ViewLogsDialog({
   if (isLoadingContainers || isLoadingLogs) {
     logsContent = (
       <div className='flex items-center justify-center py-8'>
-        <Loader2 className='h-6 w-6 animate-spin text-gray-400' />
+        <Loader2 className='h-6 w-6 animate-spin text-[#8A93A4]' />
       </div>
     )
   } else if (containers.length === 0) {
     logsContent = (
-      <div className='py-8 text-center text-gray-400'>{t('No containers')}</div>
+      <div className='py-8 text-center text-[#8A93A4] text-[13px]'>{t('No containers')}</div>
     )
   } else if (!containerId) {
     logsContent = (
-      <div className='py-8 text-center text-gray-400'>
+      <div className='py-8 text-center text-[#8A93A4] text-[13px]'>
         {t('Please select a container')}
       </div>
     )
   } else if (!logsText.trim()) {
     logsContent = (
-      <div className='py-8 text-center text-gray-400'>{t('No logs')}</div>
+      <div className='py-8 text-center text-[#8A93A4] text-[13px]'>{t('No logs')}</div>
     )
   } else {
     logsContent = (
-      <div className='font-mono text-sm'>
+      <div className='font-mono text-[12px]'>
         {keyedLogLines.map(({ key, line }) => (
-          <div key={key} className='whitespace-pre-wrap text-gray-200'>
+          <div key={key} className='whitespace-pre-wrap text-[#0A0E1A]'>
             {line}
           </div>
         ))}
@@ -221,7 +221,7 @@ export function ViewLogsDialog({
       bodyClassName='space-y-4'
     >
       <div className='mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3'>
-        <div className='text-muted-foreground text-sm'>
+        <div className='text-[#8A93A4] text-[13px] font-mono tabular-nums'>
           {t('Deployment ID')}: {deploymentId}
         </div>
         <div className='grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center'>
@@ -250,15 +250,15 @@ export function ViewLogsDialog({
             <Download className='mr-2 h-4 w-4' />
             {t('Download')}
           </Button>
-          <div className='col-span-2 flex items-center justify-between gap-2 rounded-md border px-3 py-1.5 sm:col-span-1'>
-            <span className='text-xs'>{t('Auto refresh')}</span>
+          <div className='col-span-2 flex items-center justify-between gap-2 rounded-md border border-[#E5E8EE] px-3 py-1.5 sm:col-span-1'>
+            <span className='text-[12px] text-[#5A6478]'>{t('Auto refresh')}</span>
             <Switch checked={autoRefresh} onCheckedChange={setAutoRefresh} />
           </div>
         </div>
       </div>
       <div className='mb-3 grid gap-2 sm:grid-cols-2 sm:gap-3'>
         <div className='space-y-1'>
-          <div className='text-muted-foreground text-xs'>{t('Container')}</div>
+          <div className='text-[#8A93A4] text-[12px] font-medium'>{t('Container')}</div>
           <Select
             items={containers.flatMap((c) => {
               const id = c?.container_id
@@ -309,7 +309,7 @@ export function ViewLogsDialog({
           </Select>
         </div>
         <div className='space-y-1'>
-          <div className='text-muted-foreground text-xs'>{t('Stream')}</div>
+          <div className='text-[#8A93A4] text-[12px] font-medium'>{t('Stream')}</div>
           <Select
             items={[
               { value: 'stdout', label: 'stdout' },
@@ -340,7 +340,7 @@ export function ViewLogsDialog({
       </div>
       <div
         ref={scrollRef}
-        className='bg-muted flex-1 overflow-auto rounded-md border p-3 sm:p-4'
+        className='bg-[#F7F8FA] flex-1 overflow-auto rounded-md border border-[#E5E8EE] p-3 sm:p-4'
         onScroll={(e) => {
           const target = e.target as HTMLDivElement
           const isAtBottom =

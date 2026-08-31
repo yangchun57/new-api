@@ -202,8 +202,8 @@ export function DataTableRowActions<TData>({
               aria-label={toggleLabel}
               className={
                 isEnabled
-                  ? 'text-destructive hover:text-destructive'
-                  : 'text-emerald-600 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-400'
+                  ? 'text-[#E5484D] hover:text-[#E5484D]'
+                  : 'text-[#16A34A] hover:text-[#16A34A]'
               }
             />
           }
@@ -309,7 +309,7 @@ export function DataTableRowActions<TData>({
             setCurrentRow(apiKey)
             setOpen('delete')
           }}
-          className='text-destructive focus:text-destructive'
+          className='text-[#E5484D] focus:bg-[#E5484D]/[0.06] focus:text-[#E5484D]'
         >
           {t('Delete')}
           <DropdownMenuShortcut>

@@ -243,7 +243,7 @@ export function UsersMutateDrawer({
             >
               {/* Basic Information */}
               <SideDrawerSection>
-                <h3 className='text-sm font-medium'>
+                <h3 className='text-[14px] font-semibold leading-none tracking-[-0.01em] text-[#0A0E1A]'>
                   {t('Basic Information')}
                 </h3>
 
@@ -351,7 +351,7 @@ export function UsersMutateDrawer({
               {/* Group & Quota Settings (Update only) */}
               {isUpdate && (
                 <SideDrawerSection>
-                  <h3 className='text-sm font-medium'>{t('Group & Quota')}</h3>
+                  <h3 className='text-[14px] font-semibold leading-none tracking-[-0.01em] text-[#0A0E1A]'>{t('Group & Quota')}</h3>
 
                   <FormField
                     control={form.control}
@@ -454,10 +454,10 @@ export function UsersMutateDrawer({
                 targetIsAdmin &&
                 permissionCatalog.resources.length > 0 && (
                   <SideDrawerSection>
-                    <h3 className='text-sm font-medium'>
+                    <h3 className='text-[14px] font-semibold leading-none tracking-[-0.01em] text-[#0A0E1A]'>
                       {t('Admin Permissions')}
                     </h3>
-                    <p className='text-muted-foreground text-xs'>
+                    <p className='text-[12px] leading-relaxed text-[#8A93A4]'>
                       {t(
                         'Default administrator permissions can be overridden for this user.'
                       )}
@@ -476,9 +476,9 @@ export function UsersMutateDrawer({
                               {permissionCatalog.resources.map((resource) => (
                                 <div
                                   key={resource.resource}
-                                  className='space-y-2 rounded-md border p-3'
+                                  className='space-y-2 rounded-xl border border-[#E5E8EE] bg-white p-3'
                                 >
-                                  <div className='text-sm font-medium'>
+                                  <div className='text-[13px] font-medium text-[#0A0E1A]'>
                                     {t(resource.label_key)}
                                   </div>
                                   <div className='space-y-2'>
@@ -504,11 +504,11 @@ export function UsersMutateDrawer({
                                             })
                                           }}
                                         />
-                                        <span className='flex flex-col gap-1'>
-                                          <span className='text-sm font-medium'>
+                                        <span className='flex flex-col gap-0.5'>
+                                          <span className='text-[13px] text-[#0A0E1A]'>
                                             {t(option.label_key)}
                                           </span>
-                                          <span className='text-muted-foreground text-xs'>
+                                          <span className='text-[12px] leading-relaxed text-[#8A93A4]'>
                                             {t(option.description_key)}
                                           </span>
                                         </span>
@@ -524,7 +524,7 @@ export function UsersMutateDrawer({
                       }}
                     />
                     {currentUser && (
-                      <p className='text-muted-foreground text-xs'>
+                      <p className='text-[12px] leading-relaxed text-[#8A93A4]'>
                         {hasPermission(
                           currentUser,
                           ADMIN_PERMISSION_RESOURCES.CHANNEL,
@@ -544,10 +544,10 @@ export function UsersMutateDrawer({
               {/* Binding Information (Read-only) */}
               {isUpdate && (
                 <SideDrawerSection>
-                  <h3 className='text-sm font-medium'>
+                  <h3 className='text-[14px] font-semibold leading-none tracking-[-0.01em] text-[#0A0E1A]'>
                     {t('Binding Information')}
                   </h3>
-                  <p className='text-muted-foreground text-xs'>
+                  <p className='text-[12px] leading-relaxed text-[#8A93A4]'>
                     {t(
                       'Third-party account bindings (read-only, managed by user in profile settings)'
                     )}
@@ -556,7 +556,7 @@ export function UsersMutateDrawer({
                   <div className='flex flex-col gap-3'>
                     {BINDING_FIELDS.map(({ key, label }) => (
                       <div key={key}>
-                        <Label className='text-muted-foreground text-xs'>
+                        <Label className='text-[12px] font-medium text-[#0A0E1A]'>
                           {t(label)}
                         </Label>
                         <Input

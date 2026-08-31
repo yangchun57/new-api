@@ -33,12 +33,12 @@ import { cn } from '@/lib/utils'
 import { PanelWrapper } from '../ui/panel-wrapper'
 
 const STATUS_COLOR_MAP: Record<number, string> = {
-  1: 'bg-emerald-500',
-  0: 'bg-red-500',
-  2: 'bg-amber-500',
-  3: 'bg-blue-500',
+  1: 'bg-[#16A34A]',
+  0: 'bg-[#E5484D]',
+  2: 'bg-[#D97706]',
+  3: 'bg-[#2E4BFF]',
 }
-const DEFAULT_STATUS_COLOR = 'bg-muted-foreground/40'
+const DEFAULT_STATUS_COLOR = 'bg-[#B8BFCC]'
 
 const StatusDot = memo(function StatusDot(props: { status: number }) {
   const color = STATUS_COLOR_MAP[props.status] ?? DEFAULT_STATUS_COLOR
@@ -116,7 +116,7 @@ export function UptimePanel() {
           size='sm'
           onClick={handleRefresh}
           disabled={refreshing}
-          className='size-7 p-0'
+          className='size-7 p-0 text-[#8A93A4] hover:bg-[#F0F2F6] hover:text-[#0A0E1A]'
         >
           <RotateCw
             className={cn('size-3.5', refreshing && 'animate-spin')}
@@ -129,12 +129,12 @@ export function UptimePanel() {
         <div>
           {groups.map((group, groupIdx) => (
             <div key={group.categoryName}>
-              <div className='bg-muted/30 border-border/60 border-b px-3 py-2 sm:px-5'>
+              <div className='border-b border-[#E5E8EE] bg-[#F7F8FA] px-3 py-2 sm:px-5'>
                 <div className='flex items-center gap-2'>
-                  <h4 className='text-muted-foreground text-xs font-semibold tracking-wider uppercase'>
+                  <h4 className='text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8A93A4]'>
                     {group.categoryName}
                   </h4>
-                  <span className='text-muted-foreground/40 font-mono text-xs tabular-nums'>
+                  <span className='font-mono text-[11px] tabular-nums text-[#B8BFCC]'>
                     {group.monitors?.length || 0}
                   </span>
                 </div>
@@ -145,24 +145,24 @@ export function UptimePanel() {
                   <div
                     key={monitor.name}
                     className={cn(
-                      'hover:bg-muted/40 flex items-center justify-between gap-2 px-3 py-2 transition-colors sm:px-5 sm:py-2.5',
+                      'flex items-center justify-between gap-2 px-3 py-2 transition-colors hover:bg-[#F7F8FA] sm:px-5 sm:py-2.5',
                       monitorIdx < (group.monitors?.length || 0) - 1 &&
-                        'border-border/40 border-b',
+                        'border-b border-[#E5E8EE]/60',
                       groupIdx < groups.length - 1 &&
                         monitorIdx === (group.monitors?.length || 0) - 1 &&
-                        'border-border/60 border-b'
+                        'border-b border-[#E5E8EE]'
                     )}
                   >
                     <div className='flex min-w-0 items-center gap-2.5'>
                       <StatusDot status={monitor.status} />
-                      <span className='truncate text-sm'>{monitor.name}</span>
+                      <span className='truncate text-[13px] text-[#0A0E1A]'>{monitor.name}</span>
                       {monitor.group && (
-                        <span className='text-muted-foreground/40 shrink-0 text-xs'>
+                        <span className='shrink-0 text-[12px] text-[#8A93A4]'>
                           ({monitor.group})
                         </span>
                       )}
                     </div>
-                    <span className='text-foreground shrink-0 font-mono text-sm font-semibold tabular-nums'>
+                    <span className='shrink-0 font-mono text-[13px] font-semibold tabular-nums tracking-[-0.01em] text-[#0A0E1A]'>
                       {((monitor.uptime ?? 0) * 100).toFixed(2)}%
                     </span>
                   </div>

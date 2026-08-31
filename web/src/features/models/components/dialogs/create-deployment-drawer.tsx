@@ -402,7 +402,7 @@ export function CreateDeploymentDrawer({
           >
             {/* Basic Configuration */}
             <SideDrawerSection>
-              <h3 className='text-sm font-medium'>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                 {t('Basic Configuration')}
               </h3>
 
@@ -416,7 +416,7 @@ export function CreateDeploymentDrawer({
                       <Input placeholder={t('Enter a name')} {...field} />
                     </FormControl>
                     {open && field.value?.trim() ? (
-                      <div className='text-muted-foreground text-xs'>
+                      <div className='text-[#8A93A4] text-[12px]'>
                         {isCheckingName
                           ? t('Checking name...')
                           : nameAvailable === true
@@ -448,7 +448,7 @@ export function CreateDeploymentDrawer({
 
             {/* Resource Configuration */}
             <SideDrawerSection>
-              <h3 className='text-sm font-medium'>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                 {t('Resource Configuration')}
               </h3>
 
@@ -617,8 +617,8 @@ export function CreateDeploymentDrawer({
 
             {/* Price Estimation */}
             <SideDrawerSection>
-              <h3 className='text-sm font-medium'>{t('Price estimation')}</h3>
-              <p className='text-muted-foreground text-xs'>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Price estimation')}</h3>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t('Price estimation description')}
               </p>
 
@@ -655,10 +655,10 @@ export function CreateDeploymentDrawer({
 
             {/* Advanced Configuration */}
             <SideDrawerSection>
-              <h3 className='text-sm font-medium'>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                 {t('Advanced Configuration')}
               </h3>
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t('Optional settings for advanced container configuration.')}
               </p>
 

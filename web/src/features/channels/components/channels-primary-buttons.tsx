@@ -109,10 +109,10 @@ export function ChannelsPrimaryButtons() {
       <div className='flex items-center gap-2'>
         {/* Desktop: Toggle switches visible */}
         <div className='hidden items-center gap-2 rounded-md border px-3 py-1.5 sm:flex'>
-          <ListChecks className='text-muted-foreground h-4 w-4' />
+          <ListChecks className='text-[#8A93A4] h-4 w-4' />
           <Label
             htmlFor='channel-batch-mode'
-            className='cursor-pointer text-sm'
+            className='text-[#0A0E1A] cursor-pointer text-[13px] font-medium'
           >
             {t('Batch Operations')}
           </Label>
@@ -124,8 +124,8 @@ export function ChannelsPrimaryButtons() {
         </div>
 
         <div className='hidden items-center gap-2 rounded-md border px-3 py-1.5 sm:flex'>
-          <Tags className='text-muted-foreground h-4 w-4' />
-          <Label htmlFor='tag-mode' className='cursor-pointer text-sm'>
+          <Tags className='text-[#8A93A4] h-4 w-4' />
+          <Label htmlFor='tag-mode' className='text-[#0A0E1A] cursor-pointer text-[13px] font-medium'>
             {t('Tag Mode')}
           </Label>
           <Switch
@@ -136,8 +136,8 @@ export function ChannelsPrimaryButtons() {
         </div>
 
         <div className='hidden items-center gap-2 rounded-md border px-3 py-1.5 sm:flex'>
-          <SortAsc className='text-muted-foreground h-4 w-4' />
-          <Label htmlFor='id-sort' className='cursor-pointer text-sm'>
+          <SortAsc className='text-[#8A93A4] h-4 w-4' />
+          <Label htmlFor='id-sort' className='text-[#0A0E1A] cursor-pointer text-[13px] font-medium'>
             {t('Sort by ID')}
           </Label>
           <Switch

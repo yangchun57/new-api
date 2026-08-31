@@ -129,20 +129,20 @@ export function MissingModelsDialog({
           <Loader2 className='h-8 w-8 animate-spin' />
         </div>
       ) : missingModels.length === 0 ? (
-        <div className='text-muted-foreground py-12 text-center'>
+        <div className='text-[#5A6478] py-12 text-center'>
           <p>{t('No missing models found.')}</p>
-          <p className='text-sm'>
+          <p className='text-[13px]'>
             {t('All models in use are properly configured.')}
           </p>
         </div>
       ) : (
         <div className='flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto'>
           <div className='flex flex-shrink-0 items-center justify-between gap-3'>
-            <div className='text-muted-foreground text-sm whitespace-nowrap'>
+            <div className='text-[#8A93A4] text-[12px] whitespace-nowrap tabular-nums'>
               {t('Showing')} {displayStart}-{displayEnd} {t('of')} {totalItems}
             </div>
             <div className='relative w-48'>
-              <Search className='text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+              <Search className='text-[#8A93A4] pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
               <Input
                 value={searchTerm}
                 onChange={(event) => {
@@ -169,7 +169,7 @@ export function MissingModelsDialog({
               </EmptyHeader>
             </Empty>
           ) : (
-            <div className='flex-shrink-0 rounded-lg border'>
+            <div className='flex-shrink-0 rounded-xl border border-[#E5E8EE]'>
               <div className='divide-y'>
                 {paginatedModels.map((modelName) => (
                   <div
@@ -195,8 +195,8 @@ export function MissingModelsDialog({
                 ))}
               </div>
 
-              <div className='bg-muted/40 flex items-center justify-between border-t px-3 py-2 text-sm'>
-                <div className='text-muted-foreground text-sm'>
+              <div className='bg-[#F7F8FA] border-[#E5E8EE] flex items-center justify-between border-t px-3 py-2 text-[13px]'>
+                <div className='text-[#8A93A4] text-[13px]'>
                   {t('Page {{current}} of {{total}}', {
                     current: currentPage,
                     total: totalPages,

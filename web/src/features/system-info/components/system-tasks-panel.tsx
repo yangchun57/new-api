@@ -53,12 +53,9 @@ const STATUS_VARIANT: Record<SystemTaskStatus, 'secondary' | 'destructive'> = {
 }
 
 const STATUS_CLASS_NAME: Record<SystemTaskStatus, string> = {
-  pending:
-    'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
-  running:
-    'bg-sky-50 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300 [&_span]:bg-sky-500',
-  succeeded:
-    'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300',
+  pending: 'bg-amber-50 text-amber-700',
+  running: 'bg-sky-50 text-sky-700 [&_span]:bg-sky-500',
+  succeeded: 'bg-emerald-50 text-emerald-700',
   failed: '',
 }
 
@@ -111,23 +108,23 @@ function SystemTasksTable(props: SystemTasksTableProps) {
     <div className='overflow-x-auto'>
       <Table className='min-w-[900px]'>
         <TableHeader>
-          <TableRow className='bg-muted/40 hover:bg-muted/40'>
-            <TableHead className='h-9 w-[260px] px-4 text-xs'>
+          <TableRow className='bg-[#F7F8FA] hover:bg-[#F7F8FA]'>
+            <TableHead className='h-9 w-[260px] px-4 font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Type')}
             </TableHead>
-            <TableHead className='h-9 w-[130px] text-xs'>
+            <TableHead className='h-9 w-[130px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Status')}
             </TableHead>
-            <TableHead className='h-9 w-[180px] text-xs'>
+            <TableHead className='h-9 w-[180px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Progress')}
             </TableHead>
-            <TableHead className='h-9 min-w-[260px] text-xs'>
+            <TableHead className='h-9 min-w-[260px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Executor')}
             </TableHead>
-            <TableHead className='h-9 w-[190px] text-xs'>
+            <TableHead className='h-9 w-[190px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Updated')}
             </TableHead>
-            <TableHead className='h-9 w-[220px] pr-4 text-xs'>
+            <TableHead className='h-9 w-[220px] pr-4 font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Detail')}
             </TableHead>
           </TableRow>
@@ -136,13 +133,13 @@ function SystemTasksTable(props: SystemTasksTableProps) {
           {props.tasks.map((task) => {
             const progress = getProgress(task)
             return (
-              <TableRow key={task.task_id} className='hover:bg-muted/30'>
+              <TableRow key={task.task_id} className='border-b border-[#E5E8EE] hover:bg-[#F0F2F6]'>
                 <TableCell className='px-4 py-3 align-middle'>
                   <div className='space-y-0.5'>
-                    <div className='font-medium'>
+                    <div className='text-[13px] font-medium leading-none text-[#0A0E1A]'>
                       {t(TYPE_LABEL[task.type] ?? task.type)}
                     </div>
-                    <div className='text-muted-foreground font-mono text-[11px]'>
+                    <div className='font-mono text-[11px] text-[#8A93A4]'>
                       {TYPE_DISPLAY_ID[task.type] ?? task.type}
                     </div>
                   </div>
@@ -171,16 +168,16 @@ function SystemTasksTable(props: SystemTasksTableProps) {
                         PROGRESS_BAR_CLASS_NAME[task.status]
                       )}
                     />
-                    <span className='text-muted-foreground w-10 text-right text-xs tabular-nums'>
+                    <span className='w-10 text-right font-mono text-[11px] tabular-nums text-[#8A93A4]'>
                       {progress === null ? '-' : `${progress}%`}
                     </span>
                   </div>
                 </TableCell>
-                <TableCell className='text-muted-foreground max-w-[280px] truncate py-3 align-middle font-mono text-xs'>
+                <TableCell className='max-w-[280px] truncate py-3 align-middle font-mono text-[11px] text-[#8A93A4]'>
                   {task.locked_by || '-'}
                 </TableCell>
                 <TableCell
-                  className='text-muted-foreground py-3 align-middle text-xs whitespace-nowrap'
+                  className='py-3 align-middle text-[12px] whitespace-nowrap text-[#8A93A4]'
                   title={formatTimestampToDate(task.updated_at)}
                 >
                   {formatTimestampRelative(
@@ -190,7 +187,7 @@ function SystemTasksTable(props: SystemTasksTableProps) {
                   )}
                 </TableCell>
                 <TableCell
-                  className='text-destructive max-w-[220px] truncate py-3 pr-4 align-middle text-xs'
+                  className='max-w-[220px] truncate py-3 pr-4 align-middle text-[12px] text-red-600'
                   title={task.error || undefined}
                 >
                   {task.error || '-'}
@@ -233,17 +230,17 @@ export function SystemTasksPanel() {
   return (
     <section
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+      className='group/card overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
     >
-      <div className='flex flex-col gap-3 border-b px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5'>
+      <div className='flex flex-col gap-3 border-b border-[#E5E8EE] px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
         <div className='min-w-0'>
-          <div className='flex items-center gap-2'>
-            <span className='bg-muted text-muted-foreground inline-flex size-7 items-center justify-center rounded-md'>
+          <div className='flex items-center gap-3'>
+            <span className='inline-flex size-8 items-center justify-center rounded-md bg-[#F7F8FA] text-[#5A6478]'>
               <ListChecks className='size-4' aria-hidden='true' />
             </span>
             <div className='min-w-0'>
-              <h3 className='text-sm font-semibold'>{t('System Tasks')}</h3>
-              <p className='text-muted-foreground mt-0.5 text-xs'>
+              <h3 className='text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]'>{t('System Tasks')}</h3>
+              <p className='mt-1.5 text-[13px] text-[#5A6478]'>
                 {t(
                   'Recent maintenance tasks running across instances and their execution status.'
                 )}
@@ -253,13 +250,13 @@ export function SystemTasksPanel() {
         </div>
         <div className='flex shrink-0 items-center gap-3'>
           <span
-            className='text-muted-foreground inline-flex items-center gap-1.5 text-xs'
+            className='inline-flex items-center gap-1.5 text-[12px] text-[#8A93A4]'
             aria-live='polite'
           >
             <span
               className={cn(
                 'size-1.5 rounded-full',
-                hasActiveTasks ? 'bg-emerald-500' : 'bg-muted-foreground/40'
+                hasActiveTasks ? 'bg-emerald-500' : 'bg-[#8A93A4]/40'
               )}
               aria-hidden='true'
             />
@@ -289,7 +286,7 @@ export function SystemTasksPanel() {
 
       <div aria-busy={tasksQuery.isFetching}>
         {loading ? (
-          <div className='space-y-2 p-4 sm:p-5'>
+          <div className='space-y-2 p-5'>
             {Array.from({ length: 4 }).map((_, i) => (
               <Skeleton key={i} className='h-9 w-full rounded-md' />
             ))}
@@ -308,24 +305,24 @@ export function SystemTasksPanel() {
             className='min-h-[260px]'
           />
         ) : tasks.length === 0 ? (
-          <div className='px-4 py-10 text-center sm:px-5'>
-            <div className='bg-muted mx-auto mb-3 flex size-10 items-center justify-center rounded-lg'>
+          <div className='px-5 py-10 text-center'>
+            <div className='mx-auto mb-3 flex size-10 items-center justify-center rounded-md bg-[#F7F8FA]'>
               <ListChecks
-                className='text-muted-foreground size-5'
+                className='size-5 text-[#8A93A4]'
                 aria-hidden='true'
               />
             </div>
-            <p className='text-muted-foreground text-sm'>
+            <p className='text-[13px] text-[#5A6478]'>
               {t('No system tasks yet.')}
             </p>
           </div>
         ) : (
-          <div className='space-y-4 p-4 sm:p-5'>
+          <div className='space-y-5 p-5'>
             <div>
               <div className='mb-2 flex items-center justify-between gap-3'>
                 <div>
-                  <h4 className='text-sm font-medium'>{t('Active Tasks')}</h4>
-                  <p className='text-muted-foreground mt-0.5 text-xs'>
+                  <h4 className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{t('Active Tasks')}</h4>
+                  <p className='mt-1 text-[12px] text-[#8A93A4]'>
                     {t('Tasks currently pending or running.')}
                   </p>
                 </div>
@@ -334,7 +331,7 @@ export function SystemTasksPanel() {
               {activeTasks.length > 0 ? (
                 <SystemTasksTable tasks={activeTasks} />
               ) : (
-                <div className='text-muted-foreground rounded-md border border-dashed px-4 py-6 text-center text-sm'>
+                <div className='rounded-md border border-dashed border-[#D8DCE5] px-4 py-6 text-center text-[13px] text-[#8A93A4]'>
                   {t('No active system tasks.')}
                 </div>
               )}
@@ -343,8 +340,8 @@ export function SystemTasksPanel() {
             <div>
               <div className='mb-2 flex items-center justify-between gap-3'>
                 <div>
-                  <h4 className='text-sm font-medium'>{t('Task History')}</h4>
-                  <p className='text-muted-foreground mt-0.5 text-xs'>
+                  <h4 className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{t('Task History')}</h4>
+                  <p className='mt-1 text-[12px] text-[#8A93A4]'>
                     {t('Recently completed or failed system task runs.')}
                   </p>
                 </div>
@@ -353,7 +350,7 @@ export function SystemTasksPanel() {
               {historyTasks.length > 0 ? (
                 <SystemTasksTable tasks={historyTasks} />
               ) : (
-                <div className='text-muted-foreground rounded-md border border-dashed px-4 py-6 text-center text-sm'>
+                <div className='rounded-md border border-dashed border-[#D8DCE5] px-4 py-6 text-center text-[13px] text-[#8A93A4]'>
                   {t('No historical system tasks.')}
                 </div>
               )}

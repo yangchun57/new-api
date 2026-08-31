@@ -44,6 +44,12 @@ import { useTurnstile } from '@/features/auth/hooks/use-turnstile'
 import { useCountdown } from '@/hooks/use-countdown'
 import { cn } from '@/lib/utils'
 
+const inputCls =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white px-3.5 text-[14px] text-[#0A0E1A] shadow-sm placeholder:text-[#B8BFCC] focus-visible:border-[#0A0E1A] focus-visible:ring-[#0A0E1A]/15 aria-invalid:border-rose-400 aria-invalid:ring-rose-400/20'
+const labelCls = 'text-[13px] font-medium text-[#0A0E1A]'
+const btnPrimary =
+  'h-11 rounded-xl bg-[#0A0E1A] text-[14px] font-medium text-white shadow-sm transition-colors hover:bg-[#0A0E1A]/90 active:bg-[#0A0E1A]'
+
 export function ForgotPasswordForm({
   className,
   ...props
@@ -58,11 +64,9 @@ export function ForgotPasswordForm({
     setTurnstileToken,
     validateTurnstile,
   } = useTurnstile()
-  const {
-    secondsLeft,
-    isActive,
-    start: startCountdown,
-  } = useCountdown({ initialSeconds: PASSWORD_RESET_COUNTDOWN })
+  const { secondsLeft, isActive, start: startCountdown } = useCountdown({
+    initialSeconds: PASSWORD_RESET_COUNTDOWN,
+  })
 
   const form = useForm<z.infer<typeof forgotPasswordFormSchema>>({
     resolver: zodResolver(forgotPasswordFormSchema),
@@ -102,28 +106,36 @@ export function ForgotPasswordForm({
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className={labelCls}>{t('Email')}</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input
+                  placeholder='name@example.com'
+                  className={inputCls}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className='text-[12px]' />
             </FormItem>
           )}
         />
 
         <Button
           type='submit'
-          className='mt-2'
+          className={cn(btnPrimary, 'mt-2 gap-2')}
           disabled={isLoading || isActive || !turnstileReady}
         >
           {isActive
             ? t('Resend ({{seconds}}s)', { seconds: secondsLeft })
             : t('Send reset email')}
-          {isLoading ? <Loader2 className='animate-spin' /> : <ArrowRight />}
+          {isLoading ? (
+            <Loader2 className='h-4 w-4 animate-spin' />
+          ) : (
+            <ArrowRight className='h-4 w-4' />
+          )}
         </Button>
 
         {isTurnstileEnabled && (
-          <div className='mt-2'>
+          <div className='mt-2 flex justify-center'>
             <Turnstile
               siteKey={turnstileSiteKey}
               onVerify={setTurnstileToken}

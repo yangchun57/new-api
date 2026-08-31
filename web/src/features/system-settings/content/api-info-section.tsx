@@ -328,7 +328,7 @@ export function ApiInfoSection({ enabled, data }: ApiInfoSectionProps) {
             {
               id: 'url',
               header: t('URL'),
-              cellClassName: 'max-w-xs truncate font-mono text-sm',
+              cellClassName: 'max-w-xs truncate font-mono text-[12px]',
               cell: (apiInfo) => (
                 <BadgeCell>
                   <StatusBadge
@@ -366,7 +366,7 @@ export function ApiInfoSection({ enabled, data }: ApiInfoSectionProps) {
                   <div
                     className={`h-4 w-4 rounded-full ${getColorClass(apiInfo.color)}`}
                   />
-                  <span className='text-sm capitalize'>{apiInfo.color}</span>
+                  <span className='text-[13px] capitalize text-[#5A6478]'>{apiInfo.color}</span>
                 </div>
               ),
             },

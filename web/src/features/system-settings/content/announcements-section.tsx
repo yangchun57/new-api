@@ -100,31 +100,31 @@ const typeOptions = [
   {
     value: 'default',
     label: 'Default',
-    color: 'bg-gray-500',
+    color: 'bg-[#8A93A4]',
     badgeVariant: 'neutral' as const,
   },
   {
     value: 'ongoing',
     label: 'Ongoing',
-    color: 'bg-blue-500',
+    color: 'bg-[#2563EB]',
     badgeVariant: 'info' as const,
   },
   {
     value: 'success',
     label: 'Success',
-    color: 'bg-green-500',
+    color: 'bg-[#16A34A]',
     badgeVariant: 'success' as const,
   },
   {
     value: 'warning',
     label: 'Warning',
-    color: 'bg-orange-500',
+    color: 'bg-[#D97706]',
     badgeVariant: 'warning' as const,
   },
   {
     value: 'error',
     label: 'Error',
-    color: 'bg-red-500',
+    color: 'bg-[#E5484D]',
     badgeVariant: 'danger' as const,
   },
 ]
@@ -385,10 +385,10 @@ export function AnnouncementsSection({
               header: t('Publish Date'),
               cell: (announcement) => (
                 <div className='flex flex-col gap-1'>
-                  <span className='text-sm font-medium'>
+                  <span className='text-[13px] font-medium text-[#0A0E1A]'>
                     {getRelativeTime(announcement.publishDate)}
                   </span>
-                  <span className='text-muted-foreground text-xs'>
+                  <span className='text-[12px] text-[#8A93A4]'>
                     {dayjs(announcement.publishDate).format(
                       'YYYY-MM-DD HH:mm:ss'
                     )}
@@ -416,7 +416,7 @@ export function AnnouncementsSection({
             {
               id: 'extra',
               header: t('Extra'),
-              cellClassName: 'text-muted-foreground max-w-xs truncate',
+              cellClassName: 'text-[#5A6478] max-w-xs truncate',
               cell: (announcement) => announcement.extra || '-',
             },
             {

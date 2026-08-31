@@ -65,14 +65,19 @@ export function TermsFooter({
 
   const [firstLink, secondLink] = activeLinks
 
+  const linkCls =
+    'font-medium text-[#0A0E1A] underline decoration-[#D8DCE5] underline-offset-[3px] transition-colors hover:decoration-[#0A0E1A]/50'
+
   return (
-    <p className={cn('text-muted-foreground text-center text-xs', className)}>
+    <p
+      className={cn(
+        'text-center text-[12px] leading-relaxed text-[#8A93A4]',
+        className
+      )}
+    >
       {text}{' '}
       {firstLink && (
-        <a
-          href={firstLink.href}
-          className='hover:text-primary underline underline-offset-4'
-        >
+        <a href={firstLink.href} className={linkCls}>
           {firstLink.label}
         </a>
       )}
@@ -80,10 +85,7 @@ export function TermsFooter({
         <>
           {' '}
           {t('and')}{' '}
-          <a
-            href={secondLink.href}
-            className='hover:text-primary underline underline-offset-4'
-          >
+          <a href={secondLink.href} className={linkCls}>
             {secondLink.label}
           </a>
         </>

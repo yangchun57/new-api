@@ -145,7 +145,7 @@ export function TwoFADisableDialog({
             placeholder={t('Enter code or backup code')}
             disabled={loading}
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t('Enter your authenticator code or a backup code')}
           </p>
         </div>
@@ -158,7 +158,7 @@ export function TwoFADisableDialog({
           />
           <Label
             htmlFor='confirm'
-            className='text-sm leading-tight font-normal'
+            className='text-[13px] font-normal leading-relaxed text-[#5A6478]'
           >
             {t(
               'I understand that disabling 2FA will remove all protection and backup codes'

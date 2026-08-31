@@ -31,30 +31,32 @@ export function AuthLayout({ children }: AuthLayoutProps) {
   const { systemName, logo, loading } = useSystemConfig()
 
   return (
-    <div className='relative grid h-svh max-w-none'>
+    <div className='relative flex min-h-svh flex-col bg-white pl-grid-bg'>
       <Link
         to='/'
-        className='absolute top-4 left-4 z-10 flex items-center gap-2 transition-opacity hover:opacity-80 sm:top-8 sm:left-8'
+        className='absolute top-5 left-5 z-10 flex items-center gap-2 transition-opacity hover:opacity-70 sm:top-8 sm:left-8'
       >
-        <div className='relative h-8 w-8'>
+        <div className='relative h-8 w-8 overflow-hidden rounded-full ring-1 ring-[#E5E8EE]'>
           {loading ? (
             <Skeleton className='absolute inset-0 rounded-full' />
           ) : (
             <img
               src={logo}
               alt={t('Logo')}
-              className='h-8 w-8 rounded-full object-cover'
+              className='h-full w-full object-cover'
             />
           )}
         </div>
         {loading ? (
-          <Skeleton className='h-6 w-24' />
+          <Skeleton className='h-5 w-24' />
         ) : (
-          <h1 className='text-xl font-medium'>{systemName}</h1>
+          <span className='text-[15px] font-semibold tracking-tight text-[#0A0E1A]'>
+            {systemName}
+          </span>
         )}
       </Link>
-      <div className='container flex items-center pt-16 sm:pt-0'>
-        <div className='mx-auto flex w-full flex-col justify-center space-y-2 px-4 py-8 sm:w-[480px] sm:p-8'>
+      <div className='flex flex-1 items-center justify-center px-4 py-20 sm:px-6'>
+        <div className='mx-auto flex w-full max-w-[420px] flex-col'>
           {children}
         </div>
       </div>

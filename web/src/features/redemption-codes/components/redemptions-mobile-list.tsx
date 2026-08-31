@@ -49,11 +49,11 @@ const MOBILE_SKELETON_KEYS = [
 
 function RedemptionsMobileSkeleton() {
   return (
-    <div className='divide-border overflow-hidden rounded-lg border'>
+    <div className='divide-[#E5E8EE] overflow-hidden rounded-xl border border-[#E5E8EE] bg-[#FFFFFF]'>
       {MOBILE_SKELETON_KEYS.map((key) => (
         <div
           key={key}
-          className='space-y-2 border-b px-3 py-2.5 last:border-b-0'
+          className='space-y-2 border-b border-[#E5E8EE] px-4 py-3 last:border-b-0'
         >
           <div className='flex items-center justify-between'>
             <Skeleton className='h-4 w-32' />
@@ -83,7 +83,7 @@ export function RedemptionsMobileList(props: RedemptionsMobileListProps) {
 
   if (!rows.length) {
     return (
-      <div className='rounded-lg border p-8'>
+      <div className='rounded-xl border border-[#E5E8EE] bg-[#FFFFFF] p-8'>
         <Empty className='border-none p-0'>
           <EmptyHeader>
             <EmptyMedia variant='icon'>
@@ -102,7 +102,7 @@ export function RedemptionsMobileList(props: RedemptionsMobileListProps) {
   }
 
   return (
-    <div className='divide-border overflow-hidden rounded-lg border'>
+    <div className='divide-[#E5E8EE] overflow-hidden rounded-xl border border-[#E5E8EE] bg-[#FFFFFF]'>
       {rows.map((row) => {
         const redemption = row.original
         const expired = isRedemptionExpired(
@@ -116,7 +116,7 @@ export function RedemptionsMobileList(props: RedemptionsMobileListProps) {
           <div
             key={row.id}
             className={cn(
-              'bg-card space-y-2.5 border-b px-3 py-2.5 last:border-b-0',
+              'space-y-2.5 border-b border-[#E5E8EE] bg-[#FFFFFF] px-4 py-3 last:border-b-0',
               expired || redemption.status !== REDEMPTION_STATUS.ENABLED
                 ? DISABLED_ROW_MOBILE
                 : undefined
@@ -124,10 +124,10 @@ export function RedemptionsMobileList(props: RedemptionsMobileListProps) {
           >
             <div className='flex items-start justify-between gap-3'>
               <div className='min-w-0'>
-                <div className='truncate text-sm font-semibold'>
+                <div className='truncate text-[13px] font-semibold text-[#0A0E1A]'>
                   {redemption.name}
                 </div>
-                <div className='text-muted-foreground text-[11px]'>
+                <div className='font-mono text-[11px] uppercase tracking-[0.08em] text-[#8A93A4]'>
                   {t('Redemption Code')}
                 </div>
               </div>
@@ -161,9 +161,9 @@ export function RedemptionsMobileList(props: RedemptionsMobileListProps) {
               <DataTableRowActions row={row} />
             </div>
 
-            <div className='flex items-center justify-between gap-2 text-xs'>
-              <span className='text-muted-foreground'>{t('Quota')}</span>
-              <span className='font-medium tabular-nums'>
+            <div className='flex items-center justify-between gap-2 text-[13px]'>
+              <span className='text-[#8A93A4]'>{t('Quota')}</span>
+              <span className='font-medium tabular-nums text-[#0A0E1A]'>
                 {formatQuota(redemption.quota)}
               </span>
             </div>

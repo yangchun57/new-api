@@ -43,6 +43,9 @@ import type {
 import { getRollingDateRange, type TimeGranularity } from '@/lib/time'
 import { VCHART_OPTION } from '@/lib/vchart'
 
+const sectionLabelCls =
+  'text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-[#8A93A4]'
+
 let themeManagerPromise: Promise<
   (typeof import('@visactor/vchart'))['ThemeManager']
 > | null = null
@@ -79,8 +82,6 @@ export function UserCharts(props: UserChartsProps) {
     (typeof import('@visactor/vchart'))['ThemeManager'] | null
   >(null)
 
-  // The selection is owned by the dashboard parent so it persists across
-  // sub-section switches; the rolling window is derived from the chosen range.
   const timeGranularity = props.filters.timeGranularity
   const selectedRange = props.filters.selectedRange
   const topUserLimit = props.filters.topUserLimit
@@ -156,7 +157,7 @@ export function UserCharts(props: UserChartsProps) {
 
   return (
     <div className='space-y-3'>
-      <div className='flex items-center gap-1.5 overflow-x-auto pb-1 sm:gap-2'>
+      <div className='flex items-center gap-3 overflow-x-auto pb-1'>
         <Tabs
           value={String(selectedRange)}
           onValueChange={(value) => handleRangeChange(Number(value))}
@@ -167,7 +168,7 @@ export function UserCharts(props: UserChartsProps) {
               <TabsTrigger
                 key={preset.days}
                 value={String(preset.days)}
-                className='px-2.5 text-xs'
+                className='px-3 text-[12px]'
               >
                 {t(preset.label)}
               </TabsTrigger>
@@ -187,7 +188,7 @@ export function UserCharts(props: UserChartsProps) {
               <TabsTrigger
                 key={opt.value}
                 value={opt.value}
-                className='px-2.5 text-xs'
+                className='px-3 text-[12px]'
               >
                 {t(opt.label)}
               </TabsTrigger>
@@ -201,14 +202,14 @@ export function UserCharts(props: UserChartsProps) {
           className='shrink-0'
         >
           <TabsList>
-            <span className='text-muted-foreground px-2 text-xs font-medium whitespace-nowrap'>
+            <span className={`${sectionLabelCls} px-2 whitespace-nowrap`}>
               {t('Top Users')}
             </span>
             {TOP_USER_LIMIT_OPTIONS.map((limit) => (
               <TabsTrigger
                 key={limit}
                 value={String(limit)}
-                className='px-2.5 text-xs'
+                className='px-3 text-[12px]'
               >
                 {t('Top {{count}}', { count: limit })}
               </TabsTrigger>
@@ -217,7 +218,7 @@ export function UserCharts(props: UserChartsProps) {
         </Tabs>
 
         {isLoading && (
-          <Loader2 className='text-muted-foreground size-4 animate-spin' />
+          <Loader2 className='text-[#8A93A4] size-4 animate-spin' />
         )}
       </div>
 
@@ -229,18 +230,20 @@ export function UserCharts(props: UserChartsProps) {
             <div
               key={chart.value}
               data-slot='card'
-              className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5'
+              className='bg-card text-card-foreground border-border/70 shadow-card group/card flex flex-col gap-4 overflow-hidden rounded-xl border p-4 sm:p-5'
             >
               <div className='flex w-full items-center gap-2'>
                 <IconBadge tone='info' size='sm'>
                   <Users />
                 </IconBadge>
-                <div className='text-sm font-semibold'>{t(chart.labelKey)}</div>
+                <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
+                  {t(chart.labelKey)}
+                </h3>
               </div>
 
               <div className='h-[300px] sm:h-96'>
                 {isLoading ? (
-                  <Skeleton className='h-full w-full' />
+                  <Skeleton className='h-full w-full rounded-xl' />
                 ) : (
                   themeReady &&
                   spec && (

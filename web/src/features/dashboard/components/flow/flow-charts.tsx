@@ -96,7 +96,6 @@ import { FlowNodeFilterControl } from './flow-node-filter'
 
 interface FlowChartsProps {
   filters?: DashboardFilters
-  // When false, sensitive node labels are masked in the rendered Sankey.
   sensitiveVisible?: boolean
 }
 
@@ -121,7 +120,6 @@ const FLOW_OVERFLOW_MODE_OPTIONS = [
   { value: 'hide', labelKey: 'Hide' },
 ] as const
 
-// A Sankey needs at least two columns to render any link.
 const MIN_VISIBLE_STAGES = 2
 
 const FLOW_STAGE_META: Record<
@@ -174,6 +172,12 @@ const FLOW_OTHER_NODE_LABEL_KEYS: Record<FlowNodeKind, string> = {
 
 type FlowChartPointerEvent = EventParamsDefinition['pointerdown']
 
+const sectionLabelCls =
+  'text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-[#8A93A4]'
+
+const iconBtnCls =
+  'inline-flex size-5 shrink-0 items-center justify-center rounded-md text-[#8A93A4] transition-colors hover:bg-[#F0F2F6] hover:text-[#0A0E1A]'
+
 function chartRecordValue(value: unknown): Record<string, unknown> | undefined {
   return value && typeof value === 'object'
     ? (value as Record<string, unknown>)
@@ -204,7 +208,7 @@ function flowChartEventDatum(event: FlowChartPointerEvent): unknown {
   if (record.datum !== undefined && record.datum !== null) return record.datum
 
   const itemRecord = chartRecordValue(record.item)
-  if (itemRecord?.datum !== undefined && itemRecord.datum !== null) {
+  if (itemRecord?.datum !== undefined && itemRecord?.datum !== null) {
     return itemRecord.datum
   }
 
@@ -293,8 +297,6 @@ export function FlowCharts(props: FlowChartsProps) {
     setActiveFlowNode((prev) =>
       prev && visible.has(prev.kind) ? prev : undefined
     )
-    // The graph reshapes when columns are toggled, so any highlighted edge may
-    // no longer exist. Drop the link selection rather than leave it dangling.
     setActiveFlowLink(undefined)
   }, [visibleStages])
   const toggleStage = (stage: FlowNodeKind) => {
@@ -397,9 +399,6 @@ export function FlowCharts(props: FlowChartsProps) {
       metric === 'quota' ? formatQuota(value) : formatFlowMetricNumber(value),
     [metric]
   )
-  // Explicit filters (the chips/dropdown control) narrow the rows that feed the
-  // chart. They are intentionally independent from the click-to-highlight state
-  // below so selecting a filter never dims a node, it removes unrelated rows.
   const toggleFlowNodeFilter = useCallback((filter: FlowNodeFilter) => {
     if (filter.kind === 'user') {
       setSelectedUsers((prev) => toggleSelectedValue(prev, filter.id))
@@ -420,9 +419,6 @@ export function FlowCharts(props: FlowChartsProps) {
   const clearFlowNodeFilters = useCallback(() => {
     setSelectedNodes([])
   }, [])
-  // Clicking a node only drives the highlight: keep every node/link on screen
-  // but emphasize the full paths through the clicked node and dim the rest.
-  // Clicking the active node again, or clicking empty space, clears it.
   const handleChartPointerDown = useCallback((event: FlowChartPointerEvent) => {
     const datum = flowChartEventDatum(event)
     const filter = flowNodeFilterFromSankeyDatum(datum)
@@ -505,7 +501,7 @@ export function FlowCharts(props: FlowChartsProps) {
     />
   )
   if (displayState === 'loading') {
-    chartContent = <Skeleton className='h-full w-full' />
+    chartContent = <Skeleton className='h-full w-full rounded-xl' />
   } else if (displayState === 'error') {
     chartContent = (
       <div className='flex h-full items-center justify-center p-4'>
@@ -532,20 +528,18 @@ export function FlowCharts(props: FlowChartsProps) {
 
   return (
     <div className='flex flex-col gap-3'>
-      <div className='flex flex-col gap-2 xl:flex-row xl:items-end xl:justify-between'>
-        <div className='flex min-w-0 flex-wrap items-end gap-2'>
+      <div className='flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between'>
+        <div className='flex min-w-0 flex-wrap items-end gap-x-4 gap-y-3'>
           <div className='flex min-w-0 flex-col gap-1.5'>
-            <div className='flex items-center gap-1.5'>
-              <span className='text-muted-foreground text-xs font-medium'>
-                {t('Flow width metric')}
-              </span>
+            <div className='flex items-center gap-1'>
+              <span className={sectionLabelCls}>{t('Flow width metric')}</span>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger
                     render={
                       <button
                         type='button'
-                        className='text-muted-foreground/60 hover:text-foreground flex size-5 shrink-0 items-center justify-center rounded-md'
+                        className={iconBtnCls}
                         aria-label={t('Flow width metric')}
                       />
                     }
@@ -570,7 +564,7 @@ export function FlowCharts(props: FlowChartsProps) {
                     <TabsTrigger
                       key={option.value}
                       value={option.value}
-                      className='gap-1.5 px-2.5 text-xs'
+                      className='gap-1.5 px-3 text-[12px]'
                     >
                       <Icon data-icon='inline-start' aria-hidden='true' />
                       {t(option.labelKey)}
@@ -582,9 +576,7 @@ export function FlowCharts(props: FlowChartsProps) {
           </div>
 
           <div className='flex min-w-0 flex-col gap-1.5'>
-            <span className='text-muted-foreground text-xs font-medium'>
-              {t('Display limit')}
-            </span>
+            <span className={sectionLabelCls}>{t('Display limit')}</span>
             <Tabs
               value={String(topNodeLimit)}
               onValueChange={(value) => setTopNodeLimit(Number(value))}
@@ -595,7 +587,7 @@ export function FlowCharts(props: FlowChartsProps) {
                   <TabsTrigger
                     key={limit}
                     value={String(limit)}
-                    className='px-2.5 text-xs'
+                    className='px-3 text-[12px]'
                   >
                     {t('Top {{count}}', { count: limit })}
                   </TabsTrigger>
@@ -605,9 +597,7 @@ export function FlowCharts(props: FlowChartsProps) {
           </div>
 
           <div className='flex min-w-0 flex-col gap-1.5'>
-            <span className='text-muted-foreground text-xs font-medium'>
-              {t('Overflow items')}
-            </span>
+            <span className={sectionLabelCls}>{t('Overflow items')}</span>
             <Tabs
               value={overflowMode}
               onValueChange={(value) =>
@@ -620,7 +610,7 @@ export function FlowCharts(props: FlowChartsProps) {
                   <TabsTrigger
                     key={option.value}
                     value={option.value}
-                    className='px-2.5 text-xs'
+                    className='px-3 text-[12px]'
                   >
                     {t(option.labelKey)}
                   </TabsTrigger>
@@ -659,30 +649,32 @@ export function FlowCharts(props: FlowChartsProps) {
             </div>
           )}
           {isLoading && (
-            <Loader2 className='text-muted-foreground size-4 animate-spin' />
+            <Loader2 className='size-4 animate-spin text-[#8A93A4]' />
           )}
         </div>
       </div>
 
       <div
         data-slot='card'
-        className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5'
+        className='group/card border-border/70 shadow-card bg-card text-card-foreground flex flex-col gap-4 overflow-hidden rounded-xl border p-4 sm:p-5'
       >
-        <div className='flex w-full flex-col gap-2 lg:flex-row lg:items-center lg:justify-between'>
+        <div className='flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
           <div className='flex min-w-0 items-center gap-2'>
             <IconBadge tone='info' size='sm'>
               <GitBranch />
             </IconBadge>
-            <div className='text-sm font-semibold'>{chartTitle}</div>
+            <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
+              {chartTitle}
+            </h3>
           </div>
           <TooltipProvider>
-            <div className='flex min-w-0 items-center gap-1 overflow-x-auto pb-1 lg:justify-end lg:pb-0'>
+            <div className='flex min-w-0 items-center gap-1 overflow-x-auto pb-1 sm:justify-end sm:pb-0'>
               <Tooltip>
                 <TooltipTrigger
                   render={
                     <button
                       type='button'
-                      className='text-muted-foreground/60 hover:text-foreground flex size-6 shrink-0 items-center justify-center rounded-md'
+                      className={cn(iconBtnCls, 'size-6')}
                       aria-label={t('Show or hide flow columns')}
                     />
                   }
@@ -699,7 +691,7 @@ export function FlowCharts(props: FlowChartsProps) {
                 return (
                   <Fragment key={stage}>
                     {index > 0 && (
-                      <ChevronRight className='text-muted-foreground/40 size-3.5 shrink-0' />
+                      <ChevronRight className='size-3.5 shrink-0 text-[#B8BFCC]' />
                     )}
                     <Tooltip>
                       <TooltipTrigger

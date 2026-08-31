@@ -243,7 +243,7 @@ export function UpdateConfigDialog({
     >
       {isLoading ? (
         <div className='flex items-center justify-center py-10'>
-          <Loader2 className='text-muted-foreground h-6 w-6 animate-spin' />
+          <Loader2 className='text-[#8A93A4] h-6 w-6 animate-spin' />
         </div>
       ) : (
         <div className='max-h-[calc(100dvh-8.5rem)] overflow-y-auto py-2 pr-1 sm:max-h-[72vh]'>
@@ -345,8 +345,8 @@ export function UpdateConfigDialog({
                 )}
               />
 
-              <Collapsible className='rounded-md border p-3'>
-                <CollapsibleTrigger className='cursor-pointer text-sm'>
+              <Collapsible className='rounded-md border border-[#E5E8EE] p-3'>
+                <CollapsibleTrigger className='cursor-pointer text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Registry (optional)')}
                 </CollapsibleTrigger>
                 <CollapsibleContent>
@@ -385,8 +385,8 @@ export function UpdateConfigDialog({
                 </CollapsibleContent>
               </Collapsible>
 
-              <Collapsible className='rounded-md border p-3'>
-                <CollapsibleTrigger className='cursor-pointer text-sm'>
+              <Collapsible className='rounded-md border border-[#E5E8EE] p-3'>
+                <CollapsibleTrigger className='cursor-pointer text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Environment variables')}
                 </CollapsibleTrigger>
                 <CollapsibleContent>

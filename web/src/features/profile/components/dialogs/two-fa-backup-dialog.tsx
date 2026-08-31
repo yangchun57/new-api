@@ -161,12 +161,12 @@ export function TwoFABackupDialog({
               </AlertDescription>
             </Alert>
 
-            <div className='rounded-lg border p-4'>
+            <div className='rounded-xl border p-4'>
               <div className='grid grid-cols-2 gap-2'>
                 {backupCodes.map((code, index) => (
                   <div
                     key={index}
-                    className='bg-muted rounded-md p-2 text-center font-mono text-sm'
+                    className='bg-[#F7F8FA] rounded-md p-2 text-center font-mono text-[13px]'
                   >
                     {code}
                   </div>

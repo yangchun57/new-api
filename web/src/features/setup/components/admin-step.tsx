@@ -33,6 +33,11 @@ import { Input } from '@/components/ui/input'
 
 import type { SetupFormValues } from '../types'
 
+const inputCls =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white px-3.5 text-[14px] text-[#0A0E1A] shadow-sm placeholder:text-[#B8BFCC] focus-visible:border-[#0A0E1A] focus-visible:ring-[#0A0E1A]/15 aria-invalid:border-rose-400 aria-invalid:ring-rose-400/20'
+const labelCls = 'text-[13px] font-medium text-[#0A0E1A]'
+const formMsgCls = 'text-[12px] text-rose-600'
+
 interface AdminStepProps {
   form: UseFormReturn<SetupFormValues>
   rootInitialized?: boolean
@@ -42,9 +47,9 @@ export function AdminStep({ form, rootInitialized }: AdminStepProps) {
   const { t } = useTranslation()
   if (rootInitialized) {
     return (
-      <Alert className='border-sky-200 bg-sky-50 dark:border-sky-900/60 dark:bg-sky-950/40'>
-        <AlertDescription className='flex items-start gap-2'>
-          <ShieldCheck className='mt-0.5 size-4 text-sky-500' />
+      <Alert className='rounded-xl border-sky-200/80 bg-sky-50/60 px-4 py-3 text-sky-700'>
+        <AlertDescription className='flex items-start gap-2 text-[13px] leading-relaxed text-sky-700'>
+          <ShieldCheck className='mt-0.5 h-4 w-4 shrink-0 text-sky-500' />
           {t(
             'The administrator account is already initialized. You can keep your existing credentials and continue to the next step.'
           )}
@@ -54,25 +59,26 @@ export function AdminStep({ form, rootInitialized }: AdminStepProps) {
   }
 
   return (
-    <div className='grid gap-4 sm:grid-cols-2'>
+    <div className='grid gap-5 sm:grid-cols-2'>
       <FormField
         control={form.control}
         name='username'
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('Administrator username')}</FormLabel>
+            <FormLabel className={labelCls}>{t('Administrator username')}</FormLabel>
             <FormControl>
               <Input
                 {...field}
                 placeholder={t('Choose a username')}
                 autoComplete='username'
+                className={inputCls}
                 onChange={(event) => {
                   form.clearErrors('username')
                   field.onChange(event)
                 }}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className={formMsgCls} />
           </FormItem>
         )}
       />
@@ -82,19 +88,20 @@ export function AdminStep({ form, rootInitialized }: AdminStepProps) {
         name='password'
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('Password')}</FormLabel>
+            <FormLabel className={labelCls}>{t('Password')}</FormLabel>
             <FormControl>
               <PasswordInput
                 {...field}
                 placeholder={t('Set a secure password (min. 8 characters)')}
                 autoComplete='new-password'
+                className={inputCls}
                 onChange={(event) => {
                   form.clearErrors('password')
                   field.onChange(event)
                 }}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className={formMsgCls} />
           </FormItem>
         )}
       />
@@ -104,19 +111,20 @@ export function AdminStep({ form, rootInitialized }: AdminStepProps) {
         name='confirmPassword'
         render={({ field }) => (
           <FormItem className='sm:col-span-2'>
-            <FormLabel>{t('Confirm password')}</FormLabel>
+            <FormLabel className={labelCls}>{t('Confirm password')}</FormLabel>
             <FormControl>
               <PasswordInput
                 {...field}
                 placeholder={t('Repeat the administrator password')}
                 autoComplete='new-password'
+                className={inputCls}
                 onChange={(event) => {
                   form.clearErrors('confirmPassword')
                   field.onChange(event)
                 }}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className={formMsgCls} />
           </FormItem>
         )}
       />

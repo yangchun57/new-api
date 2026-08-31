@@ -59,39 +59,49 @@ export function ProfileDropdown() {
     <>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger
-          render={<Button variant='ghost' className='relative size-6 p-0' />}
+          render={
+            <Button
+              variant='ghost'
+              className='relative size-9 rounded-lg p-0 hover:bg-[#F0F2F6]'
+              aria-label={t('Account menu')}
+            />
+          }
         >
-          <Avatar className='size-6'>
+          <Avatar className='size-7 rounded-md'>
             <AvatarFallback
-              className={`${avatarFallbackClassName} text-[11px]`}
+              className={`${avatarFallbackClassName} rounded-md text-[11px]`}
               style={avatarFallbackStyle}
             >
               {avatarFallback}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align='end' sideOffset={8} className='w-56'>
-          <div className='flex items-center gap-2 px-1.5 py-1.5'>
-            <Avatar className='size-8'>
+        <DropdownMenuContent
+          align='end'
+          sideOffset={8}
+          className='w-56 rounded-xl border-[#E5E8EE] p-1.5 shadow-lg'
+        >
+          <div className='flex items-center gap-2.5 rounded-lg px-2 py-2'>
+            <Avatar className='size-9 rounded-md'>
               <AvatarFallback
-                className={`${avatarFallbackClassName} text-xs`}
+                className={`${avatarFallbackClassName} rounded-md text-xs`}
                 style={avatarFallbackStyle}
               >
                 {avatarFallback}
               </AvatarFallback>
             </Avatar>
             <div className='flex flex-1 flex-col gap-0.5 overflow-hidden'>
-              <p className='text-foreground truncate text-sm font-medium'>
+              <p className='truncate text-[13px] font-semibold text-[#0A0E1A]'>
                 {displayName}
               </p>
               <div className='flex items-center gap-1.5'>
-                <span className='text-muted-foreground text-xs'>
+                <span className='text-[11px] text-[#8A93A4]'>
                   {roleLabel}
                 </span>
                 {user?.group && (
                   <>
-                    <span className='text-muted-foreground text-xs'>·</span>
-                    <span className='text-muted-foreground truncate text-xs'>
+                    <span className='text-[11px] text-[#B8BFCC]'>·</span>
+                    <span className='truncate text-[11px] text-[#8A93A4]'>
                       {String(user.group)}
                     </span>
                   </>
@@ -100,16 +110,22 @@ export function ProfileDropdown() {
             </div>
           </div>
 
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator className='my-1 bg-[#E5E8EE]' />
 
-          <DropdownMenuItem onClick={() => navigate({ to: '/profile' })}>
-            <User className='size-4' />
+          <DropdownMenuItem
+            onClick={() => navigate({ to: '/profile' })}
+            className='gap-2.5 rounded-lg px-2 py-2 text-[13px] text-[#5A6478] focus:bg-[#F0F2F6] focus:text-[#0A0E1A] [&>svg]:size-[16px] [&>svg]:text-[#8A93A4]'
+          >
+            <User />
             {t('Profile')}
           </DropdownMenuItem>
 
           {isWalletVisible && (
-            <DropdownMenuItem onClick={() => navigate({ to: '/wallet' })}>
-              <Wallet className='size-4' />
+            <DropdownMenuItem
+              onClick={() => navigate({ to: '/wallet' })}
+              className='gap-2.5 rounded-lg px-2 py-2 text-[13px] text-[#5A6478] focus:bg-[#F0F2F6] focus:text-[#0A0E1A] [&>svg]:size-[16px] [&>svg]:text-[#8A93A4]'
+            >
+              <Wallet />
               {t('Wallet')}
             </DropdownMenuItem>
           )}
@@ -122,16 +138,21 @@ export function ProfileDropdown() {
                   params: { section: 'system-info' },
                 })
               }
+              className='gap-2.5 rounded-lg px-2 py-2 text-[13px] text-[#5A6478] focus:bg-[#F0F2F6] focus:text-[#0A0E1A] [&>svg]:size-[16px] [&>svg]:text-[#8A93A4]'
             >
-              <Settings className='size-4' />
+              <Settings />
               {t('System Settings')}
             </DropdownMenuItem>
           )}
 
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator className='my-1 bg-[#E5E8EE]' />
 
-          <DropdownMenuItem variant='destructive' onClick={() => setOpen(true)}>
-            <LogOut className='size-4' />
+          <DropdownMenuItem
+            variant='destructive'
+            onClick={() => setOpen(true)}
+            className='gap-2.5 rounded-lg px-2 py-2 text-[13px] [&>svg]:size-[16px]'
+          >
+            <LogOut />
             {t('Sign out')}
           </DropdownMenuItem>
         </DropdownMenuContent>

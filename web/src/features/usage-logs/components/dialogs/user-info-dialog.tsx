@@ -78,8 +78,8 @@ export function UserInfoDialog({
     value: string | number
   }) => (
     <div className='space-y-1.5'>
-      <Label className='text-muted-foreground text-xs'>{label}</Label>
-      <div className='text-sm font-semibold'>{value}</div>
+      <Label className='pl-font-mono text-[11px] text-[#8A93A4]'>{label}</Label>
+      <div className='text-[13px] text-[#0A0E1A]'>{value}</div>
     </div>
   )
 
@@ -97,7 +97,7 @@ export function UserInfoDialog({
     >
       {isLoading ? (
         <div className='flex items-center justify-center py-8'>
-          <Loader2 className='text-muted-foreground size-6 animate-spin' />
+          <Loader2 className='text-[#8A93A4] size-6 animate-spin' />
         </div>
       ) : userInfo ? (
         <div className='space-y-4 py-4'>
@@ -167,17 +167,17 @@ export function UserInfoDialog({
           {/* Remark */}
           {userInfo.remark && (
             <div className='space-y-1.5'>
-              <Label className='text-muted-foreground text-xs'>
+              <Label className='pl-font-mono text-[11px] text-[#8A93A4]'>
                 {t('Remark')}
               </Label>
-              <div className='text-sm leading-relaxed font-semibold break-words'>
+              <div className='text-[13px] leading-relaxed text-[#0A0E1A] break-words'>
                 {userInfo.remark}
               </div>
             </div>
           )}
         </div>
       ) : (
-        <div className='text-muted-foreground py-8 text-center text-sm'>
+        <div className='text-[#5A6478] py-8 text-center text-[13px]'>
           {t('No user information available')}
         </div>
       )}

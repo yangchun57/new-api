@@ -28,37 +28,48 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSlot,
   InputOTPSeparator,
+  InputOTPSlot,
 } from '@/components/ui/input-otp'
 import { login2fa } from '@/features/auth/api'
 import {
-  otpFormSchema,
-  OTP_LENGTH,
   BACKUP_CODE_LENGTH,
+  OTP_LENGTH,
+  otpFormSchema,
 } from '@/features/auth/constants'
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect'
 import {
-  isValidOTP,
-  isValidBackupCode,
-  formatBackupCode,
   cleanBackupCode,
+  formatBackupCode,
+  isValidBackupCode,
+  isValidOTP,
 } from '@/features/auth/lib/validation'
 import { getServerErrorMessageKey } from '@/lib/server-error-message'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/stores/auth-store'
 
 type OtpFormProps = React.HTMLAttributes<HTMLFormElement>
+
+const inputCls =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white px-3.5 text-[14px] text-[#0A0E1A] shadow-sm placeholder:text-[#B8BFCC] focus-visible:border-[#0A0E1A] focus-visible:ring-[#0A0E1A]/15 aria-invalid:border-rose-400 aria-invalid:ring-rose-400/20'
+const labelCls = 'text-[13px] font-medium text-[#0A0E1A]'
+const btnPrimary =
+  'h-11 rounded-xl bg-[#0A0E1A] text-[14px] font-medium text-white shadow-sm transition-colors hover:bg-[#0A0E1A]/90 active:bg-[#0A0E1A]'
+
+const otpSlotCls =
+  'relative flex h-12 w-12 items-center justify-center rounded-xl border border-[#E5E8EE] bg-white text-[20px] font-mono text-[#0A0E1A] shadow-sm transition-all outline-none first:rounded-xl last:rounded-xl data-[active=true]:z-10 data-[active=true]:border-[#0A0E1A] data-[active=true]:ring-2 data-[active=true]:ring-[#0A0E1A]/15 aria-invalid:border-rose-400 data-[active=true]:aria-invalid:border-rose-400 data-[active=true]:aria-invalid:ring-rose-400/20'
+const otpGroupCls = 'flex items-center gap-2'
+const otpSeparatorCls = 'px-1 text-[#B8BFCC] [&_svg]:size-3.5'
 
 export function OtpForm({ className, ...props }: OtpFormProps) {
   const { t } = useTranslation()
@@ -78,7 +89,6 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
   const otp = form.watch('otp')
 
   async function onSubmit(data: z.infer<typeof otpFormSchema>) {
-    // Validate based on mode
     if (useBackupCode) {
       if (!isValidBackupCode(data.otp)) {
         toast.error(t('Backup code must be in format XXXX-XXXX'))
@@ -93,7 +103,6 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
 
     setIsLoading(true)
     try {
-      // Remove all hyphens from backup code before sending to backend
       const code = useBackupCode ? cleanBackupCode(data.otp) : data.otp
       if (!pending2FAFlowToken) {
         toast.error(t('Login flow expired. Please sign in again.'))
@@ -154,7 +163,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
           name='otp'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className={labelCls}>
                 {useBackupCode ? t('Backup Code') : t('Verification Code')}
               </FormLabel>
               <FormControl>
@@ -164,7 +173,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
                     {...field}
                     maxLength={BACKUP_CODE_LENGTH}
                     autoComplete='off'
-                    className='font-mono uppercase'
+                    className={cn(inputCls, 'font-mono uppercase tracking-[0.2em]')}
                     onChange={(e) => {
                       const formatted = formatBackupCode(e.target.value)
                       field.onChange(formatted)
@@ -174,61 +183,61 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
                   <InputOTP
                     maxLength={OTP_LENGTH}
                     {...field}
-                    containerClassName='justify-between sm:[&>[data-slot="input-otp-group"]>div]:w-12'
+                    containerClassName='w-full items-center justify-between gap-0'
                   >
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
+                    <InputOTPGroup className={otpGroupCls}>
+                      <InputOTPSlot index={0} className={otpSlotCls} />
+                      <InputOTPSlot index={1} className={otpSlotCls} />
                     </InputOTPGroup>
-                    <InputOTPSeparator />
-                    <InputOTPGroup>
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
+                    <InputOTPSeparator className={otpSeparatorCls} />
+                    <InputOTPGroup className={otpGroupCls}>
+                      <InputOTPSlot index={2} className={otpSlotCls} />
+                      <InputOTPSlot index={3} className={otpSlotCls} />
                     </InputOTPGroup>
-                    <InputOTPSeparator />
-                    <InputOTPGroup>
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
+                    <InputOTPSeparator className={otpSeparatorCls} />
+                    <InputOTPGroup className={otpGroupCls}>
+                      <InputOTPSlot index={4} className={otpSlotCls} />
+                      <InputOTPSlot index={5} className={otpSlotCls} />
                     </InputOTPGroup>
                   </InputOTP>
                 )}
               </FormControl>
-              <FormDescription className='text-muted-foreground text-xs'>
+              <FormDescription className='text-[12px] leading-relaxed text-[#8A93A4]'>
                 {useBackupCode
                   ? t('Each backup code can only be used once.')
                   : t('Verification code updates every 30 seconds.')}
               </FormDescription>
-              <FormMessage />
+              <FormMessage className='text-[12px]' />
             </FormItem>
           )}
         />
 
         <Button
           type='submit'
-          className='mt-2 w-full'
+          className={cn(btnPrimary, 'mt-2 w-full gap-2')}
           disabled={!isFormValid || isLoading}
         >
           {isLoading ? <Loader2 className='h-4 w-4 animate-spin' /> : null}
           {t('Verify and Sign In')}
         </Button>
 
-        <div className='flex items-center justify-center gap-2 text-sm'>
+        <div className='flex items-center justify-center gap-2 text-[13px]'>
           <Button
             type='button'
-            variant='link'
+            variant='ghost'
             size='sm'
-            className='text-primary h-auto p-0'
             onClick={handleToggleMode}
+            className='h-auto p-0 font-medium text-[#5A6478] no-underline transition-colors hover:bg-transparent hover:text-[#0A0E1A]'
           >
             {useBackupCode ? t('Use authenticator code') : t('Use backup code')}
           </Button>
-          <span className='text-muted-foreground'>·</span>
+          <span className='text-[#D8DCE5]'>·</span>
           <Button
             type='button'
-            variant='link'
+            variant='ghost'
             size='sm'
-            className='text-primary h-auto p-0'
             onClick={handleBackToLogin}
+            className='h-auto p-0 font-medium text-[#5A6478] no-underline transition-colors hover:bg-transparent hover:text-[#0A0E1A]'
           >
             {t('Back to login')}
           </Button>

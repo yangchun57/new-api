@@ -26,7 +26,7 @@ import { cn } from '@/lib/utils'
 export type GroupRatio = number | string | null | undefined
 
 export const AUTO_GROUP_FRAME_CLASS_NAME =
-  'border-primary/40 relative overflow-visible border shadow-sm shadow-primary/10'
+  'border-[#2E4BFF]/40 relative overflow-visible border shadow-[0_1px_2px_rgba(10,14,26,0.04)]'
 
 type AutoGroupFlowBorderProps = {
   shouldReduceMotion: boolean
@@ -70,18 +70,18 @@ export function AutoGroupFrame(props: AutoGroupFrameProps) {
 
 function getRatioBadgeClassName(ratio: GroupRatio, isAuto: boolean): string {
   if (isAuto || typeof ratio !== 'number') {
-    return 'border-primary/30 bg-primary/10 text-primary'
+    return 'border-[#2E4BFF]/30 bg-[#2E4BFF]/[0.08] text-[#2E4BFF]'
   }
   if (ratio > 5) {
-    return 'border-destructive/30 bg-destructive/10 text-destructive'
+    return 'border-[#E5484D]/30 bg-[#E5484D]/[0.08] text-[#E5484D]'
   }
   if (ratio > 3) {
-    return 'border-warning/30 bg-warning/10 text-warning'
+    return 'border-[#D97706]/30 bg-[#D97706]/[0.08] text-[#D97706]'
   }
   if (ratio > 1) {
-    return 'border-info/30 bg-info/10 text-info'
+    return 'border-[#2E4BFF]/30 bg-[#2E4BFF]/[0.08] text-[#2E4BFF]'
   }
-  return 'border-success/30 bg-success/10 text-success'
+  return 'border-[#16A34A]/30 bg-[#16A34A]/[0.08] text-[#16A34A]'
 }
 
 type GroupRatioBadgeProps = {
@@ -105,7 +105,7 @@ export function GroupRatioBadge(props: GroupRatioBadgeProps) {
     <Badge
       variant='outline'
       className={cn(
-        'max-w-full truncate text-[10px] sm:text-xs',
+        'max-w-full truncate text-[10px] sm:text-[12px]',
         getRatioBadgeClassName(props.ratio, props.isAuto === true)
       )}
     >

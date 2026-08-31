@@ -21,7 +21,6 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { StaticDataTable } from '@/components/data-table'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useSystemConfigStore } from '@/stores/system-config-store'
 
@@ -48,25 +47,9 @@ import {
 
 type DynamicPricingBreakdownProps = {
   billingExpr: string | null | undefined
-  /**
-   * Label of the tier that fired for the current request. When provided,
-   * the corresponding row is highlighted and tagged as "Matched". Used by
-   * the usage-log details dialog to show which tier the engine selected.
-   */
   matchedTierLabel?: string | null
-  /** Request-rule traces emitted by the settlement run. */
   requestRules?: RequestRuleTrace[] | null
-  /**
-   * Hide cache-pricing columns regardless of the per-tier values. The log
-   * details dialog passes this when the actual request did not consume any
-   * cache tokens, so users only see pricing rows that were relevant to the
-   * call they are inspecting. Defaults to false (show all configured prices).
-   */
   hideCacheColumns?: boolean
-  /**
-   * Dense rendering for the usage-log details dialog: drops the colored
-   * icon header and uses the dialog's small text sizes. Defaults to false.
-   */
   compact?: boolean
 }
 
@@ -167,6 +150,64 @@ function nextOccurrenceKey(
   return `${baseKey}:${occurrence}`
 }
 
+function TierBadge({
+  label,
+  compact,
+}: {
+  label: string
+  compact?: boolean
+}) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full border border-[#EEF0F4] bg-[#FAFBFC] font-mono text-[#5A6478]',
+        compact ? 'px-1.5 py-px text-[10px]' : 'px-2 py-0.5 text-[11px]'
+      )}
+    >
+      {label}
+    </span>
+  )
+}
+
+function MatchedBadge({ compact }: { compact?: boolean }) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full bg-emerald-50 font-medium text-emerald-700 ring-1 ring-emerald-200',
+        compact ? 'px-1.5 py-px text-[10px]' : 'px-2 py-0.5 text-[11px]'
+      )}
+    >
+      {compact ? '✓' : 'Matched'}
+    </span>
+  )
+}
+
+function MultiplierBadge({
+  multiplier,
+  matched,
+  matchedText,
+}: {
+  multiplier: number
+  matched?: boolean
+  matchedText?: string
+}) {
+  return (
+    <span
+      className={cn(
+        'inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-[11px] font-semibold',
+        matched
+          ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
+          : 'border border-[#FCD34D]/60 bg-[#FEF9E7] text-[#B45309]'
+      )}
+    >
+      {multiplier}x{matched && matchedText ? ` · ${matchedText}` : ''}
+    </span>
+  )
+}
+
+const RAW_CODE_BASE =
+  'block break-all rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] p-3 font-mono text-[12px] leading-relaxed text-[#5A6478]'
+
 export function DynamicPricingBreakdown({
   billingExpr,
   matchedTierLabel,
@@ -217,25 +258,23 @@ export function DynamicPricingBreakdown({
       <section className={cn('min-w-0', !compact && 'py-4')}>
         {!compact && (
           <div className='mb-3 flex items-center gap-2'>
-            <span className='inline-flex size-6 items-center justify-center rounded-lg bg-amber-100 text-amber-700 shadow-sm dark:bg-amber-500/20 dark:text-amber-300'>
+            <span className='inline-flex size-7 items-center justify-center rounded-full bg-[#FEF9E7] text-[#B45309] ring-1 ring-[#FCD34D]/50'>
               <TagIcon className='size-3.5' />
             </span>
             <div>
-              <div className='text-foreground text-base font-medium'>
+              <div className='text-[14px] font-semibold text-[#0A0E1A]'>
                 {t('Special billing expression')}
               </div>
-              <div className='text-muted-foreground text-xs'>
+              <div className='mt-0.5 text-[12px] text-[#8A93A4]'>
                 {t('Unable to parse structured pricing')}
               </div>
             </div>
           </div>
         )}
-        <div className='text-muted-foreground mb-1 text-[10px] font-medium tracking-wider uppercase'>
+        <div className='mb-1.5 pl-font-mono text-[10px] text-[#8A93A4]'>
           {t('Raw expression')}
         </div>
-        <code className='text-muted-foreground block text-xs break-all'>
-          {expr}
-        </code>
+        <code className={RAW_CODE_BASE}>{expr}</code>
       </section>
     )
   }
@@ -250,18 +289,38 @@ export function DynamicPricingBreakdown({
   const mobileTierKeyOccurrences = new Map<string, number>()
   const requestRuleKeyOccurrences = new Map<string, number>()
 
+  const sectionLabel = compact
+    ? 'mb-1 text-[11px] font-medium text-[#8A93A4]'
+    : 'mb-2 text-[13px] font-semibold text-[#0A0E1A]'
+
+  const thBase = compact
+    ? 'h-8 py-2 text-[11px] text-[#8A93A4]'
+    : 'py-3 pl-font-mono text-[9px] text-[#8A93A4]'
+  const thLeft = thBase + ' text-left font-medium'
+  const thRight = thBase + ' text-right font-medium'
+  const cellBase = compact ? 'py-2 text-[12px]' : 'py-3 text-[13px]'
+  const cellLeft = cellBase + ' text-[#5A6478]'
+  const cellNum =
+    cellBase +
+    ' text-right font-mono tabular-nums text-[#0A0E1A]' +
+    (compact ? '' : ' font-semibold')
+  const condClass = compact
+    ? 'mt-0.5 text-[11px] text-[#8A93A4]'
+    : 'mt-1 text-[12px] text-[#8A93A4]'
+  const dividerClass = compact ? 'border-t border-[#F0F2F6]' : 'border-t border-[#F0F2F6]'
+
   return (
     <section className={cn('min-w-0', !compact && 'py-3 sm:py-4')}>
       {!compact && (
-        <div className='mb-3 flex items-start gap-2 sm:mb-4'>
-          <span className='mt-0.5 inline-flex size-6 items-center justify-center rounded-lg bg-amber-100 text-amber-700 shadow-sm dark:bg-amber-500/20 dark:text-amber-300'>
+        <div className='mb-4 flex items-start gap-2'>
+          <span className='mt-0.5 inline-flex size-7 items-center justify-center rounded-full bg-[#FEF9E7] text-[#B45309] ring-1 ring-[#FCD34D]/50'>
             <TagIcon className='size-3.5' />
           </span>
           <div>
-            <div className='text-foreground text-base font-medium'>
+            <div className='text-[14px] font-semibold text-[#0A0E1A]'>
               {t('Dynamic Pricing')}
             </div>
-            <div className='text-muted-foreground text-xs'>
+            <div className='mt-0.5 text-[12px] text-[#8A93A4]'>
               {t('Prices vary by usage tier and request conditions')}
             </div>
           </div>
@@ -269,17 +328,9 @@ export function DynamicPricingBreakdown({
       )}
 
       {hasTiers && (
-        <div className={cn(compact ? cn(hasRules && 'mb-2') : 'mb-3 sm:mb-4')}>
-          <div
-            className={
-              compact
-                ? 'text-muted-foreground mb-1.5 text-xs font-medium'
-                : 'text-foreground mb-2 text-sm font-semibold'
-            }
-          >
-            {t('Tiered price table')}
-          </div>
-          <div className='space-y-1.5 sm:hidden'>
+        <div className={cn(!compact && 'mb-4', compact && hasRules && 'mb-3')}>
+          <div className={sectionLabel}>{t('Tiered price table')}</div>
+          <div className='space-y-2 sm:hidden'>
             {tiers.map((tier) => {
               const condSummary = formatConditionSummary(tier.conditions, t)
               const isMatched =
@@ -294,28 +345,23 @@ export function DynamicPricingBreakdown({
                 <div
                   key={`tier-mobile-${rowKey}`}
                   className={cn(
-                    'rounded-md border p-2',
-                    isMatched && 'border-emerald-500/40 bg-emerald-500/10'
+                    'rounded-xl border p-3',
+                    isMatched
+                      ? 'border-emerald-200 bg-emerald-50/60'
+                      : 'border-[#E5E8EE] bg-white'
                   )}
                 >
-                  <div className='mb-1.5 flex flex-wrap items-center gap-1.5'>
-                    <Badge
-                      variant='secondary'
-                      className='bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300'
-                    >
-                      {tier.label || t('Default')}
-                    </Badge>
-                    {isMatched && (
-                      <Badge
-                        variant='secondary'
-                        className='bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300'
-                      >
-                        {t('Matched')}
-                      </Badge>
-                    )}
+                  <div className='mb-2 flex flex-wrap items-center gap-1.5'>
+                    <TierBadge label={tier.label || t('Default')} compact={compact} />
+                    {isMatched && <MatchedBadge compact={compact} />}
                   </div>
                   {condSummary && (
-                    <div className='text-muted-foreground mb-1.5 text-xs'>
+                    <div
+                      className={cn(
+                        'mb-2 text-[12px] text-[#8A93A4]',
+                        compact && 'text-[11px]'
+                      )}
+                    >
                       {condSummary}
                     </div>
                   )}
@@ -326,18 +372,18 @@ export function DynamicPricingBreakdown({
                       )
                       return (
                         <div key={v.field} className='min-w-0'>
-                          <div className='text-muted-foreground truncate text-[10px] font-medium tracking-wider uppercase'>
+                          <div className='truncate pl-font-mono text-[9px] text-[#8A93A4]'>
                             {t(v.shortLabel)}
                           </div>
                           <div
                             className={cn(
-                              'truncate font-mono',
-                              compact ? 'text-xs' : 'text-sm font-semibold'
+                              'truncate font-mono tabular-nums text-[#0A0E1A]',
+                              compact ? 'text-[12px]' : 'text-[13px] font-semibold'
                             )}
                           >
                             {value > 0
                               ? `${symbol}${(value * rate).toFixed(4)}`
-                              : '-'}
+                              : <span className='text-[#B8BFCC]'>–</span>}
                           </div>
                         </div>
                       )
@@ -348,33 +394,34 @@ export function DynamicPricingBreakdown({
             })}
           </div>
           <StaticDataTable
-            className='hidden rounded-none border-0 bg-transparent shadow-none sm:block'
+            className={cn(
+              'hidden overflow-hidden sm:block',
+              compact
+                ? ''
+                : 'rounded-2xl border border-[#E5E8EE] bg-white shadow-sm'
+            )}
             tableClassName={
               compact
-                ? '[&_td]:text-xs [&_td_*]:text-xs [&_th]:text-xs [&_th_*]:text-xs'
-                : 'text-sm'
+                ? '[&_td]:text-[12px] [&_th]:text-[11px]'
+                : 'text-[13px]'
             }
-            headerRowClassName='hover:bg-transparent'
+            headerRowClassName={
+              compact ? 'hover:bg-transparent' : 'bg-[#FAFBFC] hover:bg-transparent'
+            }
             data={tiers}
             getRowKey={(_tier, index) => `tier-${index}`}
             getRowClassName={(tier) => {
               const isMatched =
                 normalizedMatchedTierLabel !== '' &&
                 normalizeTierLabel(tier.label) === normalizedMatchedTierLabel
-              return cn(
-                isMatched &&
-                  'bg-emerald-50/70 hover:bg-emerald-50/70 dark:bg-emerald-500/10 dark:hover:bg-emerald-500/10'
-              )
+              return isMatched ? 'bg-emerald-50/60 hover:bg-emerald-50/60' : ''
             }}
             columns={[
               {
                 id: 'tier',
                 header: t('Tier'),
-                className: cn(
-                  'text-muted-foreground py-2 font-medium',
-                  compact && 'h-8'
-                ),
-                cellClassName: cn('align-top', compact ? 'py-2' : 'py-2.5'),
+                className: thLeft,
+                cellClassName: cn(cellLeft + ' align-top', dividerClass),
                 cell: (tier) => {
                   const condSummary = formatConditionSummary(tier.conditions, t)
                   const isMatched =
@@ -384,25 +431,11 @@ export function DynamicPricingBreakdown({
                   return (
                     <>
                       <div className='flex flex-wrap items-center gap-1.5'>
-                        <Badge
-                          variant='secondary'
-                          className='bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300'
-                        >
-                          {tier.label || t('Default')}
-                        </Badge>
-                        {isMatched && (
-                          <Badge
-                            variant='secondary'
-                            className='bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300'
-                          >
-                            {t('Matched')}
-                          </Badge>
-                        )}
+                        <TierBadge label={tier.label || t('Default')} compact={compact} />
+                        {isMatched && <MatchedBadge compact={compact} />}
                       </div>
                       {condSummary && (
-                        <div className='text-muted-foreground mt-1 text-xs'>
-                          {condSummary}
-                        </div>
+                        <div className={condClass}>{condSummary}</div>
                       )}
                     </>
                   )
@@ -411,24 +444,16 @@ export function DynamicPricingBreakdown({
               ...visiblePriceFields.map((v, index) => ({
                 id: v.field ?? `price-${index}`,
                 header: t(v.shortLabel),
-                className: cn(
-                  'text-muted-foreground py-2 text-right font-medium',
-                  compact && 'h-8'
-                ),
-                cellClassName: cn(
-                  'text-right align-top font-mono',
-                  compact ? 'py-2' : 'py-2.5'
-                ),
+                className: thRight,
+                cellClassName: cn(cellNum + ' align-top', dividerClass),
                 cell: (tier: ParsedTier) => {
                   const value = Number(
                     tier[v.field as string as keyof ParsedTier] || 0
                   )
                   return value > 0 ? (
-                    <span className={cn(!compact && 'font-semibold')}>
-                      {`${symbol}${(value * rate).toFixed(4)}`}
-                    </span>
+                    `${symbol}${(value * rate).toFixed(4)}`
                   ) : (
-                    '-'
+                    <span className='text-[#B8BFCC]'>–</span>
                   )
                 },
               })),
@@ -439,15 +464,7 @@ export function DynamicPricingBreakdown({
 
       {hasRules && (
         <div>
-          <div
-            className={
-              compact
-                ? 'text-muted-foreground mb-1.5 text-xs font-medium'
-                : 'text-foreground mb-2 text-sm font-semibold'
-            }
-          >
-            {t('Conditional multipliers')}
-          </div>
+          <div className={sectionLabel}>{t('Conditional multipliers')}</div>
           <ul className='space-y-1.5'>
             {ruleGroups.map((group) => {
               const isMatched = group.matched === true
@@ -459,28 +476,27 @@ export function DynamicPricingBreakdown({
                 <li
                   key={`group-${rowKey}`}
                   className={cn(
-                    'bg-muted/50 flex items-center justify-between gap-3 rounded-md border border-transparent px-3 py-2',
-                    isMatched && 'border-emerald-500/40 bg-emerald-500/10'
+                    'flex items-center justify-between gap-3 rounded-xl border px-3 py-2',
+                    isMatched
+                      ? 'border-emerald-200 bg-emerald-50/60'
+                      : compact
+                        ? 'border-[#EEF0F4] bg-[#FAFBFC]'
+                        : 'border-[#E5E8EE] bg-[#FAFBFC]'
                   )}
                 >
                   <span
                     className={cn(
-                      'text-foreground break-all',
-                      compact ? 'text-xs' : 'text-sm'
+                      'break-all text-[#5A6478]',
+                      compact ? 'text-[12px]' : 'text-[13px]'
                     )}
                   >
                     {describeGroup(group, t)}
                   </span>
-                  <Badge
-                    variant='secondary'
-                    className={cn(
-                      'shrink-0 bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-300',
-                      isMatched &&
-                        'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300'
-                    )}
-                  >
-                    {group.multiplier}x{isMatched && ` · ${t('Matched')}`}
-                  </Badge>
+                  <MultiplierBadge
+                    multiplier={group.multiplier}
+                    matched={isMatched}
+                    matchedText={t('Matched')}
+                  />
                 </li>
               )
             })}

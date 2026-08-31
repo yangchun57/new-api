@@ -530,7 +530,7 @@ export function ApiKeysMutateDrawer({
                           type='button'
                           variant='outline'
                           size='sm'
-                          className='px-2 text-xs sm:px-3 sm:text-sm'
+                          className='px-2 text-[12px] sm:px-3 sm:text-[13px]'
                           onClick={() => handleSetExpiry(0, 0, 0)}
                         >
                           {t('Never')}
@@ -539,7 +539,7 @@ export function ApiKeysMutateDrawer({
                           type='button'
                           variant='outline'
                           size='sm'
-                          className='px-2 text-xs sm:px-3 sm:text-sm'
+                          className='px-2 text-[12px] sm:px-3 sm:text-[13px]'
                           onClick={() => handleSetExpiry(1, 0, 0)}
                         >
                           {t('1 Month')}
@@ -548,7 +548,7 @@ export function ApiKeysMutateDrawer({
                           type='button'
                           variant='outline'
                           size='sm'
-                          className='px-2 text-xs sm:px-3 sm:text-sm'
+                          className='px-2 text-[12px] sm:px-3 sm:text-[13px]'
                           onClick={() => handleSetExpiry(0, 1, 0)}
                         >
                           {t('1 Day')}
@@ -557,7 +557,7 @@ export function ApiKeysMutateDrawer({
                           type='button'
                           variant='outline'
                           size='sm'
-                          className='px-2 text-xs sm:px-3 sm:text-sm'
+                          className='px-2 text-[12px] sm:px-3 sm:text-[13px]'
                           onClick={() => handleSetExpiry(0, 0, 1)}
                         >
                           {t('1 Hour')}
@@ -671,7 +671,7 @@ export function ApiKeysMutateDrawer({
                   render={
                     <button
                       type='button'
-                      className='hover:bg-muted/40 flex w-full items-center gap-3 rounded-md py-1.5 text-left transition-colors'
+                      className='flex w-full items-center gap-3 rounded-md py-1.5 text-left transition-colors hover:bg-[#F0F2F6]'
                     />
                   }
                 >
@@ -683,7 +683,7 @@ export function ApiKeysMutateDrawer({
                   />
                   <ChevronDown
                     className={cn(
-                      'text-muted-foreground size-4 shrink-0 transition-transform',
+                      'size-4 shrink-0 text-[#8A93A4] transition-transform',
                       advancedOpen && 'rotate-180'
                     )}
                   />

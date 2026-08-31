@@ -99,7 +99,7 @@ type ConflictFieldRow = {
 
 function ValuePreview({ value }: { value: unknown }) {
   return (
-    <pre className='bg-muted/70 text-muted-foreground max-h-32 overflow-auto rounded-md border px-2 py-1.5 font-mono text-xs break-words whitespace-pre-wrap'>
+    <pre className='bg-[#F7F8FA] text-[#8A93A4] max-h-32 overflow-auto rounded-md border border-[#E5E8EE] px-2 py-1.5 font-mono text-[12px] break-words whitespace-pre-wrap'>
       {formatValue(value)}
     </pre>
   )
@@ -210,8 +210,8 @@ export function UpstreamConflictDialog({
             />
           ) : null}
           <div className='space-y-1'>
-            <p className='leading-none font-medium'>{row.original.modelName}</p>
-            <span className='text-muted-foreground font-mono text-xs'>
+            <p className='leading-none text-[13px] font-medium text-[#0A0E1A]'>{row.original.modelName}</p>
+            <span className='text-[#8A93A4] font-mono text-[12px]'>
               {row.original.fieldKey}
             </span>
             {isMobile ? (
@@ -240,14 +240,14 @@ export function UpstreamConflictDialog({
               <Button
                 variant='ghost'
                 size='sm'
-                className={isMobile ? 'h-7 w-7 p-0' : 'h-7 gap-2 px-2 text-xs'}
+                className={isMobile ? 'h-7 w-7 p-0' : 'h-7 gap-2 px-2 text-[12px]'}
               />
             }
           >
             <MousePointerClick className='h-3.5 w-3.5' />
             {!isMobile && 'View diff'}
           </PopoverTrigger>
-          <PopoverContent className='w-[min(90vw,24rem)] space-y-4 text-sm'>
+          <PopoverContent className='w-[min(90vw,24rem)] space-y-4 text-[13px]'>
             <div>
               <StatusBadge
                 label='Local'
@@ -256,7 +256,7 @@ export function UpstreamConflictDialog({
                 copyable={false}
                 className='mb-1'
               />
-              <pre className='bg-muted rounded-md p-2 text-xs'>
+              <pre className='bg-[#F7F8FA] rounded-md border border-[#E5E8EE] p-2 font-mono text-[12px]'>
                 {formatValue(row.original.localValue)}
               </pre>
             </div>
@@ -268,7 +268,7 @@ export function UpstreamConflictDialog({
                 copyable={false}
                 className='mb-1'
               />
-              <pre className='bg-muted rounded-md p-2 text-xs'>
+              <pre className='bg-[#F7F8FA] rounded-md border border-[#E5E8EE] p-2 font-mono text-[12px]'>
                 {formatValue(row.original.upstreamValue)}
               </pre>
             </div>
@@ -451,7 +451,7 @@ export function UpstreamConflictDialog({
       footerClassName='sm:justify-between'
       footer={
         <div className='flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-          <div className='text-muted-foreground flex flex-1 items-start gap-2 text-xs'>
+          <div className='text-[#8A93A4] flex flex-1 items-start gap-2 text-[12px]'>
             <Info className='h-4 w-4 flex-shrink-0' />
             <span>
               {t(
@@ -481,18 +481,18 @@ export function UpstreamConflictDialog({
     >
       <div className='flex min-h-0 flex-1 flex-col gap-4'>
         {!hasConflicts ? (
-          <div className='text-muted-foreground flex flex-1 items-center justify-center rounded-md border border-dashed p-8 text-center text-sm'>
+          <div className='text-[#5A6478] flex flex-1 items-center justify-center rounded-md border border-dashed border-[#E5E8EE] p-8 text-center text-[13px]'>
             {t('No conflict entries available.')}
           </div>
         ) : (
           <div className='flex min-h-0 flex-1 flex-col gap-4 overflow-hidden'>
             <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
               <div className='space-y-1'>
-                <div className='text-sm font-medium'>
+                <div className='text-[13px] font-medium text-[#0A0E1A]'>
                   {visibleModelCount} {t('model')}
                   {visibleModelCount === 1 ? '' : 's'} {t('with conflicts')}
                 </div>
-                <div className='text-muted-foreground text-xs'>
+                <div className='text-[#8A93A4] text-[12px] tabular-nums'>
                   {visibleFieldCount} {t('field')}
                   {visibleFieldCount === 1 ? '' : 's'} {t('showing •')}{' '}
                   {totalSelectedFields} {t('selected')}
@@ -500,7 +500,7 @@ export function UpstreamConflictDialog({
               </div>
               <div className='flex w-full flex-col gap-2 sm:w-auto sm:flex-row'>
                 <div className='relative flex-1'>
-                  <Search className='text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+                  <Search className='text-[#8A93A4] pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
                   <Input
                     value={search}
                     onChange={(event) => {
@@ -524,13 +524,13 @@ export function UpstreamConflictDialog({
             </div>
 
             {showSearchEmptyState ? (
-              <div className='text-muted-foreground flex flex-1 items-center justify-center rounded-md border border-dashed p-8 text-center text-sm'>
+              <div className='text-[#5A6478] flex flex-1 items-center justify-center rounded-md border border-dashed border-[#E5E8EE] p-8 text-center text-[13px]'>
                 {t('No conflicts match your search.')}
               </div>
             ) : (
               <div
                 data-slot='card'
-                className='group/card bg-card text-card-foreground border-border/70 shadow-card flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border'
+                className='group/card bg-white text-[#0A0E1A] border-[#E5E8EE] flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border'
               >
                 <div className='flex-1 overflow-auto'>
                   <DataTableView
@@ -543,14 +543,14 @@ export function UpstreamConflictDialog({
                   />
                 </div>
 
-                <div className='bg-muted/40 flex flex-col gap-2 border-t px-2 py-1.5 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-3 sm:py-2'>
-                  <div className='text-muted-foreground text-xs'>
+                <div className='bg-[#F7F8FA] flex flex-col gap-2 border-t border-[#E5E8EE] px-2 py-1.5 text-[13px] sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-3 sm:py-2'>
+                  <div className='text-[#8A93A4] text-[12px] tabular-nums'>
                     {t('Showing')} {displayStart}-{displayEnd} {t('of')}{' '}
                     {visibleFieldCount} {t('field')}
                     {visibleFieldCount === 1 ? '' : 's'}
                   </div>
                   <div className='flex items-center justify-between gap-2 sm:flex-wrap sm:gap-3'>
-                    <div className='flex items-center gap-1.5 text-xs sm:gap-2'>
+                    <div className='flex items-center gap-1.5 text-[12px] sm:gap-2'>
                       <span className='hidden sm:inline'>
                         {t('Rows per page')}
                       </span>
@@ -565,7 +565,7 @@ export function UpstreamConflictDialog({
                           setPageIndex(0)
                         }}
                       >
-                        <SelectTrigger className='h-8 w-[70px] text-xs sm:h-8 sm:w-[72px]'>
+                        <SelectTrigger className='h-8 w-[70px] text-[12px] sm:h-8 sm:w-[72px]'>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent alignItemWithTrigger={false}>
@@ -592,7 +592,7 @@ export function UpstreamConflictDialog({
                       >
                         <ChevronLeft className='h-3.5 w-3.5 sm:h-4 sm:w-4' />
                       </Button>
-                      <span className='text-xs font-medium'>
+                      <span className='text-[12px] font-medium tabular-nums'>
                         {t('Page {{current}} of {{total}}', {
                           current: currentPageDisplay,
                           total: totalPagesDisplay,

@@ -36,9 +36,9 @@ export function WalletStatsCard(props: WalletStatsCardProps) {
     return (
       <div
         data-slot='card'
-        className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+        className='group/card bg-white text-[#0A0E1A] border-[#E5E8EE] overflow-hidden rounded-xl border shadow-[0_1px_2px_rgba(10,14,26,0.04)]'
       >
-        <div className='divide-border/60 grid grid-cols-3 divide-x'>
+        <div className='border-[#E5E8EE] grid grid-cols-3 divide-x'>
           {['balance', 'usage', 'requests'].map((key) => (
             <div
               key={key}
@@ -87,9 +87,9 @@ export function WalletStatsCard(props: WalletStatsCardProps) {
   return (
     <div
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+      className='group/card bg-white text-[#0A0E1A] border-[#E5E8EE] overflow-hidden rounded-xl border shadow-[0_1px_2px_rgba(10,14,26,0.04)]'
     >
-      <div className='divide-border/60 grid grid-cols-3 divide-x'>
+      <div className='border-[#E5E8EE] grid grid-cols-3 divide-x'>
         {stats.map((item) => (
           <div
             key={item.label}
@@ -99,15 +99,15 @@ export function WalletStatsCard(props: WalletStatsCardProps) {
               <IconBadge tone={item.tone} size='stat'>
                 <item.icon />
               </IconBadge>
-              <div className='text-muted-foreground truncate text-[11px] font-medium tracking-wider uppercase sm:text-xs'>
+              <div className='pl-font-mono text-[#8A93A4] truncate text-[11px] font-medium tracking-[0.08em] uppercase sm:text-xs'>
                 {item.label}
               </div>
             </div>
 
-            <div className='text-foreground mt-1.5 font-mono text-sm font-bold tracking-tight break-all tabular-nums sm:mt-2.5 sm:text-2xl'>
+            <div className='text-[#0A0E1A] mt-1.5 font-mono text-sm font-semibold tracking-[-0.01em] break-all tabular-nums sm:mt-2.5 sm:text-2xl'>
               {item.value}
             </div>
-            <div className='text-muted-foreground/60 mt-1 hidden text-xs md:block'>
+            <div className='text-[#8A93A4] mt-1 hidden text-[12px] md:block'>
               {item.description}
             </div>
           </div>

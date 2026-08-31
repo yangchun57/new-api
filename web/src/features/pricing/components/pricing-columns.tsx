@@ -70,7 +70,6 @@ export function usePricingColumns(
   const tokenUnitLabel = tokenUnit === 'K' ? '1K' : '1M'
 
   return [
-    // Model column
     {
       accessorKey: 'model_name',
       meta: { label: t('Model') },
@@ -85,7 +84,7 @@ export function usePricingColumns(
         return (
           <div className='flex max-w-full min-w-0 items-center gap-2'>
             {modelIcon}
-            <span className='truncate font-mono text-sm font-medium'>
+            <span className='truncate font-mono text-[13px] font-semibold text-[#0A0E1A]'>
               {model.model_name}
             </span>
           </div>
@@ -94,7 +93,6 @@ export function usePricingColumns(
       minSize: 200,
     },
 
-    // Type column
     {
       accessorKey: 'quota_type',
       header: t('Type'),
@@ -105,7 +103,6 @@ export function usePricingColumns(
       enableSorting: false,
     },
 
-    // Price column
     {
       accessorKey: 'price',
       meta: { label: t('Price') },
@@ -129,13 +126,13 @@ export function usePricingColumns(
           if (dynamicSummary.isSpecialExpression) {
             return (
               <div className='max-w-full min-w-0'>
-                <div className='text-xs font-medium text-amber-700 dark:text-amber-300'>
+                <div className='text-[12px] font-medium text-[#B45309]'>
                   {t('Special billing expression')}
                 </div>
-                <div className='text-muted-foreground text-[11px]'>
+                <div className='text-[11px] text-[#8A93A4]'>
                   {t('Unable to parse structured pricing')}
                 </div>
-                <code className='text-muted-foreground/70 mt-1 line-clamp-2 block font-mono text-[10px] leading-relaxed break-all'>
+                <code className='mt-1 block line-clamp-2 font-mono text-[10px] leading-relaxed break-all text-[#8A93A4]'>
                   {dynamicSummary.rawExpression}
                 </code>
               </div>
@@ -145,7 +142,7 @@ export function usePricingColumns(
           const primaryEntries = dynamicSummary.primaryEntries.slice(0, 2)
           if (primaryEntries.length === 0) {
             return (
-              <span className='text-muted-foreground text-xs'>
+              <span className='text-[12px] text-[#8A93A4]'>
                 {t('Dynamic Pricing')}
               </span>
             )
@@ -153,17 +150,17 @@ export function usePricingColumns(
 
           return (
             <div className='max-w-full min-w-0'>
-              <span className='font-mono text-sm tabular-nums'>
+              <span className='font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
                 {primaryEntries.map((entry, index) => (
                   <span key={entry.key}>
                     {index > 0 && (
-                      <span className='text-muted-foreground/40 mx-1'>/</span>
+                      <span className='mx-1 text-[#B8BFCC]'>/</span>
                     )}
                     {stripTrailingZeros(entry.formatted)}
                   </span>
                 ))}
               </span>
-              <div className='text-muted-foreground/50 text-[10px]'>
+              <div className='text-[10px] text-[#8A93A4]'>
                 / {tokenUnitLabel} tokens
                 {dynamicSummary.tierCount > 1 &&
                   ` · ${t('{{count}} tiers', {
@@ -202,12 +199,12 @@ export function usePricingColumns(
 
           return (
             <div className='max-w-full min-w-0'>
-              <span className='font-mono text-sm tabular-nums'>
+              <span className='font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
                 {inputPrice}
-                <span className='text-muted-foreground/40 mx-1'>/</span>
+                <span className='mx-1 text-[#B8BFCC]'>/</span>
                 {outputPrice}
               </span>
-              <div className='text-muted-foreground/50 text-[10px]'>
+              <div className='text-[10px] text-[#8A93A4]'>
                 / {tokenUnitLabel} tokens
               </div>
             </div>
@@ -226,10 +223,10 @@ export function usePricingColumns(
 
         return (
           <div className='max-w-full min-w-0'>
-            <span className='font-mono text-sm tabular-nums'>{price}</span>
-            <div className='text-muted-foreground/50 text-[10px]'>
-              / {t('request')}
-            </div>
+            <span className='font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
+              {price}
+            </span>
+            <div className='text-[10px] text-[#8A93A4]'>/ {t('request')}</div>
           </div>
         )
       },
@@ -237,7 +234,6 @@ export function usePricingColumns(
       enableSorting: false,
     },
 
-    // Cached price column (Vercel AI Gateway style)
     {
       id: 'cached_price',
       header: t('Cached'),
@@ -257,7 +253,7 @@ export function usePricingColumns(
         if (dynamicSummary) {
           if (dynamicSummary.isSpecialExpression) {
             return (
-              <span className='text-muted-foreground/50 text-xs'>
+              <span className='text-[12px] text-[#8A93A4]'>
                 {t('Special billing expression')}
               </span>
             )
@@ -267,15 +263,15 @@ export function usePricingColumns(
             (entry) => entry.field === 'cacheReadPrice'
           )
           if (!cacheEntry) {
-            return <span className='text-muted-foreground/30 text-xs'>—</span>
+            return <span className='text-[12px] text-[#B8BFCC]'>—</span>
           }
 
           return (
             <div className='max-w-full min-w-0'>
-              <span className='font-mono text-sm tabular-nums'>
+              <span className='font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
                 {stripTrailingZeros(cacheEntry.formatted)}
               </span>
-              <div className='text-muted-foreground/50 text-[10px]'>
+              <div className='text-[10px] text-[#8A93A4]'>
                 / {tokenUnitLabel}
               </div>
             </div>
@@ -285,7 +281,7 @@ export function usePricingColumns(
         const isTokenBased = isTokenBasedModel(model)
 
         if (!isTokenBased || model.cache_ratio == null) {
-          return <span className='text-muted-foreground/30 text-xs'>—</span>
+          return <span className='text-[12px] text-[#B8BFCC]'>—</span>
         }
 
         const cachedPrice = stripTrailingZeros(
@@ -302,10 +298,10 @@ export function usePricingColumns(
 
         return (
           <div className='max-w-full min-w-0'>
-            <span className='font-mono text-sm tabular-nums'>
+            <span className='font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
               {cachedPrice}
             </span>
-            <div className='text-muted-foreground/50 text-[10px]'>
+            <div className='text-[10px] text-[#8A93A4]'>
               / {tokenUnitLabel}
             </div>
           </div>
@@ -315,14 +311,13 @@ export function usePricingColumns(
       enableSorting: false,
     },
 
-    // Vendor column
     {
       accessorKey: 'vendor_name',
       header: t('Vendor'),
       cell: ({ row }) => {
         const model = row.original
         if (!model.vendor_name) {
-          return <span className='text-muted-foreground/50 text-xs'>—</span>
+          return <span className='text-[12px] text-[#B8BFCC]'>—</span>
         }
         const vendorIcon = model.vendor_icon
           ? getLobeIcon(model.vendor_icon, 12)
@@ -343,7 +338,6 @@ export function usePricingColumns(
       enableSorting: false,
     },
 
-    // Tags column
     {
       accessorKey: 'tags',
       header: t('Tags'),
@@ -367,7 +361,6 @@ export function usePricingColumns(
       enableSorting: false,
     },
 
-    // Endpoints column
     {
       accessorKey: 'supported_endpoint_types',
       header: t('Endpoints'),
@@ -391,7 +384,6 @@ export function usePricingColumns(
       enableSorting: false,
     },
 
-    // Enable Groups column
     {
       accessorKey: 'enable_groups',
       header: t('Groups'),

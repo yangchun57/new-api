@@ -118,9 +118,9 @@ export function SettingsSwitchField({
   return (
     <SettingsSwitchRow className={className} {...props}>
       <SettingsSwitchContent>
-        <Label className='text-sm font-medium'>{label}</Label>
+        <Label className='text-[13px] font-medium text-[#0A0E1A]'>{label}</Label>
         {description ? (
-          <p className='text-muted-foreground text-xs'>{description}</p>
+          <p className='text-[12px] text-[#8A93A4]'>{description}</p>
         ) : null}
       </SettingsSwitchContent>
       <Switch
@@ -148,7 +148,7 @@ export function SettingsControlGroup({
     <div
       data-settings-form-span='full'
       className={cn(
-        'bg-muted/20 min-w-0 space-y-3 rounded-xl border px-3 py-2.5',
+        'bg-[#F7F8FA] min-w-0 space-y-3 rounded-xl border border-[#E5E8EE] px-3 py-2.5',
         className
       )}
       {...props}
@@ -162,7 +162,7 @@ export function SettingsControlChildren({
 }: SettingsControlChildrenProps) {
   return (
     <div
-      className={cn('border-border/70 ml-2 min-w-0 border-l pl-3', className)}
+      className={cn('border-l border-[#E5E8EE] ml-2 min-w-0 pl-3', className)}
       {...props}
     />
   )

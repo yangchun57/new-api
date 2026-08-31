@@ -235,7 +235,7 @@ export function PaymentMethodsVisualEditor({
     <div className='space-y-4'>
       <div className='flex flex-col gap-3 sm:flex-row sm:items-center'>
         <div className='relative flex-1'>
-          <Search className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
+          <Search className='text-[#8A93A4] absolute top-2.5 left-2.5 h-4 w-4' />
           <Input
             placeholder={t('Search payment methods...')}
             value={searchText}
@@ -255,7 +255,7 @@ export function PaymentMethodsVisualEditor({
             </PopoverTrigger>
             <PopoverContent className='w-60'>
               <div className='space-y-2'>
-                <p className='text-muted-foreground text-xs'>
+                <p className='text-[12px] text-[#8A93A4]'>
                   {t('Quick insert payment entries')}
                 </p>
                 <div className='space-y-1'>
@@ -264,7 +264,7 @@ export function PaymentMethodsVisualEditor({
                       key={item.name}
                       type='button'
                       variant='ghost'
-                      className='w-full justify-start text-sm'
+                      className='w-full justify-start text-[13px]'
                       onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
@@ -295,7 +295,7 @@ export function PaymentMethodsVisualEditor({
       </div>
 
       {filteredMethods.length === 0 ? (
-        <div className='text-muted-foreground rounded-lg border border-dashed p-8 text-center text-sm'>
+        <div className='rounded-xl border border-dashed border-[#E5E8EE] bg-[#F7F8FA] p-8 text-center text-[13px] text-[#8A93A4]'>
           {searchText
             ? t('No payment methods match your search')
             : t(
@@ -303,7 +303,7 @@ export function PaymentMethodsVisualEditor({
               )}
         </div>
       ) : (
-        <div className='rounded-md border'>
+        <div className='rounded-xl border border-[#E5E8EE]'>
           {/* Desktop table view */}
           <StaticDataTable
             className='hidden rounded-none border-0 bg-transparent shadow-none md:block'
@@ -313,14 +313,14 @@ export function PaymentMethodsVisualEditor({
               {
                 id: 'name',
                 header: t('Name'),
-                cellClassName: 'font-medium',
+                cellClassName: 'font-medium text-[13px] text-[#0A0E1A]',
                 cell: (method) => method.name,
               },
               {
                 id: 'type',
                 header: t('Payment type key'),
                 cell: (method) => (
-                  <code className='bg-muted rounded px-1.5 py-0.5 text-sm'>
+                  <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
                     {method.type}
                   </code>
                 ),
@@ -335,15 +335,15 @@ export function PaymentMethodsVisualEditor({
                     <div className='flex items-center gap-2'>
                       <ReactIconByName
                         name={iconName}
-                        className='text-muted-foreground size-5 shrink-0'
+                        className='text-[#8A93A4] size-5 shrink-0'
                         title={iconName}
                       />
-                      <span className='text-muted-foreground truncate font-mono text-sm'>
+                      <span className='truncate font-mono text-[12px] text-[#5A6478]'>
                         {iconName}
                       </span>
                     </div>
                   ) : (
-                    <span className='text-muted-foreground text-sm'>—</span>
+                    <span className='text-[12px] text-[#8A93A4]'>—</span>
                   )
                 },
               },
@@ -352,11 +352,11 @@ export function PaymentMethodsVisualEditor({
                 header: t('Min Top-up'),
                 cell: (method) =>
                   method.min_topup ? (
-                    <span className='font-mono text-sm'>
+                    <span className='font-mono text-[13px] tabular-nums font-semibold text-[#0A0E1A]'>
                       {method.min_topup}
                     </span>
                   ) : (
-                    <span className='text-muted-foreground text-sm'>—</span>
+                    <span className='text-[12px] text-[#8A93A4]'>—</span>
                   ),
               },
               {
@@ -395,8 +395,8 @@ export function PaymentMethodsVisualEditor({
                 <div key={methodKey} className='p-4'>
                   <div className='mb-3 flex items-start justify-between'>
                     <div className='flex-1'>
-                      <div className='mb-1 font-medium'>{method.name}</div>
-                      <code className='bg-muted rounded px-1.5 py-0.5 text-xs'>
+                      <div className='mb-1 font-medium text-[14px] text-[#0A0E1A]'>{method.name}</div>
+                      <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
                         {method.type}
                       </code>
                     </div>
@@ -427,32 +427,32 @@ export function PaymentMethodsVisualEditor({
                       </Button>
                     </div>
                   </div>
-                  <div className='space-y-2 text-sm'>
+                  <div className='space-y-2 text-[13px]'>
                     <div className='flex items-center gap-2'>
-                      <span className='text-muted-foreground min-w-20'>
+                      <span className='text-[#8A93A4] min-w-20'>
                         {t('Icon')}
                       </span>
                       {iconName ? (
                         <div className='flex min-w-0 items-center gap-2'>
                           <ReactIconByName
                             name={iconName}
-                            className='text-muted-foreground size-5 shrink-0'
+                            className='text-[#8A93A4] size-5 shrink-0'
                             title={iconName}
                           />
-                          <span className='text-muted-foreground truncate font-mono text-xs'>
+                          <span className='truncate font-mono text-[12px] text-[#5A6478]'>
                             {iconName}
                           </span>
                         </div>
                       ) : (
-                        <span className='text-muted-foreground text-xs'>—</span>
+                        <span className='text-[12px] text-[#8A93A4]'>—</span>
                       )}
                     </div>
                     {method.min_topup && (
                       <div className='flex items-center gap-2'>
-                        <span className='text-muted-foreground min-w-20'>
+                        <span className='text-[#8A93A4] min-w-20'>
                           {t('Min Top-up:')}
                         </span>
-                        <span className='font-mono'>{method.min_topup}</span>
+                        <span className='font-mono font-semibold tabular-nums text-[#0A0E1A]'>{method.min_topup}</span>
                       </div>
                     )}
                   </div>

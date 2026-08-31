@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright (C) 2023-2026 QuantumNous
 
 This program is free software: you can redistribute it and/or modify
@@ -470,7 +470,7 @@ export function ChannelsTable() {
                   size='icon'
                   onClick={() => setSensitiveVisible(!sensitiveVisible)}
                   aria-label={sensitiveVisible ? t('Hide') : t('Show')}
-                  className='text-muted-foreground hover:text-foreground size-8'
+                  className='text-[#8A93A4] hover:text-[#0A0E1A] size-8'
                 />
               }
             >

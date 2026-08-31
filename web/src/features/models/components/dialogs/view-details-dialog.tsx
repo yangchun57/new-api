@@ -158,9 +158,9 @@ export function ViewDetailsDialog({
     >
       <div className='max-h-[calc(100dvh-8.5rem)] space-y-3 overflow-y-auto py-2 pr-1 sm:max-h-[72vh] sm:space-y-4'>
         <div className='flex flex-wrap items-center justify-between gap-2'>
-          <div className='text-muted-foreground text-sm'>
+          <div className='text-[#8A93A4] text-[13px]'>
             {t('Deployment ID')}:{' '}
-            <span className='font-mono'>{deploymentId}</span>
+            <span className='font-mono tabular-nums text-[#0A0E1A]'>{deploymentId}</span>
           </div>
           <div className='grid grid-cols-2 gap-2 sm:flex sm:items-center'>
             <Button variant='outline' size='sm' onClick={handleCopyId}>
@@ -187,58 +187,58 @@ export function ViewDetailsDialog({
 
         {isDetailsLoading ? (
           <div className='flex items-center justify-center py-10'>
-            <Loader2 className='text-muted-foreground h-6 w-6 animate-spin' />
+            <Loader2 className='text-[#8A93A4] h-6 w-6 animate-spin' />
           </div>
         ) : null}
         {showDetailsError ? (
-          <div className='text-muted-foreground py-10 text-center text-sm'>
+          <div className='text-[#5A6478] py-10 text-center text-[13px]'>
             {detailsRes?.message || t('Failed to fetch deployment details')}
           </div>
         ) : null}
         {showDetailsContent ? (
           <>
             <div className='grid gap-3 sm:grid-cols-2'>
-              <div className='rounded-lg border p-3'>
-                <div className='text-muted-foreground text-xs'>
+              <div className='rounded-xl border border-[#E5E8EE] p-3'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Status')}
                 </div>
-                <div className='mt-1 font-medium'>
+                <div className='mt-1 text-[13px] font-medium text-[#0A0E1A]'>
                   {String(details?.status ?? '-')}
                 </div>
               </div>
-              <div className='rounded-lg border p-3'>
-                <div className='text-muted-foreground text-xs'>
+              <div className='rounded-xl border border-[#E5E8EE] p-3'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Hardware')}
                 </div>
-                <div className='mt-1 font-medium'>
+                <div className='mt-1 text-[13px] font-medium text-[#0A0E1A]'>
                   {String(details?.brand_name ?? '')}{' '}
                   {String(details?.hardware_name ?? '')}
                 </div>
               </div>
-              <div className='rounded-lg border p-3'>
-                <div className='text-muted-foreground text-xs'>
+              <div className='rounded-xl border border-[#E5E8EE] p-3'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Total GPUs')}
                 </div>
-                <div className='mt-1 font-medium'>
+                <div className='mt-1 text-[13px] font-medium text-[#0A0E1A] tabular-nums'>
                   {String(details?.total_gpus ?? details?.hardware_qty ?? '-')}
                 </div>
               </div>
-              <div className='rounded-lg border p-3'>
-                <div className='text-muted-foreground text-xs'>
+              <div className='rounded-xl border border-[#E5E8EE] p-3'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Containers')}
                 </div>
-                <div className='mt-1 font-medium'>{containers.length}</div>
+                <div className='mt-1 text-[13px] font-medium text-[#0A0E1A] tabular-nums'>{containers.length}</div>
               </div>
             </div>
 
             {locations.length ? (
-              <div className='rounded-lg border p-3'>
-                <div className='text-muted-foreground text-xs'>
+              <div className='rounded-xl border border-[#E5E8EE] p-3'>
+                <div className='text-[#8A93A4] text-[12px] font-medium'>
                   {t('Locations')}
                 </div>
-                <div className='mt-1 flex flex-wrap gap-2 text-sm'>
+                <div className='mt-1 flex flex-wrap gap-2 text-[13px]'>
                   {locations.map((x) => (
-                    <span key={x} className='bg-muted rounded-md px-2 py-1'>
+                    <span key={x} className='bg-[#F7F8FA] rounded-md border border-[#E5E8EE] px-2 py-1 text-[#0A0E1A]'>
                       {x}
                     </span>
                   ))}
@@ -247,8 +247,8 @@ export function ViewDetailsDialog({
             ) : null}
 
             {containers.length ? (
-              <div className='rounded-lg border p-3'>
-                <div className='text-muted-foreground mb-2 text-xs'>
+              <div className='rounded-xl border border-[#E5E8EE] p-3'>
+                <div className='text-[#8A93A4] mb-2 text-[12px] font-medium'>
                   {t('Containers')}
                 </div>
                 <div className='space-y-2'>
@@ -264,11 +264,11 @@ export function ViewDetailsDialog({
                     return (
                       <div
                         key={id}
-                        className='flex flex-wrap items-center justify-between gap-2 rounded-md border px-3 py-2'
+                        className='flex flex-wrap items-center justify-between gap-2 rounded-md border border-[#E5E8EE] px-3 py-2'
                       >
                         <div className='min-w-0'>
-                          <div className='truncate font-mono text-sm'>{id}</div>
-                          <div className='text-muted-foreground text-xs'>
+                          <div className='truncate font-mono text-[12px] text-[#0A0E1A]'>{id}</div>
+                          <div className='text-[#8A93A4] text-[12px]'>
                             {status ? `${t('Status')}: ${status}` : ''}
                           </div>
                         </div>
@@ -289,12 +289,12 @@ export function ViewDetailsDialog({
               </div>
             ) : null}
 
-            <Collapsible className='rounded-lg border p-3'>
-              <CollapsibleTrigger className='cursor-pointer text-sm font-medium'>
+            <Collapsible className='rounded-xl border border-[#E5E8EE] p-3'>
+              <CollapsibleTrigger className='cursor-pointer text-[13px] font-medium text-[#0A0E1A]'>
                 {t('Raw JSON')}
               </CollapsibleTrigger>
               <CollapsibleContent>
-                <pre className='bg-muted text-foreground mt-3 max-h-[360px] overflow-auto rounded-md p-3 text-xs'>
+                <pre className='bg-[#F7F8FA] text-[#0A0E1A] mt-3 max-h-[360px] overflow-auto rounded-md border border-[#E5E8EE] p-3 font-mono text-[12px]'>
                   {payloadJson || '-'}
                 </pre>
               </CollapsibleContent>

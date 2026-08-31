@@ -377,7 +377,7 @@ export function GeminiSettingsCard({ defaultValues }: GeminiSettingsCardProps) {
             />
 
             {!isAdapterEnabled && (
-              <p className='text-muted-foreground text-sm'>
+              <p className='text-[13px] text-[#8A93A4]'>
                 {t(
                   'Gemini will continue to auto-detect thinking mode even with the adapter disabled. Enable this only when you need finer control over pricing and budgeting.'
                 )}

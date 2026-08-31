@@ -456,7 +456,7 @@ type GroupPricingGuideProps = {
 
 function GuideCodeBlock({ children }: { children: string }) {
   return (
-    <pre className='bg-muted/60 overflow-x-auto rounded-lg border px-3 py-2 text-xs leading-6 whitespace-pre-wrap'>
+    <pre className='overflow-x-auto whitespace-pre-wrap rounded-xl border border-[#E5E8EE] bg-[#F7F8FA] px-3 py-2 text-[12px] leading-6'>
       {children}
     </pre>
   )
@@ -470,11 +470,11 @@ function GuideStepRow({
   children: ReactNode
 }) {
   return (
-    <div className='flex items-start gap-2.5 text-sm leading-6'>
-      <span className='bg-muted text-muted-foreground mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-medium'>
+    <div className='flex items-start gap-2.5 text-[13px] leading-6 text-[#5A6478]'>
+      <span className='mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F7F8FA] text-[12px] font-medium text-[#8A93A4]'>
         {chip}
       </span>
-      <span className='text-muted-foreground min-w-0'>{children}</span>
+      <span className='min-w-0 text-[#5A6478]'>{children}</span>
     </div>
   )
 }
@@ -499,17 +499,17 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
 
         <div className={sideDrawerFormClassName('gap-5')}>
           <section className='space-y-2'>
-            <h3 className='text-sm font-semibold'>
+            <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>
               {t('The two roles of a group')}
             </h3>
-            <div className='text-muted-foreground space-y-2 text-sm leading-6'>
+            <div className='space-y-2 text-[13px] leading-6 text-[#5A6478]'>
               <p>
                 {t(
                   'Every group name in the pricing table can be used in two places: on a user (the user group, assigned by admins) and on a token (the token group, chosen when creating the token). Same name pool, two different jobs.'
                 )}
               </p>
               <p>
-                <span className='text-foreground font-medium'>
+                <span className='font-medium text-[#0A0E1A]'>
                   {t('Token group')}
                 </span>
                 {': '}
@@ -518,7 +518,7 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                 )}
               </p>
               <p>
-                <span className='text-foreground font-medium'>
+                <span className='font-medium text-[#0A0E1A]'>
                   {t('User group')}
                 </span>
                 {': '}
@@ -530,12 +530,12 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
           </section>
 
           <section className='space-y-2'>
-            <h3 className='text-sm font-semibold'>
+            <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>
               {t('How a call is priced')}
             </h3>
-            <ol className='text-muted-foreground list-decimal space-y-2 pl-5 text-sm leading-6'>
+            <ol className='list-decimal space-y-2 pl-5 text-[13px] leading-6 text-[#5A6478]'>
               <li>
-                <span className='text-foreground font-medium'>
+                <span className='font-medium text-[#0A0E1A]'>
                   {t('Find the billing group.')}
                 </span>{' '}
                 {t(
@@ -543,7 +543,7 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                 )}
               </li>
               <li>
-                <span className='text-foreground font-medium'>
+                <span className='font-medium text-[#0A0E1A]'>
                   {t('Find the ratio.')}
                 </span>{' '}
                 {t(
@@ -551,7 +551,7 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                 )}
               </li>
               <li>
-                <span className='text-foreground font-medium'>
+                <span className='font-medium text-[#0A0E1A]'>
                   {t('Charge.')}
                 </span>{' '}
                 {t(
@@ -559,7 +559,7 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                 )}
               </li>
             </ol>
-            <p className='text-muted-foreground text-sm leading-6'>
+            <p className='text-[13px] leading-6 text-[#5A6478]'>
               {t(
                 'Common pitfall: the user group base ratio is NOT a personal discount. It only applies when the user group itself is the billing group.'
               )}
@@ -567,20 +567,20 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
           </section>
 
           <section className='space-y-3'>
-            <h3 className='text-sm font-semibold'>{t('Worked example')}</h3>
-            <p className='text-muted-foreground text-sm leading-6'>
+            <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Worked example')}</h3>
+            <p className='text-[13px] leading-6 text-[#5A6478]'>
               {t(
                 'The admin configured three groups and one special ratio rule:'
               )}
             </p>
 
-            <div className='overflow-hidden rounded-lg border'>
-              <div className='bg-muted/40 border-b px-3 py-1.5 text-xs font-medium'>
+            <div className='overflow-hidden rounded-xl border border-[#E5E8EE]'>
+              <div className='border-b border-[#E5E8EE] bg-[#F7F8FA] px-3 py-1.5 text-[12px] font-medium text-[#0A0E1A]'>
                 {t('Pricing groups')}
               </div>
-              <table className='w-full text-sm'>
+              <table className='w-full text-[13px]'>
                 <thead>
-                  <tr className='text-muted-foreground border-b text-xs'>
+                  <tr className='border-b border-[#E5E8EE] text-[12px] text-[#8A93A4]'>
                     <th className='px-3 py-1.5 text-left font-medium'>
                       {t('Group name')}
                     </th>
@@ -590,46 +590,46 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className='border-b'>
-                    <td className='px-3 py-1.5'>default</td>
-                    <td className='px-3 py-1.5 text-right'>1.0</td>
+                  <tr className='border-b border-[#E5E8EE]'>
+                    <td className='font-mono px-3 py-1.5 text-[#0A0E1A]'>default</td>
+                    <td className='tabular-nums px-3 py-1.5 text-right font-semibold text-[#0A0E1A]'>1.0</td>
                   </tr>
-                  <tr className='border-b'>
-                    <td className='px-3 py-1.5'>premium</td>
-                    <td className='px-3 py-1.5 text-right'>0.5</td>
+                  <tr className='border-b border-[#E5E8EE]'>
+                    <td className='font-mono px-3 py-1.5 text-[#0A0E1A]'>premium</td>
+                    <td className='tabular-nums px-3 py-1.5 text-right font-semibold text-[#0A0E1A]'>0.5</td>
                   </tr>
                   <tr>
-                    <td className='px-3 py-1.5'>vip</td>
-                    <td className='px-3 py-1.5 text-right'>0.8</td>
+                    <td className='font-mono px-3 py-1.5 text-[#0A0E1A]'>vip</td>
+                    <td className='tabular-nums px-3 py-1.5 text-right font-semibold text-[#0A0E1A]'>0.8</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div className='overflow-hidden rounded-lg border'>
-              <div className='bg-muted/40 border-b px-3 py-1.5 text-xs font-medium'>
+            <div className='overflow-hidden rounded-xl border border-[#E5E8EE]'>
+              <div className='border-b border-[#E5E8EE] bg-[#F7F8FA] px-3 py-1.5 text-[12px] font-medium text-[#0A0E1A]'>
                 {t('Special ratio rules')}
               </div>
-              <div className='p-3 text-sm leading-6'>
+              <div className='p-3 text-[13px] leading-6 text-[#5A6478]'>
                 {t('Users of vip, when billed as premium, pay ratio')}{' '}
-                <span className='bg-primary/10 ring-primary/40 rounded px-1.5 py-0.5 font-semibold ring-1'>
+                <span className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-semibold tabular-nums text-[#0A0E1A] ring-1 ring-[#E5E8EE]'>
                   0.3
                 </span>{' '}
-                <span className='text-muted-foreground text-xs'>
+                <span className='text-[12px] text-[#8A93A4]'>
                   {t('(instead of {{ratio}})', { ratio: 0.5 })}
                 </span>
               </div>
             </div>
 
-            <p className='text-muted-foreground text-sm leading-6'>
+            <p className='text-[13px] leading-6 text-[#5A6478]'>
               {t(
                 'Three calls made by the same vip user. Assume the base price of one call is 10.'
               )}
             </p>
 
             <div className='space-y-3'>
-              <div className='overflow-hidden rounded-lg border'>
-                <div className='bg-muted/40 border-b px-3 py-2 text-sm font-medium'>
+              <div className='overflow-hidden rounded-xl border border-[#E5E8EE]'>
+                <div className='border-b border-[#E5E8EE] bg-[#F7F8FA] px-3 py-2 text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Call 1: the token group is premium')}
                 </div>
                 <div className='space-y-2 p-3'>
@@ -644,15 +644,15 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                     )}
                   </GuideStepRow>
                   <GuideStepRow chip='='>
-                    <span className='text-foreground font-medium'>
+                    <span className='font-medium text-[#0A0E1A]'>
                       {t('Cost = 10 × 0.3 = 3')}
                     </span>
                   </GuideStepRow>
                 </div>
               </div>
 
-              <div className='overflow-hidden rounded-lg border'>
-                <div className='bg-muted/40 border-b px-3 py-2 text-sm font-medium'>
+              <div className='overflow-hidden rounded-xl border border-[#E5E8EE]'>
+                <div className='border-b border-[#E5E8EE] bg-[#F7F8FA] px-3 py-2 text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Call 2: the token group is default')}
                 </div>
                 <div className='space-y-2 p-3'>
@@ -667,15 +667,15 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                     )}
                   </GuideStepRow>
                   <GuideStepRow chip='='>
-                    <span className='text-foreground font-medium'>
+                    <span className='font-medium text-[#0A0E1A]'>
                       {t('Cost = 10 × 1.0 = 10')}
                     </span>
                   </GuideStepRow>
                 </div>
               </div>
 
-              <div className='overflow-hidden rounded-lg border'>
-                <div className='bg-muted/40 border-b px-3 py-2 text-sm font-medium'>
+              <div className='overflow-hidden rounded-xl border border-[#E5E8EE]'>
+                <div className='border-b border-[#E5E8EE] bg-[#F7F8FA] px-3 py-2 text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Call 3: the token has no group')}
                 </div>
                 <div className='space-y-2 p-3'>
@@ -690,7 +690,7 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
                     )}
                   </GuideStepRow>
                   <GuideStepRow chip='='>
-                    <span className='text-foreground font-medium'>
+                    <span className='font-medium text-[#0A0E1A]'>
                       {t('Cost = 10 × 0.8 = 8')}
                     </span>
                   </GuideStepRow>
@@ -699,11 +699,11 @@ function GroupPricingGuide({ open, onOpenChange }: GroupPricingGuideProps) {
             </div>
           </section>
 
-          <Accordion className='rounded-lg border px-3'>
+          <Accordion className='rounded-xl border border-[#E5E8EE] px-3'>
             <AccordionItem value='groups'>
               <AccordionTrigger>{t('Pricing group example')}</AccordionTrigger>
               <AccordionContent className='space-y-3'>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'Use the pricing group table to manage the ratio and whether the group appears in the token creation dropdown.'
                   )}
@@ -714,7 +714,7 @@ standard     1.0     ${t('Yes')}               ${t('Standard price')}
 premium      0.5     ${t('Yes')}               ${t('Premium plan, half price')}
 vip          0.5     ${t('No')}                ${t('Assigned by administrator only')}`}
                 </GuideCodeBlock>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'Users only see groups marked as user selectable. Non-selectable groups can still be assigned by administrators.'
                   )}
@@ -725,13 +725,13 @@ vip          0.5     ${t('No')}                ${t('Assigned by administrator on
             <AccordionItem value='auto'>
               <AccordionTrigger>{t('Auto group behavior')}</AccordionTrigger>
               <AccordionContent className='space-y-3'>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'When a token uses the auto group, the system tries groups from top to bottom until it finds an available group.'
                   )}
                 </p>
                 <GuideCodeBlock>{`["default", "vip"]`}</GuideCodeBlock>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'If default auto group is enabled, newly created tokens start with auto instead of an empty group.'
                   )}
@@ -742,7 +742,7 @@ vip          0.5     ${t('No')}                ${t('Assigned by administrator on
             <AccordionItem value='special-ratio'>
               <AccordionTrigger>{t('Special ratio rules')}</AccordionTrigger>
               <AccordionContent className='space-y-3'>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'In JSON, the user group is the outer key and the billing group is the inner key. The example below means: vip users pay 0.8 when billed as standard, and 0.3 when billed as premium.'
                   )}
@@ -753,7 +753,7 @@ vip          0.5     ${t('No')}                ${t('Assigned by administrator on
     "premium": 0.3
   }
 }`}</GuideCodeBlock>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'Only configured combinations are overridden. All other calls keep the billing group base ratio.'
                   )}
@@ -766,7 +766,7 @@ vip          0.5     ${t('No')}                ${t('Assigned by administrator on
                 {t('Special usable group rules')}
               </AccordionTrigger>
               <AccordionContent className='space-y-3'>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'Special usable group rules make extra token groups visible to, or hide default ones from, users of a specific user group.'
                   )}
@@ -778,7 +778,7 @@ vip          0.5     ${t('No')}                ${t('Assigned by administrator on
     "special": "${t('Special group')}"
   }
 }`}</GuideCodeBlock>
-                <p className='text-muted-foreground text-sm leading-6'>
+                <p className='text-[13px] leading-6 text-[#5A6478]'>
                   {t(
                     'In the visual editor these appear as Extra visible and Hidden. In JSON, +: (or no prefix) adds a group and -: removes one.'
                   )}

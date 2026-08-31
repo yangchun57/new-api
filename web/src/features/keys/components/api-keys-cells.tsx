@@ -76,10 +76,10 @@ export function ApiKeyCell({ apiKey }: { apiKey: ApiKey }) {
   let copyIcon = <Copy className='size-3.5' />
   let copyTooltip = t('Copy API key')
   if (isLoading) {
-    copyIcon = <Loader2 className='size-3.5 animate-spin' />
+    copyIcon = <Loader2 className='size-3.5 animate-spin text-[#8A93A4]' />
     copyTooltip = t('Loading...')
   } else if (isCopied) {
-    copyIcon = <Check className='size-3.5 text-green-600' />
+    copyIcon = <Check className='size-3.5 text-[#16A34A]' />
     copyTooltip = t('Copied!')
   }
 
@@ -91,22 +91,22 @@ export function ApiKeyCell({ apiKey }: { apiKey: ApiKey }) {
             <Button
               variant='ghost'
               size='sm'
-              className='text-muted-foreground h-7 max-w-full min-w-0 justify-start truncate px-0 font-mono text-xs hover:bg-transparent aria-expanded:bg-transparent'
+              className='h-7 max-w-full min-w-0 justify-start truncate rounded-md bg-[#F7F8FA] px-2 py-1 font-mono text-[12px] text-[#0A0E1A] hover:bg-[#F0F2F6] hover:text-[#0A0E1A] aria-expanded:bg-[#F0F2F6]'
             />
           }
         >
           <span className='truncate'>{maskedKey}</span>
         </PopoverTrigger>
         <PopoverContent
-          className='w-auto max-w-[min(90vw,28rem)]'
+          className='w-auto max-w-[min(90vw,28rem)] rounded-xl border-[#E5E8EE] p-3 shadow-[0_8px_24px_rgba(10,14,26,0.08)]'
           align='start'
         >
           <div className='space-y-2'>
-            <p className='text-muted-foreground text-xs'>{t('Full API Key')}</p>
+            <p className='text-[12px] font-medium text-[#0A0E1A]'>{t('Full API Key')}</p>
             {isLoading ? (
               <div className='flex items-center gap-2 py-2'>
-                <Loader2 className='size-3.5 animate-spin' />
-                <span className='text-muted-foreground text-xs'>
+                <Loader2 className='size-3.5 animate-spin text-[#8A93A4]' />
+                <span className='text-[13px] text-[#5A6478]'>
                   {t('Loading...')}
                 </span>
               </div>
@@ -116,7 +116,7 @@ export function ApiKeyCell({ apiKey }: { apiKey: ApiKey }) {
                 value={resolvedFullKey || maskedKey}
                 autoFocus
                 onFocus={(e) => e.target.select()}
-                className='bg-muted/50 w-full min-w-[280px] rounded-md border px-3 py-2 font-mono text-xs outline-none'
+                className='w-full min-w-[280px] rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-3 py-2 font-mono text-[12px] text-[#0A0E1A] outline-none'
               />
             )}
           </div>
@@ -167,9 +167,9 @@ export function UnlimitedQuotaBadge(props: UnlimitedQuotaBadgeProps) {
           copyable={false}
         />
       </PopoverTrigger>
-      <PopoverContent className='w-auto p-2' side='top'>
-        <span className='text-xs'>
-          {t('Used:')} {formattedUsed}
+      <PopoverContent className='w-auto rounded-xl border-[#E5E8EE] p-2 shadow-[0_8px_24px_rgba(10,14,26,0.08)]' side='top'>
+        <span className='text-[12px] text-[#5A6478]'>
+          {t('Used:')} <span className='font-mono tabular-nums text-[#0A0E1A]'>{formattedUsed}</span>
         </span>
       </PopoverContent>
     </Popover>
@@ -201,10 +201,10 @@ export function ModelLimitsCell({ apiKey }: { apiKey: ApiKey }) {
           copyable={false}
         />
       </TooltipTrigger>
-      <TooltipContent side='top' className='max-w-xs'>
-        <div className='max-h-[200px] space-y-0.5 overflow-y-auto text-xs'>
+      <TooltipContent side='top' className='max-w-xs rounded-lg border-[#E5E8EE] bg-white shadow-[0_8px_24px_rgba(10,14,26,0.08)]'>
+        <div className='max-h-[200px] space-y-0.5 overflow-y-auto text-[12px] text-[#5A6478]'>
           {models.map((m) => (
-            <div key={m} className='font-mono'>
+            <div key={m} className='font-mono text-[#0A0E1A]'>
               {m}
             </div>
           ))}
@@ -243,10 +243,10 @@ export function IpRestrictionsCell({ apiKey }: { apiKey: ApiKey }) {
           copyable={false}
         />
       </TooltipTrigger>
-      <TooltipContent side='top' className='max-w-xs'>
-        <div className='max-h-[200px] space-y-0.5 overflow-y-auto text-xs'>
+      <TooltipContent side='top' className='max-w-xs rounded-lg border-[#E5E8EE] bg-white shadow-[0_8px_24px_rgba(10,14,26,0.08)]'>
+        <div className='max-h-[200px] space-y-0.5 overflow-y-auto text-[12px] text-[#5A6478]'>
           {ips.map((ip) => (
-            <div key={ip} className='font-mono'>
+            <div key={ip} className='font-mono text-[#0A0E1A]'>
               {ip}
             </div>
           ))}

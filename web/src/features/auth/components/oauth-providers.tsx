@@ -50,6 +50,9 @@ type ProviderButton = {
   disabled?: boolean
 }
 
+const btnSocial =
+  'h-11 w-full justify-center gap-2 rounded-xl border-[#E5E8EE] bg-white text-[14px] font-medium text-[#0A0E1A] shadow-sm transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A] active:bg-[#F0F2F6]'
+
 export function OAuthProviders({
   status,
   disabled = false,
@@ -135,7 +138,6 @@ export function OAuthProviders({
     })
   }
 
-  // Custom OAuth providers
   const customProviders = status?.custom_oauth_providers
   if (customProviders && customProviders.length > 0) {
     for (const provider of customProviders) {
@@ -154,10 +156,10 @@ export function OAuthProviders({
       <div className={cn('space-y-3', className)}>
         <div className='relative'>
           <div className='absolute inset-0 flex items-center'>
-            <span className='w-full border-t' />
+            <span className='w-full border-t border-[#E5E8EE]' />
           </div>
-          <div className='relative flex justify-center text-xs uppercase'>
-            <span className='bg-background text-muted-foreground px-2'>
+          <div className='relative flex justify-center text-[11px] uppercase tracking-[0.09em]'>
+            <span className='bg-white px-3 text-[#8A93A4]'>
               {t('Or continue with')}
             </span>
           </div>
@@ -172,7 +174,7 @@ export function OAuthProviders({
                 type='button'
                 disabled={disabled || isLoading || extraDisabled}
                 onClick={onClick}
-                className='h-11 w-full justify-center gap-2 rounded-lg'
+                className={btnSocial}
               >
                 {icon}
                 {label}

@@ -75,7 +75,7 @@ export function ResetSubscriptionsDialog() {
       disabled={!plan?.id}
       isLoading={resetting}
     >
-      <label className='flex items-center justify-between gap-3 rounded-md border px-3 py-2 text-sm'>
+      <label className='flex items-center justify-between gap-3 rounded-md border border-[#E5E8EE] bg-[#FFFFFF] px-3 py-2 text-[13px] text-[#0A0E1A]'>
         <span>{t('Advance next reset time')}</span>
         <Switch
           checked={advanceResetTime}

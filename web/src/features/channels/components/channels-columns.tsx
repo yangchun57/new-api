@@ -679,7 +679,7 @@ export function useChannelsColumns(
                   )}
                 </Button>
                 <div className='flex items-center gap-1.5'>
-                  <span className='font-semibold'>Tag：{tag}</span>
+                  <span className='text-[#0A0E1A] font-semibold text-[13px]'>Tag：{tag}</span>
                   <StatusBadge
                     label={`${childrenCount} channels`}
                     variant='blue'
@@ -702,7 +702,7 @@ export function useChannelsColumns(
                 <div className='flex max-w-full min-w-0 items-center gap-1.5'>
                   <TruncatedText
                     text={sensitiveVisible ? name : SENSITIVE_MASK}
-                    className='font-medium'
+                    className='text-[#0A0E1A] font-medium text-[13px]'
                     maxWidth='max-w-full'
                   />
                   {isPassThrough && (
@@ -742,7 +742,7 @@ export function useChannelsColumns(
                     <Tooltip>
                       <TooltipTrigger
                         render={
-                          <span className='text-muted-foreground text-xs' />
+                          <span className='text-[#8A93A4] text-[12px]' />
                         }
                       >
                         {truncateText(channel.remark, 40)}
@@ -808,7 +808,7 @@ export function useChannelsColumns(
                   <Tooltip>
                     <TooltipTrigger
                       render={
-                        <span className='border-border bg-muted text-primary inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border' />
+                        <span className='border-[#E5E8EE] bg-[#F7F8FA] text-primary inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border' />
                       }
                     >
                       <MultiKeyModeIcon className='h-3 w-3' />
@@ -845,7 +845,7 @@ export function useChannelsColumns(
                     <TooltipTrigger
                       render={
                         <span
-                          className='flex cursor-pointer items-center gap-1.5 text-xs font-medium'
+                          className='text-[#5A6478] flex cursor-pointer items-center gap-1.5 text-[12px] font-medium'
                           onClick={(e) => {
                             e.stopPropagation()
                             if (!deploymentId) {
@@ -867,15 +867,15 @@ export function useChannelsColumns(
                     </TooltipTrigger>
                     <TooltipContent side='top'>
                       <div className='max-w-xs space-y-1'>
-                        <div className='text-xs'>
+                        <div className='text-[13px]'>
                           {t('From IO.NET deployment')}
                         </div>
                         {deploymentId && (
-                          <div className='text-muted-foreground font-mono text-xs'>
+                          <div className='text-[#8A93A4] font-mono text-[12px]'>
                             {t('Deployment ID')}: {deploymentId}
                           </div>
                         )}
-                        <div className='text-muted-foreground text-xs'>
+                        <div className='text-[#8A93A4] text-[12px]'>
                           {t('Click to open deployment')}
                         </div>
                       </div>
@@ -982,7 +982,7 @@ export function useChannelsColumns(
                       />
                     </TooltipTrigger>
                     <TooltipContent side='top' className='max-w-xs'>
-                      <div className='space-y-1 text-xs'>
+                      <div className='space-y-1 text-[12px]'>
                         {statusReason && (
                           <div>
                             {t('Reason:')} {statusReason}
@@ -1094,7 +1094,7 @@ export function useChannelsColumns(
         cell: ({ row }) => {
           const tag = row.getValue('tag') as string | null
           if (!tag) {
-            return <span className='text-muted-foreground text-xs'>-</span>
+            return <span className='text-[#8A93A4] text-[12px]'>-</span>
           }
 
           return (
@@ -1169,7 +1169,7 @@ export function useChannelsColumns(
 
           // For invalid timestamps, show "Never" badge
           if (!testTime || testTime === 0) {
-            return <span className='text-muted-foreground text-xs'>-</span>
+            return <span className='text-[#8A93A4] text-[12px]'>-</span>
           }
 
           const timeText = formatRelativeTime(testTime, locale)
@@ -1191,7 +1191,7 @@ export function useChannelsColumns(
                   }
                 />
                 <TooltipContent side='top'>
-                  <p className='font-mono text-sm'>{fullDate}</p>
+                  <p className='font-mono text-[12px]'>{fullDate}</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

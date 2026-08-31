@@ -117,24 +117,24 @@ function LogStatCardsFallback() {
   return (
     <div
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-xl border'
     >
-      <div className='divide-border/60 grid grid-cols-2 divide-x sm:grid-cols-3 lg:grid-cols-5'>
+      <div className='grid grid-cols-2 divide-x divide-[#E5E8EE] sm:grid-cols-3 lg:grid-cols-5'>
         {LOG_STAT_CARD_FALLBACK_KEYS.map((key, index) => (
           <div
             key={key}
             className={cn(
-              'px-2.5 py-1.5 sm:px-5 sm:py-4',
+              'px-3 py-3 sm:px-5 sm:py-4',
               index === LOG_STAT_CARD_FALLBACK_KEYS.length - 1 &&
                 'col-span-2 sm:col-span-1'
             )}
           >
             <div className='flex items-center gap-1.5 sm:gap-2'>
               <Skeleton className='size-4 rounded-sm sm:size-7 sm:rounded-md' />
-              <Skeleton className='h-4 w-16' />
+              <Skeleton className='h-3.5 w-16' />
             </div>
-            <Skeleton className='mt-1 h-5 w-16 sm:mt-2 sm:h-7 sm:w-20' />
-            <Skeleton className='mt-1 hidden h-3.5 w-28 md:block' />
+            <Skeleton className='mt-2 h-6 w-16 sm:h-8 sm:w-20' />
+            <Skeleton className='mt-1.5 hidden h-3 w-28 md:block' />
           </div>
         ))}
       </div>
@@ -146,14 +146,14 @@ function ModelChartsFallback() {
   return (
     <div
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-xl border p-5 sm:p-6'
     >
       <div className='flex items-center justify-between'>
-        <Skeleton className='h-5 w-32' />
-        <Skeleton className='h-8 w-72' />
+        <Skeleton className='h-5 w-36' />
+        <Skeleton className='h-9 w-72' />
       </div>
       <div className='h-96'>
-        <Skeleton className='h-full w-full' />
+        <Skeleton className='h-full w-full rounded-lg' />
       </div>
     </div>
   )
@@ -163,7 +163,7 @@ function PerformanceOverviewFallback() {
   return (
     <div
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border p-4 sm:p-5'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-xl border p-5 sm:p-6'
     >
       <div className='flex flex-wrap items-center gap-x-6 gap-y-2'>
         <div className='flex items-center gap-2'>
@@ -177,7 +177,7 @@ function PerformanceOverviewFallback() {
         ))}
         <div className='ml-auto flex items-center gap-2'>
           {PERFORMANCE_MODEL_FALLBACK_KEYS.map((key) => (
-            <Skeleton key={key} className='h-5 w-28 rounded-full' />
+            <Skeleton key={key} className='h-6 w-28 rounded-full' />
           ))}
         </div>
       </div>
@@ -302,7 +302,7 @@ export function Dashboard() {
                     ? t('Hide sensitive data')
                     : t('Show sensitive data')
                 }
-                className='text-muted-foreground hover:text-foreground size-8'
+                className='text-[#5A6478] hover:bg-[#F0F2F6] hover:text-[#0A0E1A]'
               />
             }
           >
@@ -330,9 +330,9 @@ export function Dashboard() {
     <SectionPageLayout>
       <SectionPageLayout.Title>{t(meta.titleKey)}</SectionPageLayout.Title>
       <SectionPageLayout.Content>
-        <div className='space-y-3 sm:space-y-4'>
+        <div className='space-y-4 sm:space-y-5'>
           {activeSection !== 'overview' && (
-            <div className='flex flex-wrap items-center justify-between gap-1.5 sm:gap-2'>
+            <div className='flex flex-wrap items-center justify-between gap-2 sm:gap-2.5'>
               {showSectionTabs ? (
                 <Tabs value={activeSection} onValueChange={handleSectionChange}>
                   <TabsList className='max-w-full flex-wrap justify-start group-data-horizontal/tabs:h-auto'>
@@ -347,7 +347,7 @@ export function Dashboard() {
                 <div />
               )}
               {sectionActions != null && (
-                <div className='flex shrink-0 flex-wrap items-center gap-1.5 sm:gap-2'>
+                <div className='flex shrink-0 flex-wrap items-center gap-2 sm:gap-2'>
                   {sectionActions}
                 </div>
               )}

@@ -148,7 +148,7 @@ export function SyncWizardDialog({
       <div className='space-y-3'>
         <div>
           <Label className='text-base'>{t('Select Sync Source')}</Label>
-          <p className='text-muted-foreground text-sm'>
+          <p className='text-[#5A6478] text-[13px]'>
             {t('Choose where to fetch upstream metadata.')}
           </p>
         </div>
@@ -171,11 +171,12 @@ export function SyncWizardDialog({
                 key={option.value}
                 htmlFor={`sync-source-${option.value}`}
                 className={cn(
-                  'flex-col items-start gap-0 rounded-lg border p-4 font-normal transition-all',
-                  isActive && 'border-primary ring-primary ring-1',
+                  'flex-col items-start gap-0 rounded-xl border border-[#E5E8EE] p-4 font-normal transition-all',
+                  isActive &&
+                    'border-[#2E4BFF] ring-[#2E4BFF] ring-1',
                   isDisabled
                     ? 'cursor-not-allowed opacity-60'
-                    : 'hover:border-primary/60 cursor-pointer'
+                    : 'hover:border-[#2E4BFF]/60 cursor-pointer'
                 )}
               >
                 <div className='flex items-start gap-3'>
@@ -195,7 +196,7 @@ export function SyncWizardDialog({
                         />
                       )}
                     </div>
-                    <p className='text-muted-foreground text-sm'>
+                    <p className='text-[#5A6478] text-[13px]'>
                       {option.description}
                     </p>
                   </div>
@@ -216,7 +217,7 @@ export function SyncWizardDialog({
           {SYNC_LOCALE_OPTIONS.map((option) => (
             <div
               key={option.value}
-              className='flex items-center space-x-2 rounded-lg border p-3'
+              className='flex items-center space-x-2 rounded-xl border border-[#E5E8EE] p-3'
             >
               <RadioGroupItem
                 value={option.value}
@@ -233,8 +234,8 @@ export function SyncWizardDialog({
         </RadioGroup>
       </div>
 
-      <div className='bg-muted/50 rounded-lg border p-4'>
-        <p className='text-muted-foreground text-sm'>
+      <div className='bg-[#F7F8FA] rounded-xl border border-[#E5E8EE] p-4'>
+        <p className='text-[#5A6478] text-[13px]'>
           {t(
             'The sync will fetch missing models and vendors from the selected source. Existing records are updated only when you approve conflicts.'
           )}

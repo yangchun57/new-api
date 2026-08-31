@@ -140,7 +140,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
           </>
         }
       >
-        <p className='text-muted-foreground text-sm'>
+        <p className='text-[#8A93A4] text-[13px]'>
           {t(
             'Select models to process. Unselected "add" models will be ignored.'
           )}
@@ -166,7 +166,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
 
           <TabsContent value='add' className='space-y-3'>
             <div className='relative'>
-              <Search className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
+              <Search className='text-[#8A93A4] absolute top-2.5 left-2.5 h-4 w-4' />
               <Input
                 placeholder={t('Search models...')}
                 className='pl-8'
@@ -182,7 +182,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
                     toggleAllVisible(filteredAdd, selectedAdd, setSelectedAdd)
                   }
                 />
-                <span className='text-muted-foreground text-xs'>
+                <span className='text-[#8A93A4] text-[13px]'>
                   {t('Select All Visible')}
                 </span>
               </div>
@@ -193,7 +193,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
                   {filteredAdd.map((model) => (
                     <label
                       key={model}
-                      className='hover:bg-accent flex cursor-pointer items-center gap-2 rounded px-2 py-1.5'
+                      className='hover:bg-[#F0F2F6] data-popup-open:bg-[#E8EBF1] flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5'
                     >
                       <Checkbox
                         checked={selectedAdd.has(model)}
@@ -201,12 +201,12 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
                           toggleModel(model, selectedAdd, setSelectedAdd)
                         }
                       />
-                      <span className='truncate text-sm'>{model}</span>
+                      <span className='text-[#0A0E1A] truncate font-mono text-[12px]'>{model}</span>
                     </label>
                   ))}
                 </div>
               ) : (
-                <p className='text-muted-foreground py-8 text-center text-sm'>
+                <p className='text-[#8A93A4] py-8 text-center text-[13px]'>
                   {props.addModels.length === 0
                     ? t('No models to add')
                     : t('No matching results')}
@@ -217,7 +217,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
 
           <TabsContent value='remove' className='space-y-3'>
             <div className='relative'>
-              <Search className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
+              <Search className='text-[#8A93A4] absolute top-2.5 left-2.5 h-4 w-4' />
               <Input
                 placeholder={t('Search models...')}
                 className='pl-8'
@@ -237,7 +237,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
                     )
                   }
                 />
-                <span className='text-muted-foreground text-xs'>
+                <span className='text-[#8A93A4] text-[13px]'>
                   {t('Select All Visible')}
                 </span>
               </div>
@@ -248,7 +248,7 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
                   {filteredRemove.map((model) => (
                     <label
                       key={model}
-                      className='hover:bg-accent flex cursor-pointer items-center gap-2 rounded px-2 py-1.5'
+                      className='hover:bg-[#F0F2F6] data-popup-open:bg-[#E8EBF1] flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5'
                     >
                       <Checkbox
                         checked={selectedRemove.has(model)}
@@ -256,12 +256,12 @@ export function UpstreamUpdateDialog(props: UpstreamUpdateDialogProps) {
                           toggleModel(model, selectedRemove, setSelectedRemove)
                         }
                       />
-                      <span className='truncate text-sm'>{model}</span>
+                      <span className='text-[#0A0E1A] truncate font-mono text-[12px]'>{model}</span>
                     </label>
                   ))}
                 </div>
               ) : (
-                <p className='text-muted-foreground py-8 text-center text-sm'>
+                <p className='text-[#8A93A4] py-8 text-center text-[13px]'>
                   {props.removeModels.length === 0
                     ? t('No models to remove')
                     : t('No matching results')}

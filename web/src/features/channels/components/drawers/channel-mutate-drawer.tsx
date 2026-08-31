@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright (C) 2023-2026 QuantumNous
 
 This program is free software: you can redistribute it and/or modify
@@ -387,7 +387,7 @@ function CardHeading(props: {
           {props.icon}
         </IconBadge>
       )}
-      <h3 className='text-sm font-semibold tracking-tight'>{props.title}</h3>
+      <h3 className='text-[#0A0E1A] text-[14px] font-semibold tracking-tight'>{props.title}</h3>
     </div>
   )
 }
@@ -404,7 +404,7 @@ function SubHeading(props: {
           {props.icon}
         </IconBadge>
       )}
-      <h4 className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>
+      <h4 className='text-[#8A93A4] pl-font-mono'>
         {props.title}
       </h4>
     </div>
@@ -417,7 +417,7 @@ function configuredAdvancedSectionClassName(
 ) {
   return cn(
     className,
-    'border-border/60 rounded-lg border p-3 transition-colors',
+    'border-[#E5E8EE] rounded-xl border p-3 transition-colors',
     configured && 'border-primary/35 ring-primary/20 ring-1'
   )
 }
@@ -434,7 +434,7 @@ function ChannelTypeLogo(props: {
   if (!isKnownType) {
     return (
       <Server
-        className={cn('text-muted-foreground shrink-0', props.className)}
+        className={cn('text-[#8A93A4] shrink-0', props.className)}
         style={{
           width: props.size ?? 16,
           height: props.size ?? 16,
@@ -493,16 +493,16 @@ function ChannelEditorNav(props: {
   return (
     <aside className='hidden self-start lg:sticky lg:top-4 lg:z-20 lg:block'>
       <div className='flex max-h-[calc(100dvh-12rem)] flex-col gap-3 overflow-y-auto overscroll-contain pr-1'>
-        <div className='border-border/60 bg-muted/20 rounded-lg border p-3'>
+        <div className='border-[#E5E8EE] bg-[#F7F8FA]/40 rounded-xl border p-3'>
           <div className='flex min-w-0 items-center gap-2'>
             <span className='bg-background flex size-8 shrink-0 items-center justify-center rounded-md border'>
               {props.providerLogo}
             </span>
             <div className='min-w-0'>
-              <p className='truncate text-sm font-medium'>
+              <p className='text-[#0A0E1A] truncate text-[13px] font-medium'>
                 {props.providerLabel}
               </p>
-              <p className='text-muted-foreground truncate text-xs'>
+              <p className='text-[#8A93A4] truncate text-[12px]'>
                 {props.statusLabel} · {props.progressLabel}
               </p>
             </div>
@@ -510,7 +510,7 @@ function ChannelEditorNav(props: {
         </div>
 
         <nav
-          className='border-border/60 bg-background rounded-lg border p-1'
+          className='border-[#E5E8EE] bg-background rounded-xl border p-1'
           aria-label={props.navigationLabel}
         >
           {props.items.map((item) => {
@@ -525,8 +525,8 @@ function ChannelEditorNav(props: {
                 <button
                   type='button'
                   className={cn(
-                    'hover:bg-muted/60 flex w-full items-start gap-2 rounded-md px-2 py-2 text-left transition-colors',
-                    isActive && 'bg-muted/70',
+                    'hover:bg-[#F0F2F6] flex w-full items-start gap-2 rounded-md px-2 py-2 text-left transition-colors',
+                    isActive && 'bg-[#F0F2F6]',
                     isConfigured && !isError && 'text-primary',
                     isError && 'text-destructive hover:bg-destructive/10'
                   )}
@@ -535,7 +535,7 @@ function ChannelEditorNav(props: {
                 >
                   <span
                     className={cn(
-                      'bg-muted text-muted-foreground mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md',
+                      'bg-[#F7F8FA] text-[#8A93A4] mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md',
                       isConfigured && !isError && 'bg-primary/10 text-primary',
                       isError && 'bg-destructive/10 text-destructive',
                       isDone && !isError && 'text-primary'
@@ -544,18 +544,18 @@ function ChannelEditorNav(props: {
                     {item.icon}
                   </span>
                   <span className='min-w-0 flex-1'>
-                    <span className='block truncate text-sm font-medium'>
+                    <span className='text-[#0A0E1A] block truncate text-[13px] font-medium'>
                       {item.title}
                     </span>
                     {item.description && (
-                      <span className='text-muted-foreground block truncate text-xs'>
+                      <span className='text-[#8A93A4] block truncate text-[12px]'>
                         {item.description}
                       </span>
                     )}
                   </span>
                   <span
                     className={cn(
-                      'text-muted-foreground mt-1 shrink-0',
+                      'text-[#8A93A4] mt-1 shrink-0',
                       isError && 'text-destructive',
                       isDone && !isError && 'text-primary',
                       isConfigured && !isError && 'pt-1.5'
@@ -573,13 +573,13 @@ function ChannelEditorNav(props: {
                   </span>
                 </button>
                 {item.children && isExpanded && (
-                  <div className='border-border/60 ml-5 flex flex-col gap-0.5 border-l py-1 pl-3'>
+                  <div className='border-[#E5E8EE] ml-5 flex flex-col gap-0.5 border-l py-1 pl-3'>
                     {item.children.map((child) => (
                       <button
                         key={child.id}
                         type='button'
                         className={cn(
-                          'text-muted-foreground hover:bg-muted/50 hover:text-foreground flex w-full items-center gap-2 rounded-md px-2 py-1 text-left text-xs transition-colors',
+                          'text-[#8A93A4] hover:bg-[#F0F2F6] hover:text-[#0A0E1A] flex w-full items-center gap-2 rounded-md px-2 py-1 text-left text-[12px] transition-colors',
                           child.configured && 'text-primary'
                         )}
                         onClick={() => props.onNavigate(child.id)}
@@ -1875,7 +1875,7 @@ export function ChannelMutateDrawer({
                   </IconBadge>
                   <span>
                     {isEditing ? t('Edit Channel') : t('Create Channel')}
-                    <span className='text-muted-foreground ml-2 text-sm font-normal'>
+                    <span className='text-[#5A6478] ml-2 text-[13px] font-normal'>
                       {t(currentTypeLabel)}
                     </span>
                   </span>
@@ -1906,7 +1906,7 @@ export function ChannelMutateDrawer({
           </SheetHeader>
 
           {sensitiveLocked && (
-            <Alert className='border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-50'>
+            <Alert className='border-amber-200 bg-amber-50 text-amber-900'>
               <AlertDescription>
                 {t(
                   'Sensitive channel settings are read-only for your account.'
@@ -2057,7 +2057,7 @@ export function ChannelMutateDrawer({
                               >
                                 <div className='flex flex-col gap-0.5'>
                                   <FormLabel>{t('Enabled')}</FormLabel>
-                                  <FormDescription className='text-xs'>
+                                  <FormDescription className='text-[12px] text-[#8A93A4]'>
                                     {t('Enable or disable this channel')}
                                   </FormDescription>
                                 </div>
@@ -2124,14 +2124,14 @@ export function ChannelMutateDrawer({
                         )}
 
                         {sensitiveLocked && (
-                          <Alert className='border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-50'>
+                          <Alert className='border-amber-200 bg-amber-50 text-amber-900'>
                             <AlertDescription>
                               {t('No permission to perform this action')}
                             </AlertDescription>
                           </Alert>
                         )}
 
-                        <div className='border-border/60 bg-muted/10 rounded-lg border p-4'>
+                        <div className='border-[#E5E8EE] bg-[#F7F8FA]/20 rounded-xl border p-4'>
                           <fieldset
                             disabled={sensitiveLocked}
                             className='space-y-4 disabled:opacity-60'
@@ -2878,7 +2878,7 @@ export function ChannelMutateDrawer({
                                   name='multi_key_mode'
                                   render={({ field }) => (
                                     <FormItem className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
-                                      <FormLabel className='text-muted-foreground text-xs font-medium'>
+                                      <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                         {t('Add Mode')}
                                       </FormLabel>
                                       <Select
@@ -3018,13 +3018,13 @@ export function ChannelMutateDrawer({
                                         </div>
                                       </FormDescription>
                                       {isEditing && canRevealChannelKey && (
-                                        <div className='border-border/60 mt-4 flex flex-col gap-3 border-y border-dashed py-4'>
+                                        <div className='border-[#E5E8EE] mt-4 flex flex-col gap-3 border-y border-dashed py-4'>
                                           <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
                                             <div>
-                                              <p className='text-sm font-medium'>
+                                              <p className='text-[#0A0E1A] text-[13px] font-medium'>
                                                 {t('Current key')}
                                               </p>
-                                              <p className='text-muted-foreground text-xs'>
+                                              <p className='text-[#8A93A4] text-[12px]'>
                                                 {t(
                                                   'Verification required to reveal the saved key.'
                                                 )}
@@ -3084,9 +3084,9 @@ export function ChannelMutateDrawer({
                               />
 
                               {currentType === 57 && (
-                                <div className='border-border/60 flex flex-col gap-3 border-y py-4'>
+                                <div className='border-[#E5E8EE] flex flex-col gap-3 border-y py-4'>
                                   <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
-                                    <div className='text-muted-foreground text-xs'>
+                                    <div className='text-[#8A93A4] text-[12px]'>
                                       {t(
                                         'Codex channels use an OAuth JSON credential as the key.'
                                       )}
@@ -3115,7 +3115,7 @@ export function ChannelMutateDrawer({
                                       )}
                                     </div>
                                   </div>
-                                  <Alert className='border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-50'>
+                                  <Alert className='border-amber-200 bg-amber-50 text-amber-900'>
                                     <AlertDescription>
                                       {t(
                                         "Disclaimer: Personal use only. Do not distribute or share any credentials. This channel has prerequisites and requires prior setup; use it only if you understand the flow and risks, and comply with OpenAI's terms and policies. Credentials and configuration are for Codex CLI integration only, and are not intended for any other client, platform, or channel."
@@ -3256,7 +3256,7 @@ export function ChannelMutateDrawer({
                     >
                       <ChannelModelsSection>
                         <div className='space-y-5'>
-                          <div className='border-border/60 bg-muted/10 rounded-lg border p-4'>
+                          <div className='border-[#E5E8EE] bg-[#F7F8FA]/20 rounded-xl border p-4'>
                             <FormField
                               control={form.control}
                               name='models'
@@ -3291,7 +3291,7 @@ export function ChannelMutateDrawer({
                                   </FormControl>
                                   {modelMappingGuardrail.exposedTargetModels
                                     .length > 0 && (
-                                    <Alert className='border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-50'>
+                                    <Alert className='border-amber-200 bg-amber-50 text-amber-900'>
                                       <AlertDescription className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
                                         <span>
                                           {t('The mapped upstream model(s)')}{' '}
@@ -3332,10 +3332,10 @@ export function ChannelMutateDrawer({
 
                             <div className='space-y-3'>
                               <div>
-                                <p className='text-sm font-medium'>
+                                <p className='text-[#0A0E1A] text-[13px] font-medium'>
                                   {t('Quick actions')}
                                 </p>
-                                <p className='text-muted-foreground text-xs'>
+                                <p className='text-[#8A93A4] text-[12px]'>
                                   {t(
                                     'Use presets or upstream discovery to populate the model list faster.'
                                   )}
@@ -3384,7 +3384,7 @@ export function ChannelMutateDrawer({
                                       {t('Fetch from Upstream')}
                                     </Button>
                                     {!isEditing && !canEditSensitive && (
-                                      <span className='text-muted-foreground basis-full text-xs'>
+                                      <span className='text-[#8A93A4] basis-full text-[12px]'>
                                         {t(
                                           'No permission to perform this action'
                                         )}
@@ -3421,7 +3421,7 @@ export function ChannelMutateDrawer({
                               </div>
                               {prefillGroups.length > 0 && (
                                 <div className='flex flex-wrap items-center gap-2'>
-                                  <span className='text-muted-foreground text-xs'>
+                                  <span className='text-[#8A93A4] text-[12px]'>
                                     {t('Preset groups')}:
                                   </span>
                                   {prefillGroups.map((group) => (
@@ -3442,7 +3442,7 @@ export function ChannelMutateDrawer({
                             </div>
                           </div>
 
-                          <div className='border-border/60 rounded-lg border p-4'>
+                          <div className='border-[#E5E8EE] rounded-xl border p-4'>
                             <FormField
                               control={form.control}
                               name='model_mapping'
@@ -3451,7 +3451,7 @@ export function ChannelMutateDrawer({
                                   <div className='flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between'>
                                     <div className='space-y-1'>
                                       <div className='flex items-center gap-2'>
-                                        <FormLabel className='mb-0'>
+                                        <FormLabel className='mb-0 text-[#0A0E1A] text-[13px] font-medium'>
                                           {t('Model Mapping')}
                                         </FormLabel>
                                         <Tooltip>
@@ -3461,7 +3461,7 @@ export function ChannelMutateDrawer({
                                                 type='button'
                                                 variant='ghost'
                                                 size='icon-sm'
-                                                className='text-muted-foreground hover:text-foreground size-auto p-0'
+                                                className='text-[#8A93A4] hover:text-[#0A0E1A] size-auto p-0'
                                                 aria-label={t(
                                                   'How model mapping works'
                                                 )}
@@ -3478,10 +3478,10 @@ export function ChannelMutateDrawer({
                                             align='start'
                                             className='max-w-xs space-y-2 text-left'
                                           >
-                                            <p className='text-xs font-semibold tracking-wide uppercase'>
+                                            <p className='text-[12px] font-semibold pl-font-mono'>
                                               {t('Request flow')}
                                             </p>
-                                            <div className='space-y-1 font-mono text-xs'>
+                                            <div className='space-y-1 font-mono text-[12px]'>
                                               {mappingPreviewPairs.map(
                                                 (pair) => (
                                                   <div
@@ -3548,7 +3548,7 @@ export function ChannelMutateDrawer({
                                   )}
                                   {modelMappingGuardrail.missingSourceModels
                                     .length > 0 && (
-                                    <Alert className='border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-50'>
+                                    <Alert className='border-amber-200 bg-amber-50 text-amber-900'>
                                       <AlertDescription className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
                                         <span>
                                           {t('Add')}{' '}
@@ -3581,7 +3581,7 @@ export function ChannelMutateDrawer({
                             />
                           </div>
 
-                          <div className='border-border/60 rounded-lg border p-4'>
+                          <div className='border-[#E5E8EE] rounded-xl border p-4'>
                             <FormField
                               control={form.control}
                               name='group'
@@ -3595,7 +3595,7 @@ export function ChannelMutateDrawer({
                                   </div>
                                   <FormControl>
                                     {isLoadingGroups ? (
-                                      <Skeleton className='h-10 w-full' />
+                                      <Skeleton className='h-10 w-full rounded-md' />
                                     ) : (
                                       <MultiSelect
                                         options={groupOptions}
@@ -3848,7 +3848,7 @@ export function ChannelMutateDrawer({
                             />
 
                             {sensitiveLocked && (
-                              <p className='text-muted-foreground text-xs'>
+                              <p className='text-[#8A93A4] text-[12px]'>
                                 {t('No permission to perform this action')}
                               </p>
                             )}
@@ -4027,13 +4027,13 @@ export function ChannelMutateDrawer({
                                         heightClassName='h-40 min-h-40 max-h-40'
                                       />
                                     </FormControl>
-                                    <FormDescription className='text-xs'>
+                                    <FormDescription className='text-[12px] text-[#8A93A4]'>
                                       {t('Supported variables')}:{' '}
-                                      <code className='bg-muted rounded px-1 py-0.5'>
+                                      <code className='bg-[#F7F8FA] rounded px-1 py-0.5'>
                                         {'{api_key}'}
                                       </code>{' '}
                                       — {t('Channel key')},{' '}
-                                      <code className='bg-muted rounded px-1 py-0.5'>
+                                      <code className='bg-[#F7F8FA] rounded px-1 py-0.5'>
                                         {'{client_header:NAME}'}
                                       </code>{' '}
                                       — {t('Client header value')}
@@ -4062,7 +4062,7 @@ export function ChannelMutateDrawer({
                             iconTone='chart-3'
                           />
                           {sensitiveLocked && (
-                            <Alert className='border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-50'>
+                            <Alert className='border-amber-200 bg-amber-50 text-amber-900'>
                               <AlertDescription>
                                 {t('No permission to perform this action')}
                               </AlertDescription>
@@ -4399,7 +4399,7 @@ export function ChannelMutateDrawer({
                                   render={({ field }) => (
                                     <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                       <div className='space-y-0.5'>
-                                        <FormLabel className='text-sm'>
+                                        <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                           {t('Allow service_tier passthrough')}
                                         </FormLabel>
                                         <FormDescription>
@@ -4428,7 +4428,7 @@ export function ChannelMutateDrawer({
                                       render={({ field }) => (
                                         <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                           <div className='space-y-0.5'>
-                                            <FormLabel className='text-sm'>
+                                            <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                               {t('Disable store passthrough')}
                                             </FormLabel>
                                             <FormDescription>
@@ -4453,7 +4453,7 @@ export function ChannelMutateDrawer({
                                       render={({ field }) => (
                                         <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                           <div className='space-y-0.5'>
-                                            <FormLabel className='text-sm'>
+                                            <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                               {t(
                                                 'Allow safety_identifier passthrough'
                                               )}
@@ -4480,7 +4480,7 @@ export function ChannelMutateDrawer({
                                       render={({ field }) => (
                                         <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                           <div className='space-y-0.5'>
-                                            <FormLabel className='text-sm'>
+                                            <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                               {t(
                                                 'Allow include usage obfuscation passthrough'
                                               )}
@@ -4507,7 +4507,7 @@ export function ChannelMutateDrawer({
                                       render={({ field }) => (
                                         <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                           <div className='space-y-0.5'>
-                                            <FormLabel className='text-sm'>
+                                            <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                               {t(
                                                 'Allow inference geography passthrough'
                                               )}
@@ -4541,7 +4541,7 @@ export function ChannelMutateDrawer({
                                         render={({ field }) => (
                                           <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                             <div className='space-y-0.5'>
-                                              <FormLabel className='text-sm'>
+                                              <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                                 {t(
                                                   'Allow inference_geo passthrough'
                                                 )}
@@ -4569,7 +4569,7 @@ export function ChannelMutateDrawer({
                                       render={({ field }) => (
                                         <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                           <div className='space-y-0.5'>
-                                            <FormLabel className='text-sm'>
+                                            <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                               {t('Allow speed passthrough')}
                                             </FormLabel>
                                             <FormDescription>
@@ -4595,7 +4595,7 @@ export function ChannelMutateDrawer({
                                         render={({ field }) => (
                                           <FormItem className='flex items-center justify-between gap-3 px-4 py-3'>
                                             <div className='space-y-0.5'>
-                                              <FormLabel className='text-sm'>
+                                              <FormLabel className='text-[#0A0E1A] text-[13px] font-medium'>
                                                 {t(
                                                   'Allow Claude beta query passthrough'
                                                 )}
@@ -4723,9 +4723,9 @@ export function ChannelMutateDrawer({
                                   </FormItem>
                                 )}
                               />
-                              <div className='text-muted-foreground space-y-2 border-t pt-3 text-xs'>
+                              <div className='text-[#8A93A4] space-y-2 border-t pt-3 text-[12px]'>
                                 <div>
-                                  <span className='text-foreground font-medium'>
+                                  <span className='text-[#0A0E1A] font-medium'>
                                     {t('Last check time')}:
                                   </span>{' '}
                                   {formatUnixTime(
@@ -4733,7 +4733,7 @@ export function ChannelMutateDrawer({
                                   )}
                                 </div>
                                 <div>
-                                  <span className='text-foreground font-medium'>
+                                  <span className='text-[#0A0E1A] font-medium'>
                                     {t('Last detected addable models')}:
                                   </span>{' '}
                                   {upstreamUpdateMeta.detectedModels.length ===

@@ -91,20 +91,20 @@ function AutoGroupOrderItem(props: AutoGroupOrderItemProps) {
       value={props.group}
       dragListener={false}
       dragControls={dragControls}
-      className='bg-background flex items-center gap-2 rounded-lg border p-2'
+      className='bg-white flex items-center gap-2 rounded-xl border border-[#E5E8EE] p-2'
     >
       <Button
         type='button'
         variant='ghost'
         size='icon-sm'
-        className='text-muted-foreground cursor-grab touch-none font-mono active:cursor-grabbing'
+        className='text-[#8A93A4] cursor-grab touch-none font-mono text-[12px] active:cursor-grabbing'
         aria-label={t('Drag {{group}} to reorder', { group: props.group })}
         onPointerDown={handleDragStart}
         onKeyDown={handleDragKeyDown}
       >
         <HugeiconsIcon icon={Drag01Icon} strokeWidth={2} aria-hidden='true' />
       </Button>
-      <span className='min-w-0 flex-1 truncate text-sm font-medium'>
+      <span className='min-w-0 flex-1 truncate text-[13px] font-medium text-[#0A0E1A]'>
         {props.group}
       </span>
       <div className='flex shrink-0 gap-1'>
@@ -205,7 +205,7 @@ export function AutoGroupOrderEditor(props: AutoGroupOrderEditorProps) {
       className={cn('flex flex-col gap-3', props.className)}
     >
       <div className='flex items-center justify-between gap-3'>
-        <p className='text-muted-foreground text-xs' aria-live='polite'>
+        <p className='text-[#8A93A4] text-[12px]' aria-live='polite'>
           {isInheriting
             ? t('Using the complete global Auto order ({{count}} groups)', {
                 count: props.globalOptions.length,
@@ -241,7 +241,7 @@ export function AutoGroupOrderEditor(props: AutoGroupOrderEditorProps) {
       />
 
       {isInheriting && props.globalOptions.length === 0 && (
-        <Empty className='min-h-28 border'>
+        <Empty className='min-h-28 border border-[#E5E8EE] rounded-xl'>
           <EmptyHeader>
             <EmptyTitle>{t('Inherit global Auto order')}</EmptyTitle>
             <EmptyDescription>
@@ -265,24 +265,24 @@ export function AutoGroupOrderEditor(props: AutoGroupOrderEditorProps) {
                   strokeWidth={2}
                   aria-hidden='true'
                   data-slot='global-auto-order-connector'
-                  className='text-muted-foreground size-3.5 shrink-0'
+                  className='text-[#8A93A4] size-3.5 shrink-0'
                 />
               )}
               <span
                 data-slot='global-auto-order-chip'
                 title={option.desc}
-                className='bg-muted/30 flex min-w-0 items-center gap-1.5 rounded-md border px-2 py-1'
+                className='bg-[#F7F8FA] flex min-w-0 items-center gap-1.5 rounded-md border border-[#E5E8EE] px-2 py-1'
               >
                 <span
                   data-slot='global-auto-order-index'
                   aria-hidden='true'
-                  className='bg-primary/10 text-primary flex size-4 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold tabular-nums'
+                  className='bg-[#2E4BFF]/[0.08] text-[#2E4BFF] flex size-4 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold tabular-nums'
                 >
                   {index + 1}
                 </span>
                 <span
                   data-slot='global-auto-order-name'
-                  className='max-w-40 truncate text-xs font-medium'
+                  className='max-w-40 truncate text-[12px] font-medium text-[#0A0E1A]'
                 >
                   {option.label}
                 </span>
@@ -302,7 +302,7 @@ export function AutoGroupOrderEditor(props: AutoGroupOrderEditorProps) {
       )}
 
       {!isInheriting && props.value.length === 0 && (
-        <Empty className='min-h-24 border'>
+        <Empty className='min-h-24 border border-[#E5E8EE] rounded-xl'>
           <EmptyHeader>
             <EmptyTitle>{t('Auto group order')}</EmptyTitle>
             <EmptyDescription>

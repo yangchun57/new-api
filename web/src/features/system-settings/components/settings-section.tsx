@@ -41,7 +41,10 @@ export function SettingsSection({
         <div className='flex flex-col gap-1'>
           <h3
             {...titleProps}
-            className={cn('text-base font-semibold', titleProps?.className)}
+            className={cn(
+              'text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]',
+              titleProps?.className
+            )}
           >
             {title}
           </h3>

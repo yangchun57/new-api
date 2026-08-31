@@ -216,7 +216,7 @@ export function TagBatchEditDialog({
     >
       {isLoading ? (
         <div className='flex items-center justify-center py-12'>
-          <Loader2 className='text-muted-foreground h-8 w-8 animate-spin' />
+          <Loader2 className='text-[#8A93A4] h-8 w-8 animate-spin' />
         </div>
       ) : (
         <>
@@ -242,7 +242,7 @@ export function TagBatchEditDialog({
                 onChange={(e) => setNewTag(e.target.value)}
                 disabled={isSaving}
               />
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t('Leave empty to disband the tag')}
               </p>
             </div>
@@ -260,7 +260,7 @@ export function TagBatchEditDialog({
                 disabled={isSaving}
                 rows={3}
               />
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t(
                   'Current models for the longest channel in this tag. May not include all models from all channels.'
                 )}
@@ -281,7 +281,7 @@ export function TagBatchEditDialog({
             <div className='space-y-2'>
               <Label htmlFor='groups'>{t('Groups')}</Label>
               {isLoadingGroups ? (
-                <Skeleton className='h-10 w-full' />
+                <Skeleton className='h-10 w-full rounded-md' />
               ) : (
                 <MultiSelect
                   options={groupOptions}
@@ -290,7 +290,7 @@ export function TagBatchEditDialog({
                   placeholder={t('Select groups (leave empty to keep current)')}
                 />
               )}
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t('User groups that can access channels with this tag')}
               </p>
             </div>

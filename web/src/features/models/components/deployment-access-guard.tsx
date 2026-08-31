@@ -72,18 +72,18 @@ function LoadingStep({
   return (
     <div className='flex items-center gap-3'>
       {status === 'loading' && (
-        <Loader2 className='text-primary h-5 w-5 animate-spin' />
+        <Loader2 className='h-5 w-5 animate-spin text-[#2E4BFF]' />
       )}
-      {status === 'done' && <CheckCircle2 className='h-5 w-5 text-green-500' />}
+      {status === 'done' && <CheckCircle2 className='h-5 w-5 text-[#16A34A]' />}
       {status === 'pending' && (
-        <Circle className='text-muted-foreground/40 h-5 w-5' />
+        <Circle className='h-5 w-5 text-[#B8BFCC]/60' />
       )}
       <span
         className={cn(
-          'text-sm',
-          status === 'loading' && 'text-foreground font-medium',
-          status === 'done' && 'text-muted-foreground',
-          status === 'pending' && 'text-muted-foreground/60'
+          'text-[13px]',
+          status === 'loading' && 'font-medium text-[#0A0E1A]',
+          status === 'done' && 'text-[#5A6478]',
+          status === 'pending' && 'text-[#8A93A4]/70'
         )}
       >
         {label}
@@ -120,7 +120,7 @@ export function DeploymentAccessGuard({
     return (
       <div className='mx-auto mt-8 max-w-md'>
         <div className='flex flex-col items-center justify-center py-12'>
-          <Loader2 className='text-primary mb-6 h-10 w-10 animate-spin' />
+          <Loader2 className='text-[#2E4BFF] mb-6 h-10 w-10 animate-spin' />
           <div className='space-y-3'>
             <LoadingStep
               label={t('Loading configuration')}
@@ -141,8 +141,8 @@ export function DeploymentAccessGuard({
     return (
       <div className='mx-auto mt-8 max-w-md'>
         <div className='text-center'>
-          <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-100 dark:bg-amber-900/20'>
-            <Server className='h-8 w-8 text-amber-600 dark:text-amber-400' />
+          <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#FFF7E6]'>
+            <Server className='h-8 w-8 text-[#D97706]' />
           </div>
           <h3 className='mb-6 text-xl font-semibold'>
             {t('Model deployment service is disabled')}
@@ -172,8 +172,8 @@ export function DeploymentAccessGuard({
     return (
       <div className='mx-auto mt-8 max-w-md'>
         <div className='text-center'>
-          <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-red-100 dark:bg-red-900/20'>
-            <WifiOff className='h-8 w-8 text-red-600 dark:text-red-400' />
+          <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#FEF2F2]'>
+            <WifiOff className='h-8 w-8 text-[#E5484D]' />
           </div>
           <h3 className='mb-6 text-xl font-semibold'>
             {t('Connection failed')}

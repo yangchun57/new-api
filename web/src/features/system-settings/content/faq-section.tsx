@@ -293,13 +293,13 @@ export function FAQSection({ enabled, data }: FAQSectionProps) {
             {
               id: 'question',
               header: t('Question'),
-              cellClassName: 'max-w-xs truncate font-medium',
+              cellClassName: 'max-w-xs truncate font-medium text-[13px] text-[#0A0E1A]',
               cell: (faq) => faq.question,
             },
             {
               id: 'answer',
               header: t('Answer'),
-              cellClassName: 'text-muted-foreground max-w-md truncate',
+              cellClassName: 'max-w-md truncate text-[13px] text-[#5A6478]',
               cell: (faq) => faq.answer,
             },
             {

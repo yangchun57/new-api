@@ -55,7 +55,7 @@ export function FAQPanel() {
       contentClassName='p-0'
     >
       <ScrollArea className='h-80'>
-        <Accordion className='w-full px-4 sm:px-5'>
+        <Accordion className='w-full px-3 sm:px-5'>
           {list.map((item: FAQItem, idx: number) => {
             const key = item.id ?? `faq-${idx}`
             const value = `item-${key}`
@@ -63,15 +63,15 @@ export function FAQPanel() {
               <AccordionItem
                 key={key}
                 value={value}
-                className='border-border/60'
+                className='border-b border-[#E5E8EE] last:border-b-0'
               >
-                <AccordionTrigger className='text-start hover:no-underline'>
-                  <Markdown className='text-sm leading-relaxed font-semibold'>
+                <AccordionTrigger className='rounded-md px-1 py-3 text-start hover:bg-[#F7F8FA] hover:no-underline'>
+                  <Markdown className='text-[13px] font-semibold leading-relaxed tracking-[-0.005em] text-[#0A0E1A]'>
                     {item.question}
                   </Markdown>
                 </AccordionTrigger>
-                <AccordionContent>
-                  <Markdown className='text-muted-foreground/60 text-sm'>
+                <AccordionContent className='px-1 pb-3 pt-0'>
+                  <Markdown className='text-[13px] leading-relaxed text-[#5A6478] [&_a]:text-[#2E4BFF]'>
                     {item.answer}
                   </Markdown>
                 </AccordionContent>

@@ -144,7 +144,7 @@ export function ProfileHeader({ profile, loading }: ProfileHeaderProps) {
               />
             </div>
 
-            <div className='text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs sm:gap-x-4 sm:text-sm'>
+            <div className='flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[13px] leading-relaxed text-[#5A6478] sm:gap-x-4'>
               <span className='truncate'>@{profile.username}</span>
               {profile.email && (
                 <>
@@ -170,7 +170,7 @@ export function ProfileHeader({ profile, loading }: ProfileHeaderProps) {
                 <IconBadge tone={item.tone} size='stat'>
                   <item.icon />
                 </IconBadge>
-                <div className='text-muted-foreground truncate text-xs font-medium tracking-wider uppercase'>
+                <div className='truncate pl-font-mono text-[11px] text-[#8A93A4]'>
                   {item.label}
                 </div>
               </div>
@@ -178,7 +178,7 @@ export function ProfileHeader({ profile, loading }: ProfileHeaderProps) {
               <div className='text-foreground mt-1.5 truncate font-mono text-lg font-bold tracking-tight tabular-nums sm:mt-2 sm:text-2xl'>
                 {item.value}
               </div>
-              <div className='text-muted-foreground/60 mt-1 hidden text-xs md:block'>
+              <div className='mt-1 hidden text-[12px] text-[#8A93A4] md:block'>
                 {item.description}
               </div>
             </div>

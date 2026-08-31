@@ -268,12 +268,12 @@ export function PaymentMethodDialog({
                     <Input
                       placeholder={t('e.g., SiAlipay')}
                       {...field}
-                      className='flex-1'
+                      className='flex-1 font-mono text-[12px] bg-[#F7F8FA]'
                     />
                     {iconValue && (
                       <ReactIconByName
                         name={iconValue}
-                        className='text-muted-foreground size-5 shrink-0'
+                        className='text-[#8A93A4] size-5 shrink-0'
                         title={iconValue}
                       />
                     )}
@@ -300,6 +300,7 @@ export function PaymentMethodDialog({
                     type='number'
                     step='0.01'
                     placeholder={t('e.g., 50')}
+                    className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                     {...field}
                   />
                 </FormControl>

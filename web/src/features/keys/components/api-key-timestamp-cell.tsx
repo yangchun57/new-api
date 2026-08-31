@@ -34,7 +34,7 @@ interface ApiKeyTimestampCellProps {
 
 export function ApiKeyTimestampCell(props: ApiKeyTimestampCellProps) {
   if (!props.timestamp || props.timestamp === -1) {
-    return <span className='text-muted-foreground text-xs'>-</span>
+    return <span className='text-[12px] text-[#8A93A4] font-mono tabular-nums'>-</span>
   }
 
   const timestampMs = props.timestamp * 1000
@@ -52,7 +52,7 @@ export function ApiKeyTimestampCell(props: ApiKeyTimestampCellProps) {
             dateTime={new Date(timestampMs).toISOString()}
             tabIndex={0}
             className={cn(
-              'block truncate font-mono text-xs tabular-nums',
+              'block truncate font-mono text-[12px] tabular-nums',
               props.className
             )}
           />
@@ -60,8 +60,8 @@ export function ApiKeyTimestampCell(props: ApiKeyTimestampCellProps) {
       >
         {relativeTime}
       </TooltipTrigger>
-      <TooltipContent>
-        <span className='font-mono tabular-nums'>{absoluteTime}</span>
+      <TooltipContent className='rounded-lg border-[#E5E8EE] bg-white shadow-[0_8px_24px_rgba(10,14,26,0.08)]'>
+        <span className='font-mono tabular-nums text-[12px] text-[#0A0E1A]'>{absoluteTime}</span>
       </TooltipContent>
     </Tooltip>
   )

@@ -34,18 +34,6 @@ import { cn } from '@/lib/utils'
 
 import { aggregateUptime, type UptimeDayPoint } from '../lib/mock-stats'
 
-// ---------------------------------------------------------------------------
-// Uptime sparkline
-// ---------------------------------------------------------------------------
-//
-// Compact 30-day uptime visualisation: a row of small coloured bars where:
-//   - Bar colour reflects per-day uptime (green / amber / red)
-//   - Bar height reflects severity (the worse the day, the shorter the bar)
-//   - Hovering a bar reveals the exact date and uptime
-//
-// Useful as a header strip ("at-a-glance" status) and as a per-row visual
-// inside the per-group performance table.
-
 type SparklineSize = 'sm' | 'md'
 
 type UptimeSparklineProps = {
@@ -70,8 +58,8 @@ export function UptimeSparkline(props: UptimeSparklineProps) {
 
   if (props.series.length === 0) {
     return (
-      <span className={cn('text-muted-foreground text-xs', props.className)}>
-        {props.emptyLabel ?? '—'}
+      <span className={cn('text-[12px] text-[#B8BFCC]', props.className)}>
+        {props.emptyLabel ?? '–'}
       </span>
     )
   }
@@ -113,11 +101,14 @@ export function UptimeSparkline(props: UptimeSparklineProps) {
                 aria-hidden
               />
             </TooltipTrigger>
-            <TooltipContent side='top' className='font-mono text-xs'>
+            <TooltipContent
+              side='top'
+              className='rounded-lg border border-[#E5E8EE] bg-white px-2.5 py-1.5 font-mono text-[11px] text-[#0A0E1A] shadow-md'
+            >
               <div className='font-medium'>{day.date}</div>
               <div>{day.uptime_pct.toFixed(2)}%</div>
               {day.outage_minutes > 0 && (
-                <div className='text-muted-foreground'>
+                <div className='text-[#8A93A4]'>
                   {day.outage_minutes} min outage
                 </div>
               )}
@@ -128,7 +119,7 @@ export function UptimeSparkline(props: UptimeSparklineProps) {
       {showOverall && (
         <span
           className={cn(
-            'font-mono text-sm font-semibold tabular-nums',
+            'font-mono text-[13px] font-semibold tabular-nums',
             getSuccessRateTextClass(overall)
           )}
         >
@@ -138,10 +129,6 @@ export function UptimeSparkline(props: UptimeSparklineProps) {
     </div>
   )
 }
-
-// ---------------------------------------------------------------------------
-// Uptime status row — sparkline + summary text + status icon
-// ---------------------------------------------------------------------------
 
 export function UptimeStatusRow(props: {
   series: UptimeDayPoint[]
@@ -163,14 +150,26 @@ export function UptimeStatusRow(props: {
         ? Activity
         : AlertCircle
 
-  const statusColour =
-    status === 'operational'
-      ? 'text-emerald-600 dark:text-emerald-400'
-      : status === 'minor'
-        ? 'text-emerald-600 dark:text-emerald-400'
-        : status === 'degraded'
-          ? 'text-amber-600 dark:text-amber-400'
-          : 'text-rose-600 dark:text-rose-400'
+  const statusIconColor =
+    status === 'operational' || status === 'minor'
+      ? 'text-emerald-600'
+      : status === 'degraded'
+        ? 'text-amber-600'
+        : 'text-rose-600'
+
+  const statusLabelColor =
+    status === 'operational' || status === 'minor'
+      ? 'text-emerald-700'
+      : status === 'degraded'
+        ? 'text-[#B45309]'
+        : 'text-rose-600'
+
+  const iconWrapColour =
+    status === 'operational' || status === 'minor'
+      ? 'bg-emerald-50 ring-emerald-200'
+      : status === 'degraded'
+        ? 'bg-[#FEF9E7] ring-[#FCD34D]/60'
+        : 'bg-rose-50 ring-rose-200'
 
   const statusLabel =
     status === 'operational'
@@ -184,31 +183,44 @@ export function UptimeStatusRow(props: {
   return (
     <div
       className={cn(
-        'border-border/60 bg-muted/30 flex flex-wrap items-center gap-3 rounded-lg border px-3 py-2 sm:gap-4 sm:px-4',
+        'flex flex-wrap items-center gap-3 rounded-2xl border border-[#E5E8EE] bg-white px-4 py-3 shadow-sm sm:gap-4',
         props.className
       )}
     >
-      <div className='flex items-center gap-2'>
-        <StatusIcon className={cn('size-4 shrink-0', statusColour)} />
-        <span className='text-sm font-medium'>{t('Last 30 days uptime')}</span>
+      <div className='flex items-center gap-2.5'>
+        <span
+          className={cn(
+            'inline-flex size-7 items-center justify-center rounded-full ring-1',
+            iconWrapColour
+          )}
+        >
+          <StatusIcon className={cn('size-3.5 shrink-0', statusIconColor)} />
+        </span>
+        <div className='flex flex-col'>
+          <span className='text-[13px] font-semibold text-[#0A0E1A]'>
+            {t('Last 30 days uptime')}
+          </span>
+          <span className={cn('text-[12px] font-medium', statusLabelColor)}>
+            {statusLabel}
+          </span>
+        </div>
       </div>
 
       <UptimeSparkline series={props.series} className='ml-auto' />
 
-      <div className='flex items-center gap-3 text-xs'>
-        <span className={cn('font-medium', statusColour)}>{statusLabel}</span>
+      <div className='flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-[#8A93A4]'>
         {summary.incidents > 0 && (
-          <span className='text-muted-foreground'>
+          <span>
             {summary.incidents}{' '}
             {summary.incidents === 1 ? t('incident') : t('incidents')}
           </span>
         )}
         {summary.outage_minutes > 0 && (
-          <span className='text-muted-foreground'>
+          <span>
             {summary.outage_minutes} {t('min downtime')}
           </span>
         )}
-        <span className='text-muted-foreground hidden sm:inline'>
+        <span className='hidden sm:inline'>
           {formatUptimePct(summary.uptime_pct)} {t('overall')}
         </span>
       </div>

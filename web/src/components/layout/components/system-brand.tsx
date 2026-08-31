@@ -61,11 +61,11 @@ export function SystemBrand(props: SystemBrandProps) {
         to='/'
         aria-label={t('Go to home')}
         className={cn(
-          'text-foreground inline-flex h-7 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium transition-colors outline-none select-none',
-          'hover:bg-accent focus-visible:ring-ring/40 focus-visible:ring-2'
+          'text-foreground inline-flex h-8 items-center gap-2 rounded-lg px-2 text-[13px] font-semibold transition-colors outline-none select-none',
+          'hover:bg-[#F0F2F6] focus-visible:ring-2 focus-visible:ring-[#0A0E1A]/15'
         )}
       >
-        <div className='flex size-5 items-center justify-center overflow-hidden rounded-md'>
+        <div className='flex size-6 items-center justify-center overflow-hidden rounded-md'>
           <img
             src={logo}
             alt={t('Logo')}
@@ -85,7 +85,7 @@ export function SystemBrand(props: SystemBrandProps) {
           className='hover:text-sidebar-foreground active:text-sidebar-foreground cursor-default hover:bg-transparent active:bg-transparent'
           render={<div />}
         >
-          <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg'>
+          <div className='flex aspect-square size-9 items-center justify-center overflow-hidden rounded-lg'>
             <img
               src={logo}
               alt={t('Logo')}
@@ -93,8 +93,8 @@ export function SystemBrand(props: SystemBrandProps) {
             />
           </div>
           <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
-            <span className='truncate font-semibold'>{name}</span>
-            <span className='truncate text-xs'>{version}</span>
+            <span className='truncate font-semibold text-[#0A0E1A]'>{name}</span>
+            <span className='truncate text-[11px] text-[#8A93A4]'>{version}</span>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

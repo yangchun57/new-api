@@ -75,7 +75,7 @@ export function useUsersColumns(): ColumnDef<User>[] {
         return (
           <TableId
             value={row.getValue('id') as number}
-            className='w-[60px] text-sm'
+            className='w-[60px] text-[12px] text-[#8A93A4] tabular-nums'
           />
         )
       },
@@ -91,9 +91,9 @@ export function useUsersColumns(): ColumnDef<User>[] {
         const remark = row.original.remark
 
         return (
-          <div className='flex min-w-[160px] flex-col gap-1'>
+          <div className='flex min-w-[160px] flex-col gap-0.5'>
             <div className='flex items-center gap-2'>
-              <LongText className='max-w-[140px] font-medium'>
+              <LongText className='max-w-[140px] text-[13px] font-medium text-[#0A0E1A]'>
                 {username}
               </LongText>
               {remark && (
@@ -110,7 +110,7 @@ export function useUsersColumns(): ColumnDef<User>[] {
               )}
             </div>
             {displayName && displayName !== username && (
-              <LongText className='text-muted-foreground max-w-[180px] text-xs'>
+              <LongText className='max-w-[180px] text-[12px] text-[#8A93A4]'>
                 {displayName}
               </LongText>
             )}
@@ -205,9 +205,9 @@ export function useUsersColumns(): ColumnDef<User>[] {
         return (
           <div className='flex items-center gap-x-2'>
             {roleConfig.icon && (
-              <roleConfig.icon size={16} className='text-muted-foreground' />
+              <roleConfig.icon size={16} className='text-[#8A93A4]' />
             )}
-            <span className='text-sm'>{t(roleConfig.labelKey)}</span>
+            <span className='text-[13px] text-[#5A6478]'>{t(roleConfig.labelKey)}</span>
           </div>
         )
       },
@@ -298,7 +298,7 @@ export function useUsersColumns(): ColumnDef<User>[] {
       cell: ({ row }) => {
         const ts = row.getValue('created_at') as number | undefined
         return (
-          <span className='text-muted-foreground text-sm'>
+          <span className='text-[12px] text-[#8A93A4] tabular-nums'>
             {ts ? formatTimestamp(ts) : '-'}
           </span>
         )
@@ -312,7 +312,7 @@ export function useUsersColumns(): ColumnDef<User>[] {
       cell: ({ row }) => {
         const ts = row.getValue('last_login_at') as number | undefined
         return (
-          <span className='text-muted-foreground text-sm'>
+          <span className='text-[12px] text-[#8A93A4] tabular-nums'>
             {ts ? formatTimestamp(ts) : '-'}
           </span>
         )

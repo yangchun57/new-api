@@ -48,15 +48,15 @@ export function AffiliateRewardsCard({
     return (
       <div
         data-slot='card'
-        className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+        className='group/card bg-white text-[#0A0E1A] border-[#E5E8EE] overflow-hidden rounded-xl border shadow-[0_1px_2px_rgba(10,14,26,0.04)]'
       >
         <div className='grid gap-4 p-3 sm:p-4 lg:grid-cols-[minmax(220px,1fr)_minmax(220px,0.72fr)_minmax(320px,1.15fr)] lg:items-center'>
           <div>
             <Skeleton className='h-5 w-32' />
             <Skeleton className='mt-2 h-4 w-48' />
           </div>
-          <Skeleton className='h-14 rounded-lg' />
-          <Skeleton className='h-10 rounded-lg' />
+          <Skeleton className='h-14 rounded-xl' />
+          <Skeleton className='h-10 rounded-xl' />
         </div>
       </div>
     )
@@ -67,7 +67,7 @@ export function AffiliateRewardsCard({
   return (
     <div
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+      className='group/card bg-white text-[#0A0E1A] border-[#E5E8EE] overflow-hidden rounded-xl border shadow-[0_1px_2px_rgba(10,14,26,0.04)]'
     >
       <div className='grid gap-3 p-3 sm:gap-4 sm:p-4 lg:grid-cols-[minmax(200px,1fr)_minmax(180px,0.65fr)_minmax(280px,1fr)] lg:items-center'>
         <div className='flex min-w-0 items-center gap-2.5'>
@@ -75,10 +75,10 @@ export function AffiliateRewardsCard({
             <Share2 />
           </IconBadge>
           <div className='min-w-0'>
-            <h3 className='truncate text-sm font-semibold'>
+            <h3 className='truncate text-[16px] font-semibold tracking-[-0.015em] text-[#0A0E1A] leading-none'>
               {t('Referral Program')}
             </h3>
-            <p className='text-muted-foreground line-clamp-1 text-xs'>
+            <p className='text-[#5A6478] line-clamp-1 text-[13px] leading-relaxed mt-1.5'>
               {t(
                 'Earn rewards when users join through your referral link. Transfer accumulated rewards to your balance anytime.'
               )}
@@ -93,10 +93,10 @@ export function AffiliateRewardsCard({
             [t('Invites'), String(user?.aff_count ?? 0)],
           ].map(([label, value]) => (
             <div key={label}>
-              <div className='text-muted-foreground truncate text-[10px] font-medium tracking-wider uppercase'>
+              <div className='pl-font-mono text-[#8A93A4] truncate text-[11px] font-medium tracking-[0.08em] uppercase'>
                 {label}
               </div>
-              <div className='mt-0.5 truncate text-sm font-semibold tabular-nums'>
+              <div className='mt-0.5 truncate text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
                 {value}
               </div>
             </div>
@@ -107,12 +107,12 @@ export function AffiliateRewardsCard({
           <Input
             value={affiliateLink}
             readOnly
-            className='border-muted bg-background/70 h-9 min-w-0 flex-1 font-mono text-xs'
+            className='border-[#E5E8EE] bg-[#F7F8FA] h-9 min-w-0 flex-1 font-mono text-[12px] text-[#5A6478]'
           />
           <CopyButton
             value={affiliateLink}
             variant='outline'
-            className='bg-background size-9 shrink-0'
+            className='bg-white size-9 shrink-0'
             iconClassName='size-4'
             tooltip={t('Copy referral link')}
             aria-label={t('Copy referral link')}
@@ -129,7 +129,7 @@ export function AffiliateRewardsCard({
           )}
         </div>
         {!complianceConfirmed ? (
-          <p className='text-muted-foreground text-xs lg:col-span-3'>
+          <p className='text-[#8A93A4] text-[12px] lg:col-span-3'>
             {t(
               'Referral reward transfer is disabled until the administrator confirms compliance terms.'
             )}

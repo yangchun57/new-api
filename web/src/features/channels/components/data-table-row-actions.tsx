@@ -256,7 +256,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           render={
             <Button
               variant='ghost'
-              className='data-popup-open:bg-muted flex h-8 w-8 p-0'
+              className='data-popup-open:bg-[#F7F8FA] flex h-8 w-8 p-0'
             />
           }
         >
@@ -347,7 +347,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             </DropdownMenuShortcut>
           </DropdownMenuItem>
           {!canEditSensitive && (
-            <DropdownMenuItem disabled className='text-xs normal-case'>
+            <DropdownMenuItem disabled className='text-[12px] normal-case'>
               {t('No permission to perform this action')}
             </DropdownMenuItem>
           )}

@@ -205,7 +205,7 @@ export function CCSwitchDialog(props: Props) {
             <Label>
               {t(field.labelKey)}
               {field.required && (
-                <span className='text-destructive ml-0.5'>*</span>
+                <span className='text-[#E5484D] ml-0.5'>*</span>
               )}
             </Label>
             <ComboboxInput

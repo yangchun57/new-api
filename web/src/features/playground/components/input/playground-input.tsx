@@ -93,10 +93,10 @@ export function PlaygroundInput({
   }
 
   return (
-    <div className='grid shrink-0 gap-4 px-1 md:pb-4'>
+    <div className='grid shrink-0 gap-3 border-t border-[#E5E8EE] bg-white px-4 pt-3 pb-4 md:pb-6'>
       <PromptInput
         className='relative'
-        groupClassName='bg-background/95 dark:bg-background/80 border-border/70 shadow-[0_18px_60px_-32px_rgba(0,0,0,0.65)] ring-1 ring-foreground/5 rounded-xl overflow-hidden transition-all duration-200 focus-within:border-primary/45 focus-within:ring-primary/15 focus-within:shadow-[0_22px_70px_-34px_rgba(0,0,0,0.75)]'
+        groupClassName='bg-white border border-[#E5E8EE] rounded-xl overflow-hidden transition-colors duration-150 focus-within:border-[#2E4BFF]/50 focus-within:ring-1 focus-within:ring-[#2E4BFF]/15'
         onSubmit={handleSubmit}
       >
         <PromptInputTextarea
@@ -104,14 +104,14 @@ export function PlaygroundInput({
           autoCorrect='off'
           autoCapitalize='off'
           spellCheck={false}
-          className='min-h-20 px-5 pt-4 pb-3 leading-7 md:min-h-24 md:text-base'
+          className='min-h-[56px] px-4 pt-3.5 pb-2 leading-6 text-[13px] text-[#0A0E1A] placeholder:text-[#B8BFCC] md:min-h-[64px] md:text-[14px]'
           disabled={disabled}
           onChange={(event) => setText(event.target.value)}
           placeholder={t('Ask anything')}
           value={text}
         />
 
-        <PromptInputFooter className='border-border/60 bg-muted/20 dark:bg-muted/10 border-t px-3 py-2.5 backdrop-blur'>
+        <PromptInputFooter className='border-t border-[#E5E8EE] bg-white px-3 py-2'>
           <PlaygroundInputControls
             disabled={disabled}
             groups={groups}

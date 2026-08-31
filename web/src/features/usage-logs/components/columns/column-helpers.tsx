@@ -56,7 +56,7 @@ export function CacheTooltip({
           render={<Zap className={`size-3 flex-shrink-0 ${color}`} />}
         ></TooltipTrigger>
         <TooltipContent side='top'>
-          <p className='text-xs'>
+          <p className='text-[12px] text-[#5A6478]'>
             {label}: {formatTokens(tokens)}
           </p>
         </TooltipContent>
@@ -87,10 +87,10 @@ export function createTimestampColumn<T>(config: {
     cell: ({ row }) => {
       const timestamp = row.getValue(accessorKey) as number
       if (!timestamp) {
-        return <span className='text-muted-foreground/60 text-xs'>-</span>
+        return <span className='text-[#8A93A4] text-[12px]'>-</span>
       }
       return (
-        <span className='font-mono text-xs tabular-nums'>
+        <span className='text-[12px] tabular-nums text-[#8A93A4]'>
           {formatTimestampToDate(timestamp, unit)}
         </span>
       )
@@ -131,7 +131,7 @@ export function createDurationColumn<T>(config: {
       )
 
       if (!duration) {
-        return <span className='text-muted-foreground/60 text-xs'>-</span>
+        return <span className='text-[12px] text-[#8A93A4]'>-</span>
       }
 
       const variant =
@@ -139,11 +139,11 @@ export function createDurationColumn<T>(config: {
 
       const durationBgMap: Record<string, string> = {
         success:
-          'border border-emerald-200/40 bg-emerald-50/35 !text-emerald-600 dark:border-emerald-900/40 dark:bg-emerald-950/15 dark:!text-emerald-400',
+          'border border-[#BBF7D0]/70 bg-[#DCFCE7]/55 text-[#16A34A]',
         warning:
-          'border border-amber-200/45 bg-amber-50/35 !text-amber-600 dark:border-amber-900/40 dark:bg-amber-950/15 dark:!text-amber-400',
+          'border border-[#FDE68A]/70 bg-[#FEF3C7]/55 text-[#D97706]',
         danger:
-          'border border-rose-200/50 bg-rose-50/35 !text-red-600 dark:border-rose-900/40 dark:bg-rose-950/15 dark:!text-red-400',
+          'border border-[#FECACA]/70 bg-[#FEE2E2]/55 text-[#E5484D]',
       }
 
       return (
@@ -152,7 +152,7 @@ export function createDurationColumn<T>(config: {
           variant={variant}
           size='sm'
           copyable={false}
-          className={cn('rounded-md font-mono', durationBgMap[variant])}
+          className={cn('rounded-md font-mono text-[12px] tabular-nums', durationBgMap[variant])}
         />
       )
     },
@@ -177,7 +177,7 @@ export function createChannelColumn<T>(config: {
     cell: ({ row }) => {
       const channelId = row.getValue(accessorKey) as number
       if (!channelId) {
-        return <span className='text-muted-foreground/60 text-xs'>-</span>
+        return <span className='text-[12px] text-[#8A93A4]'>-</span>
       }
       return (
         <StatusBadge
@@ -186,7 +186,7 @@ export function createChannelColumn<T>(config: {
           copyText={String(channelId)}
           size='sm'
           showDot={false}
-          className='font-mono'
+          className='font-mono text-[12px]'
         />
       )
     },
@@ -214,18 +214,18 @@ export function createFailReasonColumn<T>(config: {
       const [dialogOpen, setDialogOpen] = useState(false)
 
       if (!failReason) {
-        return <span className='text-muted-foreground/60 text-xs'>-</span>
+        return <span className='text-[12px] text-[#8A93A4]'>-</span>
       }
 
       return (
         <>
           <button
             type='button'
-            className='group flex max-w-[200px] items-center gap-1 text-left text-xs'
+            className='group flex max-w-[200px] items-center gap-1 text-left text-[12px]'
             onClick={() => setDialogOpen(true)}
             title={cellTitle}
           >
-            <span className='truncate leading-snug text-red-600 group-hover:underline dark:text-red-400'>
+            <span className='truncate leading-snug text-[#E5484D] group-hover:underline'>
               {failReason}
             </span>
           </button>
@@ -258,10 +258,10 @@ export function createProgressColumn<T>(config: {
     cell: ({ row }) => {
       const progress = row.getValue(accessorKey) as string
       if (!progress) {
-        return <span className='text-muted-foreground/60 text-xs'>-</span>
+        return <span className='text-[12px] text-[#8A93A4]'>-</span>
       }
       return (
-        <span className='border-border/60 bg-muted/30 inline-flex items-center rounded-md border px-1.5 py-0.5 font-mono text-xs'>
+        <span className='inline-flex items-center rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
           {progress}
         </span>
       )

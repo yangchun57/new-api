@@ -250,7 +250,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
           <div className='space-y-2'>
             <Label htmlFor='new-tag'>
               {t('Tag Name')}
-              <span className='text-muted-foreground ml-2 text-xs'>
+              <span className='text-[#8A93A4] ml-2 text-[12px]'>
                 {t('(Leave empty to dissolve tag)')}
               </span>
             </Label>
@@ -268,7 +268,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
           <div className='space-y-2'>
             <Label>
               {t('Models')}
-              <span className='text-muted-foreground ml-2 text-xs'>
+              <span className='text-[#8A93A4] ml-2 text-[12px]'>
                 {t("(Override all channels' models)")}
               </span>
             </Label>
@@ -276,7 +276,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
             {isLoadingTagModels ? (
               <div className='flex items-center gap-2 py-4'>
                 <Loader2 className='h-4 w-4 animate-spin' />
-                <span className='text-muted-foreground text-sm'>
+                <span className='text-[#8A93A4] text-[12px]'>
                   {t('Loading current models...')}
                 </span>
               </div>
@@ -296,7 +296,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
                       </StatusBadge>
                     ))
                   ) : (
-                    <span className='text-muted-foreground text-sm'>
+                    <span className='text-[#8A93A4] text-[12px]'>
                       {t('No models selected')}
                     </span>
                   )}
@@ -366,7 +366,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
           <div className='space-y-2'>
             <Label htmlFor='model-mapping'>
               {t('Model Mapping (JSON)')}
-              <span className='text-muted-foreground ml-2 text-xs'>
+              <span className='text-[#8A93A4] ml-2 text-[12px]'>
                 {t('(Optional: redirect model names)')}
               </span>
             </Label>
@@ -419,7 +419,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
           <div className='space-y-2'>
             <Label>
               {t('Groups')}
-              <span className='text-muted-foreground ml-2 text-xs'>
+              <span className='text-[#8A93A4] ml-2 text-[12px]'>
                 {t("(Override all channels' groups)")}
               </span>
             </Label>
@@ -429,7 +429,7 @@ export function EditTagDialog({ open, onOpenChange }: EditTagDialogProps) {
                   key={group}
                   group={group}
                   className={`cursor-pointer rounded-sm transition-opacity hover:opacity-70 ${
-                    selectedGroups.includes(group) ? 'bg-muted/70 px-1' : ''
+                    selectedGroups.includes(group) ? 'bg-[#F0F2F6] px-1' : ''
                   }`}
                   onClick={() => handleToggleGroup(group)}
                 />

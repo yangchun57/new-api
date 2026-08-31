@@ -65,8 +65,8 @@ export function NavGroup({ title, items }: NavGroupProps) {
   const href = useLocation({ select: (location) => location.href })
 
   return (
-    <SidebarGroup className='px-2 py-2'>
-      <SidebarGroupLabel className='text-muted-foreground/60 px-2.5 text-[11px] font-medium tracking-[0.08em] uppercase'>
+    <SidebarGroup className='px-2 py-1.5'>
+      <SidebarGroupLabel className='px-2.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#8A93A4]'>
         {title}
       </SidebarGroupLabel>
       <SidebarMenu>
@@ -181,7 +181,7 @@ function SidebarMenuCollapsible({
         {item.icon && <item.icon className='shrink-0' />}
         <span className='min-w-0 flex-1 truncate'>{item.title}</span>
         {item.badge && <NavBadge>{item.badge}</NavBadge>}
-        <ChevronRight className='ms-auto size-4 shrink-0 transition-transform duration-200 group-data-[panel-open]/collapsible-trigger:rotate-90' />
+        <ChevronRight className='ms-auto size-[14px] shrink-0 text-[#B8BFCC] transition-transform duration-200 group-data-[panel-open]/collapsible-trigger:rotate-90 group-data-[active=true]/menu-button:text-white/60' />
       </CollapsibleTrigger>
       <CollapsibleContent className='CollapsibleContent'>
         <SidebarMenuSub>
@@ -234,7 +234,7 @@ function SidebarMenuCollapsedDropdown({
           {item.icon && <item.icon className='shrink-0' />}
           <span className='min-w-0 flex-1 truncate'>{item.title}</span>
           {item.badge && <NavBadge>{item.badge}</NavBadge>}
-          <ChevronRight className='ms-auto size-4 shrink-0 transition-transform duration-200 group-data-[popup-open]/dropdown-trigger:rotate-90' />
+          <ChevronRight className='ms-auto size-[14px] shrink-0 text-[#B8BFCC] transition-transform duration-200 group-data-[popup-open]/dropdown-trigger:rotate-90' />
         </DropdownMenuTrigger>
         <DropdownMenuContent side='right' align='start' sideOffset={4}>
           <DropdownMenuGroup>

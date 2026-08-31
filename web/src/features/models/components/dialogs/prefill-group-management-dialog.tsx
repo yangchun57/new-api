@@ -162,8 +162,8 @@ export function PrefillGroupManagementDialog({
   if (isLoading) {
     groupsContent = (
       <div className='flex flex-col items-center justify-center gap-2 py-12 text-center'>
-        <Loader2 className='text-muted-foreground h-6 w-6 animate-spin' />
-        <p className='text-muted-foreground text-sm'>
+        <Loader2 className='text-[#8A93A4] h-6 w-6 animate-spin' />
+        <p className='text-[#5A6478] text-[13px]'>
           {t('Fetching prefill groups...')}
         </p>
       </div>
@@ -191,15 +191,15 @@ export function PrefillGroupManagementDialog({
     groupsContent = (
       <div className='space-y-3'>
         {normalizedGroups.map(({ group, meta, parsedItems }) => (
-          <Card key={group.id} className='border-border/60'>
+          <Card key={group.id} className='border-[#E5E8EE]'>
             <CardHeader className='flex flex-row items-start justify-between gap-4'>
               <div className='space-y-2'>
                 <CardTitle className='flex flex-wrap items-center gap-2'>
                   {group.name}
                   <StatusBadge variant={meta.badge} size='sm' copyable={false}>
                     {meta.label}
-                    <span className='text-muted-foreground/30'>·</span>
-                    <span className='text-muted-foreground font-mono'>
+                    <span className='text-[#B8BFCC]/40'>·</span>
+                    <span className='text-[#8A93A4] font-mono text-[12px]'>
                       #{group.id}
                     </span>
                   </StatusBadge>
@@ -209,7 +209,7 @@ export function PrefillGroupManagementDialog({
                     {group.description}
                   </CardDescription>
                 ) : (
-                  <CardDescription className='text-muted-foreground italic'>
+                  <CardDescription className='text-[#8A93A4] italic'>
                     No description provided
                   </CardDescription>
                 )}
@@ -227,7 +227,7 @@ export function PrefillGroupManagementDialog({
                 <Button
                   size='icon'
                   variant='ghost'
-                  className='text-destructive hover:text-destructive'
+                  className='text-[#E5484D] hover:text-[#E5484D]'
                   onClick={() => handleDeleteClick(group)}
                 >
                   <Trash2 className='h-4 w-4' />
@@ -236,7 +236,7 @@ export function PrefillGroupManagementDialog({
               </div>
             </CardHeader>
             <CardContent className='space-y-3'>
-              <div className='text-muted-foreground flex flex-wrap items-center gap-2 text-xs font-medium tracking-wide uppercase'>
+              <div className='text-[#8A93A4] flex flex-wrap items-center gap-2 text-[12px] font-medium tracking-wide uppercase'>
                 <span>Items</span>
                 <StatusBadge
                   label={`${parsedItems.length} item${parsedItems.length === 1 ? '' : 's'}`}
@@ -265,7 +265,7 @@ export function PrefillGroupManagementDialog({
                   )}
                 </div>
               ) : (
-                <p className='text-muted-foreground text-sm'>
+                <p className='text-[#5A6478] text-[13px]'>
                   {group.type === 'endpoint'
                     ? 'No endpoint mappings configured.'
                     : 'No items configured yet.'}
@@ -290,15 +290,15 @@ export function PrefillGroupManagementDialog({
             cell: ({ group }) => (
               <div className='flex flex-col gap-1'>
                 <div className='flex flex-wrap items-center gap-2'>
-                  <span className='font-medium'>{group.name}</span>
+                  <span className='text-[13px] font-medium text-[#0A0E1A]'>{group.name}</span>
                   <TableId value={group.id} />
                 </div>
                 {group.description ? (
-                  <p className='text-muted-foreground text-xs'>
+                  <p className='text-[#8A93A4] text-[12px]'>
                     {group.description}
                   </p>
                 ) : (
-                  <p className='text-muted-foreground text-xs italic'>
+                  <p className='text-[#8A93A4] text-[12px] italic'>
                     No description provided
                   </p>
                 )}
@@ -346,14 +346,14 @@ export function PrefillGroupManagementDialog({
                       )}
                     </>
                   ) : (
-                    <p className='text-muted-foreground text-sm'>
+                    <p className='text-[#5A6478] text-[13px]'>
                       {group.type === 'endpoint'
                         ? 'No endpoint mappings configured.'
                         : 'No items configured yet.'}
                     </p>
                   )}
                 </div>
-                <div className='text-muted-foreground mt-2 text-xs font-medium tracking-wide uppercase'>
+                <div className='text-[#8A93A4] mt-2 text-[12px] font-medium tracking-wide uppercase tabular-nums'>
                   {parsedItems.length} item
                   {parsedItems.length === 1 ? '' : 's'}
                 </div>
@@ -387,7 +387,7 @@ export function PrefillGroupManagementDialog({
         onOpenChange={onOpenChange}
         title={
           <>
-            <Layers3 className='text-foreground/80 h-5 w-5' />
+            <Layers3 className='text-[#0A0E1A]/80 h-5 w-5' />
             {t('Prefill Group Management')}
           </>
         }
@@ -398,15 +398,15 @@ export function PrefillGroupManagementDialog({
           'w-[calc(100vw-2rem)] sm:max-w-[52rem]',
           isMobile && 'max-w-none rounded-none'
         )}
-        titleClassName='flex flex-wrap items-center gap-2 text-lg'
-        descriptionClassName='text-sm leading-relaxed'
+        titleClassName='flex flex-wrap items-center gap-2 text-[16px] font-semibold tracking-[-0.015em] leading-none'
+        descriptionClassName='text-[13px] leading-relaxed text-[#5A6478]'
         contentHeight='auto'
         bodyClassName={cn(
           'space-y-3',
           isMobile && 'pb-[calc(env(safe-area-inset-bottom,0px)+1rem)]'
         )}
       >
-        <div className='bg-muted/30 flex flex-wrap items-center justify-between gap-3 rounded-md border p-2 text-sm'>
+        <div className='bg-[#F7F8FA] flex flex-wrap items-center justify-between gap-3 rounded-md border border-[#E5E8EE] p-2 text-[13px]'>
           <div className='flex flex-wrap items-center gap-2'>
             <Button size='sm' onClick={onCreateGroup}>
               <Plus className='mr-2 h-4 w-4' />

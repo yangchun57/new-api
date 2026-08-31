@@ -304,19 +304,19 @@ export function UptimeKumaSection({ enabled, data }: UptimeKumaSectionProps) {
             {
               id: 'category',
               header: t('Category Name'),
-              cellClassName: 'font-medium',
+              cellClassName: 'font-medium text-[13px] text-[#0A0E1A]',
               cell: (group) => group.categoryName,
             },
             {
               id: 'url',
               header: t('Uptime Kuma URL'),
-              cellClassName: 'text-primary max-w-xs truncate font-mono text-sm',
+              cellClassName: 'max-w-xs truncate font-mono text-[12px] text-[#2563EB]',
               cell: (group) => group.url,
             },
             {
               id: 'slug',
               header: t('Status Page Slug'),
-              cellClassName: 'text-muted-foreground font-mono text-sm',
+              cellClassName: 'font-mono text-[12px] text-[#5A6478]',
               cell: (group) => group.slug,
             },
             {
@@ -400,6 +400,7 @@ export function UptimeKumaSection({ enabled, data }: UptimeKumaSectionProps) {
                   <FormControl>
                     <Input
                       placeholder={t('https://status.example.com')}
+                      className='font-mono text-[12px] bg-[#F7F8FA]'
                       {...field}
                     />
                   </FormControl>
@@ -417,7 +418,11 @@ export function UptimeKumaSection({ enabled, data }: UptimeKumaSectionProps) {
                 <FormItem>
                   <FormLabel>{t('Status Page Slug')}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t('my-status')} {...field} />
+                    <Input
+                      placeholder={t('my-status')}
+                      className='font-mono text-[12px] bg-[#F7F8FA]'
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     {t('The slug is appended to the URL:')} {'{url}'}

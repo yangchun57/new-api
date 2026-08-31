@@ -209,10 +209,10 @@ export function SidebarModulesCard() {
             <LayoutDashboard />
           </IconBadge>
           <div className='min-w-0'>
-            <CardTitle className='text-lg tracking-tight sm:text-xl'>
+            <CardTitle className='text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]'>
               {t('Sidebar Personal Settings')}
             </CardTitle>
-            <CardDescription className='text-xs sm:text-sm'>
+            <CardDescription className='text-[13px] leading-relaxed text-[#5A6478]'>
               {t('Customize sidebar display content')}
             </CardDescription>
           </div>
@@ -228,8 +228,8 @@ export function SidebarModulesCard() {
             >
               <div className='flex items-start justify-between gap-3'>
                 <div className='min-w-0'>
-                  <p className='text-sm font-medium'>{section.title}</p>
-                  <p className='text-muted-foreground text-xs'>
+                  <p className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{section.title}</p>
+                  <p className='text-[12px] text-[#8A93A4]'>
                     {section.description}
                   </p>
                 </div>
@@ -242,15 +242,15 @@ export function SidebarModulesCard() {
                 {section.modules.map((mod) => (
                   <div
                     key={mod.key}
-                    className={`flex min-h-16 items-center justify-between rounded-lg border p-3 ${
+                    className={`flex min-h-16 items-center justify-between rounded-xl border p-3 ${
                       sectionEnabled ? '' : 'opacity-50'
                     }`}
                   >
                     <div className='mr-2 min-w-0'>
-                      <p className='truncate text-sm font-medium'>
+                      <p className='truncate text-[13px] font-medium leading-none text-[#0A0E1A]'>
                         {mod.title}
                       </p>
-                      <p className='text-muted-foreground truncate text-xs'>
+                      <p className='truncate text-[12px] text-[#8A93A4]'>
                         {mod.description}
                       </p>
                     </div>

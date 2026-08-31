@@ -70,10 +70,10 @@ export function TwoFACard({ loading: pageLoading }: TwoFACardProps) {
     <>
       <Card data-card-hover='false' className='gap-0 overflow-hidden py-0'>
         <CardHeader className='p-3 sm:p-5'>
-          <CardTitle className='text-lg tracking-tight sm:text-xl'>
+          <CardTitle className='text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]'>
             {t('Two-Factor Authentication')}
           </CardTitle>
-          <CardDescription className='text-xs sm:text-sm'>
+          <CardDescription className='text-[13px] leading-relaxed text-[#5A6478]'>
             {t('Add an extra layer of security to your account')}
           </CardDescription>
         </CardHeader>
@@ -113,7 +113,7 @@ export function TwoFACard({ loading: pageLoading }: TwoFACardProps) {
                       />
                     )}
                   </div>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className='text-[13px] leading-relaxed text-[#5A6478]'>
                     {status.enabled
                       ? t('Backup codes remaining: {{count}}', {
                           count: status.backup_codes_remaining,

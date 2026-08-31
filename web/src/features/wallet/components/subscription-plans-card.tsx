@@ -239,14 +239,14 @@ export function SubscriptionPlansCard({
     return (
       <div
         data-slot='card'
-        className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 rounded-lg border p-4 sm:p-5'
+        className='group/card bg-white text-[#0A0E1A] border-[#E5E8EE] shadow-[0_1px_2px_rgba(10,14,26,0.04)] flex flex-col gap-4 rounded-xl border p-4 sm:p-5'
       >
         <Skeleton className='h-6 w-32' />
         <div className='space-y-4'>
           <Skeleton className='h-20 w-full' />
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
             {['first', 'second', 'third'].map((key) => (
-              <Skeleton key={key} className='h-48 w-full' />
+              <Skeleton key={key} className='h-48 w-full rounded-xl' />
             ))}
           </div>
         </div>
@@ -268,14 +268,13 @@ export function SubscriptionPlansCard({
         disableHoverEffect
         contentClassName='space-y-4 sm:space-y-5'
       >
-        {/* My subscriptions & billing preference */}
-        <div className='border-border/60 border-b pb-3 sm:pb-4'>
+        <div className='border-[#E5E8EE] border-b pb-3 sm:pb-4'>
           <div className='flex flex-wrap items-center justify-between gap-2.5 sm:gap-3'>
             <div className='flex min-w-0 flex-wrap items-center gap-2'>
-              <span className='text-sm font-medium'>
+              <span className='text-[13px] font-medium text-[#0A0E1A]'>
                 {t('My Subscriptions')}
               </span>
-              <span className='flex items-center gap-1.5 text-xs font-medium'>
+              <span className='flex items-center gap-1.5 text-[12px] font-medium'>
                 <span
                   className={cn(
                     'size-1.5 shrink-0 rounded-full',
@@ -288,14 +287,14 @@ export function SubscriptionPlansCard({
                     {activeSubscriptions.length} {t('active')}
                   </span>
                 ) : (
-                  <span className='text-muted-foreground'>
+                  <span className='text-[#8A93A4]'>
                     {t('No Active')}
                   </span>
                 )}
                 {allSubscriptions.length > activeSubscriptions.length && (
                   <>
-                    <span className='text-muted-foreground/30'>·</span>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#B8BFCC]'>·</span>
+                    <span className='text-[#8A93A4]'>
                       {allSubscriptions.length - activeSubscriptions.length}{' '}
                       {t('expired')}
                     </span>
@@ -336,7 +335,7 @@ export function SubscriptionPlansCard({
                 value={displayPref}
                 onValueChange={(v) => v !== null && handlePreferenceChange(v)}
               >
-                <SelectTrigger className='h-8 flex-1 text-xs sm:w-[140px] sm:flex-none'>
+                <SelectTrigger className='h-8 flex-1 text-[12px] sm:w-[140px] sm:flex-none'>
                   <SelectValue>
                     {getBillingPreferenceLabel(displayPref, t)}
                   </SelectValue>
@@ -369,7 +368,7 @@ export function SubscriptionPlansCard({
               <Button
                 variant='ghost'
                 size='icon'
-                className='h-8 w-8'
+                className='h-8 w-8 rounded-md hover:bg-[#F0F2F6] active:bg-[#E8EBF1]'
                 onClick={handleRefresh}
                 disabled={refreshing}
               >
@@ -381,7 +380,7 @@ export function SubscriptionPlansCard({
           </div>
 
           {disablePref && isSubPref && (
-            <p className='text-muted-foreground mt-2 text-xs'>
+            <p className='text-[#8A93A4] mt-2 text-[12px]'>
               {t(
                 'Preference saved as {{pref}}, but no active subscription. Wallet will be used automatically.',
                 {
@@ -396,7 +395,7 @@ export function SubscriptionPlansCard({
 
           {hasAny && (
             <>
-              <Separator className='my-3' />
+              <Separator className='my-3 bg-[#E5E8EE]' />
               <div className='max-h-64 space-y-3 overflow-y-auto pr-1'>
                 {allSubscriptions.map((sub) => {
                   const subscription = sub.subscription
@@ -449,11 +448,11 @@ export function SubscriptionPlansCard({
                   return (
                     <div
                       key={subscription?.id}
-                      className='border-border/60 border-b py-3 text-xs last:border-b-0'
+                      className='border-[#E5E8EE] border-b py-3 text-[12px] last:border-b-0'
                     >
                       <div className='flex items-center justify-between'>
                         <div className='flex items-center gap-2'>
-                          <span className='font-medium'>
+                          <span className='font-medium text-[#0A0E1A]'>
                             {planTitle
                               ? `${planTitle} · ${t('Subscription')} #${subscription?.id}`
                               : `${t('Subscription')} #${subscription?.id}`}
@@ -461,31 +460,31 @@ export function SubscriptionPlansCard({
                           {statusBadge}
                         </div>
                         {isActive && (
-                          <span className='text-muted-foreground'>
+                          <span className='text-[#8A93A4]'>
                             {t('{{count}} days remaining', {
                               count: remainDays,
                             })}
                           </span>
                         )}
                       </div>
-                      <div className='text-muted-foreground mt-1.5'>
+                      <div className='text-[#8A93A4] mt-1.5'>
                         {endTimeLabel}{' '}
                         {new Date(
                           (subscription?.end_time || 0) * 1000
                         ).toLocaleString()}
                       </div>
                       {isActive && nextResetTime > 0 && (
-                        <div className='text-muted-foreground mt-1'>
+                        <div className='text-[#8A93A4] mt-1'>
                           {t('Next reset')}:{' '}
                           {new Date(nextResetTime * 1000).toLocaleString()}
                         </div>
                       )}
-                      <div className='text-muted-foreground mt-1'>
+                      <div className='text-[#8A93A4] mt-1'>
                         {t('Total Quota')}:{' '}
                         {totalAmount > 0 ? (
                           <Tooltip>
                             <TooltipTrigger
-                              render={<span className='cursor-help' />}
+                              render={<span className='cursor-help text-[#5A6478]' />}
                             >
                               {formatQuota(usedAmount)}/
                               {formatQuota(totalAmount)} · {t('Remaining')}{' '}
@@ -516,13 +515,12 @@ export function SubscriptionPlansCard({
           )}
 
           {!hasAny && (
-            <p className='text-muted-foreground mt-2 text-xs'>
+            <p className='text-[#8A93A4] mt-2 text-[12px]'>
               {t('Subscribe to a plan for model access')}
             </p>
           )}
         </div>
 
-        {/* Available plans grid */}
         {plans.length > 0 ? (
           <div className='grid grid-cols-1 gap-3 2xl:grid-cols-2 2xl:gap-4'>
             {plans.map((p, index) => {
@@ -553,16 +551,19 @@ export function SubscriptionPlansCard({
                 <Card
                   key={plan.id}
                   data-card-hover='false'
-                  className={cn(isPopular && 'border-primary/70 shadow-sm')}
+                  className={cn(
+                    'rounded-xl border-[#E5E8EE] bg-white transition-colors hover:bg-[#F0F2F6]',
+                    isPopular && 'border-[#D8DCE5] shadow-sm'
+                  )}
                 >
                   <CardContent className='flex h-full flex-col p-3.5 sm:p-4'>
                     <div className='mb-2 flex items-start justify-between gap-3'>
                       <div className='min-w-0'>
-                        <h4 className='truncate font-semibold'>
+                        <h4 className='truncate text-[16px] font-semibold tracking-[-0.015em] text-[#0A0E1A] leading-none'>
                           {plan.title || t('Subscription Plans')}
                         </h4>
                         {plan.subtitle && (
-                          <p className='text-muted-foreground truncate text-xs'>
+                          <p className='text-[#5A6478] truncate text-[13px] leading-relaxed mt-1'>
                             {plan.subtitle}
                           </p>
                         )}
@@ -580,7 +581,7 @@ export function SubscriptionPlansCard({
                     </div>
 
                     <div className='py-2'>
-                      <span className='text-primary text-2xl font-bold'>
+                      <span className='text-[#0A0E1A] text-2xl font-semibold tracking-[-0.015em]'>
                         ${price}
                       </span>
                     </div>
@@ -589,20 +590,20 @@ export function SubscriptionPlansCard({
                       {benefits.map((label) => (
                         <div
                           key={label}
-                          className='text-muted-foreground flex items-center gap-2 text-xs'
+                          className='text-[#5A6478] flex items-center gap-2 text-[13px] leading-relaxed'
                         >
-                          <Check className='text-primary h-3 w-3 shrink-0' />
+                          <Check className='text-[#0A0E1A]/40 h-3 w-3 shrink-0' />
                           <span>{label}</span>
                         </div>
                       ))}
                     </div>
 
-                    <Separator className='mb-3' />
+                    <Separator className='mb-3 bg-[#E5E8EE]' />
 
                     {reached ? (
                       <Tooltip>
                         <TooltipTrigger render={<div />}>
-                          <Button variant='outline' className='w-full' disabled>
+                          <Button variant='outline' className='w-full rounded-md' disabled>
                             {t('Limit Reached')}
                           </Button>
                         </TooltipTrigger>
@@ -613,7 +614,7 @@ export function SubscriptionPlansCard({
                     ) : (
                       <Button
                         variant='outline'
-                        className='w-full'
+                        className='w-full rounded-md'
                         onClick={() => {
                           setSelectedPlan(p)
                           setPurchaseOpen(true)
@@ -628,7 +629,7 @@ export function SubscriptionPlansCard({
             })}
           </div>
         ) : (
-          <p className='text-muted-foreground py-4 text-center text-sm'>
+          <p className='text-[#5A6478] py-4 text-center text-[13px] leading-relaxed'>
             {t('No plans available')}
           </p>
         )}

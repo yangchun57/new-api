@@ -330,14 +330,14 @@ export function UserBindingDialog(props: Props) {
       >
         {loading ? (
           <div className='flex items-center justify-center py-8'>
-            <Loader2 className='text-muted-foreground h-6 w-6 animate-spin' />
+            <Loader2 className='h-6 w-6 animate-spin text-[#8A93A4]' />
           </div>
         ) : (
           <div className='space-y-3'>
             <div className='flex items-center justify-between'>
               {user && (
-                <p className='text-muted-foreground text-sm'>
-                  {user.username} (ID: {user.id})
+                <p className='text-[13px] font-medium text-[#0A0E1A]'>
+                  {user.username} <span className='font-normal text-[#8A93A4]'>(ID: {user.id})</span>
                 </p>
               )}
               <TooltipProvider>
@@ -372,7 +372,7 @@ export function UserBindingDialog(props: Props) {
 
             <ScrollArea className='max-h-[50vh]'>
               {displayedBindings.length === 0 ? (
-                <p className='text-muted-foreground py-4 text-center text-sm'>
+                <p className='py-4 text-center text-[13px] text-[#8A93A4]'>
                   {showBoundOnly
                     ? t('This user has no bindings')
                     : t('No providers available')}
@@ -382,17 +382,17 @@ export function UserBindingDialog(props: Props) {
                   {displayedBindings.map((binding) => (
                     <div
                       key={binding.key}
-                      className={`flex items-center justify-between rounded-md border px-3 py-2.5 ${
+                      className={`flex items-center justify-between rounded-xl border border-[#E5E8EE] bg-white px-3 py-2.5 ${
                         !binding.isBound ? 'opacity-50' : ''
                       }`}
                     >
                       <div className='flex min-w-0 items-center gap-2.5'>
-                        <div className='text-muted-foreground shrink-0'>
+                        <div className='shrink-0 text-[#8A93A4]'>
                           {binding.icon}
                         </div>
                         <div className='min-w-0'>
                           <div className='flex items-center gap-1.5'>
-                            <span className='text-sm font-medium'>
+                            <span className='text-[13px] font-medium text-[#0A0E1A]'>
                               {binding.label}
                             </span>
                             {!binding.isEnabled && (
@@ -404,7 +404,7 @@ export function UserBindingDialog(props: Props) {
                               />
                             )}
                           </div>
-                          <p className='text-muted-foreground max-w-[140px] truncate text-xs'>
+                          <p className='max-w-[140px] truncate text-[12px] text-[#8A93A4]'>
                             {binding.isBound ? binding.value : t('Not bound')}
                           </p>
                         </div>
@@ -413,7 +413,7 @@ export function UserBindingDialog(props: Props) {
                         <Button
                           variant='ghost'
                           size='sm'
-                          className='text-destructive hover:text-destructive h-7 w-7 shrink-0 p-0'
+                          className='h-7 w-7 shrink-0 p-0 text-[#E5484D] hover:text-[#E5484D]'
                           onClick={() => setUnbindTarget(binding)}
                         >
                           <Unlink className='h-3.5 w-3.5' />
@@ -425,7 +425,7 @@ export function UserBindingDialog(props: Props) {
               )}
             </ScrollArea>
 
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[12px] text-[#8A93A4]'>
               {t('Bound')}: {boundCount} / {allBindings.length}
             </p>
           </div>

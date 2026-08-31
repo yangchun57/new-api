@@ -127,6 +127,7 @@ export function WorkerSettingsSection({
                     inputMode='url'
                     placeholder={t('https://worker.example.workers.dev')}
                     autoComplete='off'
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                     onChange={(event) => field.onChange(event.target.value)}
                   />
@@ -152,6 +153,7 @@ export function WorkerSettingsSection({
                     type='password'
                     placeholder={t('Enter new key to update')}
                     autoComplete='new-password'
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                     onChange={(event) => field.onChange(event.target.value)}
                   />

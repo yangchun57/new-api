@@ -58,7 +58,7 @@ export function TitledCard({
       data-slot='card'
       data-card-hover={disableHoverEffect ? 'false' : undefined}
       className={cn(
-        'group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 rounded-lg border p-4 sm:p-5',
+        'group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-xl border p-4 text-[13px] sm:p-5',
         className
       )}
     >
@@ -77,7 +77,7 @@ export function TitledCard({
           <div className='min-w-0'>
             <div
               className={cn(
-                'leading-snug font-medium tracking-tight text-lg sm:text-xl',
+                'text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]',
                 titleClassName
               )}
             >
@@ -86,7 +86,7 @@ export function TitledCard({
             {description != null && (
               <div
                 className={cn(
-                  'text-muted-foreground text-xs sm:text-sm',
+                  'mt-1 text-[13px] leading-relaxed text-[#5A6478]',
                   descriptionClassName
                 )}
               >

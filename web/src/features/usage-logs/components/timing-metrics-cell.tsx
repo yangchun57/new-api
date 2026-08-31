@@ -84,7 +84,7 @@ export function TimingMetricsCell(props: TimingMetricsCellProps) {
   const totalTimeLabel = formatUseTime(props.useTimeSec)
 
   const labels = (
-    <div className='flex min-h-8 min-w-0 flex-col justify-center gap-0.5 text-xs leading-tight'>
+    <div className='flex min-h-8 min-w-0 flex-col justify-center gap-0.5 text-[12px] leading-tight'>
       {showFirstToken && (
         <div className='flex items-baseline gap-1.5'>
           {indicator === 'dot' && (
@@ -96,7 +96,7 @@ export function TimingMetricsCell(props: TimingMetricsCellProps) {
               )}
             />
           )}
-          <span className='text-muted-foreground shrink-0'>
+          <span className='text-[#8A93A4] shrink-0'>
             {t('First token')}
           </span>
           <span className={cn('tabular-nums', textColorMap[firstTokenVariant])}>
@@ -114,7 +114,7 @@ export function TimingMetricsCell(props: TimingMetricsCellProps) {
             )}
           />
         )}
-        <span className='text-muted-foreground shrink-0'>{t('Duration')}</span>
+        <span className='text-[#8A93A4] shrink-0'>{t('Duration')}</span>
         <span className={cn('tabular-nums', textColorMap[totalTimeVariant])}>
           {totalTimeLabel}
         </span>
@@ -169,14 +169,14 @@ export function StreamTpsCell(props: StreamTpsCellProps) {
   return (
     <div
       className={cn(
-        'flex shrink-0 flex-col items-start justify-center gap-0.5 text-xs leading-tight',
+        'flex shrink-0 flex-col items-start justify-center gap-0.5 text-[12px] leading-tight',
         props.className
       )}
     >
       <span
         className={cn(
           'inline-flex items-center gap-1 font-medium',
-          props.isStream ? 'text-info' : 'text-muted-foreground'
+          props.isStream ? 'text-[#2E4BFF]' : 'text-[#8A93A4]'
         )}
       >
         {streamLabel}
@@ -203,7 +203,7 @@ export function StreamTpsCell(props: StreamTpsCellProps) {
           </TooltipProvider>
         )}
       </span>
-      <span className='text-muted-foreground/60 px-0.5 tabular-nums'>
+      <span className='text-[#8A93A4] px-0.5 tabular-nums'>
         {tpsLabel}
       </span>
     </div>

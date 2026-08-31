@@ -45,6 +45,9 @@ import type {
   FlowNodeKind,
 } from '@/features/dashboard/types'
 
+const sectionLabelCls =
+  'text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-[#8A93A4]'
+
 interface FlowNodeFilterControlProps {
   stages: FlowNodeKind[]
   stageLabels: Record<FlowNodeKind, string>
@@ -98,9 +101,7 @@ export function FlowNodeFilterControl(props: FlowNodeFilterControlProps) {
 
   return (
     <div className='flex min-w-0 flex-col gap-1.5'>
-      <span className='text-muted-foreground text-xs font-medium'>
-        {t('Node filters')}
-      </span>
+      <span className={sectionLabelCls}>{t('Node filters')}</span>
       <div className='flex min-w-0 flex-wrap items-center gap-1.5'>
         <Popover>
           <PopoverTrigger
@@ -116,7 +117,10 @@ export function FlowNodeFilterControl(props: FlowNodeFilterControlProps) {
             <Filter data-icon='inline-start' aria-hidden='true' />
             {selectedCount > 0 ? t('Selected nodes') : t('All nodes')}
             {selectedCount > 0 && (
-              <Badge variant='secondary' className='rounded-sm px-1'>
+              <Badge
+                variant='secondary'
+                className='bg-[#E8EBF1] px-1.5 text-[11px] text-[#0A0E1A]'
+              >
                 {selectedCount}
               </Badge>
             )}
@@ -167,9 +171,9 @@ export function FlowNodeFilterControl(props: FlowNodeFilterControlProps) {
                             <span className='min-w-0 flex-1 truncate'>
                               {option.label}
                             </span>
-                            <span className='text-muted-foreground flex shrink-0 items-center gap-1 text-xs'>
+                            <span className='flex shrink-0 items-center gap-1 text-[12px] text-[#8A93A4]'>
                               <span>{props.metricLabel}</span>
-                              <span className='font-mono'>
+                              <span className='pl-font-mono'>
                                 {metricValueLabel}
                               </span>
                             </span>
@@ -201,14 +205,14 @@ export function FlowNodeFilterControl(props: FlowNodeFilterControlProps) {
           <Badge
             key={flowNodeFilterKey(option)}
             variant='secondary'
-            className='max-w-[14rem] rounded-sm pr-1'
+            className='max-w-[14rem] pr-1 text-[#5A6478]'
           >
             <span className='truncate'>
               {t(props.stageLabels[option.kind])}: {option.label}
             </span>
             <button
               type='button'
-              className='hover:bg-muted-foreground/15 flex size-4 shrink-0 items-center justify-center rounded-sm'
+              className='inline-flex size-4 shrink-0 items-center justify-center rounded-md text-[#8A93A4] transition-colors hover:bg-[#E8EBF1] hover:text-[#0A0E1A]'
               aria-label={t('Remove node filter')}
               onClick={() =>
                 props.onRemoveNode({ kind: option.kind, id: option.id })

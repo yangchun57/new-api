@@ -101,10 +101,10 @@ function FilterChip(props: {
       type='button'
       onClick={props.onClick}
       className={cn(
-        'group inline-flex max-w-full items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-medium transition-all',
+        'group inline-flex max-w-full items-center gap-1.5 rounded-full border pl-font-display px-2.5 py-1 text-[12px] font-medium transition-all duration-200',
         props.active
-          ? 'border-foreground/30 bg-foreground/5 text-foreground shadow-sm'
-          : 'border-border/70 bg-background text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground'
+          ? 'border-[#0A0E1A] bg-[#0A0E1A] text-white shadow-[0_2px_6px_rgba(10,14,26,0.15)]'
+          : 'border-[#E5E8EE] bg-white text-[#5A6478] hover:border-[#CBD3E0] hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
       )}
       title={props.option.label}
     >
@@ -115,10 +115,10 @@ function FilterChip(props: {
       {(props.option.suffix || props.option.count != null) && (
         <span
           className={cn(
-            'rounded-md px-1.5 py-0.5 text-[12px]',
+            'rounded-full px-1.5 py-0 pl-font-mono text-[10px]',
             props.active
-              ? 'bg-background text-foreground'
-              : 'bg-muted text-muted-foreground'
+              ? 'bg-white/15 text-white/90'
+              : 'bg-[#F7F8FA] text-[#8A93A4]'
           )}
         >
           {props.option.suffix ?? props.option.count}
@@ -132,16 +132,16 @@ function FilterSection(props: FilterSectionProps) {
   return (
     <Collapsible
       defaultOpen
-      className='border-border/70 border-b pb-3 last:border-b-0'
+      className='border-b border-[#F0F2F6] pb-4 last:border-b-0'
     >
-      <CollapsibleTrigger className='group flex w-full items-center justify-between py-2.5 text-left'>
-        <span className='text-foreground text-sm font-semibold'>
+      <CollapsibleTrigger className='group flex w-full items-center justify-between py-2 text-left'>
+        <span className='pl-font-display text-[12px] font-semibold uppercase tracking-wider text-[#0A0E1A]'>
           {props.title}
         </span>
-        <ChevronDown className='text-muted-foreground size-4 transition-transform group-data-[panel-open]:rotate-180' />
+        <ChevronDown className='size-3.5 text-[#8A93A4] transition-transform group-data-[panel-open]:rotate-180' />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className='flex flex-wrap gap-1.5'>
+        <div className='flex flex-wrap gap-1.5 pt-1'>
           {props.options.map((option) => (
             <FilterChip
               key={option.value}
@@ -175,7 +175,7 @@ export function PricingSidebar(props: PricingSidebarProps) {
           props.models,
           (model) => model.vendor_name === vendor.name
         ),
-        icon: vendor.icon ? getLobeIcon(vendor.icon, 14) : undefined,
+        icon: vendor.icon ? getLobeIcon(vendor.icon, 12) : undefined,
       }))
       .filter((vendor) => vendor.count > 0),
   ]
@@ -246,13 +246,12 @@ export function PricingSidebar(props: PricingSidebarProps) {
   ]
 
   return (
-    <aside className={cn('rounded-xl border p-3', props.className)}>
-      <div className='mb-2.5 flex items-center justify-between gap-2'>
+    <aside className={cn('p-4', props.className)}>
+      <div className='mb-3 flex items-center justify-between gap-2'>
         <div>
-          <h2 className='text-foreground text-sm font-bold'>{t('Filter')}</h2>
-          <p className='text-muted-foreground mt-1 text-xs'>
-            {t('Refine models by provider, group, type, and tags.')}
-          </p>
+          <h2 className='pl-font-display text-[13px] font-bold tracking-tight text-[#0A0E1A]'>
+            {t('Filter')}
+          </h2>
         </div>
         <Button
           type='button'
@@ -260,20 +259,20 @@ export function PricingSidebar(props: PricingSidebarProps) {
           size='sm'
           onClick={props.onClearFilters}
           disabled={!props.hasActiveFilters}
-          className='h-7 gap-1.5 px-2 text-xs'
+          className='h-7 gap-1.5 rounded-full px-2.5 pl-font-display text-[11px] font-semibold text-[#5A6478] hover:bg-[#F7F8FA] hover:text-[#0A0E1A] disabled:opacity-40'
         >
-          <RotateCcw className='size-3.5' />
+          <RotateCcw className='size-3' />
           {t('Reset')}
         </Button>
       </div>
 
       {props.hasActiveFilters && (
-        <Badge variant='secondary' className='mb-3'>
+        <Badge className='mb-3 rounded-full bg-[#E8EEFF] pl-font-display px-2.5 py-0.5 text-[11px] font-medium text-[#2E4BFF] hover:bg-[#E8EEFF]'>
           {t('Filters active')}
         </Badge>
       )}
 
-      <div className='space-y-1'>
+      <div className='space-y-1 pt-1'>
         <FilterSection
           title={t('Groups')}
           value={props.groupFilter}

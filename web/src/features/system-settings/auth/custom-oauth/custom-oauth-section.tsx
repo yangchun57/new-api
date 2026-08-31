@@ -65,7 +65,7 @@ export function CustomOAuthSection(props: CustomOAuthSectionProps) {
   if (isLoading) {
     return (
       <SettingsSection title={t('Custom OAuth Providers')}>
-        <div className='text-muted-foreground py-8 text-center text-sm'>
+        <div className='text-[#8A93A4] py-8 text-center text-[13px]'>
           {t('Loading...')}
         </div>
       </SettingsSection>
@@ -76,18 +76,18 @@ export function CustomOAuthSection(props: CustomOAuthSectionProps) {
     <SettingsSection title={t('Custom OAuth Providers')}>
       <Alert>
         <AlertTitle>{t('Callback URL format')}</AlertTitle>
-        <AlertDescription className='space-y-3 text-sm'>
+        <AlertDescription className='space-y-3 text-[13px] text-[#5A6478]'>
           <p>
             {t(
               'Use this callback URL pattern when registering a custom OAuth provider.'
             )}
           </p>
           <div className='flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between'>
-            <span className='text-muted-foreground shrink-0'>
+            <span className='text-[#8A93A4] shrink-0 text-[12px]'>
               {t('OAuth callback URL')}
             </span>
             <span className='flex min-w-0 items-center gap-2'>
-              <code className='bg-muted text-foreground min-w-0 rounded px-1.5 py-0.5 text-xs break-all'>
+              <code className='font-mono text-[12px] bg-[#F7F8FA] rounded-md px-3 py-2 text-[#0A0E1A] break-all min-w-0'>
                 {callbackFormat}
               </code>
               <CopyButton

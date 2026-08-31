@@ -369,8 +369,10 @@ export function LogSettingsSection({
 
           <SettingsControlGroup className='space-y-3'>
             <div>
-              <h4 className='text-sm font-medium'>{t('Clean history logs')}</h4>
-              <p className='text-muted-foreground text-sm'>
+              <h4 className='text-[13px] font-medium text-[#0A0E1A]'>
+                {t('Clean history logs')}
+              </h4>
+              <p className='mt-1 text-[13px] text-[#5A6478]'>
                 {t(
                   'Remove all log entries created before the selected timestamp.'
                 )}
@@ -400,24 +402,24 @@ export function LogSettingsSection({
               </Button>
             </div>
             {logCleanupTask && (
-              <div className='rounded-md border p-3'>
-                <div className='mb-2 flex items-center justify-between gap-3 text-sm'>
-                  <span className='font-medium'>
+              <div className='rounded-xl border border-[#E5E8EE] p-4'>
+                <div className='mb-2 flex items-center justify-between gap-3 text-[13px]'>
+                  <span className='font-medium text-[#0A0E1A]'>
                     {t('Log cleanup progress')}
                   </span>
-                  <span className='text-muted-foreground tabular-nums'>
+                  <span className='tabular-nums font-semibold text-[#0A0E1A]'>
                     {logCleanupProgress}%
                   </span>
                 </div>
                 <Progress value={logCleanupProgress} />
-                <div className='text-muted-foreground mt-2 text-xs'>
+                <div className='mt-2 text-[12px] text-[#8A93A4] tabular-nums'>
                   {t('{{processed}} of {{total}} log entries processed.', {
                     processed: logCleanupProcessed,
                     total: logCleanupTotal,
                   })}
                 </div>
                 {logCleanupTask.status === 'failed' && logCleanupTask.error && (
-                  <div className='text-destructive mt-2 text-xs'>
+                  <div className='mt-2 text-[12px] text-[#E5484D]'>
                     {logCleanupTask.error}
                   </div>
                 )}
@@ -431,8 +433,10 @@ export function LogSettingsSection({
 
       <div className='space-y-4'>
         <div>
-          <h4 className='font-medium'>{t('Server Log Management')}</h4>
-          <p className='text-muted-foreground mt-1 text-xs'>
+          <h4 className='text-[13px] font-medium text-[#0A0E1A]'>
+            {t('Server Log Management')}
+          </h4>
+          <p className='mt-1 text-[12px] text-[#8A93A4]'>
             {t(
               'Manage server log files. Log files accumulate over time; regular cleanup is recommended to free disk space.'
             )}
@@ -442,35 +446,41 @@ export function LogSettingsSection({
         {serverLogInfo !== null &&
           (serverLogInfo.enabled ? (
             <div className='space-y-4'>
-              <div className='rounded-lg border p-4'>
-                <div className='grid grid-cols-2 gap-2 text-sm md:grid-cols-4'>
+              <div className='rounded-xl border border-[#E5E8EE] p-4'>
+                <div className='grid grid-cols-1 gap-x-4 gap-y-2 text-[13px] md:grid-cols-4'>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Log Directory')}:
                     </span>{' '}
-                    <span className='font-mono text-xs'>
+                    <span className='font-mono text-[12px] text-[#5A6478]'>
                       {serverLogInfo.log_dir}
                     </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Log File Count')}:
                     </span>{' '}
-                    {serverLogInfo.file_count}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {serverLogInfo.file_count}
+                    </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Total Log Size')}:
                     </span>{' '}
-                    {formatBytes(serverLogInfo.total_size)}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {formatBytes(serverLogInfo.total_size)}
+                    </span>
                   </div>
                   {serverLogInfo.oldest_time && serverLogInfo.newest_time && (
                     <div>
-                      <span className='text-muted-foreground'>
+                      <span className='text-[#8A93A4]'>
                         {t('Date Range')}:
                       </span>{' '}
-                      {dayjs(serverLogInfo.oldest_time).format('YYYY-MM-DD')} ~{' '}
-                      {dayjs(serverLogInfo.newest_time).format('YYYY-MM-DD')}
+                      <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                        {dayjs(serverLogInfo.oldest_time).format('YYYY-MM-DD')} ~{' '}
+                        {dayjs(serverLogInfo.newest_time).format('YYYY-MM-DD')}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -478,7 +488,9 @@ export function LogSettingsSection({
 
               <div className='flex flex-wrap items-end gap-3'>
                 <div className='grid gap-1.5'>
-                  <Label className='text-xs'>{t('Cleanup Mode')}</Label>
+                  <Label className='text-[12px] text-[#5A6478]'>
+                    {t('Cleanup Mode')}
+                  </Label>
                   <Select
                     items={[
                       { value: 'by_count', label: t('Retain last N files') },
@@ -505,7 +517,7 @@ export function LogSettingsSection({
                   </Select>
                 </div>
                 <div className='grid gap-1.5'>
-                  <Label className='text-xs'>
+                  <Label className='text-[12px] text-[#5A6478]'>
                     {serverLogCleanupMode === 'by_count'
                       ? t('Files to Retain')
                       : t('Days to Retain')}
@@ -518,7 +530,7 @@ export function LogSettingsSection({
                     onChange={(event) =>
                       setServerLogCleanupValue(Number(event.target.value))
                     }
-                    className='w-[120px]'
+                    className='w-[120px] font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                   />
                 </div>
                 <AlertDialog>

@@ -22,43 +22,71 @@ For commercial licensing, please contact support@quantumnous.com
  */
 export function getMessageContentStyles() {
   return [
-    // Assistant content reads like a document column; user bubble stays compact.
     'group-[.is-assistant]:w-full',
     'group-[.is-assistant]:max-w-[78ch]',
     'group-[.is-user]:w-fit',
 
-    // User bubble: compact surface that stays calm in both light and dark themes.
     'group-[.is-user]:rounded-2xl',
     'group-[.is-user]:rounded-br-md',
-    'group-[.is-user]:border',
-    'group-[.is-user]:border-border/70',
-    'group-[.is-user]:bg-muted/70',
+    'group-[.is-user]:bg-[#2E4BFF]',
+    'group-[.is-user]:text-white',
     'group-[.is-user]:px-4',
     'group-[.is-user]:py-2.5',
-    'group-[.is-user]:text-foreground',
-    'group-[.is-user]:shadow-sm',
-    'group-[.is-user]:shadow-black/5',
 
-    // Assistant response: flat reading surface using the active UI font axis.
-    'group-[.is-assistant]:bg-transparent',
-    'group-[.is-assistant]:p-0',
-    'group-[.is-assistant]:rounded-none',
-    'group-[.is-assistant]:overflow-visible',
+    'group-[.is-assistant]:bg-white',
+    'group-[.is-assistant]:border',
+    'group-[.is-assistant]:border-[#E5E8EE]',
+    'group-[.is-assistant]:rounded-2xl',
+    'group-[.is-assistant]:rounded-bl-md',
+    'group-[.is-assistant]:text-[#0A0E1A]',
+    'group-[.is-assistant]:px-4',
+    'group-[.is-assistant]:py-3',
     'group-[.is-assistant]:[font-family:var(--font-body)]',
-    'group-[.is-assistant]:text-foreground/90',
 
-    // Preferred readable widths and wrapping
-    'text-[0.95rem]',
-    'leading-6',
+    'text-[13px]',
+    'leading-[1.7]',
     'break-words',
     'whitespace-pre-wrap',
-    'sm:text-[0.975rem]',
-    'sm:leading-7',
 
-    // Cap user bubble width so it does not look like a banner
     'group-[.is-user]:max-w-[85%]',
     'sm:group-[.is-user]:max-w-[62ch]',
     'md:group-[.is-user]:max-w-[68ch]',
     'lg:group-[.is-user]:max-w-[72ch]',
+
+    '[&_a]:text-current',
+    '[&_a]:underline',
+    '[&_a]:underline-offset-2',
+
+    'group-[.is-user_a]:text-white/90',
+    'group-[.is-user_a]:decoration-white/50',
+    'group-[.is-user_a]:hover:text-white',
+
+    'group-[.is-assistant_a]:text-[#2E4BFF]',
+    'group-[.is-assistant_a]:decoration-[#2E4BFF]/40',
+    'group-[.is-assistant_a]:hover:text-[#2E4BFF]',
+
+    '[&_code]:bg-[#F0F2F6]',
+    '[&_code]:px-1.5',
+    '[&_code]:py-0.5',
+    '[&_code]:rounded',
+    '[&_code]:text-[12px]',
+    '[&_code]:font-mono',
+    '[&_code]:text-[#E5484D]',
+    '[&_code]:before:content-none',
+    '[&_code]:after:content-none',
+
+    'group-[.is-user_code]:bg-white/15',
+    'group-[.is-user_code]:text-white',
+
+    'group-[.is-assistant_strong]:text-[#0A0E1A]',
+    'group-[.is-user_strong]:text-white',
+
+    '[&_hr]:border-[#E5E8EE]',
+    '[&_hr]:my-4',
+    '[&_blockquote]:border-l-2',
+    '[&_blockquote]:border-[#D8DCE5]',
+    '[&_blockquote]:pl-3',
+    '[&_blockquote]:text-[#5A6478]',
+    '[&_blockquote]:italic',
   ].join(' ')
 }

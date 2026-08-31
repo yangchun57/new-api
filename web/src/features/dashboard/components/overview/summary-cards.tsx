@@ -251,18 +251,18 @@ export function SummaryCards() {
   return (
     <section
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-5 overflow-hidden rounded-xl border p-5 sm:gap-6 sm:p-6'
     >
-      <div className='flex flex-wrap items-end justify-between gap-2'>
-        <div className='flex flex-col gap-0.5'>
-          <h2 className='text-lg font-semibold tracking-tight sm:text-xl'>
+      <div className='flex flex-wrap items-end justify-between gap-3'>
+        <div className='flex flex-col gap-1'>
+          <h2 className='text-[18px] font-semibold leading-tight tracking-[-0.02em] sm:text-[22px]'>
             {t('Usage at a glance')}
           </h2>
-          <p className='text-muted-foreground text-xs sm:text-sm'>
+          <p className='text-[#8A93A4] text-[12px] leading-relaxed sm:text-[13px]'>
             {t('Monitor balance, usage, and request volume')}
           </p>
         </div>
-        <span className='text-muted-foreground flex items-center gap-1.5 text-xs font-medium'>
+        <span className='text-[#5A6478] inline-flex items-center gap-1.5 rounded-full border border-[#E5E8EE] bg-white px-2.5 py-1 text-[11px] font-medium'>
           <span
             className={cn('size-1.5 rounded-full', healthCfg.dotClass)}
             aria-hidden='true'
@@ -271,11 +271,11 @@ export function SummaryCards() {
         </span>
       </div>
 
-      <div className='divide-border/60 grid grid-cols-1 divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
+      <div className='grid grid-cols-1 divide-y divide-[#E5E8EE] sm:grid-cols-3 sm:divide-x sm:divide-y-0'>
         {items.map((it) => (
           <div
             key={it.key}
-            className='py-4 sm:px-6 sm:py-6 sm:first:pl-0 sm:last:pr-0'
+            className='py-4 sm:px-5 sm:py-0 sm:first:pl-0 sm:last:pr-0'
           >
             <StatCard
               title={it.title}
@@ -291,31 +291,31 @@ export function SummaryCards() {
         ))}
       </div>
 
-      <div className='border-border/60 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t pt-4'>
-        <div className='flex min-w-0 flex-wrap items-baseline gap-x-8 gap-y-2'>
-          <div className='flex flex-col gap-0.5'>
-            <span className='text-muted-foreground text-[11px] font-medium'>
+      <div className='flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-[#E5E8EE] pt-5'>
+        <div className='flex min-w-0 flex-wrap items-baseline gap-x-8 gap-y-3'>
+          <div className='flex flex-col gap-1'>
+            <span className='text-[#8A93A4] text-[11px] font-medium uppercase tracking-[0.08em]'>
               {t('Credit remaining')}
             </span>
-            <span className='font-mono text-lg font-semibold tracking-tight tabular-nums'>
+            <span className='text-foreground font-mono text-[18px] font-semibold leading-none tracking-[-0.01em] tabular-nums sm:text-[20px]'>
               {formatQuota(remainQuota)}
             </span>
           </div>
-          <div className='flex flex-col gap-0.5'>
-            <span className='text-muted-foreground text-[11px] font-medium'>
+          <div className='flex flex-col gap-1'>
+            <span className='text-[#8A93A4] text-[11px] font-medium uppercase tracking-[0.08em]'>
               {t('Last 24h usage')}
             </span>
-            <span className='font-mono text-sm font-semibold tabular-nums'>
+            <span className='text-foreground font-mono text-[15px] font-semibold leading-none tabular-nums sm:text-[16px]'>
               {formatQuota(recentUsage)}
             </span>
           </div>
-          <div className='flex flex-col gap-0.5'>
-            <span className='text-muted-foreground text-[11px] font-medium'>
+          <div className='flex flex-col gap-1'>
+            <span className='text-[#8A93A4] text-[11px] font-medium uppercase tracking-[0.08em]'>
               {t('Runway')}
             </span>
             <span
               className={cn(
-                'text-sm font-semibold tabular-nums',
+                'text-[15px] font-semibold leading-none tabular-nums sm:text-[16px]',
                 healthLevel === 'critical' && 'text-destructive',
                 healthLevel === 'caution' && 'text-warning'
               )}

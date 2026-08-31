@@ -185,7 +185,7 @@ export function MessageActions({
             render={
               <Button
                 aria-label={t('Open menu')}
-                className='data-popup-open:bg-muted text-muted-foreground hover:text-foreground size-11'
+                className='data-popup-open:bg-[#F0F2F6] text-[#8A93A4] hover:text-[#0A0E1A] hover:bg-[#F0F2F6] size-8 rounded-md'
                 size='icon'
                 variant='ghost'
               />
@@ -194,7 +194,7 @@ export function MessageActions({
             <MoreHorizontal className='size-4' />
             <span className='sr-only'>{t('Open menu')}</span>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align='end' className='w-44'>
+          <DropdownMenuContent align='end' className='w-44 rounded-xl border border-[#E5E8EE] p-1'>
             {actions.map((action) => {
               const Icon = action.icon
 

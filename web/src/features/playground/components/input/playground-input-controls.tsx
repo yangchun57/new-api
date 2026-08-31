@@ -82,7 +82,7 @@ export function PlaygroundInputControls({
   const renderSubmitButton = () =>
     shouldShowStop ? (
       <PromptInputButton
-        className='border-destructive/25 bg-destructive/10 text-destructive hover:bg-destructive/15 font-medium'
+        className='border border-[#E5484D]/30 bg-[#E5484D]/8 text-[#E5484D] hover:bg-[#E5484D]/12 h-8 rounded-md px-3 font-medium shadow-none'
         onClick={onStop}
         variant='secondary'
       >
@@ -92,7 +92,7 @@ export function PlaygroundInputControls({
       </PromptInputButton>
     ) : (
       <PromptInputButton
-        className='bg-primary text-primary-foreground hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground h-8 px-3 font-medium shadow-sm'
+        className='bg-[#2E4BFF] text-white hover:bg-[#2E4BFF]/90 disabled:bg-[#E8EBF1] disabled:text-[#B8BFCC] h-8 rounded-md px-3 font-medium shadow-none'
         disabled={!canSubmit}
         type='submit'
         variant='default'

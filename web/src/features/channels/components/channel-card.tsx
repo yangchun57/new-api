@@ -78,7 +78,7 @@ function ChannelCardComponent({
   const responseCell = renderCell('response_time')
   const testCell = renderCell('test_time')
 
-  const labelClass = 'text-muted-foreground text-[11px] font-medium select-none'
+  const labelClass = 'text-[#8A93A4] text-[12px] font-medium select-none'
 
   // In card view the enable/disable state is already conveyed by the inline
   // power toggle, so the plain "Enabled"/"Disabled" badge is redundant. Keep
@@ -113,7 +113,7 @@ function ChannelCardComponent({
         <div className='flex items-start justify-between gap-3'>
           {/* Left column */}
           <div className='flex min-w-0 flex-1 flex-col gap-3 overflow-hidden'>
-            <div className='min-w-0 text-sm'>
+            <div className='min-w-0 text-[13px]'>
               {!isTagRow && (
                 <div className={labelClass}>
                   #{sensitiveVisible ? row.original.id : SENSITIVE_MASK}
@@ -125,9 +125,9 @@ function ChannelCardComponent({
               <div className={cn('mb-1', labelClass)}>
                 {fieldLabels.balance}
               </div>
-              <div className='min-w-0 overflow-hidden text-sm'>
+              <div className='text-[#0A0E1A] min-w-0 overflow-hidden font-semibold text-[13px]'>
                 {balanceCell ?? (
-                  <span className='text-muted-foreground'>-</span>
+                  <span className='text-[#8A93A4] font-normal'>-</span>
                 )}
               </div>
             </div>
@@ -147,11 +147,11 @@ function ChannelCardComponent({
             <span className={cn('mt-2', labelClass)}>
               {fieldLabels.test_time}
             </span>
-            <div className='overflow-hidden text-sm'>
-              {responseCell ?? <span className='text-muted-foreground'>-</span>}
+            <div className='text-[#5A6478] overflow-hidden text-[13px]'>
+              {responseCell ?? <span className='text-[#8A93A4]'>-</span>}
             </div>
-            <div className='overflow-hidden text-sm'>
-              {testCell ?? <span className='text-muted-foreground'>-</span>}
+            <div className='text-[#5A6478] overflow-hidden text-[13px]'>
+              {testCell ?? <span className='text-[#8A93A4]'>-</span>}
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ function ChannelCardComponent({
               ))}
             </div>
           ) : (
-            <span className='text-muted-foreground text-sm'>-</span>
+            <span className='text-[#8A93A4] text-[12px]'>-</span>
           )}
         </div>
       </div>

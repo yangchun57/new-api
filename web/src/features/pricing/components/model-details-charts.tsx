@@ -17,13 +17,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { VChart } from '@visactor/react-vchart'
+import { BarChart3, LineChart } from 'lucide-react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useThemeCustomization } from '@/context/theme-customization-provider'
 import { getSuccessRateColor } from '@/features/performance-metrics/lib/format'
-import { useThemeRadiusPx } from '@/lib/theme-radius'
-import { useChartTheme } from '@/lib/use-chart-theme'
 import { cn } from '@/lib/utils'
 import { VCHART_OPTION } from '@/lib/vchart'
 
@@ -50,18 +48,9 @@ function formatDayLabel(date: string): string {
   })
 }
 
-function getChartThemeTokens(resolvedTheme: string) {
-  return {
-    textColor:
-      resolvedTheme === 'dark'
-        ? 'rgba(255, 255, 255, 0.68)'
-        : 'rgba(15, 23, 42, 0.58)',
-    gridColor:
-      resolvedTheme === 'dark'
-        ? 'rgba(255, 255, 255, 0.12)'
-        : 'rgba(15, 23, 42, 0.12)',
-  }
-}
+const CHART_TEXT_COLOR = 'rgba(10, 14, 26, 0.5)'
+const CHART_GRID_COLOR = 'rgba(10, 14, 26, 0.08)'
+const CHART_SERIES_COLOR = '#0A0E1A'
 
 const UPTIME_AXIS_MAX = 100
 const UPTIME_FOCUSED_AXIS_MIN = 95
@@ -89,17 +78,37 @@ function stripUptimePointSuffix(value: string): string {
   return value.replace(/__(start|end)$/, '')
 }
 
-// ---------------------------------------------------------------------------
-// Latency trend chart (24h, multi-group point-line chart)
-// ---------------------------------------------------------------------------
+function ChartEmptyState({
+  message,
+  className,
+  icon: Icon,
+}: {
+  message: string
+  className?: string
+  icon: typeof LineChart
+}) {
+  return (
+    <div
+      className={cn(
+        'flex h-48 items-center justify-center rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] px-6',
+        className
+      )}
+    >
+      <div className='flex flex-col items-center gap-2 text-center'>
+        <span className='inline-flex size-8 items-center justify-center rounded-full bg-[#F0F2F6] text-[#8A93A4]'>
+          <Icon className='size-4' />
+        </span>
+        <span className='text-[12px] text-[#8A93A4]'>{message}</span>
+      </div>
+    </div>
+  )
+}
 
 export function LatencyTrendChart(props: {
   series: LatencyTimePoint[]
   className?: string
 }) {
   const { t } = useTranslation()
-  const { resolvedTheme, themeReady } = useChartTheme()
-  const { textColor, gridColor } = getChartThemeTokens(resolvedTheme)
 
   const spec = useMemo(() => {
     if (props.series.length === 0) return null
@@ -115,9 +124,10 @@ export function LatencyTrendChart(props: {
       yField: 'ttft',
       seriesField: 'group',
       smooth: true,
+      color: [CHART_SERIES_COLOR, '#5A6478', '#8A93A4'],
       point: {
         visible: true,
-        style: { size: 5, stroke: '#ffffff', lineWidth: 1.5 },
+        style: { size: 4, stroke: '#ffffff', lineWidth: 1.5 },
       },
       line: {
         style: { lineWidth: 2 },
@@ -138,7 +148,7 @@ export function LatencyTrendChart(props: {
         {
           orient: 'bottom',
           label: {
-            style: { fill: textColor, fontSize: 10 },
+            style: { fill: CHART_TEXT_COLOR, fontSize: 10 },
           },
           tick: { visible: false },
         },
@@ -146,38 +156,34 @@ export function LatencyTrendChart(props: {
           orient: 'left',
           label: {
             formatMethod: (val: number | string) => `${val} ms`,
-            style: { fill: textColor, fontSize: 10 },
+            style: { fill: CHART_TEXT_COLOR, fontSize: 10 },
           },
           grid: {
             visible: true,
-            style: { lineDash: [3, 3], stroke: gridColor },
+            style: { lineDash: [3, 3], stroke: CHART_GRID_COLOR },
           },
         },
       ],
     }
-  }, [gridColor, props.series, t, textColor])
+  }, [props.series, t])
 
   if (props.series.length === 0) {
     return (
-      <div
-        className={cn(
-          'text-muted-foreground flex h-48 items-center justify-center rounded-lg border text-xs',
-          props.className
-        )}
-      >
-        {t('No latency data available')}
-      </div>
+      <ChartEmptyState
+        message={t('No latency data available')}
+        className={props.className}
+        icon={LineChart}
+      />
     )
   }
 
   return (
     <div className={cn('h-64 sm:h-72', props.className)}>
-      {themeReady && spec && (
+      {spec && (
         <VChart
-          key={`latency-${resolvedTheme}`}
           spec={{
             ...spec,
-            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
+            theme: 'light',
             background: 'transparent',
           }}
           option={VCHART_OPTION}
@@ -187,17 +193,11 @@ export function LatencyTrendChart(props: {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Uptime trend chart (24h, point-line chart)
-// ---------------------------------------------------------------------------
-
 export function UptimeTrendChart(props: {
   series: UptimeDayPoint[]
   className?: string
 }) {
   const { t } = useTranslation()
-  const { resolvedTheme, themeReady } = useChartTheme()
-  const { textColor, gridColor } = getChartThemeTokens(resolvedTheme)
 
   const spec = useMemo(() => {
     if (props.series.length === 0) return null
@@ -229,7 +229,7 @@ export function UptimeTrendChart(props: {
       point: {
         visible: true,
         style: {
-          size: 5,
+          size: 4,
           stroke: '#ffffff',
           lineWidth: 1.5,
           fill: (datum: { uptime: number }) =>
@@ -263,7 +263,7 @@ export function UptimeTrendChart(props: {
           label: {
             formatMethod: (val: number | string) =>
               stripUptimePointSuffix(String(val)),
-            style: { fill: textColor, fontSize: 10 },
+            style: { fill: CHART_TEXT_COLOR, fontSize: 10 },
             autoLimit: true,
           },
           tick: { visible: false },
@@ -274,38 +274,34 @@ export function UptimeTrendChart(props: {
           max: UPTIME_AXIS_MAX,
           label: {
             formatMethod: (val: number | string) => `${val}%`,
-            style: { fill: textColor, fontSize: 10 },
+            style: { fill: CHART_TEXT_COLOR, fontSize: 10 },
           },
           grid: {
             visible: true,
-            style: { lineDash: [3, 3], stroke: gridColor },
+            style: { lineDash: [3, 3], stroke: CHART_GRID_COLOR },
           },
         },
       ],
     }
-  }, [gridColor, props.series, t, textColor])
+  }, [props.series, t])
 
   if (props.series.length === 0) {
     return (
-      <div
-        className={cn(
-          'text-muted-foreground flex h-48 items-center justify-center rounded-lg border text-xs',
-          props.className
-        )}
-      >
-        {t('No uptime data available')}
-      </div>
+      <ChartEmptyState
+        message={t('No uptime data available')}
+        className={props.className}
+        icon={LineChart}
+      />
     )
   }
 
   return (
     <div className={cn('h-56 sm:h-64', props.className)}>
-      {themeReady && spec && (
+      {spec && (
         <VChart
-          key={`uptime-trend-${resolvedTheme}`}
           spec={{
             ...spec,
-            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
+            theme: 'light',
             background: 'transparent',
           }}
           option={VCHART_OPTION}
@@ -315,22 +311,11 @@ export function UptimeTrendChart(props: {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Throughput by group (horizontal bar)
-// ---------------------------------------------------------------------------
-
 export function ThroughputBarChart(props: {
   rows: { group: string; throughput_tps: number }[]
   className?: string
 }) {
   const { t } = useTranslation()
-  const { resolvedTheme, themeReady } = useChartTheme()
-  const { textColor, gridColor } = getChartThemeTokens(resolvedTheme)
-  const { customization } = useThemeCustomization()
-  const barRadius = useThemeRadiusPx(
-    '--radius-sm',
-    `${customization.preset}:${customization.radius}`
-  )
 
   const filtered = useMemo(
     () => props.rows.filter((r) => r.throughput_tps > 0),
@@ -347,28 +332,28 @@ export function ThroughputBarChart(props: {
       yField: 'group',
       bar: {
         style: {
-          fill: '#6366f1',
-          ...(barRadius == null ? {} : { cornerRadius: barRadius }),
+          fill: CHART_SERIES_COLOR,
+          cornerRadius: 4,
         },
       },
       label: {
         visible: true,
         position: 'right',
-        style: { fontSize: 11, fill: textColor },
+        style: { fontSize: 11, fill: CHART_TEXT_COLOR },
         formatMethod: (text: string) => `${text} t/s`,
       },
       axes: [
         {
           orient: 'left',
-          label: { style: { fill: textColor, fontSize: 10 } },
+          label: { style: { fill: CHART_TEXT_COLOR, fontSize: 10 } },
           tick: { visible: false },
         },
         {
           orient: 'bottom',
-          label: { style: { fill: textColor, fontSize: 10 } },
+          label: { style: { fill: CHART_TEXT_COLOR, fontSize: 10 } },
           grid: {
             visible: true,
-            style: { lineDash: [3, 3], stroke: gridColor },
+            style: { lineDash: [3, 3], stroke: CHART_GRID_COLOR },
           },
         },
       ],
@@ -385,20 +370,25 @@ export function ThroughputBarChart(props: {
         },
       },
     }
-  }, [barRadius, filtered, gridColor, t, textColor])
+  }, [filtered, t])
 
   if (filtered.length === 0) {
-    return null
+    return (
+      <ChartEmptyState
+        message={t('No throughput data available')}
+        className={props.className}
+        icon={BarChart3}
+      />
+    )
   }
 
   return (
     <div className={cn('h-48 sm:h-56', props.className)}>
-      {themeReady && spec && (
+      {spec && (
         <VChart
-          key={`tput-${resolvedTheme}`}
           spec={{
             ...spec,
-            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
+            theme: 'light',
             background: 'transparent',
           }}
           option={VCHART_OPTION}

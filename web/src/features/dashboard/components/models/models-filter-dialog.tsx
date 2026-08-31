@@ -52,8 +52,6 @@ import { useAuthStore } from '@/stores/auth-store'
 
 interface ModelsFilterProps {
   preferences: DashboardChartPreferences
-  // The filters currently applied to the dashboard. The dialog edits a copy of
-  // these so reopening it never discards a manually picked range.
   currentFilters: DashboardFilters
   onFilterChange: (filters: DashboardFilters) => void
   onReset: () => void
@@ -61,17 +59,12 @@ interface ModelsFilterProps {
   descriptionKey?: string
 }
 
-// Quick-range presets imply a sensible granularity (matching the app's
-// range<->granularity pairing), so picking "7 Days" requests daily buckets
-// instead of leaving the granularity on its previous value (e.g. hourly).
 function granularityForRangeDays(days: number): TimeGranularity {
   if (days <= 1) return 'hour'
   if (days >= 29) return 'week'
   return 'day'
 }
 
-// Highlights the matching quick-range button when the applied range spans an
-// exact preset; custom ranges leave every quick button unselected.
 function detectQuickRangeDays(
   filters: DashboardFilters | undefined
 ): number | null {
@@ -82,23 +75,23 @@ function detectQuickRangeDays(
   return TIME_RANGE_PRESETS.some((preset) => preset.days === days) ? days : null
 }
 
-/**
- * Section divider component for better visual organization
- */
 const SectionDivider = ({ label }: { label: string }) => (
-  <div className='relative'>
+  <div className='relative py-1'>
     <div className='absolute inset-0 flex items-center'>
-      <span className='w-full border-t' />
+      <span className='w-full border-t border-[#E5E8EE]' />
     </div>
-    <div className='relative flex justify-center text-xs uppercase'>
-      <span className='bg-background text-muted-foreground px-2'>{label}</span>
+    <div className='relative flex justify-center'>
+      <span className='bg-white px-2 text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-[#8A93A4]'>
+        {label}
+      </span>
     </div>
   </div>
 )
 
+const fieldLabelCls = 'text-[13px] font-medium leading-none text-[#0A0E1A]'
+
 export function ModelsFilter(props: ModelsFilterProps) {
   const { t } = useTranslation()
-  // 使用已缓存的用户数据，避免重复调用 API
   const user = useAuthStore((state) => state.auth.user)
   const isAdmin = user?.role && user.role >= 10
 
@@ -112,8 +105,6 @@ export function ModelsFilter(props: ModelsFilterProps) {
   )
 
   const handleOpenChange = (nextOpen: boolean) => {
-    // Sync the editing state from the applied filters every time the dialog
-    // opens so a previously applied manual range is preserved.
     if (nextOpen) {
       const applied =
         props.currentFilters ?? buildDefaultDashboardFilters(props.preferences)
@@ -198,39 +189,38 @@ export function ModelsFilter(props: ModelsFilterProps) {
       }
     >
       <ScrollArea className='h-full pr-3 sm:pr-4'>
-        <div className='grid gap-2.5 py-2'>
-          {/* Quick time range selection */}
+        <div className='grid gap-3 py-2'>
           <div className='grid gap-2'>
-            <Label className='flex items-center gap-2'>
-              <Calendar className='h-4 w-4' />
+            <Label className={cn(fieldLabelCls, 'gap-2')}>
+              <Calendar className='h-4 w-4 text-[#5A6478]' />
               {t('Quick Range')}
             </Label>
             <div className='grid grid-cols-2 gap-2 sm:flex'>
-              {TIME_RANGE_PRESETS.map((range) => (
-                <Button
-                  key={range.days}
-                  type='button'
-                  size='sm'
-                  variant={selectedRange === range.days ? 'default' : 'outline'}
-                  onClick={() => handleQuickRange(range.days)}
-                  className={cn(
-                    'flex-1',
-                    selectedRange === range.days &&
-                      'ring-ring ring-2 ring-offset-2'
-                  )}
-                >
-                  {t(range.label)}
-                </Button>
-              ))}
+              {TIME_RANGE_PRESETS.map((range) => {
+                const active = selectedRange === range.days
+                return (
+                  <Button
+                    key={range.days}
+                    type='button'
+                    size='sm'
+                    variant={active ? 'default' : 'outline'}
+                    onClick={() => handleQuickRange(range.days)}
+                    className='flex-1'
+                  >
+                    {t(range.label)}
+                  </Button>
+                )
+              })}
             </div>
           </div>
 
           <SectionDivider label={t('Custom Time Range')} />
 
-          {/* Custom time range */}
-          <div className='grid gap-2.5'>
-            <div className='grid gap-2'>
-              <Label htmlFor='start_timestamp'>{t('Start Time')}</Label>
+          <div className='grid gap-3'>
+            <div className='grid gap-1.5'>
+              <Label htmlFor='start_timestamp' className={fieldLabelCls}>
+                {t('Start Time')}
+              </Label>
               <DateTimePicker
                 value={filters.start_timestamp}
                 onChange={(date) =>
@@ -240,8 +230,10 @@ export function ModelsFilter(props: ModelsFilterProps) {
               />
             </div>
 
-            <div className='grid gap-2'>
-              <Label htmlFor='end_timestamp'>{t('End Time')}</Label>
+            <div className='grid gap-1.5'>
+              <Label htmlFor='end_timestamp' className={fieldLabelCls}>
+                {t('End Time')}
+              </Label>
               <DateTimePicker
                 value={filters.end_timestamp}
                 onChange={(date) =>
@@ -254,8 +246,10 @@ export function ModelsFilter(props: ModelsFilterProps) {
 
           <SectionDivider label={t('Chart Settings')} />
 
-          <div className='grid gap-2'>
-            <Label htmlFor='time_granularity'>{t('Time Granularity')}</Label>
+          <div className='grid gap-1.5'>
+            <Label htmlFor='time_granularity' className={fieldLabelCls}>
+              {t('Time Granularity')}
+            </Label>
             <Select
               items={[
                 ...TIME_GRANULARITY_OPTIONS.map((option) => ({
@@ -268,7 +262,7 @@ export function ModelsFilter(props: ModelsFilterProps) {
                 handleChange('time_granularity', value as TimeGranularity)
               }
             >
-              <SelectTrigger>
+              <SelectTrigger id='time_granularity'>
                 <SelectValue placeholder={t('Select time granularity')} />
               </SelectTrigger>
               <SelectContent alignItemWithTrigger={false}>
@@ -283,13 +277,14 @@ export function ModelsFilter(props: ModelsFilterProps) {
             </Select>
           </div>
 
-          {/* Admin-only fields */}
           {isAdmin && (
             <>
               <SectionDivider label={t('Admin Only')} />
 
-              <div className='grid gap-2'>
-                <Label htmlFor='username'>{t('Username')}</Label>
+              <div className='grid gap-1.5'>
+                <Label htmlFor='username' className={fieldLabelCls}>
+                  {t('Username')}
+                </Label>
                 <Input
                   id='username'
                   placeholder={t('Filter by username')}

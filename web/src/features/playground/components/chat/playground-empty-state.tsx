@@ -46,15 +46,15 @@ export function PlaygroundEmptyState({
   return (
     <div className='flex min-h-[min(520px,calc(100svh-18rem))] items-center justify-center px-1 py-8 md:py-12'>
       <div className='grid w-full max-w-2xl gap-5 text-center'>
-        <div className='bg-muted/50 text-muted-foreground mx-auto flex size-11 items-center justify-center rounded-xl border'>
+        <div className='bg-[#F7F8FA] text-[#8A93A4] mx-auto flex size-12 items-center justify-center rounded-xl border border-[#E5E8EE]'>
           <MessageSquarePlusIcon className='size-5' aria-hidden='true' />
         </div>
 
         <div className='grid gap-2'>
-          <h2 className='text-xl font-semibold tracking-tight text-balance md:text-2xl'>
+          <h2 className='text-[14px] font-semibold tracking-tight text-[#0A0E1A]'>
             {t('Start a playground chat')}
           </h2>
-          <p className='text-muted-foreground mx-auto max-w-lg text-sm leading-6 text-balance'>
+          <p className='text-[#5A6478] mx-auto max-w-lg text-[13px] leading-[1.7]'>
             {t(
               'Test a model with a starter prompt, or write your own request below.'
             )}
@@ -67,12 +67,12 @@ export function PlaygroundEmptyState({
 
             return (
               <Button
-                className='h-auto min-h-11 justify-start gap-2 px-3 py-2.5 text-left whitespace-normal'
+                className='h-auto min-h-11 justify-start gap-2 rounded-xl border-[#E5E8EE] bg-white px-3 py-2.5 text-left text-[13px] text-[#0A0E1A] whitespace-normal shadow-none hover:bg-[#F0F2F6] hover:text-[#0A0E1A]'
                 key={text}
                 onClick={() => onSelectPrompt(prompt)}
                 variant='outline'
               >
-                <Icon className='text-muted-foreground size-4' />
+                <Icon className='text-[#8A93A4] size-4' />
                 <span>{prompt}</span>
               </Button>
             )

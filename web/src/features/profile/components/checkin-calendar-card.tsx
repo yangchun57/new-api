@@ -264,7 +264,7 @@ export function CheckinCalendarCard({
         contentHeight='auto'
         bodyClassName='space-y-4'
       >
-        <div className='text-muted-foreground text-sm'>
+        <div className='text-[13px] text-[#5A6478]'>
           {t('Please complete the security check to continue.')}
         </div>
         <div className='flex justify-center py-4'>
@@ -298,7 +298,7 @@ export function CheckinCalendarCard({
               </IconBadge>
               <div className='min-w-0 flex-1'>
                 <div className='flex flex-wrap items-center gap-1.5 sm:gap-2'>
-                  <h3 className='text-base font-semibold tracking-tight sm:text-lg'>
+                  <h3 className='text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]'>
                     {t('Daily Check-in')}
                   </h3>
                   {checkedToday && (
@@ -307,7 +307,7 @@ export function CheckinCalendarCard({
                       {t('Checked in')}
                     </div>
                   )}
-                  <span className='text-muted-foreground inline-flex items-center'>
+                  <span className='inline-flex items-center text-[#8A93A4]'>
                     {collapsed ? (
                       <ChevronDown className='h-4 w-4' />
                     ) : (
@@ -315,7 +315,7 @@ export function CheckinCalendarCard({
                     )}
                   </span>
                 </div>
-                <p className='text-muted-foreground mt-1 line-clamp-2 text-xs sm:text-sm'>
+                <p className='mt-1 line-clamp-2 text-[13px] leading-relaxed text-[#5A6478]'>
                   {checkedToday && todayAward !== undefined
                     ? `${t('Today')} +${formatQuotaWithCurrency(todayAward)}`
                     : t('Check in daily to receive random quota rewards')}
@@ -341,7 +341,7 @@ export function CheckinCalendarCard({
                 <div className='text-xl font-semibold tracking-tight tabular-nums sm:text-2xl'>
                   {checkinData?.stats?.total_checkins || 0}
                 </div>
-                <div className='text-muted-foreground mt-0.5 text-[10px] font-medium sm:mt-1 sm:text-xs'>
+                <div className='mt-0.5 pl-font-mono text-[11px] text-[#8A93A4] sm:mt-1'>
                   {t('Total check-ins')}
                 </div>
               </div>
@@ -349,7 +349,7 @@ export function CheckinCalendarCard({
                 <div className='text-xl font-semibold tracking-tight tabular-nums sm:text-2xl'>
                   {formatQuotaWithCurrency(monthlyQuota, { digitsLarge: 0 })}
                 </div>
-                <div className='text-muted-foreground mt-0.5 text-[10px] font-medium sm:mt-1 sm:text-xs'>
+                <div className='mt-0.5 pl-font-mono text-[11px] text-[#8A93A4] sm:mt-1'>
                   {t('This month')}
                 </div>
               </div>
@@ -362,7 +362,7 @@ export function CheckinCalendarCard({
                     }
                   )}
                 </div>
-                <div className='text-muted-foreground mt-0.5 text-[10px] font-medium sm:mt-1 sm:text-xs'>
+                <div className='mt-0.5 pl-font-mono text-[11px] text-[#8A93A4] sm:mt-1'>
                   {t('Total earned')}
                 </div>
               </div>
@@ -373,7 +373,7 @@ export function CheckinCalendarCard({
               <div className='space-y-3 sm:space-y-4'>
                 {/* Month navigation */}
                 <div className='flex items-center justify-between'>
-                  <h4 className='text-xs font-semibold sm:text-sm'>
+                  <h4 className='text-[13px] font-semibold text-[#0A0E1A]'>
                     {dayjs(currentMonth).format('YYYY-MM')}
                   </h4>
                   <div className='flex items-center gap-0.5 sm:gap-1'>
@@ -402,7 +402,7 @@ export function CheckinCalendarCard({
                   {weekDays.map((day) => (
                     <div
                       key={day}
-                      className='text-muted-foreground flex h-7 items-center justify-center text-[10px] font-medium sm:h-8 sm:text-xs'
+                      className='flex h-7 items-center justify-center pl-font-mono text-[11px] text-[#8A93A4] sm:h-8'
                     >
                       {day}
                     </div>
@@ -426,9 +426,9 @@ export function CheckinCalendarCard({
                         variant={isToday ? 'default' : 'ghost'}
                         disabled={!dayObj.isCurrentMonth}
                         className={cn(
-                          'relative flex h-9 w-full flex-col items-center justify-center rounded-lg px-0 text-xs font-medium sm:h-10 sm:text-sm',
+                          'relative flex h-9 w-full flex-col items-center justify-center rounded-md px-0 text-xs font-medium sm:h-10 sm:text-sm',
                           !dayObj.isCurrentMonth &&
-                            'text-muted-foreground/40 cursor-default',
+                            'cursor-default text-[#B8BFCC]',
                           !isToday && isCheckedIn && 'font-semibold'
                         )}
                       >
@@ -444,11 +444,11 @@ export function CheckinCalendarCard({
                         <Tooltip key={dateStr}>
                           <TooltipTrigger render={dayButton} />
                           <TooltipContent>
-                            <div className='text-xs'>
+                            <div className='text-[12px]'>
                               <div className='font-medium'>
                                 {t('Checked in')}
                               </div>
-                              <div className='text-muted-foreground mt-0.5'>
+                              <div className='mt-0.5 text-[#8A93A4]'>
                                 +{formatQuotaWithCurrency(quotaAwarded)}
                               </div>
                             </div>
@@ -462,11 +462,11 @@ export function CheckinCalendarCard({
                 </div>
 
                 {/* Footer hint */}
-                <div className='text-muted-foreground border-t pt-3 text-center text-[11px] sm:pt-4 sm:text-xs'>
+                <div className='border-t pt-3 text-center text-[12px] text-[#8A93A4] sm:pt-4'>
                   {t('You can only check in once per day')}
                 </div>
 
-                <div className='bg-muted/30 text-muted-foreground rounded-lg border p-3 text-xs'>
+                <div className='rounded-xl border bg-[#F7F8FA] p-3 text-[13px] text-[#5A6478] leading-relaxed'>
                   <ul className='list-disc space-y-1 pl-5'>
                     <li>
                       {t('Check in daily to receive random quota rewards')}

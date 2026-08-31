@@ -67,25 +67,26 @@ export function ConflictConfirmDialog({
 
         <StaticDataTable
           className='max-h-96 overflow-y-auto'
+          containerClassName='rounded-xl'
           data={conflicts}
           columns={[
             {
               id: 'channel',
               header: t('Channel'),
-              cellClassName: 'font-medium',
+              cellClassName: 'font-medium text-[#0A0E1A]',
               cell: (conflict) => conflict.channel,
             },
             {
               id: 'model',
               header: t('Model'),
-              cellClassName: 'font-mono text-sm',
+              cellClassName: 'font-mono text-[12px] text-[#0A0E1A]',
               cell: (conflict) => conflict.model,
             },
             {
               id: 'current',
               header: t('Current Billing'),
               cell: (conflict) => (
-                <pre className='text-sm whitespace-pre-wrap'>
+                <pre className='text-[13px] whitespace-pre-wrap text-[#5A6478]'>
                   {conflict.current}
                 </pre>
               ),
@@ -94,7 +95,7 @@ export function ConflictConfirmDialog({
               id: 'new',
               header: t('Change To'),
               cell: (conflict) => (
-                <pre className='text-sm whitespace-pre-wrap'>
+                <pre className='text-[13px] whitespace-pre-wrap text-[#5A6478]'>
                   {conflict.newVal}
                 </pre>
               ),

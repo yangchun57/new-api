@@ -155,7 +155,7 @@ export function ChannelSelectorDialog({
 
           return (
             <div className='flex items-center gap-2'>
-              <span className='font-medium'>{name}</span>
+              <span className='font-medium text-[#0A0E1A]'>{name}</span>
               {isOfficial && (
                 <StatusBadge
                   label={t('Official')}
@@ -177,7 +177,7 @@ export function ChannelSelectorDialog({
           const url = row.getValue('base_url') as string
           return (
             <span
-              className='text-muted-foreground block max-w-xs truncate font-mono text-xs'
+              className='block max-w-xs truncate font-mono text-[12px] text-[#8A93A4]'
               title={url}
             >
               {url}
@@ -338,7 +338,7 @@ export function ChannelSelectorDialog({
       <div className='flex h-full min-h-0 flex-col gap-4 overflow-hidden'>
         <div className='flex shrink-0 items-center gap-2'>
           <div className='relative flex-1'>
-            <Search className='text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+            <Search className='text-[#8A93A4] pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
             <Input
               placeholder={t('Search by name or URL...')}
               value={search}
@@ -350,9 +350,9 @@ export function ChannelSelectorDialog({
 
         <DataTableView
           table={table}
-          containerClassName='min-h-0 flex-1 rounded-md'
+          containerClassName='min-h-0 flex-1 rounded-xl'
           tableContainerClassName='h-full min-h-0'
-          tableHeaderClassName='[background-color:var(--table-header)]'
+          tableHeaderClassName='bg-[#F7F8FA]'
           splitHeaderScrollClassName='h-full'
           bodyContainerClassName='[scrollbar-gutter:stable]'
           splitHeader

@@ -264,7 +264,7 @@ export function ModelMappingEditor(props: ModelMappingEditorProps) {
         <TabsContent value='visual' className='space-y-2'>
           {rows.length > 0 ? (
             <div className='space-y-2'>
-              <div className='grid grid-cols-[1fr_1fr_auto] gap-2 text-sm font-medium'>
+              <div className='text-[#0A0E1A] grid grid-cols-[1fr_1fr_auto] gap-2 text-[13px] font-medium'>
                 <div>{t('Original Model')}</div>
                 <div>{t('Replacement Model')}</div>
                 <div className='w-10'></div>
@@ -307,7 +307,7 @@ export function ModelMappingEditor(props: ModelMappingEditorProps) {
               ))}
             </div>
           ) : (
-            <div className='text-muted-foreground flex h-24 items-center justify-center rounded-md border border-dashed text-sm'>
+            <div className='text-[#8A93A4] flex h-24 items-center justify-center rounded-md border border-dashed text-[13px]'>
               {t(
                 'No model mappings configured. Click "Add Mapping" to get started.'
               )}

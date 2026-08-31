@@ -32,7 +32,7 @@ export function DescriptionCell({
   const { setOpen, setDescriptionData } = useModels()
 
   if (!description) {
-    return <span className='text-muted-foreground text-xs'>-</span>
+    return <span className='text-[#8A93A4] text-[12px]'>-</span>
   }
 
   const handleClick = () => {
@@ -45,7 +45,7 @@ export function DescriptionCell({
       <Button
         variant='link'
         onClick={handleClick}
-        className='text-muted-foreground hover:text-foreground block h-auto w-full cursor-pointer overflow-hidden p-0 text-left text-sm text-ellipsis whitespace-nowrap no-underline'
+        className='text-[#5A6478] hover:text-[#0A0E1A] block h-auto w-full cursor-pointer overflow-hidden p-0 text-left text-[13px] text-ellipsis whitespace-nowrap no-underline'
       >
         {description}
       </Button>

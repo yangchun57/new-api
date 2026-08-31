@@ -70,7 +70,7 @@ export function ApiInfoPanel() {
             <div
               key={item.url}
               className={
-                idx < list.length - 1 ? 'border-border/60 border-b' : ''
+                idx < list.length - 1 ? 'border-b border-[#E5E8EE]' : ''
               }
             >
               <ApiInfoItemComponent

@@ -107,7 +107,7 @@ export function CopyChannelDialog({
             onChange={(e) => setSuffix(e.target.value)}
             disabled={isCopying}
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[#8A93A4] text-[12px]'>
             {t('New name will be:')} {currentRow.name}
             {suffix}
           </p>
@@ -120,7 +120,7 @@ export function CopyChannelDialog({
             onCheckedChange={(checked) => setResetBalance(!!checked)}
             disabled={isCopying}
           />
-          <Label htmlFor='reset-balance' className='text-sm font-normal'>
+          <Label htmlFor='reset-balance' className='text-[#0A0E1A] text-[13px] font-normal'>
             {t('Reset balance and used quota')}
           </Label>
         </div>

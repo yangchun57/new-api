@@ -125,13 +125,13 @@ export function CompactDateTimeRangePicker({
             variant='outline'
             className={cn(
               'w-full justify-start gap-2 px-2.5 text-sm leading-5 font-normal tabular-nums',
-              !start && !end && 'text-muted-foreground',
+              !start && !end && 'text-[#8A93A4]',
               className
             )}
           />
         }
       >
-        <CalendarDays className='text-muted-foreground size-4 shrink-0' />
+        <CalendarDays className='text-[#8A93A4] size-4 shrink-0' />
         <span className='truncate'>{label}</span>
       </PopoverTrigger>
       <PopoverContent
@@ -141,7 +141,7 @@ export function CompactDateTimeRangePicker({
         <div className='space-y-3'>
           <div className='grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-end'>
             <div className='space-y-1.5'>
-              <div className='text-muted-foreground text-xs'>
+              <div className='text-[13px] font-medium text-[#0A0E1A]'>
                 {t('Start Time')}
               </div>
               <Input
@@ -151,11 +151,11 @@ export function CompactDateTimeRangePicker({
                 className='h-8 text-sm leading-5 tabular-nums'
               />
             </div>
-            <span className='text-muted-foreground hidden pb-2 text-xs sm:block'>
+            <span className='text-[#8A93A4] hidden pb-2 text-[12px] sm:block'>
               ~
             </span>
             <div className='space-y-1.5'>
-              <div className='text-muted-foreground text-xs'>
+              <div className='text-[13px] font-medium text-[#0A0E1A]'>
                 {t('End Time')}
               </div>
               <Input

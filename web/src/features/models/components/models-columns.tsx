@@ -187,7 +187,7 @@ export function useModelsColumns(vendors: Vendor[] = []): ColumnDef<Model>[] {
                 </TooltipTrigger>
                 <TooltipContent
                   side='top'
-                  className='border-border bg-popover max-h-48 max-w-[320px] overflow-y-auto p-2'
+                  className='border-[#E5E8EE] bg-popover max-h-48 max-w-[320px] overflow-y-auto p-2'
                 >
                   <div className='flex flex-wrap gap-1'>{matchedBadges}</div>
                 </TooltipContent>
@@ -244,7 +244,7 @@ export function useModelsColumns(vendors: Vendor[] = []): ColumnDef<Model>[] {
         const vendor = vendorMap[vendorId]
 
         if (!vendor) {
-          return <span className='text-muted-foreground text-xs'>-</span>
+          return <span className='text-[#8A93A4] text-[12px]'>-</span>
         }
 
         return (

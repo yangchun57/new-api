@@ -130,9 +130,9 @@ export function RenameDeploymentDialog({
       }
     >
       <div className='space-y-2'>
-        <div className='text-muted-foreground text-sm'>
+        <div className='text-[#8A93A4] text-[13px]'>
           {t('Deployment ID')}:{' '}
-          <span className='font-mono'>{deploymentId}</span>
+          <span className='font-mono tabular-nums text-[#0A0E1A]'>{deploymentId}</span>
         </div>
         <Input
           placeholder={t('Enter a new name')}
@@ -140,7 +140,7 @@ export function RenameDeploymentDialog({
           onChange={(e) => setName(e.target.value)}
           autoComplete='off'
         />
-        <div className='text-muted-foreground text-xs'>{helper}</div>
+        <div className='text-[#8A93A4] text-[12px]'>{helper}</div>
       </div>
     </Dialog>
   )

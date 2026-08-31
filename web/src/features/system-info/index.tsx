@@ -38,7 +38,7 @@ export function SystemInfo() {
         </span>
       </SectionPageLayout.Title>
       <SectionPageLayout.Content>
-        <div className='space-y-4'>
+        <div className='space-y-6'>
           <SystemInstancesPanel />
           <SystemTasksPanel />
         </div>

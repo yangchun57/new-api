@@ -104,7 +104,7 @@ function SegmentedControl(props: {
     <div
       role='group'
       aria-label={props.ariaLabel}
-      className='bg-muted/60 inline-flex h-8 items-center rounded-lg border p-0.5'
+      className='inline-flex h-8 items-center gap-0.5 rounded-full border border-[#E5E8EE] bg-white p-0.5 pl-nav-shadow'
     >
       {props.options.map((option) => {
         const Icon = option.icon
@@ -116,11 +116,11 @@ function SegmentedControl(props: {
             onClick={() => props.onChange(option.value)}
             aria-pressed={isActive}
             className={cn(
-              'inline-flex h-full items-center justify-center rounded-md text-xs font-medium transition-all',
-              Icon && !option.label ? 'w-7' : 'gap-1.5 px-3',
+              'inline-flex h-full items-center justify-center rounded-full pl-font-display text-[12px] font-semibold transition-all duration-200',
+              Icon && !option.label ? 'w-7' : 'gap-1 px-3',
               isActive
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'bg-[#0A0E1A] text-white shadow-[0_2px_6px_rgba(10,14,26,0.15)]'
+                : 'text-[#5A6478] hover:text-[#0A0E1A]'
             )}
           >
             {Icon && <Icon className='size-3.5' />}
@@ -166,7 +166,7 @@ export function PricingToolbar(props: PricingToolbarProps) {
   )
 
   return (
-    <div className='rounded-xl border p-3'>
+    <div className='pl-card p-3 sm:p-4'>
       <div className='flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between'>
         <div className='flex items-center gap-2'>
           <Button
@@ -174,24 +174,26 @@ export function PricingToolbar(props: PricingToolbarProps) {
             variant='outline'
             size='sm'
             onClick={() => setMobileFiltersOpen(true)}
-            className='gap-1.5 xl:hidden'
+            className='h-8 gap-1.5 rounded-full border-[#E5E8EE] bg-white pl-nav-shadow text-[12px] pl-cta-secondary xl:hidden'
           >
-            <Filter className='size-4' />
+            <Filter className='size-3.5' />
             {t('Filter')}
             {props.activeFilterCount > 0 && (
-              <Badge className='ml-0.5 size-5 justify-center p-0 text-[10px]'>
+              <Badge className='ml-0.5 size-5 justify-center rounded-full bg-[#0A0E1A] p-0 pl-font-mono text-[10px] text-white hover:bg-[#0A0E1A]'>
                 {props.activeFilterCount}
               </Badge>
             )}
           </Button>
 
-          <div className='text-muted-foreground flex items-baseline gap-1 text-sm'>
-            <span className='text-foreground font-semibold tabular-nums'>
+          <div className='flex items-baseline gap-1.5 pl-font-display text-[13px] text-[#5A6478]'>
+            <span className='text-[#0A0E1A] font-bold tabular-nums'>
               {props.filteredCount.toLocaleString()}
             </span>
-            <span>{props.filteredCount === 1 ? t('model') : t('models')}</span>
+            <span>
+              {props.filteredCount === 1 ? t('model') : t('models')}
+            </span>
             {props.hasActiveFilters && props.totalCount && (
-              <span className='text-muted-foreground/60 text-xs'>
+              <span className='text-[#8A93A4] text-[12px]'>
                 / {props.totalCount.toLocaleString()}
               </span>
             )}
@@ -227,19 +229,24 @@ export function PricingToolbar(props: PricingToolbarProps) {
                   type='button'
                   variant='outline'
                   size='sm'
-                  className='h-8 gap-1.5 px-3 text-xs'
+                  className='h-8 gap-1.5 rounded-full border-[#E5E8EE] bg-white px-3 pl-nav-shadow pl-cta-secondary pl-font-display text-[12px] font-semibold text-[#0A0E1A]'
                 />
               }
             >
               <ArrowUpDown className='size-3.5' />
-              <span>{sortLabels[props.sortBy as SortOption] || t('Sort')}</span>
+              <span>
+                {sortLabels[props.sortBy as SortOption] || t('Sort')}
+              </span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align='end' className='w-44'>
+            <DropdownMenuContent
+              align='end'
+              className='w-44 rounded-xl border-[#E5E8EE] p-1.5 pl-nav-shadow'
+            >
               {Object.entries(sortLabels).map(([value, label]) => (
                 <DropdownMenuItem
                   key={value}
                   onClick={() => props.onSortChange(value)}
-                  className='gap-2'
+                  className='gap-2 rounded-lg text-[13px]'
                 >
                   <Check
                     className={cn(

@@ -95,7 +95,7 @@ export function useDrawingLogsColumns(
 
         return (
           <div className='flex min-w-0 flex-col gap-0.5'>
-            <span className='truncate font-mono text-xs tabular-nums'>
+            <span className='truncate text-[12px] tabular-nums text-[#8A93A4]'>
               {formatTimestampToDate(submitTime, 'milliseconds')}
             </span>
             <StatusBadge
@@ -103,6 +103,7 @@ export function useDrawingLogsColumns(
               variant={mjStatusMapper.getVariant(log.status)}
               size='sm'
               copyable={false}
+              className='-ml-1.5 text-[12px] [&_span]:text-[12px]'
             />
           </div>
         )
@@ -129,7 +130,7 @@ export function useDrawingLogsColumns(
           icon={getDrawingTypeIcon(action)}
           size='sm'
           copyable={false}
-          className='-ml-1.5'
+          className='-ml-1.5 text-[12px] [&_span]:text-[12px]'
         />
       )
     },
@@ -142,7 +143,7 @@ export function useDrawingLogsColumns(
       const mjId = row.getValue('mj_id') as string
 
       if (!mjId) {
-        return <span className='text-muted-foreground/60 text-xs'>-</span>
+        return <span className='text-[12px] text-[#8A93A4]'>-</span>
       }
 
       return (
@@ -152,7 +153,7 @@ export function useDrawingLogsColumns(
             copyText={mjId}
             variant='neutral'
             size='sm'
-            className='border-border/60 bg-muted/30 !text-foreground max-w-full truncate rounded-md border px-1.5 py-0.5 font-mono'
+            className='max-w-full truncate rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#0A0E1A]'
           />
         </div>
       )
@@ -181,7 +182,7 @@ export function useDrawingLogsColumns(
             variant={mjSubmitResultMapper.getVariant(String(code))}
             size='sm'
             copyable={false}
-            className='-ml-1.5'
+            className='-ml-1.5 text-[12px] [&_span]:text-[12px]'
           />
         )
       },
@@ -199,18 +200,18 @@ export function useDrawingLogsColumns(
         const [dialogOpen, setDialogOpen] = useState(false)
 
         if (!imageUrl) {
-          return <span className='text-muted-foreground/60 text-xs'>-</span>
+          return <span className='text-[12px] text-[#8A93A4]'>-</span>
         }
 
         return (
           <>
             <button
               type='button'
-              className='group text-left text-xs'
+              className='group text-left text-[12px]'
               onClick={() => setDialogOpen(true)}
               title={t('Click to view image')}
             >
-              <span className='text-foreground truncate leading-snug group-hover:underline'>
+              <span className='truncate leading-snug text-[#0A0E1A] group-hover:underline'>
                 {t('View')}
               </span>
             </button>
@@ -233,18 +234,18 @@ export function useDrawingLogsColumns(
         const [dialogOpen, setDialogOpen] = useState(false)
 
         if (!prompt) {
-          return <span className='text-muted-foreground/60 text-xs'>-</span>
+          return <span className='text-[12px] text-[#8A93A4]'>-</span>
         }
 
         return (
           <>
             <button
               type='button'
-              className='group flex max-w-[220px] items-center text-left text-xs'
+              className='group flex max-w-[220px] items-center text-left text-[12px]'
               onClick={() => setDialogOpen(true)}
               title={t('Click to view full prompt')}
             >
-              <span className='text-muted-foreground truncate leading-snug group-hover:underline'>
+              <span className='truncate leading-snug text-[#5A6478] group-hover:underline'>
                 {prompt}
               </span>
             </button>

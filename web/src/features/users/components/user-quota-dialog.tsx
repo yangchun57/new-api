@@ -129,10 +129,10 @@ export function UserQuotaDialog(props: UserQuotaDialogProps) {
       }
     >
       <div className='space-y-4'>
-        <div className='text-muted-foreground text-sm'>{getPreviewText()}</div>
+        <div className='rounded-xl border border-[#E5E8EE] bg-[#F7F8FA] px-4 py-3 text-[13px] font-medium tabular-nums text-[#0A0E1A]'>{getPreviewText()}</div>
 
         <div className='space-y-2'>
-          <Label>{t('Mode')}</Label>
+          <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Mode')}</Label>
           <div className='flex gap-1'>
             {(['add', 'subtract', 'override'] as const).map((m) => (
               <Button
@@ -160,7 +160,7 @@ export function UserQuotaDialog(props: UserQuotaDialogProps) {
         </div>
 
         <div className='space-y-2'>
-          <Label>
+          <Label className='text-[13px] font-medium text-[#0A0E1A]'>
             {t('Amount')} ({currencyLabel})
           </Label>
           <Input

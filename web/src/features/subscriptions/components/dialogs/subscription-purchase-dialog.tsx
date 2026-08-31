@@ -271,53 +271,53 @@ export function SubscriptionPurchaseDialog(props: Props) {
       bodyClassName='space-y-4'
     >
       <div className='space-y-3 sm:space-y-4'>
-        <div className='bg-muted/50 space-y-2.5 rounded-lg border p-3 sm:space-y-3 sm:p-4'>
+        <div className='space-y-2.5 rounded-xl border border-[#E5E8EE] bg-[#F7F8FA] p-3 sm:space-y-3 sm:p-4'>
           <div className='flex justify-between'>
-            <span className='text-muted-foreground text-sm'>
+            <span className='text-[13px] text-[#8A93A4]'>
               {t('Plan Name')}
             </span>
-            <span className='max-w-[200px] truncate text-sm font-medium'>
+            <span className='max-w-[200px] truncate text-[13px] font-medium text-[#0A0E1A]'>
               {plan.title}
             </span>
           </div>
           <div className='flex items-center justify-between'>
-            <span className='text-muted-foreground text-sm'>
+            <span className='text-[13px] text-[#8A93A4]'>
               {t('Validity Period')}
             </span>
-            <span className='flex items-center gap-1 text-sm'>
+            <span className='flex items-center gap-1 text-[13px] text-[#0A0E1A]'>
               <CalendarClock className='h-3.5 w-3.5' />
               {formatDuration(plan, t)}
             </span>
           </div>
           {formatResetPeriod(plan, t) !== t('No Reset') && (
             <div className='flex justify-between'>
-              <span className='text-muted-foreground text-sm'>
+              <span className='text-[13px] text-[#8A93A4]'>
                 {t('Reset Period')}
               </span>
-              <span className='text-sm'>{formatResetPeriod(plan, t)}</span>
+              <span className='text-[13px] text-[#0A0E1A]'>{formatResetPeriod(plan, t)}</span>
             </div>
           )}
           <div className='flex items-center justify-between'>
-            <span className='text-muted-foreground text-sm'>
+            <span className='text-[13px] text-[#8A93A4]'>
               {t('Plan Quota')}
             </span>
-            <span className='flex items-center gap-1 text-sm'>
+            <span className='flex items-center gap-1 text-[13px] text-[#0A0E1A]'>
               <Package className='h-3.5 w-3.5' />
               {totalAmount > 0 ? formatQuota(totalAmount) : t('Unlimited')}
             </span>
           </div>
           {plan.upgrade_group && (
             <div className='flex items-center justify-between'>
-              <span className='text-muted-foreground text-sm'>
+              <span className='text-[13px] text-[#8A93A4]'>
                 {t('Upgrade Group')}
               </span>
               <GroupBadge group={plan.upgrade_group} />
             </div>
           )}
-          <Separator />
+          <Separator className='bg-[#E5E8EE]' />
           <div className='flex items-center justify-between'>
-            <span className='text-sm font-medium'>{t('Amount Due')}</span>
-            <span className='text-primary text-lg font-bold'>${price}</span>
+            <span className='text-[13px] font-medium text-[#0A0E1A]'>{t('Amount Due')}</span>
+            <span className='text-lg font-bold text-[#0A0E1A]'>${price}</span>
           </div>
         </div>
 
@@ -330,14 +330,14 @@ export function SubscriptionPurchaseDialog(props: Props) {
           </Alert>
         )}
 
-        <div className='flex flex-col gap-2 rounded-md border p-3'>
-          <div className='flex items-center justify-between gap-2 text-xs'>
-            <span className='text-muted-foreground'>{t('Required')}</span>
-            <span>{formatQuota(balanceCost)}</span>
+        <div className='flex flex-col gap-2 rounded-xl border border-[#E5E8EE] bg-[#FFFFFF] p-3'>
+          <div className='flex items-center justify-between gap-2 text-[12px]'>
+            <span className='text-[#8A93A4]'>{t('Required')}</span>
+            <span className='text-[#0A0E1A]'>{formatQuota(balanceCost)}</span>
           </div>
-          <div className='flex items-center justify-between gap-2 text-xs'>
-            <span className='text-muted-foreground'>{t('Available')}</span>
-            <span>{formatQuota(userQuota)}</span>
+          <div className='flex items-center justify-between gap-2 text-[12px]'>
+            <span className='text-[#8A93A4]'>{t('Available')}</span>
+            <span className='text-[#0A0E1A]'>{formatQuota(userQuota)}</span>
           </div>
           {!allowBalancePay ? (
             <Alert variant='destructive'>
@@ -365,7 +365,7 @@ export function SubscriptionPurchaseDialog(props: Props) {
 
         {hasAnyPayment && (
           <div className='space-y-3'>
-            <p className='text-muted-foreground text-xs'>
+            <p className='pl-font-mono text-[11px] tracking-[0.08em] text-[#8A93A4]'>
               {t('Select payment method')}
             </p>
             {(hasStripe || hasCreem || hasWaffoPancake) && (

@@ -431,15 +431,15 @@ export function AccountBindingsTab({
           return (
             <div
               key={binding.id}
-              className='flex items-center justify-between gap-2.5 rounded-lg border p-2.5 sm:gap-3 sm:p-3'
+              className='flex items-center justify-between gap-2.5 rounded-xl border p-2.5 sm:gap-3 sm:p-3'
             >
               <div className='flex min-w-0 items-center gap-2.5 sm:gap-3'>
-                <div className='bg-muted shrink-0 rounded-md p-1.5 sm:p-2'>
+                <div className='bg-[#F7F8FA] shrink-0 rounded-md p-1.5 sm:p-2'>
                   <binding.icon className='h-4 w-4' />
                 </div>
                 <div className='min-w-0'>
                   <div className='flex items-center gap-1.5'>
-                    <p className='text-sm font-medium'>{binding.label}</p>
+                    <p className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{binding.label}</p>
                     {binding.isBound && (
                       <StatusBadge
                         label={t('Bound')}
@@ -448,7 +448,7 @@ export function AccountBindingsTab({
                       />
                     )}
                   </div>
-                  <p className='text-muted-foreground truncate text-xs'>
+                  <p className='truncate text-[12px] text-[#8A93A4]'>
                     {binding.value || t('Not bound')}
                   </p>
                 </div>
@@ -471,7 +471,7 @@ export function AccountBindingsTab({
       {customProviders && customProviders.length > 0 && (
         <>
           <Separator className='my-4' />
-          <p className='text-muted-foreground mb-3 text-sm font-medium'>
+          <p className='mb-3 pl-font-mono text-[11px] tracking-[0.08em] text-[#8A93A4]'>
             {t('Custom OAuth')}
           </p>
           <div className='grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3'>
@@ -481,15 +481,15 @@ export function AccountBindingsTab({
               return (
                 <div
                   key={provider.id}
-                  className='flex items-center justify-between gap-2.5 rounded-lg border p-2.5 sm:gap-3 sm:p-3'
+                  className='flex items-center justify-between gap-2.5 rounded-xl border p-2.5 sm:gap-3 sm:p-3'
                 >
                   <div className='flex min-w-0 items-center gap-2.5 sm:gap-3'>
-                    <div className='bg-muted shrink-0 rounded-md p-1.5 sm:p-2'>
+                    <div className='bg-[#F7F8FA] shrink-0 rounded-md p-1.5 sm:p-2'>
                       <Link2 className='h-4 w-4' />
                     </div>
                     <div className='min-w-0'>
                       <div className='flex items-center gap-1.5'>
-                        <p className='text-sm font-medium'>{provider.name}</p>
+                        <p className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{provider.name}</p>
                         {isBound && (
                           <StatusBadge
                             label={t('Bound')}
@@ -498,7 +498,7 @@ export function AccountBindingsTab({
                           />
                         )}
                       </div>
-                      <p className='text-muted-foreground truncate text-xs'>
+                      <p className='truncate text-[12px] text-[#8A93A4]'>
                         {isBound
                           ? binding?.provider_user_id || t('Bound')
                           : t('Not bound')}

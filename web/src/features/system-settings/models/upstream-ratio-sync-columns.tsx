@@ -44,7 +44,7 @@ import type { UpstreamBulkSelectState } from './upstream-ratio-sync-table'
 
 const syncFieldListClassName = 'flex max-w-full min-w-0 flex-col gap-1.5'
 const syncFieldRowClassName =
-  'bg-muted/30 flex h-8 w-fit max-w-full min-w-0 items-center gap-2 rounded-md px-2'
+  'bg-[#F7F8FA] flex h-8 w-fit max-w-full min-w-0 items-center gap-2 rounded-md px-2'
 const syncFieldLabelClassName = 'min-w-[4.5rem] shrink-0'
 
 export function useUpstreamRatioSyncColumns(
@@ -78,7 +78,7 @@ export function useUpstreamRatioSyncColumns(
           const model = row.original.model
           return (
             <div className='flex max-w-full min-w-0 items-center gap-2'>
-              <span className='truncate font-medium'>{model}</span>
+              <span className='truncate font-mono text-[12px] text-[#0A0E1A]'>{model}</span>
               {row.original.billingConflict && (
                 <TooltipProvider>
                   <Tooltip>
@@ -141,7 +141,7 @@ export function useUpstreamRatioSyncColumns(
                                 label={String(current)}
                                 variant='info'
                                 size='sm'
-                                className='max-w-[160px] truncate font-mono'
+                                className='max-w-[160px] truncate font-mono tabular-nums font-semibold text-[#0A0E1A]'
                               />
                             }
                           />
@@ -195,11 +195,11 @@ export function useUpstreamRatioSyncColumns(
                 />
               )}
               <div className='flex min-w-0 flex-1 items-center gap-1.5'>
-                <span className='min-w-0 truncate font-medium'>
+                <span className='min-w-0 truncate font-mono text-[12px] text-[#0A0E1A]'>
                   {displayName}
                 </span>
                 {selectableCount > 0 && (
-                  <span className='bg-muted text-muted-foreground shrink-0 rounded px-1.5 py-0.5 text-[11px] leading-none font-normal tabular-nums'>
+                  <span className='bg-[#F7F8FA] text-[#8A93A4] shrink-0 rounded-md px-1.5 py-0.5 text-[11px] leading-none font-normal tabular-nums'>
                     {selectedCount}/{selectableCount}
                   </span>
                 )}
@@ -347,7 +347,7 @@ function renderUpstreamValue(args: RenderUpstreamValueArgs) {
         <Tooltip>
           <TooltipTrigger
             render={
-              <span className='inline-block max-w-[240px] cursor-default truncate font-mono text-sm' />
+              <span className='inline-block max-w-[240px] cursor-default truncate font-mono text-[12px] tabular-nums font-semibold text-[#0A0E1A]' />
             }
           >
             {text}

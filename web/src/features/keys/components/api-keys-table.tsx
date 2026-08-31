@@ -72,21 +72,21 @@ function isDisabledApiKeyRow(apiKey: ApiKey) {
 
 function ApiKeysMobileSkeleton() {
   return (
-    <div className='divide-border overflow-hidden rounded-lg border'>
+    <div className='divide-[#E5E8EE] overflow-hidden rounded-xl border border-[#E5E8EE]'>
       {API_KEYS_MOBILE_SKELETON_IDS.map((id) => (
         <div
           key={id}
-          className='space-y-2 border-b px-3 py-2.5 last:border-b-0'
+          className='space-y-2 border-b border-[#E5E8EE] px-3 py-2.5 last:border-b-0'
         >
           <div className='flex items-center justify-between'>
-            <Skeleton className='h-4 w-32' />
+            <Skeleton className='h-4 w-32 rounded-md' />
             <Skeleton className='h-5 w-16 rounded-md' />
           </div>
           <div className='flex items-center justify-between gap-3'>
-            <Skeleton className='h-7 w-44' />
-            <Skeleton className='h-8 w-16' />
+            <Skeleton className='h-7 w-44 rounded-md' />
+            <Skeleton className='h-8 w-16 rounded-md' />
           </div>
-          <Skeleton className='h-3 w-28' />
+          <Skeleton className='h-3 w-28 rounded-md' />
         </div>
       ))}
     </div>
@@ -107,14 +107,14 @@ function ApiKeysMobileList({
 
   if (!rows.length) {
     return (
-      <div className='rounded-lg border p-8'>
+      <div className='rounded-xl border border-[#E5E8EE] bg-white p-8'>
         <Empty className='border-none p-0'>
           <EmptyHeader>
             <EmptyMedia variant='icon'>
-              <Database className='size-6' />
+              <Database className='size-6 text-[#8A93A4]' />
             </EmptyMedia>
-            <EmptyTitle>{t('No API Keys Found')}</EmptyTitle>
-            <EmptyDescription>
+            <EmptyTitle className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('No API Keys Found')}</EmptyTitle>
+            <EmptyDescription className='text-[13px] text-[#5A6478]'>
               {t(
                 'No API keys available. Create your first API key to get started.'
               )}
@@ -126,7 +126,7 @@ function ApiKeysMobileList({
   }
 
   return (
-    <div className='divide-border overflow-hidden rounded-lg border'>
+    <div className='divide-[#E5E8EE] overflow-hidden rounded-xl border border-[#E5E8EE] bg-white'>
       {rows.map((row) => {
         const apiKey = row.original
         const statusConfig = API_KEY_STATUSES[apiKey.status]
@@ -136,16 +136,16 @@ function ApiKeysMobileList({
           <div
             key={row.id}
             className={cn(
-              'bg-card space-y-2.5 border-b px-3 py-2.5 last:border-b-0',
+              'bg-white space-y-2.5 border-b border-[#E5E8EE] px-3 py-2.5 last:border-b-0',
               isDisabledApiKeyRow(apiKey) && DISABLED_ROW_MOBILE
             )}
           >
             <div className='flex items-start justify-between gap-3'>
               <div className='min-w-0'>
-                <div className='truncate text-sm font-semibold'>
+                <div className='truncate text-[13px] font-medium text-[#0A0E1A]'>
                   {apiKey.name}
                 </div>
-                <div className='text-muted-foreground text-[11px]'>
+                <div className='text-[12px] text-[#8A93A4]'>
                   {t('API Key')}
                 </div>
               </div>
@@ -165,14 +165,14 @@ function ApiKeysMobileList({
               <DataTableRowActions row={row} />
             </div>
 
-            <div className='flex items-center justify-between gap-2 text-xs'>
-              <span className='text-muted-foreground'>{t('Quota')}</span>
+            <div className='flex items-center justify-between gap-2 text-[12px]'>
+              <span className='text-[#8A93A4]'>{t('Quota')}</span>
               {apiKey.unlimited_quota ? (
                 <UnlimitedQuotaBadge used={apiKey.used_quota} />
               ) : (
-                <span className='font-medium tabular-nums'>
+                <span className='font-semibold tabular-nums text-[#0A0E1A]'>
                   {formatQuota(apiKey.remain_quota)}
-                  <span className='text-muted-foreground font-normal'>
+                  <span className='text-[#8A93A4] font-normal'>
                     {' / '}
                     {formatQuota(total)}
                   </span>

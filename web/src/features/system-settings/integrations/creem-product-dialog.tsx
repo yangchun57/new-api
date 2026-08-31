@@ -172,6 +172,7 @@ export function CreemProductDialog({
                   <Input
                     placeholder={t('e.g., prod_xxx')}
                     disabled={isEditMode}
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
                     {...field}
                   />
                 </FormControl>
@@ -227,6 +228,7 @@ export function CreemProductDialog({
                       step='0.01'
                       min={0.01}
                       placeholder='10.00'
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       {...safeNumberFieldProps(field)}
                     />
                   </FormControl>
@@ -247,6 +249,7 @@ export function CreemProductDialog({
                     type='number'
                     min={1}
                     placeholder={t('e.g., 500000')}
+                    className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                     {...safeNumberFieldProps(field)}
                   />
                 </FormControl>

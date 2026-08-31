@@ -94,19 +94,21 @@ export function PerformanceHealthPanel() {
   return (
     <section
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card h-full overflow-hidden rounded-lg border'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card flex h-full flex-col gap-4 overflow-hidden rounded-xl border p-4 sm:p-5'
     >
-      <div className='flex items-center gap-2 border-b px-4 py-3 sm:px-5'>
-        <IconBadge tone='success' size='sm'>
-          <HeartPulse />
-        </IconBadge>
-        <h3 className='text-sm font-semibold'>{t('Performance health')}</h3>
-        <span className='text-muted-foreground ml-auto text-xs'>
+      <div className='flex flex-col gap-1'>
+        <div className='flex items-center gap-2'>
+          <IconBadge tone='success' size='sm'>
+            <HeartPulse />
+          </IconBadge>
+          <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Performance health')}</h3>
+        </div>
+        <span className='text-[12px] leading-relaxed text-[#8A93A4]'>
           {t('Performance metrics for the last 24 hours')}
         </span>
       </div>
 
-      <div className='space-y-3 p-4 sm:p-5'>
+      <div className='flex flex-col gap-4'>
         <div className='grid grid-cols-3 gap-2'>
           <MetricCell
             icon={HeartPulse}
@@ -133,27 +135,27 @@ export function PerformanceHealthPanel() {
         </div>
 
         {loading ? (
-          <div className='space-y-1'>
+          <div className='flex flex-col gap-1.5'>
             {['success', 'latency', 'throughput'].map((key) => (
-              <Skeleton key={key} className='h-5 w-full rounded' />
+              <Skeleton key={key} className='h-5 w-full rounded-md' />
             ))}
           </div>
         ) : (
           hasData && (
             <div>
-              <span className='text-muted-foreground mb-1 block text-[11px] font-medium'>
+              <span className='mb-2 block text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8A93A4]'>
                 {t('Top models by traffic')}
               </span>
-              <div className='grid grid-cols-1 gap-x-4 sm:grid-cols-2'>
+              <div className='grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2'>
                 {topModels.map((model) => (
                   <div
                     key={model.model_name}
-                    className='flex items-center justify-between gap-2 rounded px-1.5 py-1'
+                    className='flex items-center justify-between gap-2 rounded-md px-2 py-1.5 transition-colors hover:bg-[#F7F8FA]'
                   >
-                    <span className='min-w-0 flex-1 truncate font-mono text-[11px]'>
+                    <span className='min-w-0 flex-1 truncate font-mono text-[12px] text-[#5A6478]'>
                       {model.model_name}
                     </span>
-                    <span className='inline-flex shrink-0 items-center gap-1'>
+                    <span className='inline-flex shrink-0 items-center gap-1.5'>
                       <span
                         className={cn(
                           'size-1.5 rounded-full',
@@ -163,7 +165,7 @@ export function PerformanceHealthPanel() {
                       />
                       <span
                         className={cn(
-                          'font-mono text-[11px] font-semibold tabular-nums',
+                          'font-mono text-[12px] font-semibold tabular-nums tracking-[-0.005em]',
                           getSuccessRateTextClass(model.success_rate)
                         )}
                       >
@@ -191,19 +193,19 @@ function MetricCell(props: {
 }) {
   const Icon = props.icon
   return (
-    <div className='bg-muted/40 rounded-xl px-3 py-2.5'>
-      <div className='text-muted-foreground flex items-center gap-1.5 text-[11px] font-medium'>
+    <div className='rounded-md bg-[#F7F8FA] px-3 py-2.5'>
+      <div className='flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.06em] text-[#8A93A4]'>
         <IconBadge tone={props.tone} size='xs'>
           <Icon />
         </IconBadge>
         <span className='truncate'>{props.label}</span>
       </div>
       {props.loading ? (
-        <Skeleton className='mt-1.5 h-5 w-16' />
+        <Skeleton className='mt-1.5 h-5 w-16 rounded-md' />
       ) : (
         <div
           className={cn(
-            'mt-1.5 font-mono text-sm font-semibold tabular-nums',
+            'mt-1.5 font-mono text-[15px] font-semibold tabular-nums tracking-[-0.01em] text-[#0A0E1A]',
             props.valueClassName
           )}
         >

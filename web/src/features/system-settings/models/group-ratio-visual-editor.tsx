@@ -103,8 +103,8 @@ type RegistryEntry = {
 }
 
 const sectionCardClassName =
-  'relative shadow-sm ring-0 before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:border before:border-border/90'
-const sectionHeaderClassName = 'border-b bg-muted/20'
+  'relative ring-0 before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:border before:border-[#E5E8EE]'
+const sectionHeaderClassName = 'border-b bg-[#F7F8FA]'
 
 let groupPricingIdCounter = 0
 function createGroupPricingId() {
@@ -372,10 +372,10 @@ export const GroupRatioVisualEditor = memo(function GroupRatioVisualEditor({
                 {autoGroupsList.map((group, index) => (
                   <div
                     key={group}
-                    className='flex items-center gap-2 rounded-md border p-3'
+                    className='flex items-center gap-2 rounded-xl border border-[#E5E8EE] p-3'
                   >
-                    <GripVertical className='text-muted-foreground h-4 w-4' />
-                    <span className='font-medium'>{group}</span>
+                    <GripVertical className='h-4 w-4 text-[#8A93A4]' />
+                    <span className='font-mono text-[12px] text-[#0A0E1A]'>{group}</span>
                     {!registryNames.includes(group) && <UnknownGroupBadge />}
                     <div className='ml-auto flex gap-1'>
                       <Button
@@ -551,7 +551,7 @@ function GroupPricingTable({
           <StaticDataTable
             data={rows}
             getRowKey={(row) => row._id}
-            emptyClassName='text-muted-foreground h-20 text-sm'
+            emptyClassName='h-20 text-[13px] text-[#8A93A4]'
             emptyContent={t('No groups yet. Add a group to get started.')}
             columns={[
               {
@@ -631,7 +631,7 @@ function GroupPricingTable({
                       }
                     />
                   ) : (
-                    <span className='text-muted-foreground px-3 text-sm'>
+                    <span className='px-3 text-[13px] text-[#8A93A4]'>
                       -
                     </span>
                   ),
@@ -826,7 +826,7 @@ function GroupOverrideRules({
             <div className='space-y-3'>
               {groupGroupRatioList.map((userGroupData) => (
                 <Collapsible key={userGroupData.userGroup}>
-                  <div className='rounded-lg border'>
+                  <div className='rounded-xl border border-[#E5E8EE]'>
                     <div className='flex items-center justify-between p-4'>
                       <div className='flex items-center gap-2'>
                         <CollapsibleTrigger
@@ -834,7 +834,7 @@ function GroupOverrideRules({
                         >
                           <ChevronDown className='h-4 w-4' />
                         </CollapsibleTrigger>
-                        <span className='font-semibold'>
+                        <span className='font-mono text-[12px] font-semibold text-[#0A0E1A]'>
                           {userGroupData.userGroup}
                         </span>
                         {!registryNames.includes(userGroupData.userGroup) && (
@@ -843,7 +843,7 @@ function GroupOverrideRules({
                             aria-label={t('Not in pricing table')}
                           />
                         )}
-                        <span className='text-muted-foreground text-sm'>
+                        <span className='text-[12px] text-[#8A93A4]'>
                           {t('{{count}} override', {
                             count: userGroupData.overrides.length,
                           })}
@@ -872,7 +872,7 @@ function GroupOverrideRules({
                     </div>
                     <CollapsibleContent>
                       {userGroupData.overrides.length > 0 && (
-                        <div className='border-t'>
+                        <div className='border-t border-[#E5E8EE]'>
                           <StaticDataTable
                             className='rounded-none border-0 bg-transparent shadow-none'
                             data={userGroupData.overrides}
@@ -881,7 +881,7 @@ function GroupOverrideRules({
                               {
                                 id: 'target-group',
                                 header: t('Billing group'),
-                                cellClassName: 'font-medium',
+                                cellClassName: 'font-mono text-[12px] text-[#0A0E1A]',
                                 cell: (override) => (
                                   <span className='inline-flex items-center gap-1.5'>
                                     {override.targetGroup}
@@ -905,10 +905,10 @@ function GroupOverrideRules({
                                   )
                                   return (
                                     <span className='inline-flex items-center gap-1.5'>
-                                      {override.ratio}
+                                      <span className='tabular-nums font-semibold text-[#0A0E1A]'>{override.ratio}</span>
                                       {baseRatio !== undefined &&
                                         baseRatio !== override.ratio && (
-                                          <span className='text-muted-foreground text-xs'>
+                                          <span className='text-[12px] text-[#8A93A4]'>
                                             {t('(instead of {{ratio}})', {
                                               ratio: baseRatio,
                                             })}
@@ -1091,7 +1091,7 @@ function GroupOverrideDialog({
             placeholder={t('Select a group')}
             onValueChange={setTargetGroup}
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t('The token group that will have a custom ratio')}
           </p>
         </div>
@@ -1107,7 +1107,7 @@ function GroupOverrideDialog({
             }}
             placeholder={baseRatio === undefined ? '0.9' : String(baseRatio)}
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {baseRatio !== undefined
               ? t('(instead of {{ratio}})', { ratio: baseRatio })
               : t(
@@ -1239,41 +1239,41 @@ function GroupDetailSheet(props: GroupDetailSheetProps) {
         {detail && (
           <div className={sideDrawerFormClassName('gap-5')}>
             <section className='space-y-2'>
-              <h3 className='text-sm font-semibold'>{t('Overview')}</h3>
-              <dl className='space-y-1.5 text-sm'>
+              <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Overview')}</h3>
+              <dl className='space-y-1.5 text-[13px]'>
                 <div className='flex justify-between'>
-                  <dt className='text-muted-foreground'>{t('Ratio')}</dt>
-                  <dd className='font-medium'>{detail.ratio ?? '-'}</dd>
+                  <dt className='text-[#8A93A4]'>{t('Ratio')}</dt>
+                  <dd className='tabular-nums font-semibold text-[#0A0E1A]'>{detail.ratio ?? '-'}</dd>
                 </div>
                 <div className='flex justify-between'>
-                  <dt className='text-muted-foreground'>{t('Top-up ratio')}</dt>
-                  <dd className='font-medium'>
+                  <dt className='text-[#8A93A4]'>{t('Top-up ratio')}</dt>
+                  <dd className='font-medium text-[#0A0E1A]'>
                     {detail.topupRatio ?? t('Not set')}
                   </dd>
                 </div>
                 <div className='flex justify-between'>
-                  <dt className='text-muted-foreground'>
+                  <dt className='text-[#8A93A4]'>
                     {t('User selectable')}
                   </dt>
-                  <dd className='font-medium'>
+                  <dd className='font-medium text-[#0A0E1A]'>
                     {detail.selectable ? t('Yes') : t('No')}
                   </dd>
                 </div>
                 {detail.selectable && detail.description && (
                   <div className='flex justify-between gap-4'>
-                    <dt className='text-muted-foreground'>
+                    <dt className='text-[#8A93A4]'>
                       {t('Description')}
                     </dt>
-                    <dd className='text-right font-medium'>
+                    <dd className='text-right font-medium text-[#5A6478]'>
                       {detail.description}
                     </dd>
                   </div>
                 )}
                 <div className='flex justify-between'>
-                  <dt className='text-muted-foreground'>
+                  <dt className='text-[#8A93A4]'>
                     {t('Auto assignment order')}
                   </dt>
-                  <dd className='font-medium'>
+                  <dd className='font-medium text-[#0A0E1A]'>
                     {detail.autoIndex >= 0
                       ? t('Position {{position}}', {
                           position: detail.autoIndex + 1,
@@ -1285,22 +1285,22 @@ function GroupDetailSheet(props: GroupDetailSheetProps) {
             </section>
 
             <section className='space-y-2'>
-              <h3 className='text-sm font-semibold'>
+              <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>
                 {t('Ratio overrides when billed as this group')}
               </h3>
               {detail.incomingOverrides.length === 0 ? (
-                <p className='text-muted-foreground text-sm'>{t('None')}</p>
+                <p className='text-[13px] text-[#8A93A4]'>{t('None')}</p>
               ) : (
-                <ul className='space-y-1 text-sm'>
+                <ul className='space-y-1 text-[13px]'>
                   {detail.incomingOverrides.map((item) => (
                     <li
                       key={item.userGroup}
-                      className='flex justify-between rounded-md border px-3 py-1.5'
+                      className='flex justify-between rounded-md border border-[#E5E8EE] px-3 py-1.5 text-[#5A6478]'
                     >
                       <span>
                         {t('Users in {{group}}', { group: item.userGroup })}
                       </span>
-                      <span className='font-medium'>{item.ratio}</span>
+                      <span className='tabular-nums font-semibold text-[#0A0E1A]'>{item.ratio}</span>
                     </li>
                   ))}
                 </ul>
@@ -1308,24 +1308,24 @@ function GroupDetailSheet(props: GroupDetailSheetProps) {
             </section>
 
             <section className='space-y-2'>
-              <h3 className='text-sm font-semibold'>
+              <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>
                 {t('Ratio overrides for users of this group')}
               </h3>
               {detail.outgoingOverrides.length === 0 ? (
-                <p className='text-muted-foreground text-sm'>{t('None')}</p>
+                <p className='text-[13px] text-[#8A93A4]'>{t('None')}</p>
               ) : (
-                <ul className='space-y-1 text-sm'>
+                <ul className='space-y-1 text-[13px]'>
                   {detail.outgoingOverrides.map((item) => (
                     <li
                       key={item.targetGroup}
-                      className='flex justify-between rounded-md border px-3 py-1.5'
+                      className='flex justify-between rounded-md border border-[#E5E8EE] px-3 py-1.5 text-[#5A6478]'
                     >
                       <span>
                         {t('When billed as {{group}}', {
                           group: item.targetGroup,
                         })}
                       </span>
-                      <span className='font-medium'>{item.ratio}</span>
+                      <span className='tabular-nums font-semibold text-[#0A0E1A]'>{item.ratio}</span>
                     </li>
                   ))}
                 </ul>
@@ -1333,17 +1333,17 @@ function GroupDetailSheet(props: GroupDetailSheetProps) {
             </section>
 
             <section className='space-y-2'>
-              <h3 className='text-sm font-semibold'>
+              <h3 className='text-[14px] font-semibold text-[#0A0E1A]'>
                 {t('Special visibility rules')}
               </h3>
               {detail.visibilityRules.length === 0 ? (
-                <p className='text-muted-foreground text-sm'>{t('None')}</p>
+                <p className='text-[13px] text-[#8A93A4]'>{t('None')}</p>
               ) : (
-                <ul className='space-y-1 text-sm'>
+                <ul className='space-y-1 text-[13px]'>
                   {detail.visibilityRules.map((rule) => (
                     <li
                       key={`${rule.userGroup}-${rule.visible}`}
-                      className='flex items-center justify-between rounded-md border px-3 py-1.5'
+                      className='flex items-center justify-between rounded-md border border-[#E5E8EE] px-3 py-1.5 text-[#5A6478]'
                     >
                       <span>
                         {rule.visible

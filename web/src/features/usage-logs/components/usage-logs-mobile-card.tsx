@@ -51,10 +51,8 @@ import { StreamTpsCell, TimingMetricsCell } from './timing-metrics-cell'
 import { useUsageLogsContext } from './usage-logs-provider'
 
 const logTypeRowTint: Record<number, string> = {
-  [LOG_TYPE_ENUM.ERROR]:
-    'bg-rose-50/40 dark:bg-rose-950/20 border-rose-200/50 dark:border-rose-900/30',
-  [LOG_TYPE_ENUM.REFUND]:
-    'bg-blue-50/30 dark:bg-blue-950/15 border-blue-200/50 dark:border-blue-900/30',
+  [LOG_TYPE_ENUM.ERROR]: 'bg-[#FEF2F2]/60 border-[#FECACA]/70',
+  [LOG_TYPE_ENUM.REFUND]: 'bg-[#EFF6FF]/50 border-[#BFDBFE]/70',
 }
 
 interface UsageLogsMobileListProps<TData> {
@@ -67,11 +65,11 @@ interface UsageLogsMobileListProps<TData> {
 
 function UsageLogsMobileSkeleton() {
   return (
-    <div className='border-border/50 bg-card overflow-hidden rounded-lg border'>
+    <div className='overflow-hidden rounded-xl border border-[#E5E8EE] bg-white'>
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className='border-border/40 space-y-2.5 border-b p-3 last:border-b-0'
+          className='space-y-2.5 border-b border-[#E5E8EE] p-3 last:border-b-0'
         >
           <div className='flex items-center justify-between gap-3'>
             <Skeleton className='h-5 w-40 rounded-md' />
@@ -114,7 +112,7 @@ function CompactCell<TData>({
       {cell ? (
         flexRender(cell.column.columnDef.cell, cell.getContext())
       ) : (
-        <span className='text-muted-foreground/50'>{fallback}</span>
+        <span className='text-[#8A93A4]'>{fallback}</span>
       )}
     </div>
   )
@@ -135,15 +133,17 @@ function SummaryField<TData>({
 }) {
   if (!cell) return null
 
+  const showLabel = label != null && label !== ''
+
   return (
     <div
-      className={cn('bg-muted/20 min-w-0 rounded-md px-2 py-1.5', className)}
+      className={cn('min-w-0 rounded-md bg-[#F7F8FA] px-2 py-1.5', className)}
     >
-      {label != null && label !== '' && (
-        <div className='text-muted-foreground mb-1 text-[11px] leading-none font-medium select-none'>
+      {showLabel ? (
+        <div className='pl-font-mono mb-1 select-none text-[11px] font-medium leading-none text-[#8A93A4]'>
           {label}
         </div>
-      )}
+      ) : null}
       <CompactCell
         cell={cell}
         primaryOnly={primaryOnly}
@@ -168,17 +168,20 @@ function MobileLogTimeStatus({
 
   return (
     <div className='space-y-1'>
-      <div className='font-mono text-xs leading-tight tabular-nums'>
+      <div className='text-[12px] leading-tight tabular-nums text-[#8A93A4]'>
         {formatTimestampToDate(timestamp)}
       </div>
       <div
         className={cn(
-          'inline-flex items-center gap-1 text-xs leading-none font-medium',
+          'inline-flex items-center gap-1 text-[12px] font-medium leading-none',
           textColorMap[variant]
         )}
       >
         <span
-          className={cn('size-1.5 shrink-0 rounded-full', dotColorMap[variant])}
+          className={cn(
+            'size-1.5 shrink-0 rounded-full',
+            dotColorMap[variant]
+          )}
           aria-hidden='true'
         />
         <span>{t(config.label)}</span>
@@ -187,7 +190,6 @@ function MobileLogTimeStatus({
   )
 }
 
-/** Mobile-only Tokens block: always show cache ↓/↑ when present (no label). */
 function MobileTokensField({ log }: { log: UsageLog }) {
   const { t } = useTranslation()
 
@@ -197,8 +199,8 @@ function MobileTokensField({ log }: { log: UsageLog }) {
   const completionTokens = log.completion_tokens || 0
   if (promptTokens === 0 && completionTokens === 0) {
     return (
-      <div className='bg-muted/20 min-w-0 rounded-md px-2 py-1.5'>
-        <span className='text-muted-foreground text-xs'>-</span>
+      <div className='min-w-0 rounded-md bg-[#F7F8FA] px-2 py-1.5'>
+        <span className='text-[12px] text-[#8A93A4]'>-</span>
       </div>
     )
   }
@@ -214,24 +216,24 @@ function MobileTokensField({ log }: { log: UsageLog }) {
   const showCache = cacheReadTokens > 0 || cacheWriteTokens > 0
 
   return (
-    <div className='bg-muted/20 min-w-0 rounded-md px-2 py-1.5'>
+    <div className='min-w-0 rounded-md bg-[#F7F8FA] px-2 py-1.5'>
       <div className='flex flex-col gap-0.5'>
-        <span className='font-mono text-xs font-medium tabular-nums'>
+        <span className='text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
           {promptTokens.toLocaleString()} / {completionTokens.toLocaleString()}
         </span>
         {showCache ? (
-          <div className='text-muted-foreground flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[11px] leading-none'>
-            {cacheReadTokens > 0 && (
+          <div className='flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[11px] leading-none text-[#8A93A4]'>
+            {cacheReadTokens > 0 ? (
               <span>
                 {t('Cache')}↓ {cacheReadTokens.toLocaleString()}
               </span>
-            )}
-            {cacheWriteTokens > 0 && (
+            ) : null}
+            {cacheWriteTokens > 0 ? (
               <span>↑ {cacheWriteTokens.toLocaleString()}</span>
-            )}
+            ) : null}
           </div>
         ) : (
-          <span className='text-muted-foreground/50 text-[11px] leading-none'>
+          <span className='text-[11px] leading-none text-[#B8BFCC]'>
             —
           </span>
         )}
@@ -240,7 +242,6 @@ function MobileTokensField({ log }: { log: UsageLog }) {
   )
 }
 
-/** Mobile-only User block: own layout so avatar/name always line up on the same baseline. */
 function MobileUserField({ log }: { log: UsageLog }) {
   const { sensitiveVisible, setSelectedUserId, setUserInfoDialogOpen } =
     useUsageLogsContext()
@@ -250,18 +251,18 @@ function MobileUserField({ log }: { log: UsageLog }) {
   return (
     <button
       type='button'
-      className='bg-muted/20 flex min-w-0 items-center gap-1.5 rounded-md px-2 py-1.5 text-left'
+      className='flex min-w-0 items-center gap-1.5 rounded-md bg-[#F7F8FA] px-2 py-1.5 text-left'
       onClick={(e) => {
         e.stopPropagation()
         setSelectedUserId(log.user_id)
         setUserInfoDialogOpen(true)
       }}
     >
-      <Avatar className='ring-border/60 size-6 shrink-0 ring-1'>
+      <Avatar className='size-6 shrink-0 ring-1 ring-[#E5E8EE]'>
         <AvatarFallback
           className={cn(
             'text-[11px] font-semibold',
-            !sensitiveVisible && 'bg-muted text-muted-foreground'
+            !sensitiveVisible && 'bg-[#F7F8FA] text-[#8A93A4]'
           )}
           style={
             sensitiveVisible ? getUserAvatarStyle(log.username) : undefined
@@ -270,14 +271,13 @@ function MobileUserField({ log }: { log: UsageLog }) {
           {sensitiveVisible ? getUserAvatarFallback(log.username) : '•'}
         </AvatarFallback>
       </Avatar>
-      <span className='text-foreground min-w-0 truncate text-sm'>
+      <span className='min-w-0 truncate text-[13px] font-medium text-[#0A0E1A]'>
         {sensitiveVisible ? log.username : '••••'}
       </span>
     </button>
   )
 }
 
-/** Merge stream badge + TPS with first-token / duration on one row. */
 function MobileStreamTimingField({ log }: { log: UsageLog }) {
   if (!isTimingLogType(log.type)) return null
 
@@ -289,7 +289,7 @@ function MobileStreamTimingField({ log }: { log: UsageLog }) {
       : null
 
   return (
-    <div className='bg-muted/20 flex min-w-0 items-center gap-2.5 rounded-md px-2 py-1.5'>
+    <div className='flex min-w-0 items-center gap-2.5 rounded-md bg-[#F7F8FA] px-2 py-1.5'>
       <TimingMetricsCell
         useTimeSec={useTime}
         completionTokens={log.completion_tokens}
@@ -330,7 +330,7 @@ function CommonLogsCard<TData>({
       </div>
 
       <div className='grid grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] gap-1.5'>
-        <div className='bg-muted/20 min-w-0 rounded-md px-2 py-1.5'>
+        <div className='min-w-0 rounded-md bg-[#F7F8FA] px-2 py-1.5'>
           <MobileLogTimeStatus
             createdAt={rowData?.created_at}
             type={rowData?.type}
@@ -469,11 +469,11 @@ export function UsageLogsMobileList<TData>({
 
   if (!rows || rows.length === 0) {
     return (
-      <div className='rounded-lg border p-6'>
+      <div className='rounded-xl border border-[#E5E8EE] bg-white p-6'>
         <Empty className='border-none p-0'>
           <EmptyHeader>
             <EmptyMedia variant='icon'>
-              <Database className='size-6' />
+              <Database className='size-6 text-[#8A93A4]' />
             </EmptyMedia>
             <EmptyTitle>{resolvedEmptyTitle}</EmptyTitle>
             <EmptyDescription>{resolvedEmptyDescription}</EmptyDescription>
@@ -484,7 +484,7 @@ export function UsageLogsMobileList<TData>({
   }
 
   return (
-    <div className='border-border/50 bg-card overflow-hidden rounded-lg border'>
+    <div className='overflow-hidden rounded-xl border border-[#E5E8EE] bg-white'>
       {rows.map((row) => {
         const cells = new Map(
           row.getVisibleCells().map((cell) => [cell.column.id, cell])
@@ -499,13 +499,15 @@ export function UsageLogsMobileList<TData>({
           <div
             key={row.id}
             className={cn(
-              'border-border/40 border-b border-l-2 border-l-transparent p-3 transition-colors last:border-b-0',
+              'border-b border-l-2 border-l-transparent border-b-[#E5E8EE] p-3 transition-colors last:border-b-0',
               tintClass
             )}
           >
-            {logCategory === 'common' && <CommonLogsCard cells={cells} />}
-            {logCategory === 'task' && <TaskLogsCard cells={cells} />}
-            {logCategory === 'drawing' && <DrawingLogsCard cells={cells} />}
+            {logCategory === 'common' ? <CommonLogsCard cells={cells} /> : null}
+            {logCategory === 'task' ? <TaskLogsCard cells={cells} /> : null}
+            {logCategory === 'drawing' ? (
+              <DrawingLogsCard cells={cells} />
+            ) : null}
           </div>
         )
       })}

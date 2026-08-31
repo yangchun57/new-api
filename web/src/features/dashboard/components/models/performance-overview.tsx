@@ -105,9 +105,9 @@ export function PerformanceOverview() {
     return (
       <div
         data-slot='card'
-        className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border p-4 sm:p-5'
+        className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-xl border p-4 sm:p-5'
       >
-        <div className='text-muted-foreground text-center text-xs'>
+        <div className='py-4 text-center text-[13px] text-[#8A93A4]'>
           {t('No performance data available')}
         </div>
       </div>
@@ -117,29 +117,26 @@ export function PerformanceOverview() {
   return (
     <div
       data-slot='card'
-      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border p-4 sm:p-5'
+      className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-xl border p-4 sm:p-5'
     >
-      <div className='flex flex-wrap items-center gap-x-5 gap-y-2.5'>
-        {/* Title */}
-        <div className='flex items-center gap-1.5'>
-          <IconBadge tone='success' size='xs'>
+      <div className='flex flex-wrap items-center gap-x-5 gap-y-3'>
+        <div className='flex items-center gap-2'>
+          <IconBadge tone='success' size='sm'>
             <HeartPulse />
           </IconBadge>
-          <span className='text-xs font-semibold whitespace-nowrap'>
+          <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
             {t('Performance health')}
-          </span>
+          </h3>
         </div>
 
-        {/* Separator */}
-        <div className='bg-border hidden h-4 w-px sm:block' />
+        <div className='hidden h-4 w-px bg-[#E5E8EE] sm:block' />
 
-        {/* 3 KPI inline metrics */}
         {loading ? (
           <div className='flex flex-wrap items-center gap-x-5 gap-y-2'>
             {['success', 'latency', 'throughput'].map((key) => (
-              <div key={key} className='flex items-center gap-1.5'>
-                <Skeleton className='h-3 w-14' />
-                <Skeleton className='h-4 w-16' />
+              <div key={key} className='flex items-center gap-2'>
+                <Skeleton className='h-3.5 w-20 rounded-md' />
+                <Skeleton className='h-4 w-14 rounded-md' />
               </div>
             ))}
           </div>
@@ -167,10 +164,8 @@ export function PerformanceOverview() {
           </div>
         )}
 
-        {/* Separator */}
-        <div className='bg-border hidden h-4 w-px lg:block' />
+        <div className='hidden h-4 w-px bg-[#E5E8EE] lg:block' />
 
-        {/* Top models inline badges */}
         {!loading && hasData && (
           <div className='flex flex-wrap items-center gap-1.5'>
             {topModels.map((model) => (
@@ -197,10 +192,12 @@ function InlineMetric(props: {
       <IconBadge tone={props.tone} size='xs'>
         <Icon />
       </IconBadge>
-      <span className='text-muted-foreground text-[11px]'>{props.label}</span>
+      <span className='text-[11px] font-medium uppercase tracking-[0.06em] text-[#8A93A4]'>
+        {props.label}
+      </span>
       <span
         className={cn(
-          'font-mono text-xs font-semibold tabular-nums',
+          'font-mono text-[13px] font-semibold tabular-nums tracking-[-0.01em]',
           props.valueClassName
         )}
       >
@@ -214,8 +211,8 @@ function ModelBadge(props: { model: PerfModelSummary }) {
   const model = props.model
 
   return (
-    <span className='bg-muted/50 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1'>
-      <span className='max-w-[10rem] truncate font-mono text-[11px]'>
+    <span className='inline-flex items-center gap-1.5 rounded-full bg-[#F7F8FA] px-2.5 py-1 transition-colors hover:bg-[#F0F2F6]'>
+      <span className='max-w-[10rem] truncate font-mono text-[11px] text-[#5A6478]'>
         {model.model_name}
       </span>
       <span

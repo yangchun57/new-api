@@ -21,10 +21,7 @@ import { AlertTriangle, HeartPulse, Timer } from 'lucide-react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  StaticDataTable,
-  staticDataTableClassNames as tableStyles,
-} from '@/components/data-table'
+import { StaticDataTable } from '@/components/data-table'
 import { GroupBadge } from '@/components/group-badge'
 import { getPerfMetrics } from '@/features/performance-metrics/api'
 import {
@@ -34,7 +31,6 @@ import {
   getSuccessRateTextClass,
 } from '@/features/performance-metrics/lib/format'
 import type { PerformanceGroup } from '@/features/performance-metrics/types'
-import { cn } from '@/lib/utils'
 
 import { type UptimeDayPoint } from '../lib/mock-stats'
 import type { PricingModel } from '../types'
@@ -50,23 +46,22 @@ function StatCard(props: {
 }) {
   const Icon = props.icon
   return (
-    <div className='bg-background flex flex-col gap-1 rounded-lg border p-3'>
-      <span className='text-muted-foreground inline-flex items-center gap-1.5 text-[10px] font-medium tracking-wider uppercase'>
-        <Icon className='size-3' />
-        {props.label}
-      </span>
-      <span
-        className={cn(
-          'text-foreground font-mono text-lg font-semibold tabular-nums',
-          props.valueClassName
-        )}
+    <div className='rounded-2xl border border-[#E5E8EE] bg-white p-4 shadow-sm'>
+      <div className='flex items-center gap-2'>
+        <span className='inline-flex size-7 items-center justify-center rounded-full bg-[#F7F8FA]'>
+          <Icon className='size-3.5 text-[#5A6478]' />
+        </span>
+        <span className='pl-font-mono text-[9px] text-[#8A93A4]'>
+          {props.label}
+        </span>
+      </div>
+      <div
+        className={'mt-3 font-mono text-[18px] font-semibold tabular-nums text-[#0A0E1A] ' + (props.valueClassName ?? '')}
       >
         {props.value}
-      </span>
+      </div>
       {props.hint && (
-        <span className='text-muted-foreground/70 text-[11px]'>
-          {props.hint}
-        </span>
+        <div className='mt-1 text-[12px] text-[#8A93A4]'>{props.hint}</div>
       )}
     </div>
   )
@@ -161,6 +156,14 @@ function average(
   )
 }
 
+const plTh = 'pl-font-mono py-3 text-[9px] text-[#8A93A4]'
+const plThRight = plTh + ' text-right'
+const plCell = 'py-3 text-[13px] text-[#5A6478]'
+const plCellNum =
+  'py-3 text-right font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'
+const plCellMutedNum =
+  'py-3 text-right font-mono text-[13px] tabular-nums text-[#8A93A4]'
+
 export function ModelDetailsPerformance(props: { model: PricingModel }) {
   const { t } = useTranslation()
   const metricsQuery = useQuery({
@@ -195,8 +198,10 @@ export function ModelDetailsPerformance(props: { model: PricingModel }) {
 
   if (metricsQuery.isLoading || performances.length === 0) {
     return (
-      <div className='text-muted-foreground rounded-lg border p-6 text-center text-sm'>
-        {t('Performance data is not yet available for this model.')}
+      <div className='rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] px-6 py-12 text-center'>
+        <p className='text-[13px] text-[#8A93A4]'>
+          {t('Performance data is not yet available for this model.')}
+        </p>
       </div>
     )
   }
@@ -220,8 +225,8 @@ export function ModelDetailsPerformance(props: { model: PricingModel }) {
   const incidentCount = uptimeSeries.reduce((s, p) => s + p.incidents, 0)
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='grid grid-cols-1 gap-2 sm:grid-cols-3'>
+    <div className='flex flex-col gap-6'>
+      <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
         <StatCard
           icon={Timer}
           label='TPS'
@@ -255,45 +260,46 @@ export function ModelDetailsPerformance(props: { model: PricingModel }) {
           description={t('Average latency, TTFT, TPS, and success rate')}
         />
         <StaticDataTable
-          className='rounded-lg'
-          tableClassName='text-sm'
-          headerRowClassName={tableStyles.compactHeaderRow}
+          className='overflow-hidden rounded-2xl border border-[#E5E8EE] bg-white'
+          tableClassName='text-[13px]'
+          headerRowClassName='bg-[#FAFBFC] hover:bg-transparent'
+          cellClassName='border-t border-[#F0F2F6]'
           data={performances}
           getRowKey={(perf) => perf.group}
           columns={[
             {
               id: 'group',
               header: t('Group'),
-              className: tableStyles.compactHeaderCell,
-              cellClassName: tableStyles.compactCell,
+              className: plTh,
+              cellClassName: plCell,
               cell: (perf) => <GroupBadge group={perf.group} size='sm' />,
             },
             {
               id: 'tps',
               header: 'TPS',
-              className: tableStyles.compactHeaderCellRight,
-              cellClassName: tableStyles.compactNumericCell,
+              className: plThRight,
+              cellClassName: plCellNum,
               cell: (perf) => formatThroughput(perf.avg_tps),
             },
             {
               id: 'ttft',
               header: t('Average TTFT'),
-              className: tableStyles.compactHeaderCellRight,
-              cellClassName: tableStyles.compactNumericCell,
+              className: plThRight,
+              cellClassName: plCellNum,
               cell: (perf) => formatLatency(perf.avg_ttft_ms),
             },
             {
               id: 'latency',
               header: t('Average latency'),
-              className: tableStyles.compactHeaderCellRight,
-              cellClassName: tableStyles.compactMutedNumericCell,
+              className: plThRight,
+              cellClassName: plCellMutedNum,
               cell: (perf) => formatLatency(perf.avg_latency_ms),
             },
             {
               id: 'success',
               header: t('Success rate'),
-              className: cn(tableStyles.compactHeaderCell, 'min-w-[180px]'),
-              cellClassName: tableStyles.compactCell,
+              className: plTh + ' min-w-[180px]',
+              cellClassName: plCell,
               cell: (perf) => (
                 <UptimeSparkline
                   size='sm'
@@ -330,8 +336,8 @@ export function ModelDetailsPerformance(props: { model: PricingModel }) {
           }
           accent={
             incidentCount > 0 ? (
-              <span className='inline-flex items-center gap-1 text-amber-600 dark:text-amber-400'>
-                <AlertTriangle className='size-3.5' />
+              <span className='inline-flex items-center gap-1 rounded-full border border-[#FCD34D]/70 bg-[#FEF9E7] px-2 py-0.5 text-[11px] font-medium text-[#B45309]'>
+                <AlertTriangle className='size-3' />
                 {t('{{count}} incidents', {
                   count: incidentCount,
                 })}
@@ -353,23 +359,21 @@ function SectionHeader(props: {
 }) {
   const Icon = props.icon
   return (
-    <div className='mb-2 flex flex-wrap items-center justify-between gap-2'>
+    <div className='mb-3 flex flex-wrap items-center justify-between gap-2'>
       <div className='flex min-w-0 items-center gap-2'>
-        <Icon className='text-muted-foreground/70 size-3.5 shrink-0' />
+        <Icon className='size-3.5 shrink-0 text-[#8A93A4]' />
         <div className='min-w-0'>
-          <div className='text-foreground text-sm font-semibold'>
+          <div className='text-[13px] font-semibold text-[#0A0E1A]'>
             {props.title}
           </div>
           {props.description && (
-            <p className='text-muted-foreground/80 text-xs'>
+            <p className='mt-0.5 text-[12px] text-[#8A93A4]'>
               {props.description}
             </p>
           )}
         </div>
       </div>
-      {props.accent && (
-        <div className='shrink-0 text-xs font-medium'>{props.accent}</div>
-      )}
+      {props.accent && <div className='shrink-0'>{props.accent}</div>}
     </div>
   )
 }

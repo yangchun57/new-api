@@ -209,8 +209,8 @@ export function BalanceQueryDialog(props: BalanceQueryDialogProps) {
         ) : (
           <>
             {/* Current Balance Display */}
-            <div className='bg-muted/50 rounded-lg border p-4'>
-              <div className='text-muted-foreground mb-2 flex items-center gap-2 text-sm'>
+            <div className='bg-[#F7F8FA]/70 rounded-xl border p-4'>
+              <div className='text-[#8A93A4] mb-2 flex items-center gap-2 text-[12px] font-medium'>
                 <IconBadge tone='success' size='xs'>
                   <DollarSign />
                 </IconBadge>
@@ -221,7 +221,7 @@ export function BalanceQueryDialog(props: BalanceQueryDialogProps) {
                   ? formatBalance(balance)
                   : formatBalance(currentRow.balance)}
               </div>
-              <div className='text-muted-foreground mt-2 text-xs'>
+              <div className='text-[#8A93A4] mt-2 text-[12px]'>
                 {t('Last updated:')}{' '}
                 {formatDate(
                   balanceUpdatedTime ?? currentRow.balance_updated_time

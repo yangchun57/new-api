@@ -138,14 +138,14 @@ export function NumericSpinnerInput({
   return (
     <div className={cn('inline-flex items-center', className)}>
       {label && (
-        <Label className='text-muted-foreground mr-1.5 text-xs'>{label}</Label>
+        <Label className='text-[#8A93A4] mr-1.5 text-[12px]'>{label}</Label>
       )}
       <div
         onBlur={handleControlBlur}
         className={cn(
           'group/spinner border-input inline-flex h-7 items-center gap-0 rounded-md border transition-colors',
-          !disabled && 'hover:bg-muted/60',
-          editing && 'bg-muted/60 ring-primary/30 ring-1'
+          !disabled && 'hover:bg-[#F0F2F6]',
+          editing && 'bg-[#F0F2F6] ring-primary/30 ring-1'
         )}
       >
         <button
@@ -155,10 +155,10 @@ export function NumericSpinnerInput({
           onClick={handleDecrement}
           disabled={disabled || atMin}
           className={cn(
-            'text-muted-foreground/0 group-hover/spinner:text-muted-foreground flex h-7 w-6 shrink-0 items-center justify-center rounded-l-md transition-colors',
+            'text-[#8A93A4]/0 group-hover/spinner:text-[#8A93A4] flex h-7 w-6 shrink-0 items-center justify-center rounded-l-md transition-colors',
             !disabled &&
               !atMin &&
-              'group-hover/spinner:hover:text-foreground group-hover/spinner:hover:bg-muted',
+              'group-hover/spinner:hover:text-[#0A0E1A] group-hover/spinner:hover:bg-[#F0F2F6]',
             (disabled || atMin) && 'group-hover/spinner:opacity-30'
           )}
         >
@@ -173,7 +173,7 @@ export function NumericSpinnerInput({
             onChange={handleInputChange}
             onBlur={commitValue}
             onKeyDown={handleKeyDown}
-            className='h-7 w-10 bg-transparent text-center font-mono text-sm outline-none'
+            className='h-7 w-10 bg-transparent text-center font-mono text-[12px] outline-none'
             autoFocus
           />
         ) : (
@@ -183,7 +183,7 @@ export function NumericSpinnerInput({
             disabled={disabled}
             title={localValue}
             className={cn(
-              'h-7 min-w-8 max-w-16 cursor-text truncate px-1 text-center font-mono text-sm tabular-nums',
+              'h-7 min-w-8 max-w-16 cursor-text truncate px-1 text-center font-mono text-[12px] tabular-nums',
               disabled && 'cursor-default opacity-50'
             )}
           >
@@ -198,10 +198,10 @@ export function NumericSpinnerInput({
           onClick={handleIncrement}
           disabled={disabled || atMax}
           className={cn(
-            'text-muted-foreground/0 group-hover/spinner:text-muted-foreground flex h-7 w-6 shrink-0 items-center justify-center rounded-r-md transition-colors',
+            'text-[#8A93A4]/0 group-hover/spinner:text-[#8A93A4] flex h-7 w-6 shrink-0 items-center justify-center rounded-r-md transition-colors',
             !disabled &&
               !atMax &&
-              'group-hover/spinner:hover:text-foreground group-hover/spinner:hover:bg-muted',
+              'group-hover/spinner:hover:text-[#0A0E1A] group-hover/spinner:hover:bg-[#F0F2F6]',
             (disabled || atMax) && 'group-hover/spinner:opacity-30'
           )}
         >

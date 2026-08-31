@@ -717,16 +717,16 @@ const ModelRatioVisualEditorComponent = forwardRef<
           />
 
           {!hasRows ? (
-            <div className='text-muted-foreground rounded-lg border border-dashed p-8 text-center'>
+            <div className='text-[#8A93A4] rounded-xl border border-dashed border-[#D8DCE5] p-8 text-center'>
               {emptyStateText}
             </div>
           ) : (
             <DataTableView
               table={table}
-              containerClassName='min-h-0 flex-1 rounded-md'
+              containerClassName='min-h-0 flex-1 rounded-xl'
               tableContainerClassName='h-full'
               tableClassName='min-w-[852px] table-fixed'
-              tableHeaderClassName='[&_tr]:border-b-0'
+              tableHeaderClassName='bg-[#F7F8FA] [&_tr]:border-b-0'
               splitHeaderScrollClassName='h-full'
               bodyContainerClassName='[scrollbar-gutter:stable]'
               splitHeader
@@ -751,13 +751,13 @@ const ModelRatioVisualEditorComponent = forwardRef<
                   row={row}
                   className={
                     editData?.name === row.original.name
-                      ? 'bg-muted/45 hover:bg-muted/50 data-[state=selected]:bg-muted group'
+                      ? 'bg-[#F7F8FA] hover:bg-[#F0F2F6] data-[state=selected]:bg-[#F7F8FA] group'
                       : 'group'
                   }
                   getColumnClassName={(columnId) =>
                     columnId === 'actions' &&
                     editData?.name === row.original.name
-                      ? getCellClassName(columnId, 'bg-muted')
+                      ? getCellClassName(columnId, 'bg-[#F7F8FA]')
                       : getCellClassName(columnId)
                   }
                   onClick={(event) => {
@@ -783,11 +783,11 @@ const ModelRatioVisualEditorComponent = forwardRef<
               className='h-full min-h-0'
             />
           ) : (
-            <div className='bg-card text-muted-foreground flex h-full min-h-0 flex-col items-center justify-center gap-3 rounded-xl border border-dashed p-6 text-center'>
-              <div className='text-foreground text-base font-medium'>
+            <div className='bg-card text-[#8A93A4] flex h-full min-h-0 flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-[#D8DCE5] p-6 text-center'>
+              <div className='text-[#0A0E1A] text-[16px] font-semibold'>
                 {t('Select a model to edit pricing')}
               </div>
-              <p className='max-w-sm text-sm'>
+              <p className='max-w-sm text-[13px] text-[#5A6478]'>
                 {t(
                   'Use the full-width table to scan prices, then select a row to edit it here.'
                 )}

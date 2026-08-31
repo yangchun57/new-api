@@ -92,32 +92,38 @@ export function OAuthCallbackScreen({
 
   return (
     <AuthLayout>
-      <div className='w-full space-y-8'>
-        <div className='flex flex-col items-center space-y-4 text-center'>
-          <div className='bg-muted flex h-16 w-16 items-center justify-center rounded-2xl'>
-            <Icon className='h-8 w-8' />
-          </div>
-          <div className='space-y-2'>
-            <h2 className='text-center text-2xl font-semibold tracking-tight'>
-              {headline}
-            </h2>
-            <p className='text-muted-foreground text-sm sm:text-base'>
-              {description}
-            </p>
-          </div>
+      <div className='w-full space-y-6'>
+        <div className='space-y-2 text-center sm:text-left'>
+          <h1 className='text-[26px] font-semibold leading-tight tracking-tight text-[#0A0E1A]'>
+            {headline}
+          </h1>
+          <p className='text-[14px] leading-relaxed text-[#5A6478]'>
+            {description}
+          </p>
         </div>
 
-        <div className='space-y-4 text-center'>
-          <div className='flex items-center justify-center gap-2 text-sm font-medium'>
-            <Loader2 className='h-4 w-4 animate-spin' />
-            <span>{t('Processing OAuth response...')}</span>
+        <div className='rounded-2xl border border-[#E5E8EE] bg-white p-6 shadow-sm sm:p-10'>
+          <div className='flex flex-col items-center space-y-6 text-center'>
+            <div className='flex h-16 w-16 items-center justify-center rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] text-[#0A0E1A] shadow-sm'>
+              <Icon className='h-7 w-7' />
+            </div>
+
+            <div className='flex items-center justify-center gap-2 text-[14px] font-medium text-[#0A0E1A]'>
+              <Loader2 className='h-4 w-4 animate-spin text-[#5A6478]' />
+              <span>{t('Processing OAuth response...')}</span>
+            </div>
+
+            <div className='max-w-sm space-y-2'>
+              <p className='text-[13px] leading-relaxed text-[#5A6478]'>
+                {secondaryNote}
+              </p>
+              <p className='text-[12px] leading-relaxed text-[#8A93A4]'>
+                {t(
+                  'This may take a few moments while we validate the request and update your session.'
+                )}
+              </p>
+            </div>
           </div>
-          <p className='text-muted-foreground text-sm'>{secondaryNote}</p>
-          <p className='text-muted-foreground text-xs'>
-            {t(
-              'This may take a few moments while we validate the request and update your session.'
-            )}
-          </p>
         </div>
       </div>
     </AuthLayout>

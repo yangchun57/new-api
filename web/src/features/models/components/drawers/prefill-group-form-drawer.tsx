@@ -208,8 +208,8 @@ export function PrefillGroupFormDrawer({
           >
             <SideDrawerSection>
               <div className='flex flex-col gap-1'>
-                <h3 className='text-sm font-semibold'>{t('Group details')}</h3>
-                <p className='text-muted-foreground text-sm'>
+                <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Group details')}</h3>
+                <p className='text-[#5A6478] text-[13px]'>
                   {t(
                     'Give the group a recognizable name and optional description.'
                   )}
@@ -264,8 +264,8 @@ export function PrefillGroupFormDrawer({
 
             <SideDrawerSection>
               <div className='flex flex-col gap-1'>
-                <h3 className='text-sm font-semibold'>{t('Configuration')}</h3>
-                <p className='text-muted-foreground text-sm'>
+                <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Configuration')}</h3>
+                <p className='text-[#5A6478] text-[13px]'>
                   {t('Choose the bundle type and define the items inside it.')}
                 </p>
               </div>
@@ -285,7 +285,7 @@ export function PrefillGroupFormDrawer({
                               <span className='font-medium'>{type.label}</span>
                               <span
                                 data-prefill-description
-                                className='text-muted-foreground text-xs'
+                                className='text-[#8A93A4] text-[12px]'
                               >
                                 {type.description}
                               </span>
@@ -314,7 +314,7 @@ export function PrefillGroupFormDrawer({
                                 </span>
                                 <span
                                   data-prefill-description
-                                  className='text-muted-foreground text-xs'
+                                  className='text-[#8A93A4] text-[12px]'
                                 >
                                   {type.description}
                                 </span>
@@ -332,9 +332,9 @@ export function PrefillGroupFormDrawer({
                 )}
               />
 
-              <div className='border-border/60 flex flex-col gap-3 border-y py-4'>
+              <div className='border-[#E5E8EE] flex flex-col gap-3 border-y py-4'>
                 <div className='flex items-center gap-2'>
-                  <h4 className='text-sm font-medium'>{t('Project')}</h4>
+                  <h4 className='text-[13px] font-medium text-[#0A0E1A]'>{t('Project')}</h4>
                   <StatusBadge
                     label={meta.label}
                     variant={meta.badge}

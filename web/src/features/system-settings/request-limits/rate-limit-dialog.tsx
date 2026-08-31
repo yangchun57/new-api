@@ -175,7 +175,7 @@ export function RateLimitDialog({
                         field.onChange(parseInt(e.target.value) || 0)
                       }
                     />
-                    <span className='text-muted-foreground text-sm'>
+                    <span className='text-[13px] text-[#8A93A4]'>
                       {t('times')}
                     </span>
                   </div>
@@ -206,7 +206,7 @@ export function RateLimitDialog({
                         field.onChange(parseInt(e.target.value) || 1)
                       }
                     />
-                    <span className='text-muted-foreground text-sm'>
+                    <span className='text-[13px] text-[#8A93A4]'>
                       {t('times')}
                     </span>
                   </div>

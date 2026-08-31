@@ -73,11 +73,11 @@ function AudioPreviewCell({ log }: { log: TaskLog }) {
     <>
       <button
         type='button'
-        className='group flex items-center gap-1 text-left text-xs'
+        className='group flex items-center gap-1 text-left text-[12px]'
         onClick={() => setOpen(true)}
       >
-        <Music className='text-muted-foreground size-3' />
-        <span className='text-foreground leading-snug group-hover:underline'>
+        <Music className='size-3 text-[#8A93A4]' />
+        <span className='leading-snug text-[#0A0E1A] group-hover:underline'>
           {t('Click to preview audio')}
         </span>
       </button>
@@ -102,15 +102,15 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
 
         return (
           <div className='flex min-w-0 flex-col gap-0.5'>
-            <span className='truncate font-mono text-xs tabular-nums'>
+            <span className='truncate text-[12px] tabular-nums text-[#8A93A4]'>
               {formatTimestampToDate(submitTime, 'seconds')}
             </span>
             {log.finish_time ? (
-              <span className='text-muted-foreground/60 truncate font-mono text-[11px] tabular-nums'>
+              <span className='truncate text-[11px] tabular-nums text-[#8A93A4]'>
                 {formatTimestampToDate(log.finish_time, 'seconds')}
               </span>
             ) : (
-              <span className='text-muted-foreground/50 text-[11px]'>-</span>
+              <span className='text-[11px] text-[#8A93A4]'>-</span>
             )}
           </div>
         )
@@ -140,11 +140,11 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
               setUserInfoDialogOpen(true)
             }}
           >
-            <Avatar className='ring-border/60 size-6 ring-1 max-sm:hidden'>
+            <Avatar className='size-6 max-sm:hidden ring-1 ring-[#E5E8EE]'>
               <AvatarFallback
                 className={cn(
                   'text-[11px] font-semibold',
-                  !sensitiveVisible && 'bg-muted text-muted-foreground'
+                  !sensitiveVisible && 'bg-[#F7F8FA] text-[#8A93A4]'
                 )}
                 style={
                   sensitiveVisible ? getUserAvatarStyle(displayName) : undefined
@@ -153,7 +153,7 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
                 {sensitiveVisible ? getUserAvatarFallback(displayName) : '•'}
               </AvatarFallback>
             </Avatar>
-            <span className='text-muted-foreground truncate text-sm hover:underline'>
+            <span className='max-w-[100px] truncate text-[13px] font-medium text-[#0A0E1A] hover:underline'>
               {sensitiveVisible ? displayName : '••••'}
             </span>
           </button>
@@ -170,7 +170,7 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
         const log = row.original
         const taskId = row.getValue('task_id') as string
         if (!taskId) {
-          return <span className='text-muted-foreground/60 text-xs'>-</span>
+          return <span className='text-[12px] text-[#8A93A4]'>-</span>
         }
         return (
           <div className='flex max-w-[170px] flex-col gap-0.5'>
@@ -179,9 +179,9 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
               copyText={taskId}
               variant='neutral'
               size='sm'
-              className='border-border/60 bg-muted/30 !text-foreground max-w-full truncate rounded-md border px-1.5 py-0.5 font-mono'
+              className='max-w-full truncate rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#0A0E1A]'
             />
-            <span className='text-muted-foreground/60 truncate text-[11px]'>
+            <span className='truncate text-[11px] text-[#8A93A4]'>
               {t(log.platform)} · {t(taskActionMapper.getLabel(log.action))}
             </span>
           </div>
@@ -207,7 +207,7 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
             variant={taskStatusMapper.getVariant(status)}
             size='sm'
             copyable={false}
-            className='-ml-1.5'
+            className='-ml-1.5 text-[12px] [&_span]:text-[12px]'
           />
         )
       },
@@ -254,7 +254,7 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
               href={videoUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='text-foreground text-xs hover:underline'
+              className='text-[12px] text-[#0A0E1A] hover:underline'
             >
               {t('Click to preview video')}
             </a>
@@ -262,18 +262,18 @@ export function useTaskLogsColumns(isAdmin: boolean): ColumnDef<TaskLog>[] {
         }
 
         if (!failReason) {
-          return <span className='text-muted-foreground/60 text-xs'>-</span>
+          return <span className='text-[12px] text-[#8A93A4]'>-</span>
         }
 
         return (
           <>
             <button
               type='button'
-              className='group flex max-w-[200px] items-center gap-1 text-left text-xs'
+              className='group flex max-w-[200px] items-center gap-1 text-left text-[12px]'
               onClick={() => setDialogOpen(true)}
               title={t('Click to view full error message')}
             >
-              <span className='truncate leading-snug text-red-600 group-hover:underline dark:text-red-400'>
+              <span className='truncate leading-snug text-[#E5484D] group-hover:underline'>
                 {failReason}
               </span>
             </button>

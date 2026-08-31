@@ -67,6 +67,13 @@ const USAGE_MODE_OPTIONS: Array<{
   },
 ]
 
+const cardCls =
+  'group flex cursor-pointer flex-col gap-3 rounded-xl border border-[#E5E8EE] bg-white p-4 font-normal transition-all hover:border-[#0A0E1A]/30 has-data-[checked]:border-[#0A0E1A] has-data-[checked]:bg-[#0A0E1A]/[0.03] has-data-[checked]:ring-2 has-data-[checked]:ring-[#0A0E1A]/10'
+const radioCls =
+  'mt-1 border-[#B8BFCC] text-white data-checked:border-[#0A0E1A] data-checked:bg-[#0A0E1A] data-checked:text-white focus-visible:border-[#0A0E1A] focus-visible:ring-[#0A0E1A]/15'
+const iconCls =
+  'ml-auto h-5 w-5 shrink-0 text-[#B8BFCC] transition-colors group-hover:text-[#5A6478] group-has-data-[checked]:text-[#0A0E1A]'
+
 export function UsageModeStep({ form }: UsageModeStepProps) {
   const { t } = useTranslation()
 
@@ -76,7 +83,9 @@ export function UsageModeStep({ form }: UsageModeStepProps) {
       name='usageMode'
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{t('How will you use the platform?')}</FormLabel>
+          <FormLabel className='text-[13px] font-medium text-[#0A0E1A]'>
+            {t('How will you use the platform?')}
+          </FormLabel>
           <FormControl>
             <RadioGroup
               value={field.value}
@@ -92,28 +101,23 @@ export function UsageModeStep({ form }: UsageModeStepProps) {
                     <Label
                       key={value}
                       htmlFor={`usage-mode-${value}`}
-                      className={cn(
-                        'hover:border-primary/40 focus-within:border-primary/50 has-data-[checked]:border-primary has-data-[checked]:ring-primary/20 group bg-card border-muted flex cursor-pointer flex-col gap-3 rounded-xl border p-4 font-normal transition-all has-data-[checked]:ring-2'
-                      )}
+                      className={cardCls}
                     >
-                      <div className='flex items-center gap-3'>
+                      <div className='flex items-start gap-3'>
                         <RadioGroupItem
                           id={`usage-mode-${value}`}
                           value={value}
-                          className='mt-1'
+                          className={radioCls}
                         />
-                        <div>
-                          <Label
-                            htmlFor={`usage-mode-${value}`}
-                            className='text-base leading-none font-semibold'
-                          >
+                        <div className='min-w-0 flex-1'>
+                          <p className='text-[14px] font-semibold leading-none text-[#0A0E1A]'>
                             {t(titleKey)}
-                          </Label>
-                          <p className='text-muted-foreground mt-2 text-sm'>
+                          </p>
+                          <p className='mt-2 text-[13px] leading-relaxed text-[#5A6478]'>
                             {t(descriptionKey)}
                           </p>
                         </div>
-                        <Icon className='text-muted-foreground/70 group-hover:text-primary group-focus-within:text-primary group-has-data-[checked]:text-primary ml-auto size-5 shrink-0 transition' />
+                        <Icon className={iconCls} />
                       </div>
                     </Label>
                   )
@@ -121,7 +125,7 @@ export function UsageModeStep({ form }: UsageModeStepProps) {
               )}
             </RadioGroup>
           </FormControl>
-          <FormMessage />
+          <FormMessage className='text-[12px] text-rose-600' />
         </FormItem>
       )}
     />

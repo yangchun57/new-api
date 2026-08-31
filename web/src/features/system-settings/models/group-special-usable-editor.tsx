@@ -51,8 +51,8 @@ import {
 } from '@/components/ui/select'
 
 const sectionCardClassName =
-  'relative shadow-sm ring-0 before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:border before:border-border/90'
-const sectionHeaderClassName = 'border-b bg-muted/20'
+  'relative ring-0 before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:border before:border-[#E5E8EE]'
+const sectionHeaderClassName = 'border-b bg-[#F7F8FA]'
 
 type Rule = {
   _id: string
@@ -191,7 +191,7 @@ function GroupSection(props: GroupSectionProps) {
 
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
-      <div className='rounded-lg border'>
+      <div className='rounded-xl border border-[#E5E8EE]'>
         <div className='flex items-center justify-between p-3'>
           <div className='flex items-center gap-2'>
             <CollapsibleTrigger
@@ -205,7 +205,7 @@ function GroupSection(props: GroupSectionProps) {
                 <ChevronDown className='h-4 w-4' />
               )}
             </CollapsibleTrigger>
-            <span className='font-semibold'>{props.groupName}</span>
+            <span className='font-mono text-[12px] font-semibold text-[#0A0E1A]'>{props.groupName}</span>
             {!isKnownGroup && (
               <StatusBadge variant='danger' copyable={false}>
                 <AlertTriangle className='mr-1 h-3 w-3' />
@@ -236,7 +236,7 @@ function GroupSection(props: GroupSectionProps) {
           </div>
         </div>
         <CollapsibleContent>
-          <div className='space-y-2 border-t p-3'>
+          <div className='space-y-2 border-t border-[#E5E8EE] p-3'>
             {props.items.map((rule) => (
               <div key={rule._id} className='flex items-center gap-2'>
                 <Select
@@ -302,7 +302,7 @@ function GroupSection(props: GroupSectionProps) {
                     }
                   />
                 ) : (
-                  <div className='text-muted-foreground flex-1 px-3 text-sm'>
+                  <div className='flex-1 px-3 text-[13px] text-[#8A93A4]'>
                     -
                   </div>
                 )}
@@ -417,7 +417,7 @@ export function GroupSpecialUsableRulesEditor(
       <CardContent>
         <div className='space-y-3'>
           {grouped.length === 0 ? (
-            <p className='text-muted-foreground py-4 text-center text-sm'>
+            <p className='py-4 text-center text-[13px] text-[#8A93A4]'>
               {t('No rules yet. Add a group below to get started.')}
             </p>
           ) : (

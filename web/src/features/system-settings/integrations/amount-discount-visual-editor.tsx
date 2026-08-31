@@ -116,7 +116,7 @@ export function AmountDiscountVisualEditor({
   return (
     <div className='space-y-4'>
       <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-        <p className='text-muted-foreground text-sm'>
+        <p className='text-[13px] text-[#5A6478]'>
           {t('Configure discount rates based on recharge amounts')}
         </p>
         <Button
@@ -135,13 +135,13 @@ export function AmountDiscountVisualEditor({
       </div>
 
       {discounts.length === 0 ? (
-        <div className='text-muted-foreground rounded-lg border border-dashed p-6 text-center text-sm'>
+        <div className='rounded-xl border border-dashed border-[#E5E8EE] bg-[#F7F8FA] p-6 text-center text-[13px] text-[#8A93A4]'>
           {t(
             'No discount tiers configured. Click "Add discount tier" to get started.'
           )}
         </div>
       ) : (
-        <div className='rounded-md border'>
+        <div className='rounded-xl border border-[#E5E8EE]'>
           {/* Desktop table view */}
           <StaticDataTable
             className='hidden rounded-none border-0 bg-transparent shadow-none sm:block'
@@ -152,14 +152,16 @@ export function AmountDiscountVisualEditor({
                 id: 'amount',
                 header: t('Recharge Amount'),
                 cell: (discount) => (
-                  <span className='font-mono text-sm'>${discount.amount}</span>
+                  <span className='font-mono text-[13px] tabular-nums font-semibold text-[#0A0E1A]'>
+                    ${discount.amount}
+                  </span>
                 ),
               },
               {
                 id: 'discount-rate',
                 header: t('Discount Rate'),
                 cell: (discount) => (
-                  <code className='bg-muted rounded px-1.5 py-0.5 text-sm'>
+                  <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
                     {discount.discountRate.toFixed(2)}
                   </code>
                 ),
@@ -201,7 +203,7 @@ export function AmountDiscountVisualEditor({
               <div key={discount.amount} className='p-4'>
                 <div className='mb-3 flex items-start justify-between'>
                   <div className='flex-1'>
-                    <div className='mb-2 font-mono text-base font-medium'>
+                    <div className='mb-2 font-mono text-[15px] font-semibold tabular-nums text-[#0A0E1A]'>
                       ${discount.amount}
                     </div>
                     <StatusBadge
@@ -239,11 +241,11 @@ export function AmountDiscountVisualEditor({
                     </Button>
                   </div>
                 </div>
-                <div className='text-sm'>
-                  <span className='text-muted-foreground'>
+                <div className='text-[13px]'>
+                  <span className='text-[#8A93A4]'>
                     {t('Discount Rate:')}{' '}
                   </span>
-                  <code className='bg-muted rounded px-1.5 py-0.5 text-xs'>
+                  <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
                     {discount.discountRate.toFixed(2)}
                   </code>
                 </div>

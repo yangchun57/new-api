@@ -426,16 +426,16 @@ const percentTextClassName: Record<
   warning: 'text-warning',
   danger: 'text-destructive',
   info: 'text-info',
-  neutral: 'text-muted-foreground',
+  neutral: 'text-[#8A93A4]',
   purple: 'text-chart-4',
   amber: 'text-warning',
   blue: 'text-chart-1',
   cyan: 'text-chart-2',
   green: 'text-success',
-  grey: 'text-muted-foreground',
+  grey: 'text-[#8A93A4]',
   indigo: 'text-chart-1',
   'light-blue': 'text-info',
-  'light-green': 'text-emerald-500 dark:text-emerald-300',
+  'light-green': 'text-emerald-500',
   lime: 'text-chart-3',
   orange: 'text-warning',
   pink: 'text-chart-5',
@@ -463,10 +463,10 @@ function RateLimitWindow(props: RateLimitWindowProps) {
       <CardHeader className='p-3 pb-2'>
         <div className='flex items-start justify-between gap-3'>
           <div className='min-w-0'>
-            <CardTitle className='text-sm font-semibold'>
+            <CardTitle className='text-[#0A0E1A] text-[14px] font-semibold'>
               {props.title}
             </CardTitle>
-            <CardDescription className='mt-1 text-xs'>
+            <CardDescription className='mt-1 text-[12px]'>
               {t('Window:')}{' '}
               {hasData
                 ? formatDurationSeconds(props.window?.limit_window_seconds, t)
@@ -482,7 +482,7 @@ function RateLimitWindow(props: RateLimitWindowProps) {
             >
               {hasData ? `${percent}%` : '-'}
             </div>
-            <div className='text-muted-foreground mt-1 text-[11px]'>
+            <div className='text-[#8A93A4] mt-1 text-[11px]'>
               {t('Used')}
             </div>
           </div>
@@ -496,11 +496,11 @@ function RateLimitWindow(props: RateLimitWindowProps) {
             className='mt-1'
           />
         ) : (
-          <div className='text-muted-foreground mt-1 text-sm'>-</div>
+          <div className='text-[#8A93A4] mt-1 text-[12px]'>-</div>
         )}
-        <div className='mt-3 grid grid-cols-1 gap-2 text-xs sm:grid-cols-2'>
+        <div className='mt-3 grid grid-cols-1 gap-2 text-[12px] sm:grid-cols-2'>
           <div className='min-w-0'>
-            <div className='text-muted-foreground text-[11px]'>
+            <div className='text-[#8A93A4] text-[11px]'>
               {t('Reset at:')}
             </div>
             <div className='break-all tabular-nums'>
@@ -508,7 +508,7 @@ function RateLimitWindow(props: RateLimitWindowProps) {
             </div>
           </div>
           <div className='min-w-0 sm:text-right'>
-            <div className='text-muted-foreground text-[11px]'>
+            <div className='text-[#8A93A4] text-[11px]'>
               {t('Resets in:')}
             </div>
             <div className='tabular-nums'>
@@ -548,9 +548,9 @@ function SectionHeading(props: {
   return (
     <div className='flex flex-wrap items-start justify-between gap-3'>
       <div className='min-w-0'>
-        <div className='text-sm font-semibold'>{props.title}</div>
+        <div className='text-[#0A0E1A] text-[14px] font-semibold'>{props.title}</div>
         {props.description ? (
-          <div className='text-muted-foreground mt-1 text-xs leading-5'>
+          <div className='text-[#8A93A4] mt-1 text-[12px] leading-5'>
             {props.description}
           </div>
         ) : null}
@@ -577,13 +577,13 @@ function RateLimitGroupSection(props: RateLimitGroupSectionProps) {
   const statusBadge = getUsageStatusBadge(props.source?.rate_limit, t)
 
   return (
-    <section className='bg-muted/40 flex flex-col gap-3 rounded-xl p-3'>
+    <section className='bg-[#F7F8FA]/70 flex flex-col gap-3 rounded-xl p-3'>
       <SectionHeading title={props.title} description={props.description}>
         {statusBadge}
       </SectionHeading>
       {props.meteredFeature ? (
-        <div className='bg-background ring-border/60 inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-lg px-2 py-1 text-xs ring-1'>
-          <span className='text-muted-foreground text-[11px]'>
+        <div className='bg-background ring-[#E5E8EE] inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-xl px-2 py-1 text-[12px] ring-1'>
+          <span className='text-[#8A93A4] text-[11px]'>
             metered_feature
           </span>
           <span className='min-w-0 font-mono break-all'>
@@ -614,17 +614,17 @@ function InfoField(props: {
   return (
     <div
       className={cn(
-        'bg-background ring-border/60 min-w-0 rounded-lg p-3 ring-1',
+        'bg-background ring-[#E5E8EE] min-w-0 rounded-xl p-3 ring-1',
         props.className
       )}
     >
-      <div className='text-muted-foreground text-[11px] font-medium'>
+      <div className='text-[#8A93A4] text-[11px] font-medium'>
         {props.label}
       </div>
       <div className='mt-1 flex min-w-0 items-start justify-between gap-2'>
         <span
           className={cn(
-            'min-w-0 flex-1 text-xs leading-5 break-all',
+            'min-w-0 flex-1 text-[12px] leading-5 break-all',
             props.mono && 'font-mono tabular-nums'
           )}
         >
@@ -653,13 +653,13 @@ function ResetCreditTimeField(props: {
 }) {
   return (
     <div className='min-w-0'>
-      <div className='text-muted-foreground text-[11px] font-medium'>
+      <div className='text-[#8A93A4] text-[11px] font-medium'>
         {props.label}
       </div>
       <div
         className={cn(
-          'mt-1 text-xs leading-5 tabular-nums',
-          props.emphasis ? 'font-semibold' : 'text-foreground'
+          'mt-1 text-[12px] leading-5 tabular-nums',
+          props.emphasis ? 'font-semibold' : 'text-[#0A0E1A]'
         )}
       >
         {props.value}
@@ -678,11 +678,11 @@ function ResetCreditItem(props: { credit: CodexResetCredit; index: number }) {
     normalizeResetCreditStatus(props.credit.status) === 'available'
 
   return (
-    <div className='bg-background rounded-lg border p-3'>
+    <div className='bg-background rounded-xl border p-3'>
       <div className='flex flex-wrap items-start justify-between gap-3'>
         <div className='min-w-0'>
           <div className='flex flex-wrap items-center gap-2'>
-            <div className='min-w-0 text-sm font-medium break-words'>
+            <div className='text-[#0A0E1A] min-w-0 text-[13px] font-medium break-words'>
               {title}
             </div>
             <StatusBadge
@@ -692,24 +692,24 @@ function ResetCreditItem(props: { credit: CodexResetCredit; index: number }) {
             />
           </div>
           {props.credit.description ? (
-            <div className='text-muted-foreground mt-1 text-xs leading-5'>
+            <div className='text-[#8A93A4] mt-1 text-[12px] leading-5'>
               {props.credit.description}
             </div>
           ) : null}
           {props.credit.id ? (
-            <div className='text-muted-foreground mt-1 font-mono text-[11px] break-all'>
+            <div className='text-[#8A93A4] mt-1 font-mono text-[11px] break-all'>
               {props.credit.id}
             </div>
           ) : null}
         </div>
         <div className='shrink-0 text-right'>
-          <div className='text-muted-foreground text-[11px] font-medium'>
+          <div className='text-[#8A93A4] text-[11px] font-medium'>
             {t('Expires in')}
           </div>
           <div
             className={cn(
-              'mt-1 text-sm font-semibold tabular-nums',
-              isAvailable ? 'text-success' : 'text-muted-foreground'
+              'mt-1 text-[13px] font-semibold tabular-nums',
+              isAvailable ? 'text-success' : 'text-[#8A93A4]'
             )}
           >
             {expiresIn}
@@ -765,15 +765,15 @@ function ResetCreditsPanel(props: {
   let creditsContent: ReactNode
   if (props.errorMessage) {
     creditsContent = (
-      <div className='border-destructive/40 bg-destructive/10 text-destructive rounded-lg border px-3 py-2 text-sm'>
+      <div className='border-destructive/40 bg-destructive/10 text-destructive rounded-xl border px-3 py-2 text-[13px]'>
         {props.errorMessage}
       </div>
     )
   } else if (props.isLoading) {
     creditsContent = (
       <div className='flex flex-col gap-2'>
-        <Skeleton className='h-24 w-full' />
-        <Skeleton className='h-24 w-full' />
+        <Skeleton className='h-24 w-full rounded-md' />
+        <Skeleton className='h-24 w-full rounded-md' />
       </div>
     )
   } else if (credits.length > 0) {
@@ -832,7 +832,7 @@ function ResetCreditsPanel(props: {
       </div>
 
       <div className='flex flex-wrap items-center justify-between gap-2'>
-        <div className='text-muted-foreground text-xs leading-5'>
+        <div className='text-[#8A93A4] text-[12px] leading-5'>
           {t('Available credits are ordered by soonest expiration.')}
         </div>
         <Button
@@ -847,10 +847,10 @@ function ResetCreditsPanel(props: {
         </Button>
       </div>
 
-      <div className='bg-muted/30 flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='bg-[#F7F8FA]/60 flex flex-col gap-3 rounded-xl border p-3 sm:flex-row sm:items-center sm:justify-between'>
         <div className='min-w-0'>
-          <div className='text-sm font-semibold'>{t('Reset usage window')}</div>
-          <div className='text-muted-foreground mt-1 text-xs leading-5'>
+          <div className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Reset usage window')}</div>
+          <div className='text-[#8A93A4] mt-1 text-[12px] leading-5'>
             {t(
               'Use one available reset credit to refresh the current Codex usage windows.'
             )}
@@ -1101,14 +1101,14 @@ export function CodexUsageDialog({
     >
       <div className='flex flex-col gap-4'>
         {errorMessage && (
-          <div className='rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400'>
+          <div className='rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] text-red-700'>
             {errorMessage}
           </div>
         )}
 
-        <Card size='sm' className='bg-muted/30 gap-0 py-0'>
+        <Card size='sm' className='bg-[#F7F8FA]/60 gap-0 py-0'>
           <CardHeader className='p-4 pb-2'>
-            <CardTitle className='text-muted-foreground text-xs font-medium'>
+            <CardTitle className='text-[#8A93A4] text-[12px] font-medium'>
               {t('Codex Account Status')}
             </CardTitle>
             {onRefresh ? (
@@ -1179,20 +1179,20 @@ export function CodexUsageDialog({
         <Collapsible
           open={showResetCredits}
           onOpenChange={handleResetCreditsOpenChange}
-          className='rounded-lg border'
+          className='rounded-xl border'
         >
           <CollapsibleTrigger
             render={
               <button
                 type='button'
-                className='hover:bg-muted/40 flex w-full items-start justify-between gap-3 p-3 text-left transition-colors'
+                className='hover:bg-[#F0F2F6] flex w-full items-start justify-between gap-3 p-3 text-left transition-colors'
                 aria-expanded={showResetCredits}
               />
             }
           >
             <div className='min-w-0'>
               <div className='flex flex-wrap items-center gap-2'>
-                <div className='text-sm font-semibold'>
+                <div className='text-[#0A0E1A] text-[14px] font-semibold'>
                   {t('Reset Credits')}
                 </div>
                 <StatusBadge
@@ -1201,14 +1201,14 @@ export function CodexUsageDialog({
                   copyable={false}
                 />
               </div>
-              <div className='text-muted-foreground mt-1 text-xs leading-5'>
+              <div className='text-[#8A93A4] mt-1 text-[12px] leading-5'>
                 {t('View issued reset credits, grant dates, and expiration.')}
               </div>
             </div>
             {showResetCredits ? (
-              <ChevronUp className='text-muted-foreground mt-0.5 shrink-0' />
+              <ChevronUp className='text-[#8A93A4] mt-0.5 shrink-0' />
             ) : (
-              <ChevronDown className='text-muted-foreground mt-0.5 shrink-0' />
+              <ChevronDown className='text-[#8A93A4] mt-0.5 shrink-0' />
             )}
           </CollapsibleTrigger>
           <CollapsibleContent className='border-t'>
@@ -1275,22 +1275,22 @@ export function CodexUsageDialog({
         <Collapsible
           open={showRawJson}
           onOpenChange={setShowRawJson}
-          className='rounded-lg border'
+          className='rounded-xl border'
         >
           <CollapsibleTrigger
             render={
               <button
                 type='button'
-                className='hover:bg-muted/40 flex w-full items-center justify-between gap-2 p-3 transition-colors'
+                className='hover:bg-[#F0F2F6] flex w-full items-center justify-between gap-2 p-3 transition-colors'
                 aria-expanded={showRawJson}
               />
             }
           >
-            <div className='text-sm font-medium'>{t('Raw JSON')}</div>
+            <div className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Raw JSON')}</div>
             {showRawJson ? (
-              <ChevronUp className='text-muted-foreground h-4 w-4' />
+              <ChevronUp className='text-[#8A93A4] h-4 w-4' />
             ) : (
-              <ChevronDown className='text-muted-foreground h-4 w-4' />
+              <ChevronDown className='text-[#8A93A4] h-4 w-4' />
             )}
           </CollapsibleTrigger>
           <CollapsibleContent>
@@ -1312,7 +1312,7 @@ export function CodexUsageDialog({
                 </Button>
               </div>
               <ScrollArea className='max-h-[50vh]'>
-                <pre className='bg-muted/30 m-0 p-3 text-xs break-words whitespace-pre-wrap'>
+                <pre className='bg-[#F7F8FA]/60 m-0 p-3 text-[12px] break-words whitespace-pre-wrap'>
                   {rawJsonText || '-'}
                 </pre>
               </ScrollArea>
@@ -1331,9 +1331,9 @@ export function CodexUsageDialog({
                 'Use one available reset credit for this channel. The reset request is sent only after confirmation.'
               )}
             </p>
-            <div className='bg-muted/50 rounded-lg border px-3 py-2 text-xs'>
+            <div className='bg-[#F7F8FA]/70 rounded-xl border px-3 py-2 text-[12px]'>
               <div className='font-medium'>{channelLabel}</div>
-              <div className='text-muted-foreground mt-1'>
+              <div className='text-[#8A93A4] mt-1'>
                 {t('Available reset credits')}: {resetCreditsText}
               </div>
             </div>

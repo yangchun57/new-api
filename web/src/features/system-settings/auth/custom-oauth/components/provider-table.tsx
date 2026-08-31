@@ -52,7 +52,7 @@ export function ProviderTable(props: ProviderTableProps) {
   return (
     <>
       <div className='flex items-center justify-between'>
-        <p className='text-muted-foreground text-sm'>
+        <p className='text-[#8A93A4] text-[13px]'>
           {t('Manage custom OAuth providers for user authentication')}
         </p>
         <Button size='sm' onClick={props.onCreate}>
@@ -74,7 +74,7 @@ export function ProviderTable(props: ProviderTableProps) {
               provider.icon ? (
                 <span className='text-lg'>{provider.icon}</span>
               ) : (
-                <span className='text-muted-foreground text-sm'>--</span>
+                <span className='text-[#8A93A4] text-[13px]'>--</span>
               ),
           },
           {
@@ -113,7 +113,7 @@ export function ProviderTable(props: ProviderTableProps) {
             id: 'client-id',
             header: t('Client ID'),
             cellClassName:
-              'text-muted-foreground max-w-[120px] truncate font-mono',
+              'text-[#8A93A4] max-w-[120px] truncate font-mono text-[12px]',
             cell: (provider) => provider.client_id,
           },
           {

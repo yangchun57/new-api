@@ -132,8 +132,7 @@ function ModelBadgeContent(props: ModelBadgeProps) {
       showDot={!provider}
       autoColor={provider ? undefined : props.modelName}
       className={cn(
-        'border-border/60 bg-muted/30 h-6 max-w-none gap-1.5 rounded-md border px-2 [font-family:var(--font-body)]',
-        provider && 'text-foreground',
+        'border-[#E5E8EE] bg-[#F7F8FA] h-6 max-w-none gap-1.5 rounded-md border px-2 font-mono text-[12px] text-[#5A6478]',
         props.className
       )}
     >
@@ -168,23 +167,23 @@ export function ModelBadge(props: ModelBadgeProps) {
         }
       >
         <ModelBadgeContent {...props} />
-        <Route className='text-muted-foreground size-3 shrink-0' />
+        <Route className='text-[#8A93A4] size-3 shrink-0' />
       </PopoverTrigger>
       <PopoverContent className='w-72'>
         <div className='space-y-2'>
           <div className='flex items-start justify-between gap-3'>
-            <span className='text-muted-foreground text-xs'>
+            <span className='text-[#8A93A4] text-[12px]'>
               {t('Request Model:')}
             </span>
-            <span className='truncate font-mono text-xs font-medium'>
+            <span className='truncate font-mono text-[12px] font-medium text-[#0A0E1A]'>
               {props.modelName}
             </span>
           </div>
           <div className='flex items-start justify-between gap-3'>
-            <span className='text-muted-foreground text-xs'>
+            <span className='text-[#8A93A4] text-[12px]'>
               {t('Actual Model:')}
             </span>
-            <span className='truncate font-mono text-xs font-medium'>
+            <span className='truncate font-mono text-[12px] font-medium text-[#0A0E1A]'>
               {props.actualModel}
             </span>
           </div>

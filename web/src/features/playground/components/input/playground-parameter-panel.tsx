@@ -109,7 +109,7 @@ function PlaygroundParameterContent({
         return (
           <div
             className={cn(
-              'border-border/70 bg-background/60 grid gap-2 rounded-lg border p-3 transition-opacity',
+              'border-[#E5E8EE] bg-white grid gap-2 rounded-xl border p-3 transition-opacity',
               (!enabled || disabled) && 'opacity-55'
             )}
             key={control.key}
@@ -118,19 +118,19 @@ function PlaygroundParameterContent({
               <div className='min-w-0 space-y-1'>
                 <div className='flex min-w-0 items-center gap-2'>
                   <label
-                    className='truncate text-sm leading-5 font-medium'
+                    className='truncate text-[13px] leading-5 font-medium text-[#0A0E1A]'
                     htmlFor={controlId}
                   >
                     {t(control.labelKey)}
                   </label>
                   <Badge
-                    className='h-5 max-w-24 shrink-0 px-1.5 font-mono text-[11px]'
+                    className='h-5 max-w-24 shrink-0 rounded-md px-1.5 font-mono text-[11px] tabular-nums'
                     variant='outline'
                   >
                     {t(getParameterControlValueText(control.key, value))}
                   </Badge>
                 </div>
-                <p className='text-muted-foreground text-xs leading-4'>
+                <p className='text-[#8A93A4] text-[12px] leading-4'>
                   {t(control.descriptionKey)}
                 </p>
               </div>
@@ -205,12 +205,12 @@ export function PlaygroundParameterPanel(props: PlaygroundParameterPanelProps) {
   const trigger = (
     <PromptInputButton
       aria-label={t('Parameters')}
-      className='text-muted-foreground hover:text-foreground hover:bg-muted/70 relative font-medium'
+      className='text-[#8A93A4] hover:text-[#0A0E1A] hover:bg-[#F0F2F6] relative rounded-md font-medium'
       disabled={props.disabled}
       variant='ghost'
     >
       <SlidersHorizontalIcon size={16} />
-      <span className='bg-primary text-primary-foreground absolute -top-1 -right-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full px-1 text-[9px] leading-none font-semibold'>
+      <span className='bg-[#2E4BFF] text-white absolute -top-1 -right-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full px-1 text-[9px] leading-none font-semibold'>
         {activeCount}
       </span>
     </PromptInputButton>
@@ -254,8 +254,8 @@ export function PlaygroundParameterPanel(props: PlaygroundParameterPanelProps) {
         sideOffset={8}
       >
         <div className='space-y-1 px-1'>
-          <div className='text-sm font-semibold'>{t('Parameter settings')}</div>
-          <div className='text-muted-foreground text-xs leading-4'>
+          <div className='text-[13px] font-semibold text-[#0A0E1A]'>{t('Parameter settings')}</div>
+          <div className='text-[#8A93A4] text-[12px] leading-4'>
             {t('Only enabled parameters are sent with the request.')}
           </div>
         </div>

@@ -165,7 +165,7 @@ export function ChangePasswordDialog({
             minLength={8}
             autoComplete='new-password'
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t('Must be at least 8 characters')}
           </p>
         </div>

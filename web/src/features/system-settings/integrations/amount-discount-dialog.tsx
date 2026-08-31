@@ -154,6 +154,7 @@ export function AmountDiscountDialog({
                     step='1'
                     min='1'
                     placeholder={t('e.g., 100')}
+                    className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                     {...field}
                     onChange={(e) =>
                       field.onChange(parseInt(e.target.value) || 0)
@@ -186,6 +187,7 @@ export function AmountDiscountDialog({
                     min='0.01'
                     max='1'
                     placeholder={t('e.g., 0.95')}
+                    className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                     {...field}
                     onChange={(e) =>
                       field.onChange(parseFloat(e.target.value) || 0)
@@ -195,7 +197,7 @@ export function AmountDiscountDialog({
                 <FormDescription>
                   {t('Final price multiplier (0.95 = 5% discount')}
                   {discountPercentage > 0 && (
-                    <span className='ml-1 font-medium text-green-600 dark:text-green-400'>
+                    <span className='ml-1 font-medium text-[#16A34A]'>
                       = {discountPercentage}
                       {t('% off')}
                     </span>

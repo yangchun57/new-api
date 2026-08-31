@@ -323,7 +323,7 @@ export function RuleEditorDialog(props: Props) {
               {t('Add')}
             </Button>
           </div>
-          <p className='text-muted-foreground mb-2 text-xs'>
+          <p className='mb-2 text-[12px] text-[#8A93A4]'>
             {t('Common Keys')}: {CONTEXT_KEY_PRESETS.join(', ')}
           </p>
           <div className='space-y-2'>

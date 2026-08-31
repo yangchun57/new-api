@@ -93,12 +93,12 @@ export function AmountOptionsVisualEditor({
   return (
     <div className='space-y-4'>
       <div>
-        <p className='text-muted-foreground mb-3 text-sm'>
+        <p className='mb-3 text-[13px] text-[#5A6478]'>
           {t('Preset recharge amounts displayed to users')}
         </p>
 
         {amounts.length === 0 ? (
-          <div className='text-muted-foreground rounded-lg border border-dashed p-6 text-center text-sm'>
+          <div className='rounded-xl border border-dashed border-[#E5E8EE] bg-[#F7F8FA] p-6 text-center text-[13px] text-[#8A93A4]'>
             {t(
               'No amount options configured. Add amounts below to get started.'
             )}
@@ -109,10 +109,10 @@ export function AmountOptionsVisualEditor({
               <StatusBadge
                 key={amount}
                 variant='neutral'
-                className='text-base'
+                className='text-[13px]'
                 copyable={false}
               >
-                <span className='font-mono'>${amount}</span>
+                <span className='font-mono font-semibold tabular-nums'>${amount}</span>
                 <Button
                   type='button'
                   variant='ghost'
@@ -122,7 +122,7 @@ export function AmountOptionsVisualEditor({
                     e.stopPropagation()
                     handleRemove(amount)
                   }}
-                  className='hover:bg-muted-foreground/20 size-auto p-0.5'
+                  className='size-auto p-0.5 hover:bg-[#F0F2F6]'
                   aria-label={t('Remove ${{amount}}', { amount })}
                 >
                   <X className='h-3.5 w-3.5' />
@@ -144,6 +144,7 @@ export function AmountOptionsVisualEditor({
             step='0.01'
             min='0'
             placeholder={t('e.g., 100')}
+            className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
             value={newAmount}
             onChange={(e) => setNewAmount(e.target.value)}
             onKeyDown={handleKeyDown}

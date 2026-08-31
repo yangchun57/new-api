@@ -182,6 +182,7 @@ export function IoNetDeploymentSettingsSection({
                           type='password'
                           placeholder={t('Enter API Key')}
                           autoComplete='off'
+                          className='font-mono text-[12px] bg-[#F7F8FA]'
                           {...field}
                         />
                       </FormControl>
@@ -234,7 +235,7 @@ export function IoNetDeploymentSettingsSection({
 
               {testState.ok === true ? (
                 <Alert variant='default' className='flex items-center gap-2'>
-                  <CheckCircle2 className='size-4 text-green-600' />
+                  <CheckCircle2 className='size-4 text-[#16A34A]' />
                   <div>
                     <AlertTitle>{t('Connection successful')}</AlertTitle>
                     <AlertDescription>

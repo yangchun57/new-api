@@ -40,6 +40,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/stores/auth-store'
 
 import {
@@ -80,8 +81,8 @@ export function MessageError({
         : errorState.content
 
     return (
-      <Alert variant='default' className={className}>
-        <AlertTriangle className='text-orange-500' />
+      <Alert variant='default' className={cn('rounded-xl border-[#E5E8EE] bg-white px-3 py-2.5 text-[13px] [&_[data-slot=alert-title]]:text-[13px] [&_[data-slot=alert-title]]:font-semibold [&_[data-slot=alert-title]]:text-[#0A0E1A] [&_[data-slot=alert-description]]:text-[13px] [&_[data-slot=alert-description]]:text-[#5A6478]', className)}>
+        <AlertTriangle className='!text-[#D97706]' />
         <AlertTitle>{t('Model Price Not Configured')}</AlertTitle>
         <AlertDescription className='space-y-2'>
           <p>{content}</p>
@@ -102,8 +103,8 @@ export function MessageError({
   }
 
   return (
-    <Alert variant='destructive' className={className}>
-      <AlertCircle />
+    <Alert variant='destructive' className={cn('rounded-xl px-3 py-2.5 text-[13px] [&_[data-slot=alert-title]]:text-[13px] [&_[data-slot=alert-title]]:font-semibold [&_[data-slot=alert-description]]:text-[13px]', className)}>
+      <AlertCircle className='!text-[#E5484D]' />
       <AlertTitle>{t('Error')}</AlertTitle>
       <AlertDescription className='space-y-2'>
         <p>

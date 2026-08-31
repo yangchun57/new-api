@@ -87,9 +87,8 @@ export function TransferDialog({
       onOpenChange={onOpenChange}
       title={t('Transfer Rewards')}
       description={t('Move affiliate rewards to your main balance')}
-      contentClassName='max-sm:w-[calc(100vw-1.5rem)] sm:max-w-md'
-      titleClassName='text-xl font-semibold'
-      footerClassName='grid grid-cols-2 gap-2 sm:flex'
+      contentClassName='max-sm:w-[calc(100vw-1.5rem)] sm:max-w-md bg-white ring-[#E5E8EE] shadow-[0_8px_30px_rgba(10,14,26,0.08)]'
+      footerClassName='grid grid-cols-2 gap-2 sm:flex bg-[#F7F8FA] border-[#E5E8EE]'
       contentHeight='auto'
       bodyClassName='space-y-4'
       footer={
@@ -113,10 +112,10 @@ export function TransferDialog({
     >
       <div className='space-y-4 py-3 sm:space-y-6 sm:py-4'>
         <div className='space-y-2'>
-          <Label className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
+          <Label className='pl-font-mono text-[11px] font-medium tracking-[0.08em] uppercase text-[#8A93A4]'>
             {t('Available Rewards')}
           </Label>
-          <div className='text-2xl font-semibold'>
+          <div className='text-2xl font-semibold tracking-[-0.015em] text-[#0A0E1A] tabular-nums'>
             {formatQuota(availableQuota)}
           </div>
         </div>
@@ -124,7 +123,7 @@ export function TransferDialog({
         <div className='space-y-3'>
           <Label
             htmlFor='transfer-amount'
-            className='text-muted-foreground text-xs font-medium tracking-wider uppercase'
+            className='pl-font-mono text-[11px] font-medium tracking-[0.08em] uppercase text-[#8A93A4]'
           >
             {t('Transfer Amount')}
           </Label>
@@ -136,9 +135,9 @@ export function TransferDialog({
             min={minimumAmount}
             max={maximumAmount}
             step={minimumAmount}
-            className='font-mono text-lg'
+            className='font-mono text-[16px] text-[#0A0E1A] border-[#E5E8EE] bg-white focus-visible:border-[#0A0E1A]/30 focus-visible:ring-[#0A0E1A]/10'
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t('Minimum:')} {formatQuota(minimumQuota)}
           </p>
         </div>

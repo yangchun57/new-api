@@ -158,17 +158,17 @@ export function TelegramBindDialog({
           </AlertDescription>
         </Alert>
 
-        <div className='flex flex-col items-center justify-center gap-4 rounded-lg border p-6'>
+        <div className='flex flex-col items-center justify-center gap-4 rounded-xl border p-6'>
           <div className='flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-900'>
             <Send className='h-6 w-6 text-blue-600 dark:text-blue-400' />
           </div>
 
           <div className='text-center'>
-            <p className='text-muted-foreground text-sm'>
+            <p className='text-[13px] text-[#5A6478]'>
               {t('Bot:')}{' '}
               <span className='font-mono font-semibold'>@{botName}</span>
             </p>
-            <p className='text-muted-foreground mt-1 text-xs'>
+            <p className='mt-1 text-[12px] text-[#8A93A4]'>
               {t(
                 "After clicking the button, you'll be asked to authorize the bot"
               )}
@@ -187,7 +187,7 @@ export function TelegramBindDialog({
           <div ref={widgetRef} className='flex min-h-10 justify-center' />
         </div>
 
-        <p className='text-muted-foreground text-center text-xs'>
+        <p className='text-center text-[12px] text-[#8A93A4]'>
           {t('The binding will complete automatically after authorization')}
         </p>
       </div>

@@ -42,7 +42,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
   const status = props.status
 
   return (
-    <div className='group hover:bg-muted/40 flex items-center justify-between gap-2 px-3 py-2.5 transition-colors sm:gap-3 sm:px-5 sm:py-3'>
+    <div className='group flex items-center justify-between gap-2 px-3 py-2.5 transition-colors hover:bg-[#F7F8FA] sm:gap-3 sm:px-5 sm:py-3'>
       <div className='flex min-w-0 flex-1 items-center gap-2 sm:gap-3'>
         <span
           className={cn(
@@ -53,14 +53,14 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
 
         <div className='flex min-w-0 flex-1 flex-col gap-0.5'>
           <div className='flex items-baseline gap-2'>
-            <span className='font-mono text-sm font-semibold'>
+            <span className='font-mono text-[13px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
               {item.route}
             </span>
-            <span className='text-muted-foreground/60 hidden truncate text-xs md:inline'>
+            <span className='hidden truncate text-[12px] text-[#8A93A4] md:inline'>
               {item.description}
             </span>
           </div>
-          <span className='text-muted-foreground/40 truncate font-mono text-xs'>
+          <span className='truncate font-mono text-[11px] text-[#B8BFCC]'>
             {item.url}
           </span>
         </div>
@@ -98,7 +98,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
             size='sm'
             onClick={() => props.onTest(item.url)}
             disabled={status.testing}
-            className='size-7 p-0'
+            className='size-7 p-0 text-[#8A93A4] hover:bg-white hover:text-[#0A0E1A]'
             title={t('Test Latency')}
           >
             <Zap
@@ -110,7 +110,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
             variant='ghost'
             size='sm'
             onClick={() => openExternalSpeedTest(item.url)}
-            className='hidden size-7 p-0 sm:inline-flex'
+            className='hidden size-7 p-0 text-[#8A93A4] hover:bg-white hover:text-[#0A0E1A] sm:inline-flex'
             title={t('External Speed Test')}
           >
             <Gauge className='size-3.5' />
@@ -120,7 +120,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
             value={item.url}
             variant='ghost'
             size='sm'
-            className='size-7 p-0'
+            className='size-7 p-0 text-[#8A93A4] hover:bg-white hover:text-[#0A0E1A]'
             iconClassName='size-3.5'
             tooltip={t('Copy URL')}
             aria-label={t('Copy URL')}
@@ -129,7 +129,7 @@ export function ApiInfoItemComponent(props: ApiInfoItemProps) {
           <Button
             variant='ghost'
             size='sm'
-            className='hidden size-7 p-0 sm:inline-flex'
+            className='hidden size-7 p-0 text-[#8A93A4] hover:bg-white hover:text-[#0A0E1A] sm:inline-flex'
             title={t('Open in New Tab')}
             render={<a href={item.url} target='_blank' rel='noreferrer' />}
           >

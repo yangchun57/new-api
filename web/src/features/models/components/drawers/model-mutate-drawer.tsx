@@ -752,7 +752,7 @@ export function ModelMutateDrawer({
           >
             {/* Basic Information */}
             <SideDrawerSection>
-              <h3 className='text-sm font-semibold'>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                 {t('Basic Information')}
               </h3>
 
@@ -879,7 +879,7 @@ export function ModelMutateDrawer({
 
             {/* Matching Configuration */}
             <SideDrawerSection>
-              <h3 className='text-sm font-semibold'>{t('Matching Rules')}</h3>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Matching Rules')}</h3>
 
               <FormField
                 control={form.control}
@@ -926,7 +926,7 @@ export function ModelMutateDrawer({
             {/* Endpoints Configuration */}
             <SideDrawerSection>
               <div className='flex items-center justify-between'>
-                <h3 className='text-sm font-semibold'>{t('Endpoints')}</h3>
+                <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Endpoints')}</h3>
                 <Select<string>
                   items={Object.keys(ENDPOINT_TEMPLATES).map((key) => ({
                     value: key,
@@ -982,7 +982,7 @@ export function ModelMutateDrawer({
 
             {/* Pricing Configuration */}
             <SideDrawerSection>
-              <h3 className='text-sm font-semibold'>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                 {t('Pricing Configuration')}
               </h3>
 
@@ -1158,7 +1158,7 @@ export function ModelMutateDrawer({
                             handlePromptPriceChange(e.target.value)
                           }
                         />
-                        <p className='text-muted-foreground text-sm'>
+                        <p className='text-[#8A93A4] text-[12px] tabular-nums'>
                           {promptPrice &&
                           !Number.isNaN(Number.parseFloat(promptPrice))
                             ? `Calculated ratio: ${(Number.parseFloat(promptPrice) / 2).toFixed(4)}`
@@ -1176,7 +1176,7 @@ export function ModelMutateDrawer({
                             handleCompletionPriceChange(e.target.value)
                           }
                         />
-                        <p className='text-muted-foreground text-sm'>
+                        <p className='text-[#8A93A4] text-[12px] tabular-nums'>
                           {completionPrice &&
                           !Number.isNaN(Number.parseFloat(completionPrice)) &&
                           promptPrice &&
@@ -1325,7 +1325,7 @@ export function ModelMutateDrawer({
 
             {/* Status & Sync */}
             <SideDrawerSection>
-              <h3 className='text-sm font-semibold'>{t('Status & Sync')}</h3>
+              <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Status & Sync')}</h3>
 
               <FormField
                 control={form.control}
@@ -1333,7 +1333,7 @@ export function ModelMutateDrawer({
                 render={({ field }) => (
                   <FormItem className={sideDrawerSwitchItemClassName()}>
                     <div className='flex flex-col gap-0.5'>
-                      <FormLabel className='text-base'>
+                      <FormLabel className='text-[13px] font-medium text-[#0A0E1A]'>
                         {t('Enabled')}
                       </FormLabel>
                       <FormDescription>
@@ -1356,7 +1356,7 @@ export function ModelMutateDrawer({
                 render={({ field }) => (
                   <FormItem className={sideDrawerSwitchItemClassName()}>
                     <div className='flex flex-col gap-0.5'>
-                      <FormLabel className='text-base'>
+                      <FormLabel className='text-[13px] font-medium text-[#0A0E1A]'>
                         {t('Official Sync')}
                       </FormLabel>
                       <FormDescription>

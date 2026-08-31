@@ -64,7 +64,7 @@ export function TelegramLoginDialog(props: TelegramLoginDialogProps) {
     script.src = 'https://telegram.org/js/telegram-widget.js?22'
     script.dataset.telegramLogin = botName
     script.dataset.size = 'large'
-    script.dataset.radius = '8'
+    script.dataset.radius = '12'
     script.dataset.onauth = `${callbackName}(user)`
     const handleLoad = () => setWidgetState('ready')
     const handleError = () => setWidgetState('failed')
@@ -86,9 +86,13 @@ export function TelegramLoginDialog(props: TelegramLoginDialogProps) {
       onOpenChange={props.onOpenChange}
       title={t('Telegram Login Widget')}
       description={t('Continue with Telegram')}
-      contentClassName='max-w-sm'
+      contentClassName='max-w-sm gap-0 overflow-hidden rounded-2xl border-[#E5E8EE] bg-white p-0 shadow-xl ring-0 sm:p-0'
       contentHeight='auto'
-      bodyClassName='space-y-4'
+      headerClassName='px-6 pt-6 pb-0'
+      titleClassName='text-[15px] font-semibold text-[#0A0E1A]'
+      descriptionClassName='text-[13px] leading-relaxed text-[#5A6478]'
+      bodyClassName='space-y-4 px-6 py-5'
+      footerClassName='border-t border-[#E5E8EE] bg-[#FAFBFC] px-6 py-4 sm:justify-end'
     >
       <div
         className='flex min-h-12 items-center justify-center'
@@ -96,7 +100,7 @@ export function TelegramLoginDialog(props: TelegramLoginDialogProps) {
       >
         {(widgetState === 'loading' || props.pending) && <Spinner />}
         {widgetState === 'failed' && (
-          <p className='text-destructive text-sm'>{t('Login failed')}</p>
+          <p className='text-[13px] text-rose-600'>{t('Login failed')}</p>
         )}
         <div
           ref={widgetContainer}

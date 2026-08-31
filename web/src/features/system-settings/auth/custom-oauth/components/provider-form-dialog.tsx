@@ -230,18 +230,18 @@ export function ProviderFormDialog(props: ProviderFormDialogProps) {
 
           <Alert>
             <AlertTitle>{t('OAuth callback URL')}</AlertTitle>
-            <AlertDescription className='space-y-3 text-sm'>
+            <AlertDescription className='space-y-3 text-[13px] text-[#5A6478]'>
               <p>
                 {t(
                   'This callback URL updates from the slug field and is the value to register with your provider.'
                 )}
               </p>
               <div className='flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between'>
-                <span className='text-muted-foreground shrink-0'>
+                <span className='text-[#8A93A4] shrink-0 text-[12px]'>
                   {t('Authorization callback URL')}
                 </span>
                 <span className='flex min-w-0 items-center gap-2'>
-                  <code className='bg-muted text-foreground min-w-0 rounded px-1.5 py-0.5 text-xs break-all'>
+                  <code className='font-mono text-[12px] bg-[#F7F8FA] rounded-md px-3 py-2 text-[#0A0E1A] break-all min-w-0'>
                     {callbackUrl}
                   </code>
                   <CopyButton
@@ -258,7 +258,7 @@ export function ProviderFormDialog(props: ProviderFormDialogProps) {
 
           {/* Basic Info */}
           <div className='space-y-4'>
-            <h4 className='text-sm font-medium'>{t('Basic Info')}</h4>
+            <h4 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Basic Info')}</h4>
 
             <FormField
               control={form.control}
@@ -339,7 +339,7 @@ export function ProviderFormDialog(props: ProviderFormDialogProps) {
 
           {/* Credentials */}
           <div className='space-y-4'>
-            <h4 className='text-sm font-medium'>{t('Credentials')}</h4>
+            <h4 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Credentials')}</h4>
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <FormField
                 control={form.control}
@@ -425,7 +425,7 @@ export function ProviderFormDialog(props: ProviderFormDialogProps) {
           {/* Endpoints */}
           <div className='space-y-4'>
             <div className='flex items-center justify-between'>
-              <h4 className='text-sm font-medium'>{t('Endpoints')}</h4>
+              <h4 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Endpoints')}</h4>
               <DiscoveryButton form={form} />
             </div>
 
@@ -529,7 +529,7 @@ export function ProviderFormDialog(props: ProviderFormDialogProps) {
 
           {/* Field Mapping */}
           <div className='space-y-4'>
-            <h4 className='text-sm font-medium'>{t('Field Mapping')}</h4>
+            <h4 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Field Mapping')}</h4>
             <FormDescription>
               {t(
                 'Map fields from the user info response to local user attributes. Supports nested paths (e.g. ocs.data.id).'
@@ -599,7 +599,7 @@ export function ProviderFormDialog(props: ProviderFormDialogProps) {
 
           {/* Advanced */}
           <div className='space-y-4'>
-            <h4 className='text-sm font-medium'>{t('Advanced')}</h4>
+            <h4 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Advanced')}</h4>
 
             <FormField
               control={form.control}

@@ -143,7 +143,7 @@ function OAuthSetupGuide(props: OAuthSetupGuideProps) {
   return (
     <Alert className='lg:col-span-2'>
       <AlertTitle>{props.title}</AlertTitle>
-      <AlertDescription className='space-y-3 text-sm'>
+      <AlertDescription className='space-y-3 text-[13px] text-[#5A6478]'>
         <div>{props.description}</div>
         <div className='space-y-2'>
           {props.rows.map((row) => (
@@ -151,11 +151,11 @@ function OAuthSetupGuide(props: OAuthSetupGuideProps) {
               key={`${String(row.label)}-${row.value}`}
               className='flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between'
             >
-              <span className='text-muted-foreground shrink-0'>
+              <span className='text-[#8A93A4] shrink-0 text-[12px]'>
                 {row.label}
               </span>
               <span className='flex min-w-0 items-center gap-2'>
-                <code className='bg-muted text-foreground min-w-0 rounded px-1.5 py-0.5 text-xs break-all'>
+                <code className='font-mono text-[12px] bg-[#F7F8FA] rounded-md px-3 py-2 text-[#0A0E1A] break-all min-w-0'>
                   {row.value}
                 </code>
                 <CopyButton

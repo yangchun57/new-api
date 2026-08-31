@@ -154,7 +154,7 @@ function LineSparkline(props: { values?: number[]; tone: StatCardTone }) {
   return (
     <div
       className={cn(
-        'relative h-8 overflow-hidden rounded-lg',
+        'relative h-8 overflow-hidden rounded-md',
         LINE_TONE_CLASSES[props.tone]
       )}
       aria-hidden='true'
@@ -194,7 +194,7 @@ function BarSparkline(props: { values?: number[]; tone: StatCardTone }) {
         <span
           key={bucket.position}
           className={cn(
-            'flex-1 rounded-t-sm bg-linear-to-t',
+            'flex-1 rounded-t-[3px] bg-linear-to-t',
             bucket.height <= 0 && 'opacity-20',
             TONE_CLASSES[props.tone]
           )}
@@ -211,14 +211,14 @@ function StatCardDetails(props: { details: StatCardDetail[] }) {
       {props.details.map((detail) => (
         <div
           key={detail.label}
-          className='bg-muted/40 rounded-lg border border-transparent px-2.5 py-2'
+          className='bg-[#F7F8FA] rounded-md px-2.5 py-2'
         >
-          <div className='text-muted-foreground truncate text-[11px] leading-none font-medium'>
+          <div className='text-[#8A93A4] truncate text-[11px] leading-none font-medium uppercase tracking-[0.08em]'>
             {detail.label}
           </div>
           <div
             className={cn(
-              'mt-1.5 truncate text-xs font-semibold tabular-nums',
+              'mt-1.5 truncate text-[12px] font-semibold tabular-nums',
               DETAIL_TONE_CLASSES[detail.tone ?? 'default']
             )}
             title={detail.value}
@@ -245,7 +245,7 @@ export function StatCard(props: StatCardProps) {
           props.compactMobile ? 'gap-1' : 'gap-1.5'
         )}
       >
-        <Skeleton className='h-5 w-16 sm:h-7 sm:w-24' />
+        <Skeleton className='h-6 w-16 sm:h-8 sm:w-24' />
         <Skeleton
           className={cn(
             'h-3 w-24 sm:h-3.5 sm:w-32',
@@ -257,12 +257,12 @@ export function StatCard(props: StatCardProps) {
   } else if (props.error) {
     valueContent = (
       <div className='flex flex-col gap-1'>
-        <div className='text-muted-foreground mt-0.5 font-mono text-base font-bold tracking-tight break-all tabular-nums sm:text-2xl'>
+        <div className='text-muted-foreground mt-0.5 font-mono text-[20px] font-semibold tracking-tight break-all tabular-nums sm:text-[28px]'>
           --
         </div>
         <p
           className={cn(
-            'text-muted-foreground/60 line-clamp-1 text-[11px] sm:text-xs',
+            'text-[#8A93A4] line-clamp-1 text-[11px] sm:text-[12px] leading-relaxed',
             props.compactMobile && 'hidden sm:block'
           )}
         >
@@ -273,12 +273,12 @@ export function StatCard(props: StatCardProps) {
   } else {
     valueContent = (
       <div className='flex flex-col gap-1'>
-        <div className='text-foreground font-mono text-base font-semibold tracking-tight break-all tabular-nums sm:text-2xl'>
+        <div className='text-foreground font-mono text-[20px] font-semibold tracking-[-0.02em] break-all tabular-nums sm:text-[28px]'>
           {props.value}
         </div>
         <p
           className={cn(
-            'text-muted-foreground/60 line-clamp-1 text-[11px] leading-relaxed sm:text-xs',
+            'text-[#8A93A4] line-clamp-1 text-[11px] leading-relaxed sm:text-[12px]',
             props.compactMobile && 'hidden sm:block'
           )}
         >
@@ -300,12 +300,12 @@ export function StatCard(props: StatCardProps) {
   return (
     <div
       className={cn(
-        'group flex flex-col justify-between sm:min-h-32 sm:gap-3',
-        props.compactMobile ? 'gap-1' : 'gap-1.5'
+        'group flex flex-col justify-between sm:min-h-[140px] sm:gap-3.5',
+        props.compactMobile ? 'gap-1' : 'gap-2'
       )}
     >
       <div className='flex items-start justify-between gap-1'>
-        <div className='text-muted-foreground flex items-center gap-1 text-[11px] font-medium sm:gap-2 sm:text-xs'>
+        <div className='text-[#8A93A4] flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.08em] sm:gap-2'>
           <IconBadge
             tone={iconTone}
             size='stat'

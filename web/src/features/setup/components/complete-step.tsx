@@ -20,7 +20,6 @@ import { CheckCircle2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { StatusBadge } from '@/components/status-badge'
-import { Separator } from '@/components/ui/separator'
 
 import type { SetupFormValues, SetupStatus } from '../types'
 
@@ -44,6 +43,11 @@ const DATABASE_VARIANT: Record<
   postgres: 'success',
 }
 
+const rowCls = 'py-4 first:pt-0 last:pb-0'
+const dtCls =
+  'text-[11px] font-medium uppercase tracking-[0.14em] text-[#8A93A4]'
+const ddCls = 'mt-1.5 flex flex-wrap items-center gap-2 text-[14px] font-medium text-[#0A0E1A]'
+
 export function CompleteStep({ status, values }: CompleteStepProps) {
   const { t } = useTranslation()
   const usageLabelKey = USAGE_MODE_LABEL_KEYS[values.usageMode]
@@ -52,28 +56,26 @@ export function CompleteStep({ status, values }: CompleteStepProps) {
 
   return (
     <div className='flex flex-col items-center gap-6 text-center'>
-      <div className='rounded-2xl bg-emerald-500/10 p-4 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300'>
-        <CheckCircle2 className='size-8' />
+      <div className='flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-200/80 bg-emerald-50/70 text-emerald-600 shadow-sm'>
+        <CheckCircle2 className='h-7 w-7' strokeWidth={1.75} />
       </div>
       <div className='space-y-2'>
-        <h2 className='text-2xl font-semibold tracking-tight'>
+        <h2 className='text-[22px] font-semibold tracking-tight text-[#0A0E1A]'>
           {t('Ready to initialize')}
         </h2>
-        <p className='text-muted-foreground max-w-lg text-sm sm:text-base'>
+        <p className='mx-auto max-w-lg text-[14px] leading-relaxed text-[#5A6478]'>
           {t(
             'Double check the configuration below. Your system will be locked until initialization is complete.'
           )}
         </p>
       </div>
 
-      <div className='bg-card w-full rounded-xl border p-6 text-left shadow-sm sm:p-8'>
-        <dl className='grid gap-6'>
-          <div className='space-y-1.5'>
-            <dt className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>
-              {t('Database')}
-            </dt>
-            <dd className='flex flex-wrap items-center gap-2'>
-              <span className='text-sm font-semibold'>{dbType}</span>
+      <div className='w-full rounded-xl border border-[#E5E8EE] bg-white p-6 text-left shadow-sm sm:p-7'>
+        <dl className='divide-y divide-[#E5E8EE]'>
+          <div className={rowCls}>
+            <dt className={dtCls}>{t('Database')}</dt>
+            <dd className={ddCls}>
+              <span>{dbType}</span>
               <StatusBadge
                 label={dbType}
                 variant={databaseVariant}
@@ -82,26 +84,18 @@ export function CompleteStep({ status, values }: CompleteStepProps) {
             </dd>
           </div>
 
-          <Separator />
-
-          <div className='space-y-1.5'>
-            <dt className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>
-              {t('Administrator account')}
-            </dt>
-            <dd className='text-sm font-semibold'>
+          <div className={rowCls}>
+            <dt className={dtCls}>{t('Administrator account')}</dt>
+            <dd className={ddCls}>
               {status?.root_init
                 ? t('Existing account will be reused')
                 : values.username || t('Not set yet')}
             </dd>
           </div>
 
-          <Separator />
-
-          <div className='space-y-1.5'>
-            <dt className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>
-              {t('Usage mode')}
-            </dt>
-            <dd className='text-sm font-semibold'>{t(usageLabelKey)}</dd>
+          <div className={rowCls}>
+            <dt className={dtCls}>{t('Usage mode')}</dt>
+            <dd className={ddCls}>{t(usageLabelKey)}</dd>
           </div>
         </dl>
       </div>

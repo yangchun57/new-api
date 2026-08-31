@@ -49,6 +49,8 @@ interface ModelsChartPreferencesProps {
   onPreferencesChange: (preferences: DashboardChartPreferences) => void
 }
 
+const fieldLabelCls = 'text-[13px] font-medium leading-none text-[#0A0E1A]'
+
 export function ModelsChartPreferences(props: ModelsChartPreferencesProps) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
@@ -89,7 +91,9 @@ export function ModelsChartPreferences(props: ModelsChartPreferencesProps) {
       }
     >
       <div className='grid gap-1.5'>
-        <Label htmlFor='default-time-range'>{t('Default range')}</Label>
+        <Label htmlFor='default-time-range' className={fieldLabelCls}>
+          {t('Default range')}
+        </Label>
         <Select
           items={[
             ...TIME_RANGE_PRESETS.map((option) => ({
@@ -120,7 +124,7 @@ export function ModelsChartPreferences(props: ModelsChartPreferencesProps) {
         </Select>
       </div>
       <div className='grid gap-1.5'>
-        <Label htmlFor='default-time-granularity'>
+        <Label htmlFor='default-time-granularity' className={fieldLabelCls}>
           {t('Default time granularity')}
         </Label>
         <Select
@@ -153,7 +157,10 @@ export function ModelsChartPreferences(props: ModelsChartPreferencesProps) {
         </Select>
       </div>
       <div className='grid gap-1.5'>
-        <Label htmlFor='consumption-distribution-chart'>
+        <Label
+          htmlFor='consumption-distribution-chart'
+          className={fieldLabelCls}
+        >
           {t('Default consumption chart')}
         </Label>
         <Select
@@ -187,7 +194,7 @@ export function ModelsChartPreferences(props: ModelsChartPreferencesProps) {
         </Select>
       </div>
       <div className='grid gap-1.5'>
-        <Label htmlFor='model-analytics-chart'>
+        <Label htmlFor='model-analytics-chart' className={fieldLabelCls}>
           {t('Default model call chart')}
         </Label>
         <Select

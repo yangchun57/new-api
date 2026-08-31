@@ -242,19 +242,19 @@ export const ToolPriceSettings = memo(function ToolPriceSettings({
   return (
     <div className='space-y-4'>
       <Alert>
-        <AlertDescription className='space-y-1 text-sm'>
+        <AlertDescription className='space-y-1 text-[13px] text-[#5A6478]'>
           <div>
             {t(
               'Configure per-tool unit prices ($/1K calls). Per-request models do not incur additional tool fees.'
             )}
           </div>
           <div>
-            <span className='font-medium'>{t('Format')}:</span>{' '}
-            <code className='bg-muted rounded px-1 py-0.5 text-xs'>
+            <span className='font-medium text-[#0A0E1A]'>{t('Format')}:</span>{' '}
+            <code className='rounded-md bg-[#F7F8FA] px-1 py-0.5 font-mono text-[12px] text-[#0A0E1A]'>
               web_search_preview
             </code>{' '}
             {t('is the default price; ')}
-            <code className='bg-muted rounded px-1 py-0.5 text-xs'>
+            <code className='rounded-md bg-[#F7F8FA] px-1 py-0.5 font-mono text-[12px] text-[#0A0E1A]'>
               web_search_preview:gpt-4o*
             </code>{' '}
             {t('overrides for matching model prefix.')}
@@ -305,7 +305,8 @@ export const ToolPriceSettings = memo(function ToolPriceSettings({
         <StaticDataTable
           data={rows}
           getRowKey={(row) => row.id}
-          emptyClassName='text-muted-foreground py-8'
+          containerClassName='rounded-xl'
+          emptyClassName='py-8 text-[13px] text-[#8A93A4]'
           emptyContent={t('No tools configured')}
           columns={[
             {

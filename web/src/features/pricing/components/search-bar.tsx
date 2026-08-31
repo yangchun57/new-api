@@ -51,7 +51,7 @@ export function SearchBar(props: SearchBarProps) {
 
   return (
     <div className={cn('relative', props.className)}>
-      <Search className='text-muted-foreground/60 pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2' />
+      <Search className='pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-[#5A6478]' />
       <input
         ref={inputRef}
         type='text'
@@ -59,26 +59,25 @@ export function SearchBar(props: SearchBarProps) {
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
         className={cn(
-          'border-border/60 bg-background placeholder:text-muted-foreground/50',
-          'hover:border-border',
-          'focus:border-primary/50 focus:ring-primary/20 focus:ring-2',
-          'h-10 w-full rounded-lg border pr-16 pl-10 text-sm transition-all outline-none'
+          'pl-search-input h-12 w-full rounded-full border border-[#E5E8EE] bg-white pr-20 pl-11 pl-nav-shadow text-[14px] text-[#0A0E1A] outline-none transition-all duration-200 placeholder:text-[#8A93A4]',
+          'hover:border-[#CBD3E0]',
+          'focus:border-[#2E4BFF]/40 focus:ring-4 focus:ring-[#2E4BFF]/8'
         )}
         aria-label={t('Search models')}
       />
-      <div className='absolute top-1/2 right-2.5 flex -translate-y-1/2 items-center gap-1'>
+      <div className='absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1'>
         {props.value ? (
           <Button
             variant='ghost'
             size='icon'
             onClick={props.onClear}
-            className='text-muted-foreground/60 hover:text-foreground size-7'
+            className='size-7 text-[#5A6478] hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
             aria-label={t('Clear search')}
           >
             <X className='size-4' />
           </Button>
         ) : (
-          <kbd className='bg-muted text-muted-foreground pointer-events-none hidden rounded border px-1.5 py-0.5 font-mono text-[10px] sm:inline-block'>
+          <kbd className='pointer-events-none hidden rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-1.5 py-0.5 pl-font-mono text-[10px] text-[#5A6478] sm:inline-block'>
             ⌘K
           </kbd>
         )}

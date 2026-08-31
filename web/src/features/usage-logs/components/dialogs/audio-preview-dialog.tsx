@@ -74,12 +74,12 @@ function AudioClipCard({ clip }: { clip: AudioClip }) {
   if (!audioUrl) return null
 
   return (
-    <div className='bg-card flex gap-4 rounded-lg border p-4'>
+    <div className='bg-white flex gap-4 rounded-xl border border-[#E5E8EE] p-4'>
       {imageUrl && (
         <img
           src={imageUrl}
           alt={title}
-          className='h-20 w-20 shrink-0 rounded-lg object-cover'
+          className='h-20 w-20 shrink-0 rounded-xl object-cover'
           onError={(e) => {
             ;(e.target as HTMLElement).style.display = 'none'
           }}
@@ -87,7 +87,7 @@ function AudioClipCard({ clip }: { clip: AudioClip }) {
       )}
       <div className='min-w-0 flex-1'>
         <div className='mb-1 flex items-center gap-2'>
-          <span className='truncate text-sm font-medium'>{title}</span>
+          <span className='truncate text-[13px] font-medium text-[#0A0E1A]'>{title}</span>
           {duration != null && duration > 0 && (
             <StatusBadge
               label={formatDuration(duration)}
@@ -99,12 +99,12 @@ function AudioClipCard({ clip }: { clip: AudioClip }) {
         </div>
 
         {tags && (
-          <p className='text-muted-foreground mb-2 truncate text-xs'>{tags}</p>
+          <p className='text-[#8A93A4] mb-2 truncate text-[12px]'>{tags}</p>
         )}
 
         {hasError ? (
           <div className='flex flex-wrap items-center gap-2'>
-            <span className='text-destructive text-xs'>
+            <span className='text-[#E5484D] text-[12px]'>
               {t('Audio playback failed')}
             </span>
             <Button
@@ -166,7 +166,7 @@ export function AudioPreviewDialog(props: AudioPreviewDialogProps) {
       bodyClassName='space-y-4'
     >
       {clips.length === 0 ? (
-        <p className='text-muted-foreground py-4 text-center text-sm'>
+        <p className='text-[#5A6478] py-4 text-center text-[13px]'>
           {t('None')}
         </p>
       ) : (

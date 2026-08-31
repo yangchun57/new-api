@@ -28,12 +28,12 @@ export function StatisticsCard({ label, count, total }: StatisticsCardProps) {
   const { t } = useTranslation()
   return (
     <div className='rounded-md border p-3'>
-      <div className='text-muted-foreground mb-1 text-xs font-medium'>
+      <div className='text-[#8A93A4] mb-1 text-[12px] font-medium'>
         {label}
       </div>
       <div className='flex items-baseline gap-2'>
-        <span className='text-foreground text-2xl font-semibold'>{count}</span>
-        <span className='text-muted-foreground text-sm'>
+        <span className='text-[#0A0E1A] text-2xl font-semibold'>{count}</span>
+        <span className='text-[#8A93A4] text-[12px]'>
           {t('of')} {total}
         </span>
       </div>

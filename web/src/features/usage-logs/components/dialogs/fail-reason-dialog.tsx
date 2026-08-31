@@ -52,10 +52,10 @@ export function FailReasonDialog({
       <ScrollArea className='max-h-[500px] pr-4'>
         <div className='space-y-4 py-4'>
           <div className='space-y-2'>
-            <Label className='text-sm font-semibold'>
+            <Label className='text-[13px] font-medium text-[#0A0E1A]'>
               {t('Error Message')}
             </Label>
-            <div className='bg-muted/50 relative rounded-md border border-red-200 p-3'>
+            <div className='bg-[#FEF2F2] relative rounded-xl border border-[#FCA5A5] p-4'>
               <Button
                 variant='ghost'
                 size='sm'
@@ -64,12 +64,12 @@ export function FailReasonDialog({
                 title={t('Copy to clipboard')}
               >
                 {copiedText === failReason ? (
-                  <Check className='size-4 text-green-600' />
+                  <Check className='size-4 text-[#16A34A]' />
                 ) : (
                   <Copy className='size-4' />
                 )}
               </Button>
-              <p className='overflow-wrap-anywhere pr-10 text-sm leading-relaxed break-all whitespace-pre-wrap text-red-600'>
+              <p className='overflow-wrap-anywhere pr-10 text-[13px] leading-relaxed break-all whitespace-pre-wrap text-[#E5484D]'>
                 {failReason || '-'}
               </p>
             </div>

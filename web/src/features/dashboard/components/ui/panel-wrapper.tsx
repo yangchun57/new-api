@@ -42,9 +42,13 @@ function PanelHeader(props: {
 }) {
   const heading = (
     <div className='flex flex-col gap-1'>
-      <div className='text-sm font-semibold'>{props.title}</div>
+      <div className='text-[14px] font-semibold tracking-[-0.01em] leading-snug'>
+        {props.title}
+      </div>
       {props.description != null && (
-        <div className='text-muted-foreground text-xs'>{props.description}</div>
+        <div className='text-muted-foreground text-[12px] leading-relaxed'>
+          {props.description}
+        </div>
       )}
     </div>
   )
@@ -68,7 +72,7 @@ export function PanelWrapper(props: PanelWrapperProps) {
   const resolvedEmptyMessage = props.emptyMessage ?? t('No data available')
   const height = props.height ?? 'h-64'
   const frameClassName = cn(
-    'group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-lg border p-4 sm:p-5',
+    'group/card bg-card text-card-foreground border-border/70 shadow-card flex flex-col gap-4 overflow-hidden rounded-xl border p-4 sm:p-5',
     props.className
   )
 
@@ -89,7 +93,7 @@ export function PanelWrapper(props: PanelWrapperProps) {
         <PanelHeader title={props.title} description={props.description} />
         <div
           className={cn(
-            'text-muted-foreground flex items-center justify-center text-sm',
+            'text-muted-foreground flex items-center justify-center text-[13px]',
             height,
             props.contentClassName
           )}

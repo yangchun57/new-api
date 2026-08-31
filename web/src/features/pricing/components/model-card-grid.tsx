@@ -90,8 +90,8 @@ export function ModelCardGrid(props: ModelCardGridProps) {
       </div>
 
       {totalPages > 1 && (
-        <div className='text-muted-foreground flex flex-col items-center justify-between gap-3 border-t px-4 py-3 text-sm sm:flex-row'>
-          <p className='text-muted-foreground'>
+        <div className='pl-card flex flex-col items-center justify-between gap-3 px-4 py-3 text-sm sm:flex-row'>
+          <p className='pl-font-display text-[12px] font-medium text-[#5A6478]'>
             {t('Page {{current}} of {{total}}', {
               current: currentPage,
               total: totalPages,
@@ -104,9 +104,9 @@ export function ModelCardGrid(props: ModelCardGridProps) {
               size='sm'
               onClick={() => setPage((current) => Math.max(1, current - 1))}
               disabled={currentPage <= 1}
-              className='gap-1.5'
+              className='h-8 gap-1 rounded-full border-[#E5E8EE] bg-white pl-nav-shadow pl-cta-secondary px-3 pl-font-display text-[12px] font-semibold text-[#0A0E1A] hover:bg-white disabled:opacity-40'
             >
-              <ChevronLeft className='size-4' />
+              <ChevronLeft className='size-3.5' />
               {t('Previous page')}
             </Button>
             <Button
@@ -117,10 +117,10 @@ export function ModelCardGrid(props: ModelCardGridProps) {
                 setPage((current) => Math.min(totalPages, current + 1))
               }
               disabled={currentPage >= totalPages}
-              className='gap-1.5'
+              className='h-8 gap-1 rounded-full border-[#E5E8EE] bg-white pl-nav-shadow pl-cta-secondary px-3 pl-font-display text-[12px] font-semibold text-[#0A0E1A] hover:bg-white disabled:opacity-40'
             >
               {t('Next page')}
-              <ChevronRight className='size-4' />
+              <ChevronRight className='size-3.5' />
             </Button>
           </div>
         </div>

@@ -40,7 +40,7 @@ export function PasswordInput({
   const [showPassword, setShowPassword] = React.useState(false)
 
   return (
-    <div className={cn('relative rounded-md', className)}>
+    <div className={cn('relative', className)}>
       <Input
         type={showPassword ? 'text' : 'password'}
         ref={ref}
@@ -52,14 +52,14 @@ export function PasswordInput({
         size='icon'
         variant='ghost'
         disabled={disabled}
-        className='text-muted-foreground absolute end-1 top-1/2 h-6 w-6 -translate-y-1/2 rounded-md'
+        className='absolute end-2 top-1/2 h-7 w-7 -translate-y-1/2 rounded-md text-[#8A93A4] transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
         onClick={() => setShowPassword((prev) => !prev)}
         aria-label='Toggle password visibility'
       >
         {showPassword ? (
-          <Eye size={18} aria-hidden='true' />
+          <Eye size={16} aria-hidden='true' />
         ) : (
-          <EyeOff size={18} aria-hidden='true' />
+          <EyeOff size={16} aria-hidden='true' />
         )}
       </Button>
     </div>

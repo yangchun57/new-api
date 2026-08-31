@@ -114,10 +114,10 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
       onClick={() => setAdvancedOpen((open) => !open)}
       aria-expanded={advancedOpen}
       className={cn(
-        'text-muted-foreground hover:text-foreground gap-1 px-2',
+        'gap-1 px-2 text-[#5A6478] hover:text-[#0A0E1A]',
         props.hasAdvancedActiveFilters &&
           !advancedOpen &&
-          'text-primary hover:text-primary'
+          'text-[#2E4BFF] hover:text-[#2E4BFF]'
       )}
     >
       {advancedOpen ? t('Collapse') : t('Expand')}
@@ -139,7 +139,7 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
     return (
       <Drawer open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
         <div
-          className={cn('bg-card/50 rounded-lg border p-2.5', props.className)}
+          className={cn('rounded-xl border border-[#E5E8EE] bg-white p-2.5', props.className)}
         >
           {!mobilePanelCollapsed && (
             <div className='grid gap-2'>{props.mobilePinnedFilters}</div>
@@ -162,7 +162,7 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
                 }
                 aria-expanded={!mobilePanelCollapsed}
                 aria-label={mobilePanelCollapsed ? t('Expand') : t('Collapse')}
-                className='text-muted-foreground hover:text-foreground mr-auto size-7'
+                className='mr-auto size-7 text-[#5A6478] hover:text-[#0A0E1A]'
               >
                 <ChevronDown
                   className={cn(
@@ -177,9 +177,9 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
                   type='button'
                   variant='ghost'
                   className={cn(
-                    'text-muted-foreground hover:text-foreground gap-1 px-2',
+                    'gap-1 px-2 text-[#5A6478] hover:text-[#0A0E1A]',
                     activeMobileFilterCount > 0 &&
-                      'text-primary hover:text-primary'
+                      'text-[#2E4BFF] hover:text-[#2E4BFF]'
                   )}
                 >
                   {t('Filter')}
@@ -205,7 +205,7 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
 
         <DrawerContent className='max-h-[85dvh] p-0'>
           <div className='mx-auto flex w-full max-w-md flex-1 flex-col overflow-hidden'>
-            <DrawerHeader className='border-border/70 border-b px-4 py-3 text-left'>
+            <DrawerHeader className='border-b border-[#E5E8EE] px-4 py-3 text-left'>
               <DrawerTitle>{t('Filter')}</DrawerTitle>
               <DrawerDescription>
                 {t('Adjust filters, then search to refresh the logs.')}
@@ -219,7 +219,7 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
                 </>
               )}
             </div>
-            <DrawerFooter className='border-border/70 grid grid-cols-2 gap-2 border-t px-4 py-3'>
+            <DrawerFooter className='grid grid-cols-2 gap-2 border-t border-[#E5E8EE] px-4 py-3'>
               <Button
                 type='button'
                 variant='outline'
@@ -246,7 +246,7 @@ export function LogsFilterToolbar<TData>(props: LogsFilterToolbarProps<TData>) {
   return (
     <div
       className={cn(
-        'bg-card/50 rounded-lg border p-2.5 sm:p-3',
+        'rounded-xl border border-[#E5E8EE] bg-white p-2.5 sm:p-3',
         props.className
       )}
     >

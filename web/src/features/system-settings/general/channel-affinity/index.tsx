@@ -109,7 +109,7 @@ function ChannelAffinityConfirmDialog(props: {
         </>
       }
     >
-      <div className='text-muted-foreground text-sm'>{props.desc}</div>
+      <div className='text-[13px] text-[#5A6478]'>{props.desc}</div>
     </Dialog>
   )
 }
@@ -405,7 +405,7 @@ export function ChannelAffinitySection(props: Props) {
     <>
       <SettingsSection title={t('Channel Affinity')}>
         <Alert>
-          <AlertDescription className='text-xs'>
+          <AlertDescription className='text-[12px] text-[#5A6478]'>
             {t(
               'Channel affinity reuses the last successful channel based on keys extracted from the request context or JSON body.'
             )}
@@ -537,7 +537,7 @@ export function ChannelAffinitySection(props: Props) {
             {t('Clear All Cache')}
           </Button>
           {cacheStats && (
-            <span className='text-muted-foreground text-xs'>
+            <span className='text-[12px] text-[#8A93A4]'>
               {t('Cache Entries')}: {cacheStats.total} /{' '}
               {cacheStats.cache_capacity}
             </span>
@@ -549,7 +549,7 @@ export function ChannelAffinitySection(props: Props) {
           <StaticDataTable
             tableClassName='min-w-max'
             data={rules}
-            emptyClassName='text-muted-foreground py-8'
+            emptyClassName='text-[#5A6478] py-8'
             emptyContent={t('No rules yet')}
             columns={[
               {

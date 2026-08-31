@@ -143,17 +143,17 @@ export function WaffoSettingsSection({
     <>
       <div className='space-y-4 pt-4'>
         <div>
-          <h3 className='text-lg font-medium'>
+          <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
             {t('Waffo Aggregator Gateway')}
           </h3>
-          <p className='text-muted-foreground text-sm'>
+          <p className='text-[13px] text-[#5A6478]'>
             {t(
               'Payment aggregator mode — onboard with your own registered company (offshore entity). Built for Enterprise.'
             )}
           </p>
         </div>
         <Alert>
-          <AlertDescription className='text-xs'>
+          <AlertDescription className='text-[12px] text-[#5A6478]'>
             {t(
               'Obtain the API key, merchant ID, and RSA key pair from the Waffo dashboard, and configure the callback URL.'
             )}
@@ -184,6 +184,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoApiKey', event.target.value)
               }
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
           <div className='grid gap-1.5'>
@@ -194,6 +195,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoSandboxApiKey', event.target.value)
               }
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
         </div>
@@ -205,6 +207,7 @@ export function WaffoSettingsSection({
             onChange={(event) =>
               onValueChange('WaffoMerchantId', event.target.value)
             }
+            className='font-mono text-[12px] bg-[#F7F8FA]'
           />
         </div>
 
@@ -217,7 +220,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoPrivateKey', event.target.value)
               }
-              className='font-mono text-xs'
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
           <div className='grid gap-1.5'>
@@ -228,7 +231,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoSandboxPrivateKey', event.target.value)
               }
-              className='font-mono text-xs'
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
         </div>
@@ -242,7 +245,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoPublicCert', event.target.value)
               }
-              className='font-mono text-xs'
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
           <div className='grid gap-1.5'>
@@ -253,7 +256,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoSandboxPublicCert', event.target.value)
               }
-              className='font-mono text-xs'
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
         </div>
@@ -276,6 +279,7 @@ export function WaffoSettingsSection({
                   event.target.value === '' ? 0 : event.target.valueAsNumber
                 )
               }
+              className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
             />
           </div>
           <div className='grid gap-1.5'>
@@ -290,6 +294,7 @@ export function WaffoSettingsSection({
                   event.target.value === '' ? 1 : event.target.valueAsNumber
                 )
               }
+              className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
             />
           </div>
         </div>
@@ -303,6 +308,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoNotifyUrl', event.target.value)
               }
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
           <div className='grid gap-1.5'>
@@ -313,6 +319,7 @@ export function WaffoSettingsSection({
               onChange={(event) =>
                 onValueChange('WaffoReturnUrl', event.target.value)
               }
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
         </div>
@@ -320,7 +327,7 @@ export function WaffoSettingsSection({
         <Separator />
 
         <div className='flex items-center justify-between'>
-          <h4 className='font-medium'>{t('Payment Methods')}</h4>
+          <h4 className='text-[13px] font-medium text-[#0A0E1A]'>{t('Payment Methods')}</h4>
           <Button type='button' variant='outline' size='sm' onClick={openAdd}>
             <Plus className='mr-1 h-3 w-3' />
             {t('Add payment method')}
@@ -329,13 +336,13 @@ export function WaffoSettingsSection({
 
         <StaticDataTable
           data={payMethods}
-          emptyClassName='text-muted-foreground py-8'
+          emptyClassName='text-[13px] text-[#8A93A4] py-8'
           emptyContent={t('No payment methods configured')}
           columns={[
             {
               id: 'name',
               header: t('Display name'),
-              cell: (m) => m.name,
+              cell: (m) => <span className='font-medium text-[13px] text-[#0A0E1A]'>{m.name}</span>,
             },
             {
               id: 'icon',
@@ -345,21 +352,25 @@ export function WaffoSettingsSection({
                   <img
                     src={m.icon}
                     alt={m.name}
-                    className='h-6 w-6 rounded object-contain'
+                    className='h-6 w-6 rounded-lg border border-[#E5E8EE] object-contain p-0.5'
                   />
                 ) : (
-                  <span className='text-muted-foreground'>-</span>
+                  <span className='text-[12px] text-[#8A93A4]'>-</span>
                 ),
             },
             {
               id: 'type',
               header: t('Payment method type'),
-              cell: (m) => m.payMethodType || '-',
+              cell: (m) => m.payMethodType ? (
+                <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>{m.payMethodType}</code>
+              ) : <span className='text-[12px] text-[#8A93A4]'>-</span>,
             },
             {
               id: 'method',
               header: t('Payment method name'),
-              cell: (m) => m.payMethodName || '-',
+              cell: (m) => m.payMethodName ? (
+                <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>{m.payMethodName}</code>
+              ) : <span className='text-[12px] text-[#8A93A4]'>-</span>,
             },
             {
               id: 'actions',
@@ -424,10 +435,10 @@ export function WaffoSettingsSection({
                 <img
                   src={methodForm.icon}
                   alt={methodForm.name || t('Icon')}
-                  className='h-10 w-10 rounded border object-contain p-1'
+                  className='h-10 w-10 rounded-xl border border-[#E5E8EE] object-contain p-1'
                 />
               ) : (
-                <div className='bg-muted text-muted-foreground flex h-10 w-10 items-center justify-center rounded border text-xs'>
+                <div className='flex h-10 w-10 items-center justify-center rounded-xl border border-[#E5E8EE] bg-[#F7F8FA] text-[12px] text-[#8A93A4]'>
                   {t('Icon')}
                 </div>
               )}
@@ -460,7 +471,7 @@ export function WaffoSettingsSection({
                 </Button>
               ) : null}
             </div>
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[12px] text-[#8A93A4]'>
               {t(
                 'Supports PNG, JPG, SVG, or WebP. Recommended size: 128×128 or smaller.'
               )}
@@ -477,6 +488,7 @@ export function WaffoSettingsSection({
                 }))
               }
               placeholder='CREDITCARD,DEBITCARD'
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
           <div className='grid gap-1.5'>
@@ -489,6 +501,7 @@ export function WaffoSettingsSection({
                   payMethodName: e.target.value,
                 }))
               }
+              className='font-mono text-[12px] bg-[#F7F8FA]'
             />
           </div>
         </div>

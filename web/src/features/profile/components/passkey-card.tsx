@@ -233,10 +233,10 @@ export function PasskeyCard({ loading: pageLoading }: PasskeyCardProps) {
     <>
       <Card data-card-hover='false' className='gap-0 overflow-hidden py-0'>
         <CardHeader className='p-3 sm:p-5'>
-          <CardTitle className='text-lg tracking-tight sm:text-xl'>
+          <CardTitle className='text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]'>
             {t('Passkey Login')}
           </CardTitle>
-          <CardDescription className='text-xs sm:text-sm'>
+          <CardDescription className='text-[13px] leading-relaxed text-[#5A6478]'>
             {t('Use Passkey to sign in without entering your password.')}
           </CardDescription>
         </CardHeader>
@@ -266,7 +266,7 @@ export function PasskeyCard({ loading: pageLoading }: PasskeyCardProps) {
                       />
                     )}
                   </div>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className='text-[13px] text-[#5A6478]'>
                     {t('Last used:')} {formattedLastUsed}
                   </p>
                 </div>
@@ -337,7 +337,7 @@ export function PasskeyCard({ loading: pageLoading }: PasskeyCardProps) {
             )}
 
             {showUnsupportedNotice && (
-              <div className='bg-muted/60 text-muted-foreground flex items-start gap-3 rounded-md p-4 text-sm'>
+              <div className='flex items-start gap-3 rounded-xl bg-[#F7F8FA] p-4 text-[13px] leading-relaxed text-[#5A6478]'>
                 <ShieldAlert className='mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500' />
                 <div>
                   <p className='text-foreground font-medium'>

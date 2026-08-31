@@ -41,8 +41,8 @@ export function LoginSessionItem({ session, onRevoke }: LoginSessionItemProps) {
 
   return (
     <div className='flex flex-col gap-3 py-4 sm:flex-row sm:items-center'>
-      <div className='bg-muted flex size-10 shrink-0 items-center justify-center rounded-lg'>
-        <HugeiconsIcon icon={LaptopIcon} className='size-5' strokeWidth={2} />
+      <div className='flex size-10 shrink-0 items-center justify-center rounded-md bg-[#F7F8FA]'>
+        <HugeiconsIcon icon={LaptopIcon} className='size-5 text-[#5A6478]' strokeWidth={2} />
       </div>
       <div className='min-w-0 flex-1'>
         <div className='flex flex-wrap items-center gap-2'>
@@ -56,13 +56,13 @@ export function LoginSessionItem({ session, onRevoke }: LoginSessionItemProps) {
           </p>
           {session.current && <Badge variant='secondary'>{t('Current')}</Badge>}
         </div>
-        <p className='text-muted-foreground mt-1 text-xs'>
+        <p className='mt-1 text-[12px] text-[#8A93A4]'>
           {t('IP: {{ip}} · Method: {{method}}', {
             ip: session.ip || t('Unknown'),
             method: loginMethodLabel(session.login_method, t),
           })}
         </p>
-        <p className='text-muted-foreground mt-1 text-xs'>
+        <p className='mt-1 text-[12px] text-[#8A93A4]'>
           {t('Last active {{time}} · Expires {{expires}}', {
             time: dayjs.unix(session.last_active_at).fromNow(),
             expires: dayjs.unix(session.expires_at).format('YYYY-MM-DD HH:mm'),

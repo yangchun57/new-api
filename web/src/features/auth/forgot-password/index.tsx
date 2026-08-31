@@ -26,21 +26,21 @@ export function ForgotPassword() {
   const { t } = useTranslation()
   return (
     <AuthLayout>
-      <div className='w-full space-y-8'>
-        <div className='space-y-3'>
-          <h2 className='text-center text-2xl font-semibold tracking-tight sm:text-left'>
+      <div className='w-full space-y-6'>
+        <div className='space-y-2 text-center sm:text-left'>
+          <h1 className='text-[26px] font-semibold leading-tight tracking-tight text-[#0A0E1A]'>
             {t('Forgot password')}
-          </h2>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
+          </h1>
+          <p className='text-[14px] leading-relaxed text-[#5A6478]'>
             {t(
               'Enter your registered email and we will send you a link to reset your password.'
             )}
           </p>
-          <p className='text-muted-foreground text-left text-sm sm:text-base'>
+          <p className='text-[14px] leading-relaxed text-[#5A6478]'>
             {t("Don't have an account?")}{' '}
             <Link
               to='/sign-up'
-              className='hover:text-primary font-medium underline underline-offset-4'
+              className='font-medium text-[#0A0E1A] underline decoration-[#D8DCE5] underline-offset-[3px] transition-colors hover:decoration-[#0A0E1A]/50'
             >
               {t('Sign up')}
             </Link>
@@ -48,7 +48,9 @@ export function ForgotPassword() {
           </p>
         </div>
 
-        <ForgotPasswordForm className='space-y-0' />
+        <div className='rounded-2xl border border-[#E5E8EE] bg-white p-6 shadow-sm sm:p-8'>
+          <ForgotPasswordForm className='space-y-0' />
+        </div>
       </div>
     </AuthLayout>
   )

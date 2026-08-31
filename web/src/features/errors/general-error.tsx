@@ -17,6 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { useNavigate, useRouter } from '@tanstack/react-router'
+import { AlertOctagon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
@@ -54,45 +55,64 @@ export function GeneralError({
     ? t('Please wait a moment before trying again.')
     : t('Please try again later.')
 
-  return (
-    <div className={cn('h-svh w-full', className)}>
-      <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
-        {!minimal && (
-          <h1 className='text-[7rem] leading-tight font-bold'>
-            {status ?? 500}
-          </h1>
-        )}
-        <span className='font-medium'>{title}</span>
-        <p className='text-muted-foreground text-center'>
-          {t('We apologize for the inconvenience.')} <br /> {description}
+  if (minimal) {
+    return (
+      <div className={cn('flex h-full w-full flex-col items-center justify-center gap-2 bg-white px-6', className)}>
+        <AlertOctagon className='mb-2 h-6 w-6 text-[#8A93A4]' strokeWidth={1.75} />
+        <span className='text-[15px] font-medium text-[#0A0E1A]'>{title}</span>
+        <p className='max-w-[360px] text-center text-[13px] leading-relaxed text-[#5A6478]'>
+          {t('We apologize for the inconvenience.')} {description}
         </p>
-        {!minimal && (
-          <p className='text-muted-foreground text-center text-sm'>
-            {t('If this keeps happening, please report it on GitHub Issues.')}
-          </p>
-        )}
-        {!minimal && (
-          <div className='mt-6 flex flex-wrap justify-center gap-4'>
-            <Button variant='outline' onClick={() => history.go(-1)}>
-              {t('Go Back')}
-            </Button>
-            <Button
-              variant='outline'
-              render={
-                <a
-                  href={FEEDBACK_URL}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                />
-              }
-            >
-              {t('Report an issue')}
-            </Button>
-            <Button onClick={() => navigate({ to: '/' })}>
-              {t('Back to Home')}
-            </Button>
-          </div>
-        )}
+      </div>
+    )
+  }
+
+  return (
+    <div className={cn('min-h-svh flex items-center justify-center bg-white px-6', className)}>
+      <div className='w-full max-w-[420px] flex flex-col items-center text-center'>
+        <div className='mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] text-[#0A0E1A] shadow-sm'>
+          <AlertOctagon className='h-6 w-6' strokeWidth={1.75} />
+        </div>
+        <span className='mb-2 text-[11px] font-medium uppercase tracking-[0.14em] text-[#8A93A4]'>
+          Error {status ?? 500}
+        </span>
+        <h1 className='text-[28px] font-semibold leading-tight tracking-tight text-[#0A0E1A]'>
+          {title}
+        </h1>
+        <p className='mt-3 text-[14px] leading-relaxed text-[#5A6478]'>
+          {t('We apologize for the inconvenience.')} {description}
+        </p>
+        <p className='mt-2 text-[12px] leading-relaxed text-[#8A93A4]'>
+          {t('If this keeps happening, please report it on GitHub Issues.')}
+        </p>
+        <div className='mt-8 flex w-full flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center'>
+          <Button
+            variant='outline'
+            onClick={() => history.go(-1)}
+            className='h-11 rounded-xl border-[#E5E8EE] bg-white px-5 text-[14px] font-medium text-[#0A0E1A] shadow-sm transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
+          >
+            {t('Go Back')}
+          </Button>
+          <Button
+            variant='outline'
+            render={
+              <a
+                href={FEEDBACK_URL}
+                target='_blank'
+                rel='noopener noreferrer'
+              />
+            }
+            className='h-11 rounded-xl border-[#E5E8EE] bg-white px-5 text-[14px] font-medium text-[#0A0E1A] shadow-sm transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
+          >
+            {t('Report an issue')}
+          </Button>
+          <Button
+            onClick={() => navigate({ to: '/' })}
+            className='h-11 w-full rounded-xl bg-[#0A0E1A] px-5 text-[14px] font-medium text-white shadow-sm transition-colors hover:bg-[#0A0E1A]/90 sm:w-auto'
+          >
+            {t('Back to Home')}
+          </Button>
+        </div>
       </div>
     </div>
   )

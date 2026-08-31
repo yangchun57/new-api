@@ -183,7 +183,7 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
           }
           placeholder={t('Enter threshold')}
         />
-        <p className='text-muted-foreground text-xs'>
+        <p className='text-[12px] text-[#8A93A4]'>
           {t('Get notified when balance falls below this value')}
         </p>
       </div>
@@ -241,7 +241,7 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
             onChange={(e) => updateField('bark_url', e.target.value)}
             placeholder={t('https://api.day.app/yourkey/{{title}}/{{content}}')}
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t('Template variables:')} {'{{title}}'}, {'{{content}}'}
           </p>
         </div>
@@ -260,7 +260,7 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
               onChange={(e) => updateField('gotify_url', e.target.value)}
               placeholder={t('https://gotify.example.com')}
             />
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[12px] text-[#8A93A4]'>
               {t('Enter the full URL of your Gotify server')}
             </p>
           </div>
@@ -272,7 +272,7 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
               onChange={(e) => updateField('gotify_token', e.target.value)}
               placeholder={t('Enter application token')}
             />
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[12px] text-[#8A93A4]'>
               {t('Token obtained from your Gotify application')}
             </p>
           </div>
@@ -290,22 +290,22 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
               }
               placeholder='5'
             />
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[12px] text-[#8A93A4]'>
               {t(
                 'Priority level from 0 (lowest) to 10 (highest), default is 5'
               )}
             </p>
           </div>
-          <div className='bg-muted/50 rounded-lg border p-3 sm:p-4'>
-            <h5 className='mb-1.5 text-sm font-medium sm:mb-2'>
+          <div className='bg-[#F7F8FA] rounded-xl border p-3 sm:p-4'>
+            <h5 className='mb-1.5 text-[13px] font-medium leading-none text-[#0A0E1A] sm:mb-2'>
               {t('Setup Instructions')}
             </h5>
-            <ol className='text-muted-foreground space-y-1 text-xs'>
+            <ol className='space-y-1 text-[12px] text-[#8A93A4]'>
               <li>{t('1. Create an application in your Gotify server')}</li>
               <li>{t('2. Copy the application token')}</li>
               <li>{t('3. Enter your Gotify server URL and token above')}</li>
             </ol>
-            <p className='text-muted-foreground mt-3 text-xs'>
+            <p className='mt-3 text-[12px] text-[#8A93A4]'>
               {t('Learn more:')}{' '}
               <a
                 href='https://gotify.net/'
@@ -326,20 +326,20 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
       {/* Preferences Section */}
       <div className='space-y-3'>
         <div>
-          <h4 className='text-sm font-medium'>{t('Preferences')}</h4>
-          <p className='text-muted-foreground mt-1 text-xs'>
+          <h4 className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{t('Preferences')}</h4>
+          <p className='mt-1 text-[12px] text-[#8A93A4]'>
             {t('Configure your account behavior preferences')}
           </p>
         </div>
 
         {/* Receive Upstream Model Update Notifications (admin only) */}
         {isAdmin && (
-          <div className='flex items-start justify-between gap-3 rounded-lg border p-3 sm:items-center sm:p-4'>
+          <div className='flex items-start justify-between gap-3 rounded-xl border p-3 sm:items-center sm:p-4'>
             <div className='space-y-0.5'>
               <Label htmlFor='upstreamModelUpdateNotify'>
                 {t('Receive Upstream Model Update Notifications')}
               </Label>
-              <p className='text-muted-foreground line-clamp-3 text-xs sm:line-clamp-none sm:text-sm'>
+              <p className='line-clamp-3 text-[12px] text-[#8A93A4] sm:line-clamp-none sm:text-[13px] sm:text-[#5A6478]'>
                 {t(
                   'Only available for admins. When enabled, you will receive a summary notification via your selected method when the scheduled model check detects upstream model changes or check failures.'
                 )}
@@ -357,12 +357,12 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
         )}
 
         {/* Accept Unset Model Price */}
-        <div className='flex items-start justify-between gap-3 rounded-lg border p-3 sm:items-center sm:p-4'>
+        <div className='flex items-start justify-between gap-3 rounded-xl border p-3 sm:items-center sm:p-4'>
           <div className='space-y-0.5'>
             <Label htmlFor='acceptUnsetPrice'>
               {t('Accept Unpriced Models')}
             </Label>
-            <p className='text-muted-foreground text-xs sm:text-sm'>
+            <p className='text-[12px] text-[#8A93A4] sm:text-[13px] sm:text-[#5A6478]'>
               {t('Allow using models without price configuration')}
             </p>
           </div>
@@ -377,10 +377,10 @@ export function NotificationTab({ profile, onUpdate }: NotificationTabProps) {
         </div>
 
         {/* Record IP Log */}
-        <div className='flex items-start justify-between gap-3 rounded-lg border p-3 sm:items-center sm:p-4'>
+        <div className='flex items-start justify-between gap-3 rounded-xl border p-3 sm:items-center sm:p-4'>
           <div className='space-y-0.5'>
             <Label htmlFor='recordIp'>{t('Record IP Address')}</Label>
-            <p className='text-muted-foreground text-xs sm:text-sm'>
+            <p className='text-[12px] text-[#8A93A4] sm:text-[13px] sm:text-[#5A6478]'>
               {t('Log IP address for usage and error logs')}
             </p>
           </div>

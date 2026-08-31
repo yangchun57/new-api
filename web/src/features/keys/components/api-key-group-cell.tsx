@@ -62,7 +62,7 @@ export function ApiKeyGroupCell(props: ApiKeyGroupCellProps) {
         render={
           <BadgeCell
             data-api-key-group-cell='auto'
-            className='gap-1.5 overflow-visible text-xs'
+            className='gap-1.5 overflow-visible text-[12px]'
           />
         }
       >
@@ -79,7 +79,7 @@ export function ApiKeyGroupCell(props: ApiKeyGroupCellProps) {
         />
       </TooltipTrigger>
       <TooltipContent>
-        <span className='text-xs'>
+        <span className='text-[12px] text-[#5A6478]'>
           {t(
             'Automatically selects the best available group with circuit breaker mechanism'
           )}

@@ -20,6 +20,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { PublicLayout } from '@/components/layout'
+import { Footer } from '@/components/layout/components/footer'
 import { PageTransition } from '@/components/page-transition'
 
 import {
@@ -151,9 +152,15 @@ export function Pricing() {
   if (isLoading) {
     return (
       <PublicLayout showMainContainer={false}>
-        <div className='mx-auto w-full max-w-[1800px] px-3 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 xl:px-8'>
-          <LoadingSkeleton viewMode={viewMode} />
+        <div className='relative'>
+          <div className='pointer-events-none absolute inset-0 pl-grid-bg opacity-60' />
+          <div className='pointer-events-none absolute top-0 right-[-10%] h-[420px] w-[520px] pl-glow-blue' />
+          <div className='pointer-events-none absolute top-10 left-[-5%] h-[300px] w-[400px] pl-glow-green' />
+          <div className='relative mx-auto w-full max-w-[1400px] px-3 pt-24 pb-8 sm:px-6 sm:pt-28 sm:pb-10 xl:px-8'>
+            <LoadingSkeleton viewMode={viewMode} />
+          </div>
         </div>
+        <Footer />
       </PublicLayout>
     )
   }
@@ -161,48 +168,42 @@ export function Pricing() {
   return (
     <PublicLayout showMainContainer={false}>
       <div className='relative'>
-        <div
-          aria-hidden
-          className='pointer-events-none absolute inset-x-0 top-0 h-[600px] opacity-20 dark:opacity-[0.10]'
-          style={{
-            background: [
-              'radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 80%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 60%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 40% 35% at 50% 70%, oklch(0.70 0.12 280 / 40%) 0%, transparent 70%)',
-            ].join(', '),
-            maskImage:
-              'linear-gradient(to bottom, black 40%, transparent 100%)',
-            WebkitMaskImage:
-              'linear-gradient(to bottom, black 40%, transparent 100%)',
-          }}
-        />
-        <PageTransition className='relative mx-auto w-full max-w-[1800px] px-3 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 xl:px-8'>
-          <header className='mx-auto mb-5 max-w-3xl pt-5 text-center sm:mb-10 sm:pt-10'>
-            <h1 className='text-[clamp(2rem,5.5vw,3.5rem)] leading-[1.15] font-bold tracking-tight'>
+        <div className='pointer-events-none absolute inset-0 pl-grid-bg opacity-60' />
+        <div className='pointer-events-none absolute top-0 right-[-10%] h-[520px] w-[620px] pl-glow-blue' />
+        <div className='pointer-events-none absolute top-12 left-[-5%] h-[360px] w-[460px] pl-glow-green' />
+
+        <PageTransition className='relative mx-auto w-full max-w-[1400px] px-3 pt-24 pb-8 sm:px-6 sm:pt-28 sm:pb-10 xl:px-8'>
+          <header className='pl-fade-up mx-auto mb-8 max-w-3xl text-center sm:mb-10'>
+            <h1 className='pl-delay-1 pl-font-display text-[clamp(2rem,4vw,3rem)] leading-[1.1] font-bold tracking-tight text-[#0A0E1A]'>
               {t('Model Square')}
             </h1>
-            <p className='text-muted-foreground/80 mt-3 text-sm sm:mt-4 sm:text-base'>
-              {t('This site currently has {{count}} models enabled', {
-                count: models?.length || 0,
-              })}
-            </p>
-            <p className='text-muted-foreground/60 mx-auto mt-2 max-w-2xl text-xs leading-relaxed sm:text-sm'>
+            <p className='pl-delay-2 mt-4 text-[15px] leading-relaxed text-[#5A6478]'>
               {t(
                 'Discover curated AI models, compare pricing and capabilities, and choose the right model for every scenario.'
               )}
             </p>
-            <SearchBar
-              value={searchInput}
-              onChange={setSearchInput}
-              onClear={clearSearch}
-              placeholder={t(
-                'Search model name, provider, endpoint, or tag...'
-              )}
-              className='mx-auto mt-4 max-w-2xl sm:mt-6'
-            />
+            <div className='pl-delay-3 mt-3 flex items-center justify-center gap-2 pl-font-mono text-[12px] text-[#5A6478]'>
+              <span className='pl-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-[#22C55E]' />
+              <span>
+                {t('This site currently has {{count}} models enabled', {
+                  count: models?.length || 0,
+                })}
+              </span>
+            </div>
+            <div className='pl-delay-4 mt-6'>
+              <SearchBar
+                value={searchInput}
+                onChange={setSearchInput}
+                onClear={clearSearch}
+                placeholder={t(
+                  'Search model name, provider, endpoint, or tag...'
+                )}
+                className='mx-auto max-w-2xl'
+              />
+            </div>
           </header>
 
-          <div className='grid gap-4 xl:grid-cols-[330px_minmax(0,1fr)]'>
+          <div className='pl-fade-up pl-delay-3 grid gap-4 xl:grid-cols-[280px_minmax(0,1fr)]'>
             <PricingSidebar
               quotaTypeFilter={quotaTypeFilter}
               endpointTypeFilter={endpointTypeFilter}
@@ -221,7 +222,7 @@ export function Pricing() {
               models={models || []}
               hasActiveFilters={hasActiveFilters}
               onClearFilters={clearFilters}
-              className='hover-scrollbar sticky top-4 hidden max-h-[calc(100dvh-2rem)] self-start overflow-y-auto xl:block'
+              className='pl-card sticky top-4 hidden max-h-[calc(100dvh-2rem)] self-start overflow-y-auto xl:block'
             />
 
             <main className='min-w-0 space-y-4'>
@@ -284,6 +285,7 @@ export function Pricing() {
           )}
         </PageTransition>
       </div>
+      <Footer />
     </PublicLayout>
   )
 }

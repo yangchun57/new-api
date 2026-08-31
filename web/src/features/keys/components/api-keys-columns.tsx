@@ -48,9 +48,9 @@ import {
 import { DataTableRowActions } from './data-table-row-actions'
 
 function getQuotaProgressColor(percentage: number): string {
-  if (percentage <= 10) return '[&_[data-slot=progress-indicator]]:bg-rose-500'
-  if (percentage <= 30) return '[&_[data-slot=progress-indicator]]:bg-amber-500'
-  return '[&_[data-slot=progress-indicator]]:bg-emerald-500'
+  if (percentage <= 10) return '[&_[data-slot=progress-indicator]]:bg-[#E5484D]'
+  if (percentage <= 30) return '[&_[data-slot=progress-indicator]]:bg-[#D97706]'
+  return '[&_[data-slot=progress-indicator]]:bg-[#16A34A]'
 }
 
 function useGroupRatios(): Record<string, number | string> {
@@ -108,7 +108,7 @@ export function useApiKeysColumns(now: number): ColumnDef<ApiKey>[] {
       accessorKey: 'name',
       header: t('Name'),
       cell: ({ row }) => (
-        <span className='font-medium'>{row.getValue('name')}</span>
+        <span className='text-[13px] font-medium text-[#0A0E1A]'>{row.getValue('name')}</span>
       ),
       size: 180,
       meta: { mobileTitle: true },
@@ -158,30 +158,30 @@ export function useApiKeysColumns(now: number): ColumnDef<ApiKey>[] {
         return (
           <Tooltip>
             <TooltipTrigger render={<div className='w-[150px] space-y-1' />}>
-              <div className='flex justify-between text-xs'>
-                <span className='font-medium tabular-nums'>
+              <div className='flex justify-between text-[12px]'>
+                <span className='font-semibold tabular-nums text-[#0A0E1A]'>
                   {formatQuota(remaining)}
                 </span>
-                <span className='text-muted-foreground tabular-nums'>
+                <span className='tabular-nums text-[#8A93A4]'>
                   {formatQuota(total)}
                 </span>
               </div>
               <Progress
                 value={percentage}
-                className={cn('h-1.5', getQuotaProgressColor(percentage))}
+                className={cn('h-1.5 rounded-full bg-[#F0F2F6] [&_[data-slot=progress-indicator]]:rounded-full', getQuotaProgressColor(percentage))}
               />
             </TooltipTrigger>
             <TooltipContent>
-              <div className='space-y-1 text-xs'>
+              <div className='space-y-1 text-[12px] text-[#5A6478]'>
                 <div>
-                  {t('Used:')} {formatQuota(used)}
+                  {t('Used:')} <span className='font-mono tabular-nums text-[#0A0E1A]'>{formatQuota(used)}</span>
                 </div>
                 <div>
-                  {t('Remaining:')} {formatQuota(remaining)} (
-                  {percentage.toFixed(1)}%)
+                  {t('Remaining:')} <span className='font-mono tabular-nums text-[#0A0E1A]'>{formatQuota(remaining)}</span> (
+                  <span className='font-mono tabular-nums'>{percentage.toFixed(1)}%</span>)
                 </div>
                 <div>
-                  {t('Total:')} {formatQuota(total)}
+                  {t('Total:')} <span className='font-mono tabular-nums text-[#0A0E1A]'>{formatQuota(total)}</span>
                 </div>
               </div>
             </TooltipContent>
@@ -235,7 +235,7 @@ export function useApiKeysColumns(now: number): ColumnDef<ApiKey>[] {
           now={now}
           locale={locale}
           justNowLabel={justNowLabel}
-          className='text-muted-foreground'
+          className='text-[#8A93A4]'
         />
       ),
       size: 180,
@@ -255,7 +255,7 @@ export function useApiKeysColumns(now: number): ColumnDef<ApiKey>[] {
             now={now}
             locale={locale}
             justNowLabel={justNowLabel}
-            className={isStale ? 'text-warning' : 'text-muted-foreground'}
+            className={isStale ? 'text-[#D97706]' : 'text-[#8A93A4]'}
           />
         )
       },
@@ -285,7 +285,7 @@ export function useApiKeysColumns(now: number): ColumnDef<ApiKey>[] {
             locale={locale}
             justNowLabel={justNowLabel}
             className={cn(
-              isExpired ? 'text-destructive' : 'text-muted-foreground'
+              isExpired ? 'text-[#E5484D]' : 'text-[#8A93A4]'
             )}
           />
         )

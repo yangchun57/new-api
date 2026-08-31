@@ -130,7 +130,7 @@ export function SettingsPage<
   if (isLoading) {
     return (
       <SettingsPageFrame title={t(sectionMeta.titleKey)}>
-        <div className='text-muted-foreground flex min-h-40 items-center justify-center text-sm'>
+        <div className='flex min-h-40 items-center justify-center text-[13px] text-[#5A6478]'>
           {t(loadingMessage)}
         </div>
       </SettingsPageFrame>

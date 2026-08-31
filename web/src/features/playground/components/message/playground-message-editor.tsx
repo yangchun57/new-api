@@ -155,7 +155,7 @@ export function PlaygroundMessageEditor({
       <CodeBlockEditor
         actions={editorActions}
         ariaLabel={t('Edit')}
-        className='my-0 group-[.is-assistant]:w-full group-[.is-assistant]:max-w-[78ch] group-[.is-user]:max-w-[85%] sm:group-[.is-user]:max-w-[62ch] md:group-[.is-user]:max-w-[68ch] lg:group-[.is-user]:max-w-[72ch]'
+        className='my-0 group-[.is-assistant]:w-full group-[.is-assistant]:max-w-[78ch] group-[.is-user]:max-w-[85%] sm:group-[.is-user]:max-w-[62ch] md:group-[.is-user]:max-w-[68ch] lg:group-[.is-user]:max-w-[72ch] [&_.group\/code-block]:rounded-xl [&_.group\/code-block]:border-[#0A0E1A] [&_.group\/code-block]:bg-[#0A0E1A] [&_.group\/code-block]:text-[#E8EBF1] [&_.group\/code-block]:shadow-none [&_.group\/code-block]:[--foreground:#E8EBF1] [&_.group\/code-block]:[--muted-foreground:#8A93A4] [&_.group\/code-block>div:first-child]:border-[#E5E8EE]/20 [&_.group\/code-block>div:first-child]:bg-[#0A0E1A]/60 [&_.group\/code-block>div:first-child]:text-[#8A93A4]'
         language='markdown'
         onChange={onEditTextChange}
         onKeyDown={handleKeyDown}
@@ -163,7 +163,7 @@ export function PlaygroundMessageEditor({
         title={
           <span className='inline-flex items-center gap-2'>
             <span>{t('Edit')}</span>
-            <span className='text-muted-foreground/80 normal-case'>
+            <span className='normal-case text-[#8A93A4]'>
               {hasChanged ? t('Unsaved changes') : t('No changes')}
             </span>
           </span>

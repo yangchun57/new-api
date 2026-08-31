@@ -56,22 +56,30 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger
-        render={<Button variant='ghost' size='icon' className='h-9 w-9' />}
+        render={
+          <Button
+            variant='ghost'
+            size='icon'
+            className='size-9 rounded-lg text-[#5A6478] hover:bg-[#F0F2F6] hover:text-[#0A0E1A]'
+            aria-label={t('Change language')}
+          />
+        }
       >
-        <Languages className='size-[1.2rem]' />
+        <Languages className='size-[18px]' />
         <span className='sr-only'>{t('Change language')}</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
+      <DropdownMenuContent align='end' sideOffset={8}>
         {INTERFACE_LANGUAGE_OPTIONS.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => handleChangeLanguage(lang.code)}
+            className='text-[13px]'
           >
             {lang.label}
             <Check
               size={14}
               className={cn(
-                'ms-auto',
+                'ms-auto text-[#0A0E1A]',
                 currentLanguage !== lang.code && 'hidden'
               )}
             />

@@ -890,10 +890,10 @@ export function PaymentSettingsSection({
             <TabsContent value='general' className={paymentTabContentClassName}>
               <div className='space-y-4'>
                 <div>
-                  <h3 className='text-lg font-medium'>
+                  <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                     {t('General Settings')}
                   </h3>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className='text-[13px] text-[#5A6478]'>
                     {t('Shared configuration for all payment gateways')}
                   </p>
                 </div>
@@ -912,6 +912,7 @@ export function PaymentSettingsSection({
                             type='number'
                             step='0.01'
                             min={0}
+                            className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                             {...safeNumberFieldProps(field)}
                           />
                         </FormControl>
@@ -936,6 +937,7 @@ export function PaymentSettingsSection({
                             type='number'
                             step='0.01'
                             min={0}
+                            className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                             {...safeNumberFieldProps(field)}
                           />
                         </FormControl>
@@ -1137,8 +1139,8 @@ export function PaymentSettingsSection({
             <TabsContent value='epay' className={paymentTabContentClassName}>
               <div className='space-y-4'>
                 <div>
-                  <h3 className='text-lg font-medium'>{t('Epay Gateway')}</h3>
-                  <p className='text-muted-foreground text-sm'>
+                  <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Epay Gateway')}</h3>
+                  <p className='text-[13px] text-[#5A6478]'>
                     {t('Configuration for Epay payment integration')}
                   </p>
                 </div>
@@ -1163,6 +1165,7 @@ export function PaymentSettingsSection({
                         <FormControl>
                           <Input
                             placeholder={t('https://pay.example.com')}
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1186,6 +1189,7 @@ export function PaymentSettingsSection({
                         <FormControl>
                           <Input
                             placeholder={t('https://gateway.example.com')}
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1214,6 +1218,7 @@ export function PaymentSettingsSection({
                           <Input
                             placeholder='10001'
                             autoComplete='off'
+                            className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1236,6 +1241,7 @@ export function PaymentSettingsSection({
                             type='password'
                             placeholder={t('Enter new key to update')}
                             autoComplete='new-password'
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1256,30 +1262,30 @@ export function PaymentSettingsSection({
             <TabsContent value='stripe' className={paymentTabContentClassName}>
               <div className='space-y-4'>
                 <div>
-                  <h3 className='text-lg font-medium'>{t('Stripe Gateway')}</h3>
-                  <p className='text-muted-foreground text-sm'>
+                  <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Stripe Gateway')}</h3>
+                  <p className='text-[13px] text-[#5A6478]'>
                     {t('Configuration for Stripe payment integration')}
                   </p>
                 </div>
 
-                <div className='rounded-md bg-blue-50 p-4 text-sm text-blue-900 dark:bg-blue-950 dark:text-blue-100'>
-                  <p className='mb-2 font-medium'>
+                <div className='rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-4 text-[13px] text-[#1E40AF]'>
+                  <p className='mb-2 font-semibold'>
                     {t('Webhook Configuration:')}
                   </p>
                   <ul className='list-inside list-disc space-y-1'>
                     <li>
                       {t('Webhook URL:')}{' '}
-                      <code className='rounded bg-blue-100 px-1 py-0.5 text-xs dark:bg-blue-900'>
+                      <code className='rounded bg-[#DBEAFE] px-1 py-0.5 font-mono text-[12px]'>
                         {'<ServerAddress>/api/stripe/webhook'}
                       </code>
                     </li>
                     <li>
                       {t('Required events:')}{' '}
-                      <code className='rounded bg-blue-100 px-1 py-0.5 text-xs dark:bg-blue-900'>
+                      <code className='rounded bg-[#DBEAFE] px-1 py-0.5 font-mono text-[12px]'>
                         {t('checkout.session.completed')}
                       </code>{' '}
                       {t('and')}{' '}
-                      <code className='rounded bg-blue-100 px-1 py-0.5 text-xs dark:bg-blue-900'>
+                      <code className='rounded bg-[#DBEAFE] px-1 py-0.5 font-mono text-[12px]'>
                         {t('checkout.session.expired')}
                       </code>
                     </li>
@@ -1289,7 +1295,7 @@ export function PaymentSettingsSection({
                         href='https://dashboard.stripe.com/developers'
                         target='_blank'
                         rel='noreferrer'
-                        className='underline hover:no-underline'
+                        className='text-[#2563EB] underline hover:no-underline'
                       >
                         {t('Stripe Dashboard')}
                       </a>
@@ -1309,6 +1315,7 @@ export function PaymentSettingsSection({
                             type='password'
                             placeholder={t('sk_xxx or rk_xxx')}
                             autoComplete='new-password'
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1334,6 +1341,7 @@ export function PaymentSettingsSection({
                             type='password'
                             placeholder={t('whsec_xxx')}
                             autoComplete='new-password'
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1359,6 +1367,7 @@ export function PaymentSettingsSection({
                         <FormControl>
                           <Input
                             placeholder={t('price_xxx')}
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1388,6 +1397,7 @@ export function PaymentSettingsSection({
                             type='number'
                             step='0.01'
                             min={0}
+                            className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                             {...safeNumberFieldProps(field)}
                           />
                         </FormControl>
@@ -1410,6 +1420,7 @@ export function PaymentSettingsSection({
                             type='number'
                             step='0.01'
                             min={0}
+                            className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                             {...safeNumberFieldProps(field)}
                           />
                         </FormControl>
@@ -1448,20 +1459,20 @@ export function PaymentSettingsSection({
             <TabsContent value='creem' className={paymentTabContentClassName}>
               <div className='space-y-4'>
                 <div>
-                  <h3 className='text-lg font-medium'>{t('Creem Gateway')}</h3>
-                  <p className='text-muted-foreground text-sm'>
+                  <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Creem Gateway')}</h3>
+                  <p className='text-[13px] text-[#5A6478]'>
                     {t('Configuration for Creem payment integration')}
                   </p>
                 </div>
 
-                <div className='rounded-md bg-blue-50 p-4 text-sm text-blue-900 dark:bg-blue-950 dark:text-blue-100'>
-                  <p className='mb-2 font-medium'>
+                <div className='rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-4 text-[13px] text-[#1E40AF]'>
+                  <p className='mb-2 font-semibold'>
                     {t('Webhook Configuration:')}
                   </p>
                   <ul className='list-inside list-disc space-y-1'>
                     <li>
                       {t('Webhook URL:')}{' '}
-                      <code className='rounded bg-blue-100 px-1 py-0.5 text-xs dark:bg-blue-900'>
+                      <code className='rounded bg-[#DBEAFE] px-1 py-0.5 font-mono text-[12px]'>
                         {'<ServerAddress>/api/creem/webhook'}
                       </code>
                     </li>
@@ -1481,6 +1492,7 @@ export function PaymentSettingsSection({
                             type='password'
                             placeholder={t('Enter Creem API key')}
                             autoComplete='new-password'
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)
@@ -1506,6 +1518,7 @@ export function PaymentSettingsSection({
                             type='password'
                             placeholder={t('Enter webhook secret')}
                             autoComplete='new-password'
+                            className='font-mono text-[12px] bg-[#F7F8FA]'
                             {...field}
                             onChange={(event) =>
                               field.onChange(event.target.value)

@@ -117,7 +117,7 @@ export function AccessTokenDialog({
                   type='text'
                   value={token}
                   readOnly
-                  className='font-mono text-xs'
+                  className='font-mono text-[12px]'
                 />
                 <CopyButton
                   value={token}
@@ -128,7 +128,7 @@ export function AccessTokenDialog({
                   aria-label={t('Copy token')}
                 />
               </div>
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[12px] text-[#8A93A4]'>
                 {t(
                   "Save this token now. You won't be able to view it again after closing this dialog."
                 )}

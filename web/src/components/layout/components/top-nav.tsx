@@ -58,9 +58,9 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
       <div className='lg:hidden'>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
-            render={<Button size='icon' variant='outline' className='size-7' />}
+            render={<Button size='icon' variant='ghost' className='size-9 rounded-lg text-[#5A6478] hover:bg-[#F0F2F6] hover:text-[#0A0E1A]' />}
           >
-            <Menu />
+            <Menu className='size-[18px]' />
           </DropdownMenuTrigger>
           <DropdownMenuContent side='bottom' align='start'>
             {normalizedLinks.map(
@@ -97,7 +97,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
       {/* 桌面端水平导航 */}
       <nav
         className={cn(
-          'hidden items-center space-x-4 lg:flex lg:space-x-4 xl:space-x-6',
+          'hidden items-center gap-1 lg:flex',
           className
         )}
         {...props}
@@ -109,7 +109,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
               href={href}
               target='_blank'
               rel='noopener noreferrer'
-              className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
+              className={`rounded-md px-2.5 py-1.5 text-[13px] font-medium transition-colors ${isActive ? 'text-[#0A0E1A]' : 'text-[#5A6478] hover:text-[#0A0E1A] hover:bg-[#F0F2F6]'}`}
             >
               {title}
             </a>
@@ -118,7 +118,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
               key={`${title}-${href}`}
               to={href}
               disabled={disabled}
-              className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
+              className={`rounded-md px-2.5 py-1.5 text-[13px] font-medium transition-colors ${isActive ? 'text-[#0A0E1A]' : 'text-[#5A6478] hover:text-[#0A0E1A] hover:bg-[#F0F2F6]'}`}
             >
               {title}
             </Link>

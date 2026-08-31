@@ -75,13 +75,13 @@ function ChatRouteComponent() {
 
   if (!preset) {
     return (
-      <div className='flex h-full flex-col items-center justify-center gap-4 p-6 text-center'>
-        <MessageCircleWarning className='text-muted-foreground h-12 w-12' />
+      <div className='flex h-full flex-col items-center justify-center gap-4 bg-[#F7F8FA] p-6 text-center'>
+        <MessageCircleWarning className='h-12 w-12 text-[#8A93A4]' />
         <div className='space-y-1'>
-          <h2 className='text-lg font-semibold'>
+          <h2 className='text-[14px] font-semibold text-[#0A0E1A]'>
             {t('Chat preset not found')}
           </h2>
-          <p className='text-muted-foreground'>
+          <p className='text-[13px] leading-[1.7] text-[#5A6478]'>
             {t('The requested chat preset does not exist or has been removed.')}
           </p>
         </div>
@@ -94,11 +94,11 @@ function ChatRouteComponent() {
 
   if (!isWebLink) {
     return (
-      <div className='flex h-full flex-col items-center justify-center gap-4 p-6 text-center'>
-        <MessageCircleWarning className='text-muted-foreground h-12 w-12' />
+      <div className='flex h-full flex-col items-center justify-center gap-4 bg-[#F7F8FA] p-6 text-center'>
+        <MessageCircleWarning className='h-12 w-12 text-[#8A93A4]' />
         <div className='space-y-1'>
-          <h2 className='text-lg font-semibold'>{t('Use sidebar shortcut')}</h2>
-          <p className='text-muted-foreground'>
+          <h2 className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Use sidebar shortcut')}</h2>
+          <p className='text-[13px] leading-[1.7] text-[#5A6478]'>
             {preset.name}{' '}
             {t(
               'opens in an external client. Trigger it from the sidebar or API key actions to launch the configured application.'
@@ -114,9 +114,9 @@ function ChatRouteComponent() {
 
   if (requiresActiveKey && isPending) {
     return (
-      <div className='flex h-full flex-col items-center justify-center gap-4'>
-        <Loader2 className='text-muted-foreground h-8 w-8 animate-spin' />
-        <p className='text-muted-foreground text-sm'>
+      <div className='flex h-full flex-col items-center justify-center gap-3 bg-[#F7F8FA]'>
+        <Loader2 className='h-8 w-8 animate-spin text-[#8A93A4]' />
+        <p className='text-[13px] text-[#8A93A4]'>
           {t('Preparing your chat link…')}
         </p>
       </div>
@@ -129,8 +129,8 @@ function ChatRouteComponent() {
         ? error.message
         : 'Unable to generate chat link. Please check your API keys.'
     return (
-      <div className='flex h-full flex-col items-center justify-center p-6'>
-        <Alert variant='destructive' className='max-w-xl'>
+      <div className='flex h-full flex-col items-center justify-center bg-[#F7F8FA] p-6'>
+        <Alert variant='destructive' className='max-w-xl rounded-xl'>
           <AlertTitle>{t('Unable to open chat')}</AlertTitle>
           <AlertDescription>{message}</AlertDescription>
         </Alert>
@@ -140,8 +140,8 @@ function ChatRouteComponent() {
 
   if (!requiresActiveKey && !iframeSrc) {
     return (
-      <div className='flex h-full flex-col items-center justify-center p-6'>
-        <Alert variant='destructive' className='max-w-xl'>
+      <div className='flex h-full flex-col items-center justify-center bg-[#F7F8FA] p-6'>
+        <Alert variant='destructive' className='max-w-xl rounded-xl'>
           <AlertTitle>{t('Unable to open chat')}</AlertTitle>
           <AlertDescription>
             {t(
@@ -157,7 +157,7 @@ function ChatRouteComponent() {
     <iframe
       src={iframeSrc}
       key={iframeSrc}
-      className='h-full w-full border-0'
+      className='h-full w-full border-0 bg-[#F7F8FA]'
       allow='camera; microphone'
       title={`Chat preset: ${preset.name}`}
     />

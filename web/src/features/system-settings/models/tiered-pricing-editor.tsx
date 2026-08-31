@@ -491,7 +491,7 @@ function ConditionRow({ condition, onChange, onRemove }: ConditionRowProps) {
         placeholder='tokens'
         className='w-32'
       />
-      <span className='text-muted-foreground text-xs'>
+      <span className='text-[#8A93A4] text-[12px]'>
         {formatTokenHint(condition.value)}
       </span>
       <Button
@@ -521,7 +521,7 @@ type PriceFieldProps = {
 function PriceField({ label, hint, value, onChange }: PriceFieldProps) {
   return (
     <div className='w-36 space-y-0.5'>
-      <Label className='text-muted-foreground text-xs'>{label}</Label>
+      <Label className='text-[13px] font-medium text-[#0A0E1A]'>{label}</Label>
       <DraftNumberInput
         min={0}
         step={0.000001}
@@ -529,7 +529,7 @@ function PriceField({ label, hint, value, onChange }: PriceFieldProps) {
         onValueChange={onChange}
         className='h-8 w-full'
       />
-      {hint && <p className='text-muted-foreground text-xs'>{hint}</p>}
+      {hint && <p className='text-[#8A93A4] text-[12px]'>{hint}</p>}
     </div>
   )
 }
@@ -616,7 +616,7 @@ function VisualTierCard({
   }
 
   return (
-    <div className='space-y-3 rounded-lg border p-3'>
+    <div className='space-y-3 rounded-xl border border-[#E5E8EE] p-3'>
       <div className='flex flex-wrap items-center justify-between gap-2'>
         <div className='flex items-center gap-2'>
           <Badge variant='outline'>
@@ -648,7 +648,7 @@ function VisualTierCard({
       {/* Conditions */}
       <div className='space-y-1.5'>
         <div className='flex h-7 items-center justify-between'>
-          <Label className='text-xs font-medium'>{t('Tier conditions')}</Label>
+          <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Tier conditions')}</Label>
           <Button
             variant='ghost'
             size='sm'
@@ -661,7 +661,7 @@ function VisualTierCard({
           </Button>
         </div>
         {tier.conditions.length === 0 ? (
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[#8A93A4] text-[12px]'>
             {t('Always matches (default tier).')}
           </p>
         ) : (
@@ -678,8 +678,8 @@ function VisualTierCard({
 
       <div className='space-y-2'>
         <div className='flex items-center justify-between gap-3'>
-          <Label className='text-sm font-semibold'>{t('Token prices')}</Label>
-          <span className='bg-muted text-muted-foreground rounded-md px-2 py-1 text-xs'>
+          <Label className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Token prices')}</Label>
+          <span className='bg-[#F7F8FA] text-[#8A93A4] rounded-md px-2 py-1 text-[12px] tabular-nums'>
             {PRICE_SUFFIX}
           </span>
         </div>
@@ -842,7 +842,7 @@ function VisualEditor({ visualConfig, onChange }: VisualEditorProps) {
 
   return (
     <div className='space-y-2'>
-      <p className='text-muted-foreground text-xs'>
+      <p className='text-[#8A93A4] text-[12px]'>
         {t(
           'Each tier supports up to 2 conditions. The last tier without conditions is the fallback.'
         )}
@@ -1077,7 +1077,7 @@ function RuleConditionRow({
             placeholder={t('Start')}
             className='w-20'
           />
-          <span className='text-muted-foreground text-xs'>~</span>
+          <span className='text-[#8A93A4] text-[12px]'>~</span>
           <DraftNumberInput
             value={timeCond.rangeEnd}
             onValueChange={(value) =>
@@ -1223,7 +1223,7 @@ function RuleGroupCard({
   }
 
   return (
-    <div className='bg-muted/30 space-y-3 rounded-md border p-3'>
+    <div className='bg-[#F7F8FA] space-y-3 rounded-xl border border-[#E5E8EE] p-3'>
       <div className='flex items-center justify-between gap-2'>
         <Badge variant='outline'>
           {t('Rule group')} #{index + 1}
@@ -1275,7 +1275,7 @@ function RuleGroupCard({
       </div>
 
       <div className='flex items-center gap-2'>
-        <Label className='text-xs'>{t('Multiplier')}</Label>
+        <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Multiplier')}</Label>
         <DraftNumberInput
           min={0}
           step={0.000001}
@@ -1286,7 +1286,7 @@ function RuleGroupCard({
           className='w-32'
           placeholder='1.0'
         />
-        <span className='text-muted-foreground text-xs'>
+        <span className='text-[#8A93A4] text-[12px]'>
           {t('Final cost = base × multiplier when conditions match')}
         </span>
       </div>
@@ -1311,7 +1311,7 @@ function PresetSection({ applyPreset }: PresetSectionProps) {
   return (
     <div className='space-y-2'>
       <div className='flex items-center gap-2'>
-        <span className='text-sm font-medium'>{t('Preset templates')}</span>
+        <span className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Preset templates')}</span>
         {hasMore && (
           <Button
             variant='ghost'
@@ -1384,10 +1384,10 @@ function CostEstimator({ effectiveExpr }: EstimatorProps) {
   )
 
   return (
-    <div className='bg-muted/30 space-y-3 rounded-md border p-3'>
+    <div className='bg-[#F7F8FA] space-y-3 rounded-xl border border-[#E5E8EE] p-3'>
       <div className='space-y-1'>
-        <h4 className='text-sm font-medium'>{t('Token estimator')}</h4>
-        <p className='text-muted-foreground text-xs'>
+        <h4 className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Token estimator')}</h4>
+        <p className='text-[#8A93A4] text-[12px]'>
           {t(
             'Enter token counts to preview the estimated cost (excluding group multipliers).'
           )}
@@ -1395,7 +1395,7 @@ function CostEstimator({ effectiveExpr }: EstimatorProps) {
       </div>
       <div className='grid grid-cols-2 gap-3'>
         <div className='space-y-1'>
-          <Label className='text-xs'>{t('Input tokens')}</Label>
+          <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Input tokens')}</Label>
           <DraftNumberInput
             min={0}
             value={promptTokens}
@@ -1403,7 +1403,7 @@ function CostEstimator({ effectiveExpr }: EstimatorProps) {
           />
         </div>
         <div className='space-y-1'>
-          <Label className='text-xs'>{t('Output tokens')}</Label>
+          <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Output tokens')}</Label>
           <DraftNumberInput
             min={0}
             value={completionTokens}
@@ -1424,7 +1424,7 @@ function CostEstimator({ effectiveExpr }: EstimatorProps) {
             ) as keyof ExtraTokenValues
             return (
               <div key={variable.key} className='space-y-1'>
-                <Label className='text-xs'>{t(variable.shortLabel)}</Label>
+                <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t(variable.shortLabel)}</Label>
                 <DraftNumberInput
                   min={0}
                   value={extras[stateKey]}
@@ -1442,7 +1442,7 @@ function CostEstimator({ effectiveExpr }: EstimatorProps) {
       )}
       <div
         className={cn(
-          'rounded-md border p-3 text-sm',
+          'rounded-xl border p-3 text-[13px]',
           result.error
             ? 'border-destructive/50 bg-destructive/10 text-destructive'
             : 'border-primary/50 bg-primary/10'
@@ -1454,11 +1454,11 @@ function CostEstimator({ effectiveExpr }: EstimatorProps) {
           </span>
         ) : (
           <div className='flex items-center gap-2'>
-            <span className='font-medium'>
+            <span className='font-semibold tabular-nums text-[#0A0E1A]'>
               {t('Estimated quota cost')}: {result.cost.toLocaleString()}
             </span>
             {result.matchedTier && (
-              <Badge variant='outline' className='text-xs'>
+              <Badge variant='outline' className='text-[12px]'>
                 {t('Hit tier')}: {result.matchedTier}
               </Badge>
             )}
@@ -1587,9 +1587,9 @@ function LlmPromptHelper({ modelName }: LlmPromptHelperProps) {
         {t('LLM prompt helper')}
       </CollapsibleTrigger>
       <CollapsibleContent className='mt-2'>
-        <div className='bg-muted/30 rounded-md border p-3'>
+        <div className='bg-[#F7F8FA] rounded-xl border border-[#E5E8EE] p-3'>
           <div className='mb-2 flex items-center justify-between'>
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[#8A93A4] text-[12px]'>
               {t(
                 'Copy this prompt and send it to an LLM (e.g. ChatGPT / Claude) to help design your billing expression.'
               )}
@@ -1802,7 +1802,7 @@ export const TieredPricingEditor = memo(function TieredPricingEditor({
 
       <PresetSection applyPreset={applyPreset} />
 
-      <div className='bg-muted/30 space-y-3 rounded-md border p-3'>
+      <div className='bg-[#F7F8FA] space-y-3 rounded-xl border border-[#E5E8EE] p-3'>
         {editorMode === 'visual' ? (
           <VisualEditor
             visualConfig={visualConfig}
@@ -1813,12 +1813,12 @@ export const TieredPricingEditor = memo(function TieredPricingEditor({
         )}
 
         {editorMode === 'visual' && (
-          <div className='space-y-3 border-t pt-3'>
+          <div className='space-y-3 border-t border-[#E5E8EE] pt-3'>
             <div className='space-y-1'>
-              <h4 className='text-sm font-medium'>
+              <h4 className='text-[14px] font-semibold text-[#0A0E1A]'>
                 {t('Request rule pricing')}
               </h4>
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t(
                   'When conditions match, the final price is multiplied by X. Multiple matches multiply together; values < 1 act as discounts.'
                 )}

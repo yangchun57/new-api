@@ -376,8 +376,8 @@ export function WaffoPancakeSettingsSection({
   return (
     <div className='space-y-4 pt-4'>
       <div>
-        <h3 className='text-lg font-medium'>{t('Waffo Pancake MoR')}</h3>
-        <p className='text-muted-foreground text-sm'>
+        <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Waffo Pancake MoR')}</h3>
+        <p className='text-[13px] text-[#5A6478]'>
           {t(
             'Start collecting payments globally without registering a company. Built for indie developers, OPC sole proprietorships, and startups. Waffo Pancake acts as your Merchant of Record, taking on the compliance burden of global payment collection — consumption tax, invoicing, subscription management, refunds, and chargebacks. Solo developers can launch fast and stay focused on product instead of compliance. Onboard in minutes — one prompt to a full integration.'
           )}
@@ -385,18 +385,18 @@ export function WaffoPancakeSettingsSection({
       </div>
       <div className='grid min-w-0 gap-x-5 gap-y-4 lg:grid-cols-2'>
         {/* Blue box — webhook configuration only. */}
-        <div className='rounded-md bg-blue-50 p-4 text-sm text-blue-900 lg:col-span-2 dark:bg-blue-950 dark:text-blue-100'>
-          <p className='mb-2 font-medium'>{t('Webhook Configuration:')}</p>
+        <div className='rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-4 text-[13px] text-[#1E40AF] lg:col-span-2'>
+          <p className='mb-2 font-semibold'>{t('Webhook Configuration:')}</p>
           <ul className='list-inside list-disc space-y-1'>
             <li>
               {t('Webhook URL (Test):')}{' '}
-              <code className='rounded bg-blue-100 px-1 py-0.5 text-xs dark:bg-blue-900'>
+              <code className='rounded bg-[#DBEAFE] px-1.5 py-0.5 font-mono text-[12px]'>
                 {'<ServerAddress>/api/waffo-pancake/webhook/test'}
               </code>
             </li>
             <li>
               {t('Webhook URL (Production):')}{' '}
-              <code className='rounded bg-blue-100 px-1 py-0.5 text-xs dark:bg-blue-900'>
+              <code className='rounded bg-[#DBEAFE] px-1.5 py-0.5 font-mono text-[12px]'>
                 {'<ServerAddress>/api/waffo-pancake/webhook/prod'}
               </code>
             </li>
@@ -411,7 +411,7 @@ export function WaffoPancakeSettingsSection({
                 href={PANCAKE_DASHBOARD_URL}
                 target='_blank'
                 rel='noreferrer'
-                className='underline hover:no-underline'
+                className='text-[#2563EB] underline hover:no-underline'
               >
                 {t('Waffo Pancake Dashboard')}
               </a>
@@ -428,6 +428,7 @@ export function WaffoPancakeSettingsSection({
             onChange={(event) =>
               onValueChange('WaffoPancakeMerchantID', event.target.value)
             }
+            className='font-mono text-[12px] bg-[#F7F8FA]'
           />
         </div>
 
@@ -441,9 +442,9 @@ export function WaffoPancakeSettingsSection({
             onChange={(event) =>
               onValueChange('WaffoPancakePrivateKey', event.target.value)
             }
-            className='font-mono text-xs'
+            className='font-mono text-[12px] bg-[#F7F8FA]'
           />
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t(
               'The environment (test vs production) is decided by the key you paste here — use the Test key while integrating, then swap to the Production key when going live.'
             )}
@@ -462,10 +463,10 @@ export function WaffoPancakeSettingsSection({
         */}
         <div className='space-y-4 pt-2 lg:col-span-2'>
           <div>
-            <h4 className='font-medium'>
+            <h4 className='text-[13px] font-medium text-[#0A0E1A]'>
               {t('Bind a Pancake store + product')}
             </h4>
-            <p className='text-muted-foreground text-xs'>{bindStatusMessage}</p>
+            <p className='mt-1 text-[12px] text-[#8A93A4]'>{bindStatusMessage}</p>
           </div>
 
           {/*
@@ -474,8 +475,8 @@ export function WaffoPancakeSettingsSection({
               for. Subscriptions reuse the same Store but get their own
               per-plan product, configured in the Subscriptions admin.
             */}
-          <div className='rounded-md border border-blue-200 bg-blue-50 p-3 text-xs text-blue-900 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-100'>
-            <p className='mb-1 font-medium'>
+          <div className='rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-4 text-[13px] text-[#1E40AF]'>
+            <p className='mb-1 font-semibold'>
               {t('Why only one store + product?')}
             </p>
             <ul className='list-inside list-disc space-y-1'>
@@ -507,7 +508,7 @@ export function WaffoPancakeSettingsSection({
                 onChange={(event) =>
                   onValueChange('WaffoPancakeReturnURL', event.target.value)
                 }
-                className='flex-1'
+                className='flex-1 font-mono text-[12px] bg-[#F7F8FA]'
               />
               <Button
                 type='button'
@@ -521,7 +522,7 @@ export function WaffoPancakeSettingsSection({
                   : `+ ${t('Create')} ${DEFAULT_NEW_PAIR_NAME}`}
               </Button>
             </div>
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[12px] text-[#8A93A4]'>
               {t(
                 "Used as SuccessURL on the new product. You'll be prompted to confirm if left blank."
               )}
@@ -531,11 +532,11 @@ export function WaffoPancakeSettingsSection({
           {hasCatalog ? (
             <>
               <div className='relative flex items-center py-1'>
-                <div className='flex-1 border-t' />
-                <span className='text-muted-foreground px-3 text-[10px] font-medium tracking-[0.2em] uppercase'>
+                <div className='flex-1 border-t border-[#E5E8EE]' />
+                <span className='px-3 text-[10px] font-medium tracking-[0.2em] uppercase text-[#8A93A4]'>
                   {t('or pick existing')}
                 </span>
-                <div className='flex-1 border-t' />
+                <div className='flex-1 border-t border-[#E5E8EE]' />
               </div>
 
               <div className='grid grid-cols-2 gap-3'>
@@ -596,11 +597,11 @@ export function WaffoPancakeSettingsSection({
 
           <div className='flex items-center gap-3'>
             {storeID || productID ? (
-              <div className='text-muted-foreground flex flex-wrap gap-x-3 gap-y-1 text-xs'>
+              <div className='flex flex-wrap gap-x-3 gap-y-1 text-[12px] text-[#8A93A4]'>
                 {storeID ? (
                   <span>
                     {t('Bound store:')}{' '}
-                    <code className='bg-muted rounded px-1 py-0.5'>
+                    <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
                       {storeID}
                     </code>
                   </span>
@@ -608,7 +609,7 @@ export function WaffoPancakeSettingsSection({
                 {productID ? (
                   <span>
                     {t('Bound product:')}{' '}
-                    <code className='bg-muted rounded px-1 py-0.5'>
+                    <code className='rounded bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#5A6478]'>
                       {productID}
                     </code>
                   </span>

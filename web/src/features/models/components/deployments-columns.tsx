@@ -122,7 +122,7 @@ export function useDeploymentsColumns(opts: {
       cell: ({ row }) => {
         const provider = row.original.provider
         if (!provider) {
-          return <span className='text-muted-foreground text-xs'>-</span>
+          return <span className='text-[#8A93A4] text-[12px]'>-</span>
         }
         return (
           <StatusBadge
@@ -164,9 +164,9 @@ export function useDeploymentsColumns(opts: {
             : Math.max(0, Math.min(100, 100 - percentUsed))
 
         return (
-          <div className='flex flex-col gap-1 text-sm'>
+          <div className='flex flex-col gap-0.5 text-[13px]'>
             <div className='flex flex-wrap items-center gap-2'>
-              <span className='font-medium'>{remainingText}</span>
+              <span className='font-medium text-[#0A0E1A]'>{remainingText}</span>
               {status === 'running' && percentRemain !== null ? (
                 <StatusBadge
                   label={`${percentRemain}%`}
@@ -177,7 +177,7 @@ export function useDeploymentsColumns(opts: {
               ) : null}
             </div>
             {remainingHuman ? (
-              <div className='text-muted-foreground text-xs'>
+              <div className='text-[#8A93A4] text-[12px]'>
                 {t('Approx.')} {remainingHuman}
               </div>
             ) : null}
@@ -204,7 +204,7 @@ export function useDeploymentsColumns(opts: {
             ? row.original.hardware_quantity
             : null
         if (!hardware) {
-          return <span className='text-muted-foreground text-xs'>-</span>
+          return <span className='text-[#8A93A4] text-[12px]'>-</span>
         }
         return (
           <div className='flex max-w-full min-w-0 flex-nowrap items-center gap-2 overflow-hidden'>
@@ -215,7 +215,7 @@ export function useDeploymentsColumns(opts: {
               size='sm'
             />
             {qty !== null ? (
-              <span className='text-muted-foreground text-xs'>×{qty}</span>
+              <span className='text-[#8A93A4] text-[12px] tabular-nums'>×{qty}</span>
             ) : null}
           </div>
         )
@@ -235,7 +235,7 @@ export function useDeploymentsColumns(opts: {
           ts = Number(row.original.created_at)
         }
         return (
-          <div className='min-w-[140px] font-mono text-sm'>
+          <div className='min-w-[140px] font-mono text-[12px] text-[#8A93A4] tabular-nums'>
             {formatTimestampToDate(ts)}
           </div>
         )
@@ -293,7 +293,7 @@ export function useDeploymentsColumns(opts: {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => opts.onDelete(row.original)}
-                className='text-destructive focus:text-destructive'
+                className='text-[#E5484D] focus:text-[#E5484D]'
               >
                 {t('Delete')}
                 <DropdownMenuShortcut>

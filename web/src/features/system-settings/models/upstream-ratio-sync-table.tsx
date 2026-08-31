@@ -235,9 +235,9 @@ export function UpstreamRatioSyncTable({
   if (dataSource.length === 0) {
     if (isSyncing) {
       return (
-        <div className='flex h-64 flex-col items-center justify-center gap-3 rounded-md border'>
-          <Loader2 className='text-muted-foreground h-8 w-8 animate-spin' />
-          <p className='text-muted-foreground text-sm'>
+        <div className='flex h-64 flex-col items-center justify-center gap-3 rounded-xl border border-[#E5E8EE]'>
+          <Loader2 className='text-[#8A93A4] h-8 w-8 animate-spin' />
+          <p className='text-[13px] text-[#5A6478]'>
             {t('Fetching upstream prices...')}
           </p>
         </div>
@@ -245,12 +245,12 @@ export function UpstreamRatioSyncTable({
     }
 
     return (
-      <div className='flex h-64 items-center justify-center rounded-md border'>
+      <div className='flex h-64 items-center justify-center rounded-xl border border-[#E5E8EE]'>
         <div className='text-center'>
-          <p className='text-muted-foreground text-sm'>
+          <p className='text-[13px] text-[#5A6478]'>
             {t('No upstream price differences found')}
           </p>
-          <p className='text-muted-foreground mt-1 text-xs'>
+          <p className='mt-1 text-[12px] text-[#8A93A4]'>
             {t('Select sync channels to compare prices')}
           </p>
         </div>
@@ -262,7 +262,7 @@ export function UpstreamRatioSyncTable({
     <div className='flex h-full min-h-[520px] flex-col gap-4'>
       <div className='flex shrink-0 flex-col gap-2 sm:flex-row sm:items-center'>
         <div className='relative flex-1'>
-          <Search className='text-muted-foreground absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2' />
+          <Search className='text-[#8A93A4] absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2' />
           <Input
             placeholder={t('Search model name...')}
             value={search}
@@ -301,9 +301,9 @@ export function UpstreamRatioSyncTable({
 
       <DataTableView
         table={table}
-        containerClassName='min-h-0 flex-1 rounded-md'
+        containerClassName='min-h-0 flex-1 rounded-xl'
         tableContainerClassName='h-full min-h-0'
-        tableHeaderClassName='[background-color:var(--table-header)]'
+        tableHeaderClassName='bg-[#F7F8FA]'
         splitHeaderScrollClassName='h-full'
         bodyContainerClassName='[scrollbar-gutter:stable]'
         splitHeader

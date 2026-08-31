@@ -322,8 +322,10 @@ export function PerformanceSection(props: Props) {
           />
           {/* Disk Cache Settings */}
           <div>
-            <h4 className='font-medium'>{t('Disk Cache Settings')}</h4>
-            <p className='text-muted-foreground mt-1 text-xs'>
+            <h4 className='text-[13px] font-medium text-[#0A0E1A]'>
+              {t('Disk Cache Settings')}
+            </h4>
+            <p className='mt-1 text-[12px] text-[#8A93A4]'>
               {t(
                 'When enabled, large request bodies are temporarily stored on disk instead of memory, significantly reducing memory usage. SSD recommended.'
               )}
@@ -360,6 +362,7 @@ export function PerformanceSection(props: Props) {
                       min={1}
                       step={1}
                       {...safeNumberFieldProps(field)}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       disabled={!diskEnabled}
                     />
                   </FormControl>
@@ -382,6 +385,7 @@ export function PerformanceSection(props: Props) {
                       min={100}
                       step={1}
                       {...safeNumberFieldProps(field)}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       disabled={!diskEnabled}
                     />
                   </FormControl>
@@ -425,6 +429,7 @@ export function PerformanceSection(props: Props) {
                       name={field.name}
                       onBlur={field.onBlur}
                       ref={field.ref}
+                      className='font-mono text-[12px] bg-[#F7F8FA]'
                       disabled={!diskEnabled}
                     />
                   </FormControl>
@@ -438,10 +443,10 @@ export function PerformanceSection(props: Props) {
 
           {/* System Performance Monitor */}
           <div>
-            <h4 className='font-medium'>
+            <h4 className='text-[13px] font-medium text-[#0A0E1A]'>
               {t('System Performance Monitoring')}
             </h4>
-            <p className='text-muted-foreground mt-1 text-xs'>
+            <p className='mt-1 text-[12px] text-[#8A93A4]'>
               {t(
                 'When performance monitoring is enabled and system resource usage exceeds the set threshold, new Relay requests will be rejected.'
               )}
@@ -478,6 +483,7 @@ export function PerformanceSection(props: Props) {
                       min={0}
                       step={1}
                       {...safeNumberFieldProps(field)}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       disabled={!monitorEnabled}
                     />
                   </FormControl>
@@ -498,6 +504,7 @@ export function PerformanceSection(props: Props) {
                       max={100}
                       step={1}
                       {...safeNumberFieldProps(field)}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       disabled={!monitorEnabled}
                     />
                   </FormControl>
@@ -518,6 +525,7 @@ export function PerformanceSection(props: Props) {
                       max={100}
                       step={1}
                       {...safeNumberFieldProps(field)}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       disabled={!monitorEnabled}
                     />
                   </FormControl>
@@ -534,7 +542,9 @@ export function PerformanceSection(props: Props) {
       {/* Performance Stats Dashboard */}
       <div className='space-y-4'>
         <div className='flex items-center gap-2'>
-          <h4 className='font-medium'>{t('Performance Monitor')}</h4>
+          <h4 className='text-[13px] font-medium text-[#0A0E1A]'>
+            {t('Performance Monitor')}
+          </h4>
           <Button variant='outline' size='sm' onClick={fetchStats}>
             {t('Refresh Stats')}
           </Button>
@@ -575,12 +585,12 @@ export function PerformanceSection(props: Props) {
         {stats && (
           <>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              <div className='space-y-2 rounded-lg border p-4'>
-                <p className='text-sm font-medium'>
+              <div className='space-y-3 rounded-xl border border-[#E5E8EE] p-4'>
+                <p className='text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Request Body Disk Cache')}
                 </p>
                 <Progress value={diskCachePercent} />
-                <div className='text-muted-foreground flex justify-between text-xs'>
+                <div className='flex justify-between text-[12px] text-[#8A93A4] tabular-nums'>
                   <span>
                     {formatBytes(
                       stats.cache_stats?.current_disk_usage_bytes ?? 0
@@ -590,18 +600,23 @@ export function PerformanceSection(props: Props) {
                   </span>
                   <span>
                     {t('Active Files')}:{' '}
-                    {stats.cache_stats?.active_disk_files ?? 0}
+                    <span className='font-semibold text-[#0A0E1A]'>
+                      {stats.cache_stats?.active_disk_files ?? 0}
+                    </span>
                   </span>
                 </div>
                 <StatusBadge variant='neutral' copyable={false}>
-                  {t('Disk Hits')}: {stats.cache_stats?.disk_cache_hits ?? 0}
+                  {t('Disk Hits')}:{' '}
+                  <span className='tabular-nums font-semibold'>
+                    {stats.cache_stats?.disk_cache_hits ?? 0}
+                  </span>
                 </StatusBadge>
               </div>
-              <div className='space-y-2 rounded-lg border p-4'>
-                <p className='text-sm font-medium'>
+              <div className='space-y-3 rounded-xl border border-[#E5E8EE] p-4'>
+                <p className='text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Request Body Memory Cache')}
                 </p>
-                <div className='text-muted-foreground flex justify-between text-xs'>
+                <div className='flex justify-between text-[12px] text-[#8A93A4] tabular-nums'>
                   <span>
                     {t('Current Cache Size')}:{' '}
                     {formatBytes(
@@ -610,101 +625,128 @@ export function PerformanceSection(props: Props) {
                   </span>
                   <span>
                     {t('Active Cache Count')}:{' '}
-                    {stats.cache_stats?.active_memory_buffers ?? 0}
+                    <span className='font-semibold text-[#0A0E1A]'>
+                      {stats.cache_stats?.active_memory_buffers ?? 0}
+                    </span>
                   </span>
                 </div>
                 <StatusBadge variant='neutral' copyable={false}>
                   {t('Memory Hits')}:{' '}
-                  {stats.cache_stats?.memory_cache_hits ?? 0}
+                  <span className='tabular-nums font-semibold'>
+                    {stats.cache_stats?.memory_cache_hits ?? 0}
+                  </span>
                 </StatusBadge>
               </div>
             </div>
 
             {stats.disk_space_info && stats.disk_space_info.total > 0 && (
-              <div className='rounded-lg border p-4'>
-                <p className='mb-2 text-sm font-medium'>
+              <div className='rounded-xl border border-[#E5E8EE] p-4'>
+                <p className='mb-3 text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Cache Directory Disk Space')}
                 </p>
                 <Progress
                   value={Math.round(stats.disk_space_info.used_percent)}
                 />
-                <div className='text-muted-foreground mt-2 flex justify-between text-xs'>
+                <div className='mt-2 flex justify-between text-[12px] text-[#8A93A4] tabular-nums'>
                   <span>
-                    {t('Used')}: {formatBytes(stats.disk_space_info.used)}
+                    {t('Used')}:{' '}
+                    <span className='font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.disk_space_info.used)}
+                    </span>
                   </span>
                   <span>
-                    {t('Available')}: {formatBytes(stats.disk_space_info.free)}
+                    {t('Available')}:{' '}
+                    <span className='font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.disk_space_info.free)}
+                    </span>
                   </span>
                   <span>
-                    {t('Total')}: {formatBytes(stats.disk_space_info.total)}
+                    {t('Total')}:{' '}
+                    <span className='font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.disk_space_info.total)}
+                    </span>
                   </span>
                 </div>
               </div>
             )}
 
             {stats.memory_stats && (
-              <div className='rounded-lg border p-4'>
-                <p className='mb-2 text-sm font-medium'>
+              <div className='rounded-xl border border-[#E5E8EE] p-4'>
+                <p className='mb-3 text-[13px] font-medium text-[#0A0E1A]'>
                   {t('System Memory Stats')}
                 </p>
-                <div className='grid grid-cols-2 gap-2 text-xs md:grid-cols-5'>
+                <div className='grid grid-cols-2 gap-x-4 gap-y-2 text-[12px] md:grid-cols-5'>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Allocated Memory')}:
                     </span>{' '}
-                    {formatBytes(stats.memory_stats.alloc)}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.memory_stats.alloc)}
+                    </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Total Allocated')}:
                     </span>{' '}
-                    {formatBytes(stats.memory_stats.total_alloc)}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.memory_stats.total_alloc)}
+                    </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('System Memory')}:
                     </span>{' '}
-                    {formatBytes(stats.memory_stats.sys)}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.memory_stats.sys)}
+                    </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('GC Count')}:
                     </span>{' '}
-                    {stats.memory_stats.num_gc}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {stats.memory_stats.num_gc}
+                    </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>Goroutines:</span>{' '}
-                    {stats.memory_stats.num_goroutine}
+                    <span className='text-[#8A93A4]'>Goroutines:</span>{' '}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {stats.memory_stats.num_goroutine}
+                    </span>
                   </div>
                 </div>
               </div>
             )}
 
             {stats.disk_cache_info && (
-              <div className='rounded-lg border p-4'>
-                <p className='mb-2 text-sm font-medium'>
+              <div className='rounded-xl border border-[#E5E8EE] p-4'>
+                <p className='mb-3 text-[13px] font-medium text-[#0A0E1A]'>
                   {t('Cache Directory Info')}
                 </p>
-                <div className='grid grid-cols-3 gap-2 text-xs'>
+                <div className='grid grid-cols-1 gap-x-4 gap-y-2 text-[12px] md:grid-cols-3'>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Cache Directory')}:
                     </span>{' '}
-                    <span className='font-mono'>
+                    <span className='font-mono text-[12px] text-[#5A6478]'>
                       {stats.disk_cache_info.path}
                     </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Directory File Count')}:
                     </span>{' '}
-                    {stats.disk_cache_info.file_count}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {stats.disk_cache_info.file_count}
+                    </span>
                   </div>
                   <div>
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {t('Directory Total Size')}:
                     </span>{' '}
-                    {formatBytes(stats.disk_cache_info.total_size)}
+                    <span className='tabular-nums font-semibold text-[#0A0E1A]'>
+                      {formatBytes(stats.disk_cache_info.total_size)}
+                    </span>
                   </div>
                 </div>
               </div>

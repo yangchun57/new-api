@@ -53,25 +53,25 @@ export function AnnouncementDetailModal({
       }
       contentClassName='sm:max-w-lg'
       contentHeight='auto'
-      bodyClassName='space-y-4'
+      bodyClassName='space-y-5'
     >
-      <ScrollArea className='max-h-[min(58vh,520px)] pr-4'>
-        <div className='space-y-4'>
+      <ScrollArea className='max-h-[min(58vh,520px)] pr-1'>
+        <div className='space-y-5'>
           {announcement?.content && (
             <div>
-              <h4 className='mb-2 font-medium'>{t('Content')}</h4>
-              <RichContent breaks content={announcement.content} />
+              <h4 className='mb-2 text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Content')}</h4>
+              <RichContent breaks content={announcement.content} className='text-[13px] leading-relaxed text-[#5A6478]' />
             </div>
           )}
           {announcement?.extra && (
-            <div>
-              <h4 className='mb-2 font-medium'>
+            <div className='border-t border-[#E5E8EE] pt-5'>
+              <h4 className='mb-2 text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
                 {t('Additional Information')}
               </h4>
               <RichContent
                 breaks
                 content={announcement.extra}
-                className='text-muted-foreground'
+                className='text-[13px] leading-relaxed text-[#8A93A4]'
               />
             </div>
           )}

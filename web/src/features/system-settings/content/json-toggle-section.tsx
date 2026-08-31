@@ -214,7 +214,9 @@ export function JsonToggleSection({
                   <FormDescription>{t(textareaDescription)}</FormDescription>
                 )}
                 {example && (
-                  <div className='text-muted-foreground text-xs'>{example}</div>
+                  <div className='bg-[#F7F8FA] rounded-xl p-4 font-mono text-[12px] text-[#5A6478] whitespace-pre-wrap break-all'>
+                    {example}
+                  </div>
                 )}
                 <FormMessage />
               </FormItem>

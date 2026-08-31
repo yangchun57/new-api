@@ -390,7 +390,7 @@ export function OllamaModelsDialog({
       }
     >
       {!isOllamaChannel ? (
-        <div className='text-muted-foreground py-8 text-center'>
+        <div className='text-[#8A93A4] py-8 text-center text-[13px]'>
           {t('This channel is not an Ollama channel.')}
         </div>
       ) : (
@@ -425,7 +425,7 @@ export function OllamaModelsDialog({
               </div>
               {pullProgress && (
                 <div className='space-y-2'>
-                  <div className='text-muted-foreground text-xs'>
+                  <div className='text-[#8A93A4] text-[12px]'>
                     {t('Status:')} {String(pullProgress.status || '-')}
                   </div>
                   <Progress
@@ -468,13 +468,13 @@ export function OllamaModelsDialog({
           <div className='space-y-3'>
             <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
               <div>
-                <p className='text-sm font-medium'>{t('Local models')}</p>
-                <p className='text-muted-foreground text-xs'>
+                <p className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Local models')}</p>
+                <p className='text-[#8A93A4] text-[12px]'>
                   {t('Select models and apply to channel models list.')}
                 </p>
               </div>
               <div className='relative sm:w-72'>
-                <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+                <Search className='text-[#8A93A4] absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
                 <Input
                   placeholder={t('Search models...')}
                   value={search}
@@ -511,7 +511,7 @@ export function OllamaModelsDialog({
             <div className='overflow-hidden rounded-md border'>
               <div className='max-h-[420px] overflow-y-auto'>
                 {filteredModels.length === 0 ? (
-                  <div className='text-muted-foreground p-6 text-center text-sm'>
+                  <div className='text-[#8A93A4] p-6 text-center text-[13px]'>
                     {t('No models found.')}
                   </div>
                 ) : (
@@ -530,10 +530,10 @@ export function OllamaModelsDialog({
                               aria-label={`Select model ${m.id}`}
                             />
                             <div className='min-w-0'>
-                              <div className='truncate font-mono text-sm'>
+                              <div className='text-[#0A0E1A] truncate font-mono text-[12px]'>
                                 {m.id}
                               </div>
-                              <div className='text-muted-foreground flex flex-wrap gap-x-3 gap-y-1 text-xs'>
+                              <div className='text-[#8A93A4] flex flex-wrap gap-x-3 gap-y-1 text-[12px]'>
                                 <span>
                                   {t('Size:')} {formatBytes(m.size)}
                                 </span>

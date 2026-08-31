@@ -108,17 +108,21 @@ export function UpdateCheckerSection({
       <SettingsSection title={t('System maintenance')}>
         <div className='space-y-6'>
           <div className='grid gap-4 md:grid-cols-2'>
-            <div className='rounded-lg border p-4'>
-              <div className='text-muted-foreground text-sm'>
+            <div className='rounded-xl border border-[#E5E8EE] p-4'>
+              <div className='text-[13px] text-[#5A6478]'>
                 {t('Current version')}
               </div>
-              <div className='text-lg font-semibold'>{version}</div>
+              <div className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A] tabular-nums'>
+                {version}
+              </div>
             </div>
-            <div className='rounded-lg border p-4'>
-              <div className='text-muted-foreground text-sm'>
+            <div className='rounded-xl border border-[#E5E8EE] p-4'>
+              <div className='text-[13px] text-[#5A6478]'>
                 {t('Uptime since')}
               </div>
-              <div className='text-lg font-semibold'>{uptime}</div>
+              <div className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A] tabular-nums'>
+                {uptime}
+              </div>
             </div>
           </div>
 
@@ -178,7 +182,7 @@ export function UpdateCheckerSection({
           {release?.body ? (
             <Markdown>{release.body}</Markdown>
           ) : (
-            <p className='text-muted-foreground text-sm'>
+            <p className='text-[13px] text-[#8A93A4]'>
               {t('No release notes provided.')}
             </p>
           )}

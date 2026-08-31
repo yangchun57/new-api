@@ -82,7 +82,7 @@ export function buildModelRatioColumns({
         <DataTableColumnHeader column={column} title={t('Model name')} />
       ),
       cell: ({ row }) => (
-        <div className='flex min-w-0 items-center gap-2 font-medium'>
+        <div className='flex min-w-0 items-center gap-2 font-mono text-[12px] text-[#0A0E1A]'>
           <span className='min-w-0 truncate'>{row.getValue('name')}</span>
           {row.original.billingMode === 'tiered_expr' && (
             <StatusBadge
@@ -129,10 +129,10 @@ export function buildModelRatioColumns({
       ),
       cell: ({ row }) => (
         <div className='flex min-w-0 flex-col gap-1'>
-          <span className='truncate font-medium'>
+          <span className='truncate tabular-nums font-semibold text-[#0A0E1A]'>
             {getPriceSummary(row.original, t)}
           </span>
-          <span className='text-muted-foreground truncate text-xs'>
+          <span className='text-[#8A93A4] truncate text-[12px]'>
             {getPriceDetail(row.original, t)}
           </span>
         </div>

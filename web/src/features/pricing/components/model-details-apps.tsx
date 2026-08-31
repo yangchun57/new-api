@@ -25,10 +25,7 @@ import {
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  StaticDataTable,
-  staticDataTableClassNames as tableStyles,
-} from '@/components/data-table'
+import { StaticDataTable } from '@/components/data-table'
 import { cn } from '@/lib/utils'
 
 import {
@@ -43,21 +40,28 @@ const COMPACT_NUMBER = new Intl.NumberFormat(undefined, {
   maximumFractionDigits: 1,
 })
 
-function RankBadge(props: { rank: number }) {
-  const rank = props.rank
+const thBase =
+  'pl-font-mono h-9 px-3 text-left text-[9px] font-medium text-[#8A93A4]'
+const thRight = cn(thBase, 'text-right')
+const cellBase =
+  'border-t border-[#F0F2F6] px-3 py-2.5 text-[13px] text-[#0A0E1A]'
+const cellRight = cn(cellBase, 'text-right')
+const cellMuted = cn(cellBase, 'text-[#5A6478]')
+
+function RankBadge({ rank }: { rank: number }) {
   const isPodium = rank <= 3
   const palette =
     rank === 1
-      ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300'
+      ? 'bg-[#FEF9E7] text-[#B45309] ring-1 ring-[#FCD34D]/50'
       : rank === 2
-        ? 'bg-slate-100 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300'
+        ? 'bg-[#F0F2F6] text-[#5A6478] ring-1 ring-[#E5E8EE]'
         : rank === 3
-          ? 'bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-300'
-          : 'bg-muted text-muted-foreground'
+          ? 'bg-orange-50 text-orange-700 ring-1 ring-orange-200'
+          : 'bg-[#F7F8FA] text-[#5A6478]'
   return (
     <span
       className={cn(
-        'inline-flex size-7 shrink-0 items-center justify-center rounded-md font-mono text-xs font-bold tabular-nums',
+        'inline-flex size-7 shrink-0 items-center justify-center rounded-md font-mono text-[11px] font-bold tabular-nums',
         palette
       )}
     >
@@ -66,21 +70,20 @@ function RankBadge(props: { rank: number }) {
   )
 }
 
-function GrowthChip(props: { value: number }) {
-  const value = props.value
+function GrowthChip({ value }: { value: number }) {
   const isUp = value > 0
   const isDown = value < 0
   const palette = isUp
-    ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300'
+    ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
     : isDown
-      ? 'bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300'
-      : 'bg-muted text-muted-foreground'
+      ? 'bg-rose-50 text-rose-600 ring-1 ring-rose-200'
+      : 'bg-[#F7F8FA] text-[#8A93A4]'
   const Icon = isUp ? ArrowUpRight : isDown ? ArrowDownRight : null
   const formatted = `${value > 0 ? '+' : ''}${value.toFixed(1)}%`
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 font-mono text-[11px] font-semibold tabular-nums',
+        'inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 font-mono text-[11px] font-semibold tabular-nums',
         palette
       )}
     >
@@ -90,30 +93,30 @@ function GrowthChip(props: { value: number }) {
   )
 }
 
-function AppLink(props: { app: AppRanking }) {
-  if (!props.app.url) {
-    return <span className='text-foreground'>{props.app.name}</span>
+function AppLink({ app }: { app: AppRanking }) {
+  if (!app.url) {
+    return <span className='text-[#0A0E1A]'>{app.name}</span>
   }
   return (
     <a
-      href={props.app.url}
+      href={app.url}
       target='_blank'
       rel='noreferrer'
-      className='text-foreground hover:text-primary inline-flex items-center gap-1 transition-colors'
+      className='inline-flex items-center gap-1 text-[#0A0E1A] transition-colors hover:text-[#0A0E1A]/70'
     >
-      {props.app.name}
-      <ExternalLink className='text-muted-foreground/40 size-3' />
+      {app.name}
+      <ExternalLink className='size-3 text-[#B8BFCC]' />
     </a>
   )
 }
 
-export function ModelDetailsApps(props: { model: PricingModel }) {
+export function ModelDetailsApps({ model }: { model: PricingModel }) {
   const { t } = useTranslation()
-  const apps = useMemo(() => buildAppRankings(props.model, 12), [props.model])
+  const apps = useMemo(() => buildAppRankings(model, 12), [model])
 
   if (apps.length === 0) {
     return (
-      <div className='text-muted-foreground rounded-lg border p-6 text-center text-sm'>
+      <div className='rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] px-6 py-12 text-center text-[13px] text-[#8A93A4]'>
         {t('No app usage data available for this model.')}
       </div>
     )
@@ -123,37 +126,37 @@ export function ModelDetailsApps(props: { model: PricingModel }) {
   const top = apps[0]
   return (
     <div className='flex flex-col gap-4'>
-      <div className='grid grid-cols-1 gap-2 sm:grid-cols-3'>
-        <div className='bg-muted/20 rounded-lg border p-3'>
-          <div className='text-muted-foreground text-[10px] font-medium tracking-wider uppercase'>
+      <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
+        <div className='rounded-2xl border border-[#E5E8EE] bg-white p-4 shadow-sm'>
+          <div className='pl-font-mono text-[9px] font-medium text-[#8A93A4]'>
             {t('Tracked apps')}
           </div>
-          <div className='text-foreground mt-1 font-mono text-lg font-semibold tabular-nums'>
+          <div className='mt-1.5 font-mono text-[22px] font-semibold tabular-nums leading-none text-[#0A0E1A]'>
             {apps.length}
           </div>
-          <p className='text-muted-foreground/70 text-[11px]'>
+          <p className='mt-1.5 text-[12px] leading-relaxed text-[#8A93A4]'>
             {t('Top integrations using this model')}
           </p>
         </div>
-        <div className='bg-muted/20 rounded-lg border p-3'>
-          <div className='text-muted-foreground text-[10px] font-medium tracking-wider uppercase'>
+        <div className='rounded-2xl border border-[#E5E8EE] bg-white p-4 shadow-sm'>
+          <div className='pl-font-mono text-[9px] font-medium text-[#8A93A4]'>
             {t('Monthly tokens')}
           </div>
-          <div className='text-foreground mt-1 font-mono text-lg font-semibold tabular-nums'>
+          <div className='mt-1.5 font-mono text-[22px] font-semibold tabular-nums leading-none text-[#0A0E1A]'>
             {COMPACT_NUMBER.format(totalMonthlyTokens)}
           </div>
-          <p className='text-muted-foreground/70 text-[11px]'>
+          <p className='mt-1.5 text-[12px] leading-relaxed text-[#8A93A4]'>
             {t('Aggregated across the apps below')}
           </p>
         </div>
-        <div className='bg-muted/20 rounded-lg border p-3'>
-          <div className='text-muted-foreground text-[10px] font-medium tracking-wider uppercase'>
+        <div className='rounded-2xl border border-[#E5E8EE] bg-white p-4 shadow-sm'>
+          <div className='pl-font-mono text-[9px] font-medium text-[#8A93A4]'>
             {t('#1 by usage')}
           </div>
-          <div className='text-foreground mt-1 truncate text-base font-semibold'>
+          <div className='mt-1.5 truncate text-[15px] font-semibold leading-tight text-[#0A0E1A]'>
             {top.name}
           </div>
-          <p className='text-muted-foreground/70 truncate text-[11px]'>
+          <p className='mt-1.5 truncate text-[12px] leading-relaxed text-[#8A93A4]'>
             {top.category} · {formatTokenVolume(top.monthly_tokens)}{' '}
             {t('tokens / mo')}
           </p>
@@ -161,34 +164,34 @@ export function ModelDetailsApps(props: { model: PricingModel }) {
       </div>
 
       <StaticDataTable
-        className='rounded-lg'
-        tableClassName='text-sm'
-        headerRowClassName={tableStyles.compactHeaderRow}
+        className='overflow-hidden rounded-2xl border border-[#E5E8EE] bg-white shadow-sm'
+        tableClassName='w-full'
+        headerRowClassName='bg-[#FAFBFC] hover:bg-transparent'
         data={apps}
         getRowKey={(app) => `${app.rank}-${app.name}`}
         columns={[
           {
             id: 'rank',
             header: '#',
-            className: cn(tableStyles.compactHeaderCell, 'w-12'),
-            cellClassName: tableStyles.compactCell,
+            className: cn(thBase, 'w-12'),
+            cellClassName: cellBase,
             cell: (app) => <RankBadge rank={app.rank} />,
           },
           {
             id: 'app',
             header: t('App'),
-            className: tableStyles.compactHeaderCell,
-            cellClassName: tableStyles.compactCell,
+            className: thBase,
+            cellClassName: cellBase,
             cell: (app) => (
               <div className='flex items-center gap-3'>
-                <span className='bg-muted text-muted-foreground inline-flex size-7 shrink-0 items-center justify-center rounded-md font-bold'>
+                <span className='bg-[#F7F8FA] text-[#5A6478] inline-flex size-7 shrink-0 items-center justify-center rounded-md text-[11px] font-bold'>
                   {app.initial}
                 </span>
                 <div className='min-w-0'>
-                  <div className='text-sm font-medium'>
+                  <div className='text-[13px] font-medium'>
                     <AppLink app={app} />
                   </div>
-                  <p className='text-muted-foreground line-clamp-1 text-sm'>
+                  <p className='line-clamp-1 text-[12px] text-[#8A93A4]'>
                     {app.description}
                   </p>
                 </div>
@@ -198,34 +201,35 @@ export function ModelDetailsApps(props: { model: PricingModel }) {
           {
             id: 'category',
             header: t('Category'),
-            className: cn(
-              tableStyles.compactHeaderCell,
-              'hidden md:table-cell'
-            ),
-            cellClassName: cn(
-              tableStyles.compactMutedCell,
-              'hidden md:table-cell'
-            ),
+            className: cn(thBase, 'hidden md:table-cell'),
+            cellClassName: cn(cellMuted, 'hidden md:table-cell'),
             cell: (app) => app.category,
           },
           {
             id: 'monthly-tokens',
             header: t('Monthly tokens'),
-            className: tableStyles.compactHeaderCellRight,
-            cellClassName: cn(tableStyles.compactNumericCell, 'tabular-nums'),
+            className: thRight,
+            cellClassName: cn(
+              cellRight,
+              'font-mono font-semibold tabular-nums'
+            ),
             cell: (app) => formatTokenVolume(app.monthly_tokens),
           },
           {
             id: 'growth',
             header: t('30d change'),
-            className: tableStyles.compactHeaderCellRight,
-            cellClassName: cn(tableStyles.compactCell, 'text-right'),
-            cell: (app) => <GrowthChip value={app.growth_pct} />,
+            className: thRight,
+            cellClassName: cn(cellRight, 'text-right'),
+            cell: (app) => (
+              <span className='inline-flex justify-end'>
+                <GrowthChip value={app.growth_pct} />
+              </span>
+            ),
           },
         ]}
       />
 
-      <p className='text-muted-foreground/60 text-[11px] leading-relaxed'>
+      <p className='text-[11px] leading-relaxed text-[#8A93A4]'>
         {t(
           'App rankings shown here are simulated for preview purposes and will be replaced with live usage data once the backend integration is complete.'
         )}

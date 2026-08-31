@@ -77,7 +77,9 @@ export function useRedemptionsColumns(): ColumnDef<Redemption>[] {
       header: t('Name'),
       meta: { mobileTitle: true },
       cell: ({ row }) => (
-        <span className='font-medium'>{row.getValue('name')}</span>
+        <span className='text-[13px] font-medium text-[#0A0E1A]'>
+          {row.getValue('name')}
+        </span>
       ),
       size: 180,
     },
@@ -176,7 +178,7 @@ export function useRedemptionsColumns(): ColumnDef<Redemption>[] {
       meta: { mobileHidden: true },
       cell: ({ row }) => {
         return (
-          <div className='min-w-[160px] font-mono text-sm'>
+          <div className='min-w-[160px] font-mono text-[12px] text-[#8A93A4]'>
             {formatTimestampToDate(row.getValue('created_time'))}
           </div>
         )
@@ -202,7 +204,7 @@ export function useRedemptionsColumns(): ColumnDef<Redemption>[] {
         const isExpired = isTimestampExpired(expiredTime)
         return (
           <div
-            className={`min-w-[160px] font-mono text-sm ${isExpired ? 'text-destructive' : ''}`}
+            className={`min-w-[160px] font-mono text-[12px] ${isExpired ? 'text-destructive' : 'text-[#8A93A4]'}`}
           >
             {formatTimestampToDate(expiredTime)}
           </div>
@@ -219,7 +221,7 @@ export function useRedemptionsColumns(): ColumnDef<Redemption>[] {
         const redemption = row.original
 
         if (userId === 0) {
-          return <span className='text-muted-foreground text-sm'>-</span>
+          return <span className='text-[13px] text-[#8A93A4]'>-</span>
         }
 
         return (

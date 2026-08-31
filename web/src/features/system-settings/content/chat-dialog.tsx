@@ -149,7 +149,11 @@ export function ChatDialog({
               <FormItem>
                 <FormLabel>{t('URL')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('Please enter the URL')} {...field} />
+                  <Input
+                    placeholder={t('Please enter the URL')}
+                    className='font-mono text-[12px] bg-[#F7F8FA]'
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>
                   {t('The URL for this chat client.')}

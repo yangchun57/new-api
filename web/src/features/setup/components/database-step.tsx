@@ -68,6 +68,10 @@ function resolveDatabaseMeta(type?: string) {
   )
 }
 
+const alertBase = 'rounded-xl px-4 py-3 [&>svg]:mt-0.5'
+const alertTitleCls = 'text-[13px] font-semibold'
+const alertDescCls = 'mt-1 text-[13px] leading-relaxed opacity-90'
+
 export function DatabaseStep({ status }: DatabaseStepProps) {
   const { t } = useTranslation()
   const meta = resolveDatabaseMeta(status?.database_type)
@@ -82,15 +86,15 @@ export function DatabaseStep({ status }: DatabaseStepProps) {
 
   return (
     <div className='space-y-4'>
-      <div className='bg-card flex items-center justify-between rounded-lg border p-4'>
-        <div className='space-y-1'>
-          <p className='text-muted-foreground text-sm font-medium'>
+      <div className='flex items-center justify-between rounded-xl border border-[#E5E8EE] bg-[#FAFBFC] p-4'>
+        <div className='min-w-0 space-y-1 pr-4'>
+          <p className='text-[11px] font-medium uppercase tracking-[0.14em] text-[#8A93A4]'>
             {t('Detected database')}
           </p>
-          <p className='text-foreground text-base font-semibold'>
+          <p className='text-[15px] font-semibold text-[#0A0E1A]'>
             {meta?.label ?? t('Unknown')}
           </p>
-          <p className='text-muted-foreground text-sm'>
+          <p className='text-[13px] leading-relaxed text-[#5A6478]'>
             {t(
               meta?.descriptionKey ??
                 'The setup wizard will use this database during initialization.'
@@ -100,31 +104,33 @@ export function DatabaseStep({ status }: DatabaseStepProps) {
         <StatusBadge
           label={meta?.label ?? t('Unknown')}
           variant={meta?.variant ?? 'info'}
-          className='cursor-default'
+          className='cursor-default shrink-0'
           copyable={false}
           icon={Database}
         />
       </div>
 
       {status?.database_type === 'sqlite' && (
-        <Alert className='border-amber-200 bg-amber-50 dark:border-amber-900/60 dark:bg-amber-950/40'>
-          <AlertTitle className='flex items-center gap-2'>
-            <HardDrive className='size-4 text-amber-500' />
+        <Alert
+          className={`${alertBase} border-amber-200/80 bg-amber-50/60 text-amber-800`}
+        >
+          <AlertTitle className={`${alertTitleCls} flex items-center gap-2 text-amber-800`}>
+            <HardDrive className='h-4 w-4 text-amber-500' />
             {t('Persist your data file')}
           </AlertTitle>
-          <AlertDescription>
+          <AlertDescription className={`${alertDescCls} text-amber-700/90`}>
             <p>
               {t(
                 'When running in containers or ephemeral environments, ensure the SQLite file is mapped to persistent storage to avoid data loss on restart.'
               )}
             </p>
             {isElectron && electronDataDir && (
-              <p className='mt-3 rounded-md bg-amber-100/70 px-3 py-2 font-mono text-xs text-amber-800 dark:bg-amber-900/30 dark:text-amber-200'>
+              <p className='mt-3 rounded-md bg-amber-100/80 px-3 py-2 font-mono text-[12px] text-amber-800'>
                 {t('Data directory:')} {electronDataDir}
               </p>
             )}
             {isElectron && !electronDataDir && (
-              <p className='text-muted-foreground mt-3 text-xs'>
+              <p className='mt-3 text-[12px] text-amber-700/80'>
                 {t(
                   'Data is stored locally on this device. Use system backups to keep a safe copy.'
                 )}
@@ -135,12 +141,16 @@ export function DatabaseStep({ status }: DatabaseStepProps) {
       )}
 
       {status?.database_type === 'mysql' && (
-        <Alert className='border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/40'>
-          <AlertTitle className='flex items-center gap-2'>
-            <Server className='size-4 text-emerald-500' />
+        <Alert
+          className={`${alertBase} border-emerald-200/80 bg-emerald-50/60 text-emerald-800`}
+        >
+          <AlertTitle
+            className={`${alertTitleCls} flex items-center gap-2 text-emerald-800`}
+          >
+            <Server className='h-4 w-4 text-emerald-500' />
             {t('MySQL detected')}
           </AlertTitle>
-          <AlertDescription>
+          <AlertDescription className={`${alertDescCls} text-emerald-700/90`}>
             {t(
               'MySQL is production ready. Ensure automated backups and a dedicated user with the minimal required privileges are configured.'
             )}
@@ -149,12 +159,12 @@ export function DatabaseStep({ status }: DatabaseStepProps) {
       )}
 
       {status?.database_type === 'postgres' && (
-        <Alert className='border-sky-200 bg-sky-50 dark:border-sky-900/60 dark:bg-sky-950/40'>
-          <AlertTitle className='flex items-center gap-2'>
-            <Server className='size-4 text-sky-500' />
+        <Alert className={`${alertBase} border-sky-200/80 bg-sky-50/60 text-sky-800`}>
+          <AlertTitle className={`${alertTitleCls} flex items-center gap-2 text-sky-800`}>
+            <Server className='h-4 w-4 text-sky-500' />
             {t('PostgreSQL detected')}
           </AlertTitle>
-          <AlertDescription>
+          <AlertDescription className={`${alertDescCls} text-sky-700/90`}>
             {t(
               'PostgreSQL offers strong reliability guarantees. Double check your maintenance window and retention policies before going live.'
             )}

@@ -164,7 +164,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                           field.onChange(parseInt(e.target.value) || 0)
                         }
                       />
-                      <span className='text-muted-foreground text-sm'>
+                      <span className='text-[13px] text-[#8A93A4]'>
                         {t('minutes')}
                       </span>
                     </div>
@@ -195,7 +195,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                           field.onChange(parseInt(e.target.value) || 0)
                         }
                       />
-                      <span className='text-muted-foreground text-sm'>
+                      <span className='text-[13px] text-[#8A93A4]'>
                         {t('times')}
                       </span>
                     </div>
@@ -226,7 +226,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                           field.onChange(parseInt(e.target.value) || 1)
                         }
                       />
-                      <span className='text-muted-foreground text-sm'>
+                      <span className='text-[13px] text-[#8A93A4]'>
                         {t('times')}
                       </span>
                     </div>
@@ -288,8 +288,8 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                 </FormControl>
                 {!useVisualEditor && (
                   <FormDescription>
-                    <div className='space-y-1 text-xs'>
-                      <p className='font-semibold'>{t('Format:')}</p>
+                    <div className='space-y-1 text-[12px] text-[#8A93A4]'>
+                      <p className='font-semibold text-[#5A6478]'>{t('Format:')}</p>
                       <ul className='list-inside list-disc space-y-0.5 pl-2'>
                         <li>
                           {t('JSON object:')}{' '}

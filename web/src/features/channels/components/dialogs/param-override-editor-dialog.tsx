@@ -578,16 +578,16 @@ const getOperationSummary = (
 
 const getModeTagTailwind = (mode: string): string => {
   if (mode.includes('header'))
-    return 'bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/20'
+    return 'bg-cyan-500/15 text-cyan-700 border-cyan-500/20'
   if (mode.includes('replace') || mode.includes('trim'))
-    return 'bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/20'
+    return 'bg-violet-500/15 text-violet-700 border-violet-500/20'
   if (mode.includes('copy') || mode.includes('move'))
-    return 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/20'
+    return 'bg-blue-500/15 text-blue-700 border-blue-500/20'
   if (mode.includes('error') || mode.includes('prune'))
-    return 'bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/20'
+    return 'bg-red-500/15 text-red-700 border-red-500/20'
   if (mode.includes('sync'))
-    return 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/20'
-  return 'bg-muted text-muted-foreground'
+    return 'bg-green-500/15 text-green-700 border-green-500/20'
+  return 'bg-[#F7F8FA] text-[#8A93A4]'
 }
 
 const getModePathLabel = (mode: string): string => {
@@ -1736,9 +1736,9 @@ export function ParamOverrideEditorDialog(
       }
     >
       {/* Toolbar */}
-      <div className='bg-muted/30 border-b px-4 py-3'>
+      <div className='bg-[#F7F8FA]/60 border-b px-4 py-3'>
         <div className='flex flex-wrap items-center gap-2'>
-          <span className='text-muted-foreground text-xs font-medium'>
+          <span className='text-[#8A93A4] text-[12px] font-medium'>
             {t('Mode')}
           </span>
           <Button
@@ -1760,7 +1760,7 @@ export function ParamOverrideEditorDialog(
 
           <div className='bg-border mx-1 h-5 w-px' />
 
-          <span className='text-muted-foreground text-xs font-medium'>
+          <span className='text-[#8A93A4] text-[12px] font-medium'>
             {t('Template')}
           </span>
           <Select
@@ -1819,7 +1819,7 @@ export function ParamOverrideEditorDialog(
         {editMode === 'visual' ? (
           visualMode === 'legacy' ? (
             <div className='p-4'>
-              <p className='text-muted-foreground mb-2 text-sm'>
+              <p className='text-[#8A93A4] mb-2 text-[12px] font-medium pl-font-mono'>
                 {t('Legacy Format (JSON Object)')}
               </p>
               <JsonCodeEditor
@@ -1829,7 +1829,7 @@ export function ParamOverrideEditorDialog(
                 heightClassName='h-72 min-h-72 max-h-72'
                 ariaLabel={t('Legacy Format (JSON Object)')}
               />
-              <p className='text-muted-foreground mt-2 text-xs'>
+              <p className='text-[#8A93A4] mt-2 text-[12px]'>
                 {t(
                   'Edit JSON object directly. Suitable for simple parameter overrides.'
                 )}
@@ -1841,7 +1841,7 @@ export function ParamOverrideEditorDialog(
               <div className='flex w-[280px] flex-shrink-0 flex-col border-r'>
                 <div className='flex items-center justify-between border-b px-3 py-2'>
                   <div className='flex items-center gap-2'>
-                    <span className='text-sm font-medium'>{t('Rules')}</span>
+                    <span className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Rules')}</span>
                     <Badge variant='secondary'>
                       {operationCount}/{operations.length}
                     </Badge>
@@ -1874,12 +1874,12 @@ export function ParamOverrideEditorDialog(
 
                 <div className='px-3 py-2'>
                   <div className='relative'>
-                    <Search className='text-muted-foreground absolute top-2.5 left-2.5 h-3.5 w-3.5' />
+                    <Search className='text-[#8A93A4] absolute top-2.5 left-2.5 h-3.5 w-3.5' />
                     <Input
                       value={operationSearch}
                       onChange={(e) => setOperationSearch(e.target.value)}
                       placeholder={t('Search rules...')}
-                      className='h-8 pl-8 text-xs'
+                      className='h-8 pl-8 text-[12px]'
                     />
                   </div>
                 </div>
@@ -1887,7 +1887,7 @@ export function ParamOverrideEditorDialog(
                 <ScrollArea className='flex-1'>
                   <div className='flex flex-col gap-1 px-3 pb-3'>
                     {filteredOperations.length === 0 ? (
-                      <p className='text-muted-foreground py-4 text-center text-xs'>
+                      <p className='text-[#8A93A4] py-4 text-center text-[12px]'>
                         {t('No matching rules')}
                       </p>
                     ) : (
@@ -1921,10 +1921,10 @@ export function ParamOverrideEditorDialog(
                               }
                             }}
                             className={cn(
-                              'cursor-pointer rounded-lg border p-2.5 transition-colors',
+                              'cursor-pointer rounded-xl border p-2.5 transition-colors',
                               isActive
                                 ? 'border-primary bg-primary/5'
-                                : 'hover:bg-muted/50',
+                                : 'hover:bg-[#F0F2F6]',
                               isDragging && 'opacity-50',
                               isDropTarget &&
                                 dragOverPosition === 'before' &&
@@ -1937,7 +1937,7 @@ export function ParamOverrideEditorDialog(
                             <div className='flex items-start gap-2'>
                               <GripVertical
                                 className={cn(
-                                  'text-muted-foreground mt-0.5 h-3.5 w-3.5 flex-shrink-0',
+                                  'text-[#8A93A4] mt-0.5 h-3.5 w-3.5 flex-shrink-0',
                                   operations.length > 1
                                     ? 'cursor-grab'
                                     : 'cursor-default'
@@ -1945,7 +1945,7 @@ export function ParamOverrideEditorDialog(
                               />
                               <div className='min-w-0 flex-1'>
                                 <div className='flex items-center justify-between gap-1'>
-                                  <span className='text-xs font-semibold'>
+                                  <span className='text-[12px] font-semibold'>
                                     #{index + 1}
                                   </span>
                                   <Badge
@@ -1955,11 +1955,11 @@ export function ParamOverrideEditorDialog(
                                     {operation.conditions.length}
                                   </Badge>
                                 </div>
-                                <p className='text-muted-foreground mt-0.5 line-clamp-1 text-[11px]'>
+                                <p className='text-[#8A93A4] mt-0.5 line-clamp-1 text-[11px]'>
                                   {getOperationSummary(operation, index)}
                                 </p>
                                 {operation.description.trim() && (
-                                  <p className='text-muted-foreground mt-0.5 line-clamp-2 text-[10px]'>
+                                  <p className='text-[#8A93A4] mt-0.5 line-clamp-2 text-[10px]'>
                                     {operation.description}
                                   </p>
                                 )}
@@ -2014,7 +2014,7 @@ export function ParamOverrideEditorDialog(
                   />
                 ) : (
                   <div className='flex flex-1 items-center justify-center'>
-                    <p className='text-muted-foreground text-sm'>
+                    <p className='text-[#8A93A4] text-[13px]'>
                       {t('Select a rule to edit.')}
                     </p>
                   </div>
@@ -2022,7 +2022,7 @@ export function ParamOverrideEditorDialog(
 
                 {visualValidationError && (
                   <div className='border-t px-4 py-2'>
-                    <p className='text-destructive text-xs'>
+                    <p className='text-destructive text-[12px]'>
                       {visualValidationError}
                     </p>
                   </div>
@@ -2034,7 +2034,7 @@ export function ParamOverrideEditorDialog(
           /* JSON mode */
           <div className='p-4'>
             <div className='mb-2 flex items-center gap-2'>
-              <span className='text-muted-foreground text-xs'>
+              <span className='text-[#8A93A4] text-[12px]'>
                 {t('Advanced text editing')}
               </span>
             </div>
@@ -2046,11 +2046,11 @@ export function ParamOverrideEditorDialog(
               aria-invalid={Boolean(jsonError)}
               ariaLabel={t('Advanced text editing')}
             />
-            <p className='text-muted-foreground mt-2 text-xs'>
+            <p className='text-[#8A93A4] mt-2 text-[12px]'>
               {t('Edit JSON text directly. Format will be validated on save.')}
             </p>
             {jsonError && (
-              <p className='text-destructive mt-1 text-xs'>{jsonError}</p>
+              <p className='text-destructive mt-1 text-[12px]'>{jsonError}</p>
             )}
           </div>
         )}
@@ -2128,7 +2128,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
             <Badge variant='outline'>
               #{ruleEditorProps.operationIndex + 1}
             </Badge>
-            <span className='text-muted-foreground line-clamp-1 text-xs'>
+            <span className='text-[#8A93A4] line-clamp-1 text-[12px]'>
               {getOperationSummary(operation, ruleEditorProps.operationIndex)}
             </span>
           </div>
@@ -2158,7 +2158,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
         {/* Operation type + path */}
         <div className='grid gap-3 sm:grid-cols-2'>
           <div className='space-y-1.5'>
-            <label className='text-xs font-medium'>{t('Operation Type')}</label>
+            <label className='text-[12px] font-medium'>{t('Operation Type')}</label>
             <Select
               items={[
                 ...OPERATION_MODE_OPTIONS.map((o) => ({
@@ -2190,7 +2190,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
           </div>
           {(meta.path || meta.pathOptional) && (
             <div className='space-y-1.5'>
-              <label className='text-xs font-medium'>
+              <label className='text-[12px] font-medium'>
                 {t(getModePathLabel(mode))}
               </label>
               <Input
@@ -2209,7 +2209,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
 
         {/* Mode description */}
         {MODE_DESCRIPTIONS[mode] && (
-          <p className='text-muted-foreground text-xs'>
+          <p className='text-[#8A93A4] text-[12px]'>
             {t(MODE_DESCRIPTIONS[mode])}
           </p>
         )}
@@ -2217,10 +2217,10 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
         {/* Description */}
         <div className='space-y-1.5'>
           <div className='flex items-center justify-between'>
-            <label className='text-xs font-medium'>
+            <label className='text-[12px] font-medium'>
               {t('Rule Description (optional)')}
             </label>
-            <span className='text-muted-foreground text-[10px]'>
+            <span className='text-[#8A93A4] text-[10px]'>
               {operation.description.length}/180
             </span>
           </div>
@@ -2259,7 +2259,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
           ) : (
             <div className='space-y-1.5'>
               <div className='flex items-center justify-between'>
-                <label className='text-xs font-medium'>
+                <label className='text-[12px] font-medium'>
                   {t(getModeValueLabel(mode))}
                 </label>
                 {operation.value_text.trim().startsWith('{') && (
@@ -2267,7 +2267,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
                     type='button'
                     variant='ghost'
                     size='sm'
-                    className='text-muted-foreground h-auto px-1.5 py-0.5 text-xs'
+                    className='text-[#8A93A4] h-auto px-1.5 py-0.5 text-[12px]'
                     onClick={() => {
                       try {
                         const parsed = JSON.parse(operation.value_text)
@@ -2292,15 +2292,15 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
                 }
                 placeholder={getModeValuePlaceholder(mode)}
                 rows={3}
-                className='max-h-[200px] resize-y overflow-y-auto font-mono text-xs'
+                className='max-h-[200px] resize-y overflow-y-auto font-mono text-[12px]'
               />
             </div>
           ))}
 
         {/* keep_origin */}
         {meta.keepOrigin && (
-          <div className='flex items-center justify-between rounded-lg border px-3 py-2'>
-            <p className='text-sm font-medium'>
+          <div className='flex items-center justify-between rounded-xl border px-3 py-2'>
+            <p className='text-[#0A0E1A] text-[13px] font-medium'>
               {t('Keep original value (skip if target exists)')}
             </p>
             <Switch
@@ -2326,7 +2326,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
           <div className='grid gap-3 sm:grid-cols-2'>
             {(meta.from || meta.to === false) && (
               <div className='space-y-1.5'>
-                <label className='text-xs font-medium'>
+                <label className='text-[12px] font-medium'>
                   {t(getModeFromLabel(mode))}
                 </label>
                 <Input
@@ -2343,7 +2343,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
             )}
             {(meta.to || meta.to === false) && (
               <div className='space-y-1.5'>
-                <label className='text-xs font-medium'>
+                <label className='text-[12px] font-medium'>
                   {t(getModeToLabel(mode))}
                 </label>
                 <Input
@@ -2362,10 +2362,10 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
         ) : null}
 
         {/* Conditions */}
-        <div className='rounded-lg border p-3'>
+        <div className='rounded-xl border p-3'>
           <div className='mb-2 flex items-center justify-between'>
             <div className='flex items-center gap-2'>
-              <span className='text-sm font-medium'>{t('Conditions')}</span>
+              <span className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Conditions')}</span>
               <Select
                 items={[
                   { value: 'OR', label: t('Match Any (OR)') },
@@ -2379,7 +2379,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
                   })
                 }
               >
-                <SelectTrigger className='h-7 w-[120px] text-xs'>
+                <SelectTrigger className='h-7 w-[120px] text-[12px]'>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent alignItemWithTrigger={false}>
@@ -2397,7 +2397,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
                     type='button'
                     variant='ghost'
                     size='sm'
-                    className='h-7 text-xs'
+                    className='h-7 text-[12px]'
                     onClick={ruleEditorProps.expandAllConditions}
                   >
                     <ChevronDown className='mr-1 h-3 w-3' />
@@ -2407,7 +2407,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
                     type='button'
                     variant='ghost'
                     size='sm'
-                    className='h-7 text-xs'
+                    className='h-7 text-[12px]'
                     onClick={ruleEditorProps.collapseAllConditions}
                   >
                     <ChevronUp className='mr-1 h-3 w-3' />
@@ -2419,7 +2419,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
                 type='button'
                 variant='outline'
                 size='sm'
-                className='h-7 text-xs'
+                className='h-7 text-[12px]'
                 onClick={() => ruleEditorProps.addCondition(operation.id)}
               >
                 <Plus className='mr-1 h-3 w-3' />
@@ -2429,7 +2429,7 @@ function RuleEditor(ruleEditorProps: RuleEditorProps) {
           </div>
 
           {conditions.length === 0 ? (
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[#8A93A4] text-[12px]'>
               {t('When no conditions are set, the operation always executes.')}
             </p>
           ) : (
@@ -2489,32 +2489,32 @@ function ConditionEditor(conditionEditorProps: ConditionEditorProps) {
       onOpenChange={conditionEditorProps.onExpandedChange}
     >
       <div className='rounded-md border'>
-        <CollapsibleTrigger className='hover:bg-muted/50 flex w-full items-center justify-between px-3 py-2'>
+        <CollapsibleTrigger className='hover:bg-[#F0F2F6] flex w-full items-center justify-between px-3 py-2'>
           <div className='flex items-center gap-2'>
             <Badge variant='outline' className='text-[10px]'>
               C{conditionEditorProps.conditionIndex + 1}
             </Badge>
-            <span className='text-muted-foreground text-xs'>
+            <span className='text-[#8A93A4] text-[12px]'>
               {condition.path || t('Path not set')}
             </span>
           </div>
           {conditionEditorProps.expanded ? (
-            <ChevronUp className='text-muted-foreground h-3.5 w-3.5' />
+            <ChevronUp className='text-[#8A93A4] h-3.5 w-3.5' />
           ) : (
-            <ChevronDown className='text-muted-foreground h-3.5 w-3.5' />
+            <ChevronDown className='text-[#8A93A4] h-3.5 w-3.5' />
           )}
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className='space-y-3 border-t px-3 py-3'>
             <div className='flex items-center justify-between'>
-              <span className='text-muted-foreground text-xs'>
+              <span className='text-[#8A93A4] text-[12px]'>
                 {t('Condition Settings')}
               </span>
               <Button
                 type='button'
                 variant='ghost'
                 size='sm'
-                className='text-destructive hover:text-destructive h-7 text-xs'
+                className='text-destructive hover:text-destructive h-7 text-[12px]'
                 onClick={() =>
                   conditionEditorProps.removeCondition(
                     conditionEditorProps.operationId,
@@ -2541,7 +2541,7 @@ function ConditionEditor(conditionEditorProps: ConditionEditorProps) {
                     )
                   }
                   placeholder='model'
-                  className='h-8 text-xs'
+                  className='h-8 text-[12px]'
                 />
               </div>
               <div className='space-y-1'>
@@ -2565,7 +2565,7 @@ function ConditionEditor(conditionEditorProps: ConditionEditorProps) {
                     )
                   }
                 >
-                  <SelectTrigger className='h-8 text-xs'>
+                  <SelectTrigger className='h-8 text-[12px]'>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent alignItemWithTrigger={false}>
@@ -2593,12 +2593,12 @@ function ConditionEditor(conditionEditorProps: ConditionEditorProps) {
                     )
                   }
                   placeholder='gpt'
-                  className='h-8 text-xs'
+                  className='h-8 text-[12px]'
                 />
               </div>
             </div>
             <div className='flex flex-wrap gap-4'>
-              <label className='flex items-center gap-2 text-xs'>
+              <label className='flex items-center gap-2 text-[12px]'>
                 <Switch
                   checked={condition.invert}
                   onCheckedChange={(checked) =>
@@ -2611,7 +2611,7 @@ function ConditionEditor(conditionEditorProps: ConditionEditorProps) {
                 />
                 {t('Invert match')}
               </label>
-              <label className='flex items-center gap-2 text-xs'>
+              <label className='flex items-center gap-2 text-[12px]'>
                 <Switch
                   checked={condition.pass_missing_key}
                   onCheckedChange={(checked) =>
@@ -2650,18 +2650,18 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
   const draft = returnErrorEditorProps.draft
 
   return (
-    <div className='rounded-lg border p-3'>
+    <div className='rounded-xl border p-3'>
       <div className='mb-2 flex items-center justify-between'>
-        <span className='text-sm font-medium'>
+        <span className='text-[#0A0E1A] text-[14px] font-semibold'>
           {t('Custom Error Response')}
         </span>
         <div className='flex items-center gap-1'>
-          <span className='text-muted-foreground text-xs'>{t('Mode')}</span>
+          <span className='text-[#8A93A4] text-[12px]'>{t('Mode')}</span>
           <Button
             type='button'
             variant={draft.simpleMode ? 'default' : 'outline'}
             size='sm'
-            className='h-7 text-xs'
+            className='h-7 text-[12px]'
             onClick={() =>
               returnErrorEditorProps.updateDraft(
                 returnErrorEditorProps.operationId,
@@ -2675,7 +2675,7 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
             type='button'
             variant={draft.simpleMode ? 'outline' : 'default'}
             size='sm'
-            className='h-7 text-xs'
+            className='h-7 text-[12px]'
             onClick={() =>
               returnErrorEditorProps.updateDraft(
                 returnErrorEditorProps.operationId,
@@ -2689,7 +2689,7 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
       </div>
 
       <div className='space-y-1.5'>
-        <label className='text-xs font-medium'>
+        <label className='text-[12px] font-medium'>
           {t('Error Message (required)')}
         </label>
         <Textarea
@@ -2702,12 +2702,12 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
           }
           placeholder={t('e.g. This request does not meet access policy')}
           rows={2}
-          className='text-xs'
+          className='text-[12px]'
         />
       </div>
 
       {draft.simpleMode ? (
-        <p className='text-muted-foreground mt-2 text-xs'>
+        <p className='text-[#8A93A4] mt-2 text-[12px]'>
           {t(
             'Simple mode only returns message; status code and error type use system defaults.'
           )}
@@ -2716,7 +2716,7 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
         <>
           <div className='mt-3 grid gap-3 sm:grid-cols-3'>
             <div className='space-y-1'>
-              <label className='text-xs font-medium'>{t('Status Code')}</label>
+              <label className='text-[12px] font-medium'>{t('Status Code')}</label>
               <Input
                 value={String(draft.statusCode ?? '')}
                 onChange={(e) =>
@@ -2726,11 +2726,11 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
                   )
                 }
                 placeholder='400'
-                className='h-8 text-xs'
+                className='h-8 text-[12px]'
               />
             </div>
             <div className='space-y-1'>
-              <label className='text-xs font-medium'>
+              <label className='text-[12px] font-medium'>
                 {t('Error Code (optional)')}
               </label>
               <Input
@@ -2742,11 +2742,11 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
                   )
                 }
                 placeholder='forced_bad_request'
-                className='h-8 text-xs'
+                className='h-8 text-[12px]'
               />
             </div>
             <div className='space-y-1'>
-              <label className='text-xs font-medium'>
+              <label className='text-[12px] font-medium'>
                 {t('Error Type (optional)')}
               </label>
               <Input
@@ -2758,19 +2758,19 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
                   )
                 }
                 placeholder='invalid_request_error'
-                className='h-8 text-xs'
+                className='h-8 text-[12px]'
               />
             </div>
           </div>
           <div className='mt-2 flex items-center gap-2'>
-            <span className='text-muted-foreground text-xs'>
+            <span className='text-[#8A93A4] text-[12px]'>
               {t('Retry Suggestion')}
             </span>
             <Button
               type='button'
               variant={draft.skipRetry ? 'default' : 'outline'}
               size='sm'
-              className='h-7 text-xs'
+              className='h-7 text-[12px]'
               onClick={() =>
                 returnErrorEditorProps.updateDraft(
                   returnErrorEditorProps.operationId,
@@ -2784,7 +2784,7 @@ function ReturnErrorEditor(returnErrorEditorProps: ReturnErrorEditorProps) {
               type='button'
               variant={draft.skipRetry ? 'outline' : 'default'}
               size='sm'
-              className='h-7 text-xs'
+              className='h-7 text-[12px]'
               onClick={() =>
                 returnErrorEditorProps.updateDraft(
                   returnErrorEditorProps.operationId,
@@ -2870,16 +2870,16 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
   const draft = pruneObjectsEditorProps.draft
 
   return (
-    <div className='rounded-lg border p-3'>
+    <div className='rounded-xl border p-3'>
       <div className='mb-2 flex items-center justify-between'>
-        <span className='text-sm font-medium'>{t('Object Prune Rules')}</span>
+        <span className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Object Prune Rules')}</span>
         <div className='flex items-center gap-1'>
-          <span className='text-muted-foreground text-xs'>{t('Mode')}</span>
+          <span className='text-[#8A93A4] text-[12px]'>{t('Mode')}</span>
           <Button
             type='button'
             variant={draft.simpleMode ? 'default' : 'outline'}
             size='sm'
-            className='h-7 text-xs'
+            className='h-7 text-[12px]'
             onClick={() =>
               pruneObjectsEditorProps.updateDraft(
                 pruneObjectsEditorProps.operationId,
@@ -2893,7 +2893,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
             type='button'
             variant={draft.simpleMode ? 'outline' : 'default'}
             size='sm'
-            className='h-7 text-xs'
+            className='h-7 text-[12px]'
             onClick={() =>
               pruneObjectsEditorProps.updateDraft(
                 pruneObjectsEditorProps.operationId,
@@ -2907,7 +2907,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
       </div>
 
       <div className='space-y-1.5'>
-        <label className='text-xs font-medium'>{t('Type (common)')}</label>
+        <label className='text-[12px] font-medium'>{t('Type (common)')}</label>
         <Input
           value={draft.typeText}
           onChange={(e) =>
@@ -2917,19 +2917,19 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
             )
           }
           placeholder='redacted_thinking'
-          className='h-8 text-xs'
+          className='h-8 text-[12px]'
         />
       </div>
 
       {draft.simpleMode ? (
-        <p className='text-muted-foreground mt-2 text-xs'>
+        <p className='text-[#8A93A4] mt-2 text-[12px]'>
           {t('Simple mode: prune objects by type, e.g. redacted_thinking.')}
         </p>
       ) : (
         <>
           <div className='mt-3 grid gap-3 sm:grid-cols-2'>
             <div className='space-y-1'>
-              <label className='text-xs font-medium'>{t('Logic')}</label>
+              <label className='text-[12px] font-medium'>{t('Logic')}</label>
               <Select
                 items={[
                   { value: 'AND', label: t('All Must Match (AND)') },
@@ -2943,7 +2943,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
                   )
                 }
               >
-                <SelectTrigger className='h-8 text-xs'>
+                <SelectTrigger className='h-8 text-[12px]'>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent alignItemWithTrigger={false}>
@@ -2957,7 +2957,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
               </Select>
             </div>
             <div className='space-y-1'>
-              <label className='text-xs font-medium'>
+              <label className='text-[12px] font-medium'>
                 {t('Recursion Strategy')}
               </label>
               <div className='flex gap-1'>
@@ -2965,7 +2965,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
                   type='button'
                   variant={draft.recursive ? 'default' : 'outline'}
                   size='sm'
-                  className='h-8 text-xs'
+                  className='h-8 text-[12px]'
                   onClick={() =>
                     pruneObjectsEditorProps.updateDraft(
                       pruneObjectsEditorProps.operationId,
@@ -2979,7 +2979,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
                   type='button'
                   variant={draft.recursive ? 'outline' : 'default'}
                   size='sm'
-                  className='h-8 text-xs'
+                  className='h-8 text-[12px]'
                   onClick={() =>
                     pruneObjectsEditorProps.updateDraft(
                       pruneObjectsEditorProps.operationId,
@@ -2993,16 +2993,16 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
             </div>
           </div>
 
-          <div className='bg-muted/30 mt-3 rounded-md border p-2'>
+          <div className='bg-[#F7F8FA]/60 mt-3 rounded-md border p-2'>
             <div className='mb-2 flex items-center justify-between'>
-              <span className='text-xs font-medium'>
+              <span className='text-[12px] font-medium'>
                 {t('Additional Conditions')}
               </span>
               <Button
                 type='button'
                 variant='outline'
                 size='sm'
-                className='h-7 text-xs'
+                className='h-7 text-[12px]'
                 onClick={() =>
                   pruneObjectsEditorProps.addRule(
                     pruneObjectsEditorProps.operationId
@@ -3014,7 +3014,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
               </Button>
             </div>
             {draft.rules.length === 0 ? (
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t(
                   'Without additional conditions, only the type above is used for pruning.'
                 )}
@@ -3061,7 +3061,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
                             )
                           }
                           placeholder='type'
-                          className='h-7 text-xs'
+                          className='h-7 text-[12px]'
                         />
                       </div>
                       <div className='space-y-0.5'>
@@ -3085,7 +3085,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
                             )
                           }
                         >
-                          <SelectTrigger className='h-7 text-xs'>
+                          <SelectTrigger className='h-7 text-[12px]'>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent alignItemWithTrigger={false}>
@@ -3113,7 +3113,7 @@ function PruneObjectsEditor(pruneObjectsEditorProps: PruneObjectsEditorProps) {
                             )
                           }
                           placeholder='redacted_thinking'
-                          className='h-7 text-xs'
+                          className='h-7 text-[12px]'
                         />
                       </div>
                     </div>
@@ -3174,7 +3174,7 @@ function SyncFieldsEditor(syncFieldsEditorProps: SyncFieldsEditorProps) {
   const { t } = useTranslation()
   return (
     <div className='space-y-3'>
-      <label className='text-xs font-medium'>{t('Sync Endpoints')}</label>
+      <label className='text-[12px] font-medium'>{t('Sync Endpoints')}</label>
       <div className='grid gap-3 sm:grid-cols-2'>
         <div className='space-y-1.5'>
           <label className='text-[10px] font-medium'>
@@ -3202,7 +3202,7 @@ function SyncFieldsEditor(syncFieldsEditorProps: SyncFieldsEditorProps) {
                 )
               }
             >
-              <SelectTrigger className='h-8 w-[110px] text-xs'>
+              <SelectTrigger className='h-8 w-[110px] text-[12px]'>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent alignItemWithTrigger={false}>
@@ -3229,7 +3229,7 @@ function SyncFieldsEditor(syncFieldsEditorProps: SyncFieldsEditorProps) {
                 )
               }
               placeholder='session_id'
-              className='h-8 text-xs'
+              className='h-8 text-[12px]'
             />
           </div>
         </div>
@@ -3259,7 +3259,7 @@ function SyncFieldsEditor(syncFieldsEditorProps: SyncFieldsEditorProps) {
                 )
               }
             >
-              <SelectTrigger className='h-8 w-[110px] text-xs'>
+              <SelectTrigger className='h-8 w-[110px] text-[12px]'>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent alignItemWithTrigger={false}>
@@ -3286,7 +3286,7 @@ function SyncFieldsEditor(syncFieldsEditorProps: SyncFieldsEditorProps) {
                 )
               }
               placeholder='prompt_cache_key'
-              className='h-8 text-xs'
+              className='h-8 text-[12px]'
             />
           </div>
         </div>

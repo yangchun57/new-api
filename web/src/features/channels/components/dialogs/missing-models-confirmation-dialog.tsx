@@ -69,14 +69,14 @@ export function MissingModelsConfirmationDialog({
             {t('Models not in list, may fail to invoke')}
           </AlertDialogTitle>
           <AlertDialogDescription
-            render={<div className='space-y-3 text-sm' />}
+            render={<div className='space-y-3 text-[13px] text-[#5A6478]' />}
           >
             <div>
               {t(
                 'The following models in the model redirect have not been added to the "Models" list and may fail during invocation due to missing available models:'
               )}
             </div>
-            <div className='rounded-md bg-red-50 p-2 font-mono text-xs break-all text-red-600 dark:bg-red-950/50 dark:text-red-400'>
+            <div className='rounded-md bg-red-50 p-2 font-mono text-[12px] break-all text-red-600'>
               {missingModels.join(', ')}
             </div>
             <div>

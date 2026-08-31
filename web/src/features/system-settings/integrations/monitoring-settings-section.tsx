@@ -197,6 +197,7 @@ export function MonitoringSettingsSection({
                     type='number'
                     min={0}
                     step={1}
+                    className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                     value={field.value}
                     onChange={(event) => field.onChange(event.target.value)}
                   />
@@ -210,8 +211,8 @@ export function MonitoringSettingsSection({
           />
 
           <div>
-            <h4 className='font-medium'>{t('Model performance metrics')}</h4>
-            <p className='text-muted-foreground mt-1 text-xs'>
+            <h4 className='text-[13px] font-medium text-[#0A0E1A]'>{t('Model performance metrics')}</h4>
+            <p className='mt-1 text-[12px] text-[#8A93A4]'>
               {t(
                 'Collect relay latency and success-rate metrics for the model square.'
               )}
@@ -249,6 +250,7 @@ export function MonitoringSettingsSection({
                       type='number'
                       min={1}
                       step={1}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       {...safeNumberFieldProps(field)}
                       disabled={!perfMetricsEnabled}
                     />
@@ -301,6 +303,7 @@ export function MonitoringSettingsSection({
                       type='number'
                       min={0}
                       step={1}
+                      className='font-mono text-[12px] bg-[#F7F8FA] tabular-nums'
                       {...safeNumberFieldProps(field)}
                       disabled={!perfMetricsEnabled}
                     />

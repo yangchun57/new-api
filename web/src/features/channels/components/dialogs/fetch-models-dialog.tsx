@@ -288,7 +288,7 @@ export function FetchModelsDialog({
 
     return (
       <Collapsible key={categoryName} defaultOpen>
-        <CollapsibleTrigger className='hover:bg-muted/50 flex w-full items-center justify-between rounded-lg border p-3'>
+        <CollapsibleTrigger className='hover:bg-[#F0F2F6] flex w-full items-center justify-between rounded-xl border p-3'>
           <div className='flex items-center gap-2'>
             <ChevronDown className='h-4 w-4' />
             <span className='font-medium'>
@@ -296,7 +296,7 @@ export function FetchModelsDialog({
             </span>
           </div>
           <div className='flex items-center gap-2'>
-            <span className='text-muted-foreground text-sm'>
+            <span className='text-[#8A93A4] text-[12px] font-medium'>
               {categoryModels.filter((m) => selectedModels.includes(m)).length}{' '}
               / {categoryModels.length} selected
             </span>
@@ -320,7 +320,7 @@ export function FetchModelsDialog({
                 />
                 <Label
                   htmlFor={model}
-                  className='flex cursor-pointer items-center gap-1.5 text-sm font-normal'
+                  className='text-[#0A0E1A] flex cursor-pointer items-center gap-1.5 text-[13px] font-normal'
                 >
                   <span>{model}</span>
                   {redirectOnlySet.has(normalizeModelName(model)) && (
@@ -372,19 +372,19 @@ export function FetchModelsDialog({
   let dialogBody: ReactNode
   if (!activeChannel && !customFetcher) {
     dialogBody = (
-      <div className='text-muted-foreground py-8 text-center'>
+      <div className='text-[#8A93A4] py-8 text-center'>
         {t('No channel selected')}
       </div>
     )
   } else if (isFetching) {
     dialogBody = (
       <div className='flex items-center justify-center py-12'>
-        <Loader2 className='text-muted-foreground h-8 w-8 animate-spin' />
+        <Loader2 className='text-[#8A93A4] h-8 w-8 animate-spin' />
       </div>
     )
   } else if (fetchedModels.length === 0 && removedModels.length === 0) {
     dialogBody = (
-      <div className='text-muted-foreground py-8 text-center'>
+      <div className='text-[#8A93A4] py-8 text-center'>
         <p>{t('No models fetched yet.')}</p>
         <Button
           className='mt-4'
@@ -400,7 +400,7 @@ export function FetchModelsDialog({
       <div className='space-y-4'>
         {/* Search Bar */}
         <div className='relative'>
-          <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+          <Search className='text-[#8A93A4] absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
           <Input
             placeholder={t('Search models...')}
             value={searchKeyword}
@@ -460,7 +460,7 @@ export function FetchModelsDialog({
               value='removed'
               className='max-h-96 space-y-2 overflow-y-auto'
             >
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t(
                   'These models are still in your selection but were not returned by the upstream listing. Entries that are only model_mapping source aliases are omitted. Toggle to adjust before saving.'
                 )}
@@ -471,7 +471,7 @@ export function FetchModelsDialog({
         </Tabs>
 
         {/* Selection Summary */}
-        <div className='bg-muted/50 rounded-lg border p-3 text-sm'>
+        <div className='bg-[#F7F8FA]/70 rounded-xl border p-3 text-[13px] text-[#5A6478]'>
           {t('{{n}} model(s) selected', { n: selectedModels.length })}
         </div>
       </div>

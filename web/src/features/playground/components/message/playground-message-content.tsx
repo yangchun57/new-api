@@ -88,13 +88,21 @@ export function PlaygroundMessageContent({
     <div
       className={cn(
         'flex w-full min-w-0 flex-col',
+        '[&_.group\/code-block]:rounded-xl [&_.group\/code-block]:border-[#0A0E1A] [&_.group\/code-block]:bg-[#0A0E1A] [&_.group\/code-block]:text-[#E8EBF1] [&_.group\/code-block]:shadow-none',
+        '[&_.group\/code-block]:[--foreground:#E8EBF1] [&_.group\/code-block]:[--muted-foreground:#8A93A4]',
+        '[&_.group\/code-block>div:first-child]:border-[#E5E8EE]/20 [&_.group\/code-block>div:first-child]:bg-[#0A0E1A]/60 [&_.group\/code-block>div:first-child]:text-[#8A93A4]',
+        '[&_[class*="group/reasoning-content"]]:rounded-xl [&_[class*="group/reasoning-content"]]:border [&_[class*="group/reasoning-content"]]:border-[#E5E8EE] [&_[class*="group/reasoning-content"]]:bg-[#F7F8FA]',
+        '[&_[class*="group/reasoning-content"]]:border-l-0 [&_[class*="group/reasoning-content"]]:ml-0 [&_[class*="group/reasoning-content"]]:mt-2 [&_[class*="group/reasoning-content"]]:p-3 [&_[class*="group/reasoning-content"]]:pl-3',
+        '[&_[class*="group/reasoning-content"]]:text-[#8A93A4] [&_[class*="group/reasoning-content"]]:text-[12px] [&_[class*="group/reasoning-content"]]:font-mono [&_[class*="group/reasoning-content"]]:leading-relaxed',
+        '[&_[data-slot="collapsible-trigger"]]:text-[#8A93A4] [&_[data-slot="collapsible-trigger"]]:hover:text-[#0A0E1A] [&_[data-slot="collapsible-trigger"]]:text-[12px]',
+        '[&_.not-prose.text-primary]:text-[#8A93A4] [&_.not-prose.text-primary_a]:text-[#2E4BFF] [&_.not-prose.text-primary_a:hover]:text-[#2E4BFF]/80',
         getMessageAlignmentClass(alignment)
       )}
     >
       {hasSources && (
-        <Sources>
+        <Sources className='text-[#8A93A4] text-[12px] [&_p]:text-[#8A93A4] [&_p]:text-[12px] [&_a]:text-[#2E4BFF] [&_a:hover]:text-[#2E4BFF]/80 [&_svg]:text-[#8A93A4]'>
           <SourcesTrigger count={sources.length} />
-          <SourcesContent>
+          <SourcesContent className='border-[#E5E8EE]'>
             {sources.map((source) => (
               <Source
                 href={source.href}
@@ -118,9 +126,9 @@ export function PlaygroundMessageContent({
       )}
 
       {showLoader && (
-        <div className='flex items-center gap-2 py-2'>
+        <div className='flex items-center gap-2 py-3 text-[#8A93A4]'>
           <Loader />
-          <Shimmer className='text-sm' duration={1}>
+          <Shimmer className='text-[13px] text-[#8A93A4]' duration={1}>
             {t('Responding...')}
           </Shimmer>
         </div>

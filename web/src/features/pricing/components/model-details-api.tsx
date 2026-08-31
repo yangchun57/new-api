@@ -32,11 +32,7 @@ import {
   CodeBlock,
   CodeBlockCopyButton,
 } from '@/components/ai-elements/code-block'
-import {
-  StaticDataTable,
-  staticDataTableClassNames as tableStyles,
-} from '@/components/data-table'
-import { Badge } from '@/components/ui/badge'
+import { StaticDataTable } from '@/components/data-table'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useStatus } from '@/hooks/use-status'
 
@@ -48,15 +44,6 @@ import {
 } from '../lib/mock-stats'
 import { replaceModelInPath } from '../lib/model-helpers'
 import type { PricingModel } from '../types'
-
-// ---------------------------------------------------------------------------
-// Code-sample registry
-// ---------------------------------------------------------------------------
-//
-// Each sample is keyed by language and endpoint type. The endpoint type comes
-// from the model's `supported_endpoint_types`; we render samples only for the
-// types the model actually supports. This keeps copy-pasted code accurate and
-// provider-shaped (OpenAI vs Anthropic vs Gemini, etc.).
 
 type Lang = 'curl' | 'python' | 'typescript' | 'javascript'
 
@@ -209,7 +196,7 @@ function buildAnthropicSample(lang: Lang, ctx: SampleContext): string {
       '',
       `const message = await client.messages.create({`,
       `  model: '${ctx.modelName}',`,
-      `  max_tokens: 1024,`,
+      `  max_tokens=1024,`,
       `  messages: [{ role: 'user', content: '${userMessage}' }],`,
       `})`,
       '',
@@ -436,10 +423,6 @@ function buildSample(
   return buildChatSample(lang, ctx)
 }
 
-// ---------------------------------------------------------------------------
-// Code samples section
-// ---------------------------------------------------------------------------
-
 function CodeSamplesSection(props: {
   model: PricingModel
   endpointMap: Record<string, { path?: string; method?: string }>
@@ -502,12 +485,12 @@ function CodeSamplesSection(props: {
       <div className='flex flex-wrap items-center gap-2'>
         {endpoints.length > 1 && (
           <Tabs value={endpointType} onValueChange={setEndpointType}>
-            <TabsList className='bg-muted/40 h-8 p-0.5'>
+            <TabsList className='inline-flex h-8 gap-0.5 rounded-full bg-[#F7F8FA] p-0.5'>
               {endpoints.map((ep) => (
                 <TabsTrigger
                   key={ep.type}
                   value={ep.type}
-                  className='h-7 px-2.5 text-xs'
+                  className='h-7 rounded-full px-2.5 pl-font-display text-[11px] font-semibold data-[state=active]:bg-[#0A0E1A] data-[state=active]:text-white data-[state=active]:shadow-sm'
                 >
                   {ep.type}
                 </TabsTrigger>
@@ -521,9 +504,13 @@ function CodeSamplesSection(props: {
           onValueChange={(v) => setLang(v as Lang)}
           className='ml-auto'
         >
-          <TabsList className='bg-muted/40 h-8 p-0.5'>
+          <TabsList className='inline-flex h-8 gap-0.5 rounded-full bg-[#F7F8FA] p-0.5'>
             {(Object.keys(LANG_LABELS) as Lang[]).map((l) => (
-              <TabsTrigger key={l} value={l} className='h-7 px-2.5 text-xs'>
+              <TabsTrigger
+                key={l}
+                value={l}
+                className='h-7 rounded-full px-2.5 pl-font-display text-[11px] font-semibold data-[state=active]:bg-[#0A0E1A] data-[state=active]:text-white data-[state=active]:shadow-sm'
+              >
                 {LANG_LABELS[l]}
               </TabsTrigger>
             ))}
@@ -532,14 +519,18 @@ function CodeSamplesSection(props: {
       </div>
 
       <div className='mt-3'>
-        <CodeBlock code={code} language={LANG_HIGHLIGHT[lang]}>
+        <CodeBlock
+          code={code}
+          language={LANG_HIGHLIGHT[lang]}
+          className='!rounded-2xl !border-[#E5E8EE] !bg-[#FAFBFC] !shadow-sm'
+        >
           <CodeBlockCopyButton />
         </CodeBlock>
       </div>
 
-      <p className='text-muted-foreground mt-2 text-xs'>
+      <p className='mt-2 text-[12px] text-[#8A93A4]'>
         {t('Replace')}{' '}
-        <code className='bg-muted rounded px-1 py-0.5 font-mono text-[11px]'>
+        <code className='rounded-[6px] bg-[#F0F2F6] px-1.5 py-0.5 font-mono text-[11px] text-[#0A0E1A]'>
           {'<YOUR_API_KEY>'}
         </code>{' '}
         {t('with the API key from your token settings.')}
@@ -548,9 +539,11 @@ function CodeSamplesSection(props: {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Supported parameters table
-// ---------------------------------------------------------------------------
+const plTh = 'pl-font-mono py-3 text-[9px] text-[#8A93A4]'
+const plCell = 'py-3 text-[13px] text-[#5A6478]'
+const plCellCode = 'py-3 font-mono text-[13px] text-[#0A0E1A]'
+const plCellNum =
+  'py-3 text-right font-mono text-[13px] font-semibold tabular-nums text-[#0A0E1A]'
 
 function SupportedParametersSection(props: { model: PricingModel }) {
   const { t } = useTranslation()
@@ -565,27 +558,27 @@ function SupportedParametersSection(props: { model: PricingModel }) {
     <section>
       <SectionTitle icon={Sigma}>{t('Supported parameters')}</SectionTitle>
       <StaticDataTable
-        className={tableStyles.sectionContainer}
-        headerRowClassName={tableStyles.mutedHeaderRow}
+        className='overflow-hidden rounded-2xl border border-[#E5E8EE] bg-white'
+        headerRowClassName='bg-[#FAFBFC] hover:bg-transparent'
+        cellClassName='border-t border-[#F0F2F6]'
         data={params}
         getRowKey={(param) => param.name}
-        getRowClassName={() => 'hover:bg-muted/20'}
+        getRowClassName={() => 'hover:bg-[#F7F8FA]/50'}
         columns={[
           {
             id: 'parameter',
             header: t('Parameter'),
-            className: 'h-9 w-44',
-            cellClassName: tableStyles.topCell,
+            className: plTh + ' w-44',
+            cellClassName: plCell,
             cell: (p) => (
               <div className='flex items-center gap-1.5'>
-                <code className='font-mono text-sm font-medium'>{p.name}</code>
+                <code className='font-mono text-[13px] font-semibold text-[#0A0E1A]'>
+                  {p.name}
+                </code>
                 {p.required && (
-                  <Badge
-                    variant='outline'
-                    className='h-6 border-rose-500/40 px-2 text-sm text-rose-600 dark:text-rose-400'
-                  >
+                  <span className='inline-flex items-center rounded-full border border-rose-200 bg-rose-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-rose-600'>
                     {t('required')}
-                  </Badge>
+                  </span>
                 )}
               </div>
             ),
@@ -593,29 +586,26 @@ function SupportedParametersSection(props: { model: PricingModel }) {
           {
             id: 'type',
             header: t('Type'),
-            className: 'h-9 w-24',
-            cellClassName: tableStyles.topCell,
+            className: plTh + ' w-24',
+            cellClassName: plCell,
             cell: (p) => (
-              <Badge
-                variant='secondary'
-                className='h-7 rounded-full px-2.5 font-mono text-sm font-normal'
-              >
+              <span className='inline-flex items-center rounded-full border border-[#EEF0F4] bg-[#FAFBFC] px-2 py-0.5 font-mono text-[11px] text-[#5A6478]'>
                 {p.type}
-              </Badge>
+              </span>
             ),
           },
           {
             id: 'range',
             header: t('Default / range'),
-            className: 'h-9 w-32',
-            cellClassName: tableStyles.topCell,
+            className: plTh + ' w-40',
+            cellClassName: plCell,
             cell: (p) => <ParamRangeCell param={p} />,
           },
           {
             id: 'description',
             header: t('Description'),
-            className: 'h-9',
-            cellClassName: tableStyles.topMutedCell,
+            className: plTh,
+            cellClassName: plCell,
             cell: (p) => t(p.descriptionKey),
           },
         ]}
@@ -629,28 +619,28 @@ function ParamRangeCell(props: { param: SupportedParameter }) {
   if (defaultValue !== undefined) {
     return (
       <div className='flex flex-wrap items-center gap-1'>
-        <span className='text-muted-foreground text-sm'>=</span>
-        <code className='bg-muted rounded px-1.5 py-0.5 font-mono text-sm'>
+        <span className='text-[13px] text-[#8A93A4]'>=</span>
+        <code className='rounded-[6px] bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[12px] text-[#0A0E1A]'>
           {String(defaultValue)}
         </code>
         {range && (
-          <span className='text-muted-foreground text-sm'>{range}</span>
+          <span className='text-[12px] text-[#8A93A4]'>{range}</span>
         )}
       </div>
     )
   }
   if (range) {
     return (
-      <span className='text-muted-foreground font-mono text-sm'>{range}</span>
+      <span className='font-mono text-[12px] text-[#8A93A4]'>{range}</span>
     )
   }
   if (enumValues && enumValues.length > 0) {
     return (
-      <div className='flex flex-wrap gap-0.5'>
+      <div className='flex flex-wrap gap-1'>
         {enumValues.map((v) => (
           <code
             key={v}
-            className='bg-muted text-muted-foreground rounded px-1.5 py-0.5 font-mono text-sm'
+            className='rounded-[6px] bg-[#F7F8FA] px-1.5 py-0.5 font-mono text-[11px] text-[#5A6478]'
           >
             {v}
           </code>
@@ -658,12 +648,8 @@ function ParamRangeCell(props: { param: SupportedParameter }) {
       </div>
     )
   }
-  return <span className='text-muted-foreground/60 text-sm'>—</span>
+  return <span className='text-[13px] text-[#B8BFCC]'>—</span>
 }
-
-// ---------------------------------------------------------------------------
-// Rate-limits table
-// ---------------------------------------------------------------------------
 
 function RateLimitsSection(props: { model: PricingModel }) {
   const { t } = useTranslation()
@@ -675,43 +661,44 @@ function RateLimitsSection(props: { model: PricingModel }) {
     <section>
       <SectionTitle icon={Gauge}>{t('Rate limits')}</SectionTitle>
       <StaticDataTable
-        className={tableStyles.sectionContainer}
-        headerRowClassName={tableStyles.mutedHeaderRow}
+        className='overflow-hidden rounded-2xl border border-[#E5E8EE] bg-white'
+        headerRowClassName='bg-[#FAFBFC] hover:bg-transparent'
+        cellClassName='border-t border-[#F0F2F6]'
         data={limits}
         getRowKey={(limit) => limit.group}
-        getRowClassName={() => 'hover:bg-muted/20'}
+        getRowClassName={() => 'hover:bg-[#F7F8FA]/50'}
         columns={[
           {
             id: 'group',
             header: t('Group'),
-            className: 'h-9',
-            cellClassName: 'py-2 font-mono',
+            className: plTh,
+            cellClassName: plCellCode,
             cell: (limit) => limit.group,
           },
           {
             id: 'rpm',
             header: 'RPM',
-            className: 'h-9 text-right',
-            cellClassName: tableStyles.topNumericCell,
+            className: plTh + ' text-right',
+            cellClassName: plCellNum,
             cell: (limit) => formatRateLimit(limit.rpm),
           },
           {
             id: 'tpm',
             header: 'TPM',
-            className: 'h-9 text-right',
-            cellClassName: tableStyles.topNumericCell,
+            className: plTh + ' text-right',
+            cellClassName: plCellNum,
             cell: (limit) => formatRateLimit(limit.tpm),
           },
           {
             id: 'rpd',
             header: 'RPD',
-            className: 'h-9 text-right',
-            cellClassName: tableStyles.topNumericCell,
+            className: plTh + ' text-right',
+            cellClassName: plCellNum,
             cell: (limit) => formatRateLimit(limit.rpd),
           },
         ]}
       />
-      <p className='text-muted-foreground mt-2 text-[11px] leading-relaxed'>
+      <p className='mt-2 pl-font-mono text-[10px] leading-relaxed text-[#B8BFCC]'>
         {t(
           'RPM = requests per minute, TPM = tokens per minute, RPD = requests per day. Limits apply per token group.'
         )}
@@ -720,30 +707,26 @@ function RateLimitsSection(props: { model: PricingModel }) {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Authentication preview
-// ---------------------------------------------------------------------------
-
 function AuthSection() {
   const { t } = useTranslation()
   return (
     <section>
       <SectionTitle icon={KeyRound}>{t('Authentication')}</SectionTitle>
-      <div className='border-border/60 bg-muted/20 flex items-start gap-2 rounded-lg border p-3'>
-        <ChevronRight className='text-muted-foreground mt-0.5 size-3.5 shrink-0' />
-        <div className='space-y-1.5 text-xs leading-relaxed'>
+      <div className='flex items-start gap-3 rounded-2xl border border-[#E5E8EE] bg-[#FAFBFC] p-4'>
+        <ChevronRight className='mt-0.5 size-3.5 shrink-0 text-[#8A93A4]' />
+        <div className='space-y-2 text-[13px] leading-relaxed text-[#5A6478]'>
           <p>
             {t('All requests must include')}{' '}
-            <code className='bg-muted rounded px-1 py-0.5 font-mono text-[11px]'>
+            <code className='rounded-[6px] bg-white px-1.5 py-0.5 font-mono text-[11px] text-[#0A0E1A] ring-1 ring-[#E5E8EE]'>
               Authorization: Bearer &lt;TOKEN&gt;
             </code>{' '}
             {t('header. Anthropic-formatted endpoints accept the')}{' '}
-            <code className='bg-muted rounded px-1 py-0.5 font-mono text-[11px]'>
+            <code className='rounded-[6px] bg-white px-1.5 py-0.5 font-mono text-[11px] text-[#0A0E1A] ring-1 ring-[#E5E8EE]'>
               x-api-key
             </code>{' '}
             {t('header instead.')}
           </p>
-          <p className='text-muted-foreground'>
+          <p className='text-[#8A93A4]'>
             {t(
               'Generate tokens from the Tokens page; you can scope them to specific models, groups, IPs, and rate-limits.'
             )}
@@ -753,10 +736,6 @@ function AuthSection() {
     </section>
   )
 }
-
-// ---------------------------------------------------------------------------
-// Composite API tab
-// ---------------------------------------------------------------------------
 
 export function ModelDetailsApi(props: {
   model: PricingModel
@@ -772,22 +751,19 @@ export function ModelDetailsApi(props: {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Local UI helpers
-// ---------------------------------------------------------------------------
-
 function SectionTitle(props: {
   children: React.ReactNode
   icon: React.ComponentType<{ className?: string }>
 }) {
   const Icon = props.icon
   return (
-    <h3 className='text-foreground mb-3 flex items-center gap-1.5 text-sm font-semibold'>
-      <Icon className='text-muted-foreground/70 size-3.5' />
+    <h3 className='mb-3 flex items-center gap-2 text-[13px] font-semibold text-[#0A0E1A]'>
+      <span className='inline-flex size-6 items-center justify-center rounded-full bg-[#F7F8FA]'>
+        <Icon className='size-3 text-[#5A6478]' />
+      </span>
       {props.children}
     </h3>
   )
 }
 
-// Re-export so the parent can keep its own SectionTitle if it wants:
 export { Zap as ApiTabIcon }

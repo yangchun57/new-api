@@ -26,14 +26,6 @@ import { toast } from 'sonner'
 import { ErrorState } from '@/components/error-state'
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { LoadingState } from '@/components/loading-state'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { Form } from '@/components/ui/form'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useSystemConfig } from '@/hooks/use-system-config'
@@ -72,6 +64,18 @@ const DEFAULT_FORM_VALUES: SetupFormValues = {
   confirmPassword: '',
   usageMode: 'external',
 }
+
+const stepCardCls =
+  'rounded-xl border p-3 transition-colors'
+const stepCardActiveCls =
+  'border-[#0A0E1A] bg-[#0A0E1A]/[0.03] ring-2 ring-[#0A0E1A]/10'
+const stepCardDoneCls = 'border-[#0A0E1A]/20 bg-[#F7F8FA]'
+const stepCardIdleCls = 'border-[#E5E8EE] bg-white'
+const stepBadgeBase =
+  'flex h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[11px] font-semibold transition-colors'
+const stepBadgeActive = 'border-[#0A0E1A] bg-[#0A0E1A] text-white'
+const stepBadgeDone = 'border-[#0A0E1A]/40 bg-[#0A0E1A]/10 text-[#0A0E1A]'
+const stepBadgeIdle = 'border-[#B8BFCC] bg-white text-[#8A93A4]'
 
 export function SetupWizard() {
   const { t } = useTranslation()
@@ -140,7 +144,6 @@ export function SetupWizard() {
     setSetupStatus(status)
     setCurrentStep(0)
 
-    // Pre-fill usage mode if backend echoes it
     if (status.SelfUseModeEnabled) {
       form.setValue('usageMode', 'self', {
         shouldDirty: false,
@@ -166,7 +169,6 @@ export function SetupWizard() {
   useEffect(() => {
     if (!setupStatus) return
 
-    // Reset admin fields when backend reports they are already initialized
     if (setupStatus.root_init) {
       form.setValue('username', '', {
         shouldDirty: false,
@@ -279,11 +281,11 @@ export function SetupWizard() {
   }
 
   return (
-    <div className='bg-muted/40 relative min-h-svh py-10'>
+    <div className='relative min-h-svh bg-white py-10 sm:py-16'>
       <div className='absolute top-4 right-4 sm:top-6 sm:right-6'>
         <LanguageSwitcher />
       </div>
-      <div className='container mx-auto flex max-w-5xl flex-col gap-8 px-4 sm:px-6'>
+      <div className='mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 sm:px-6'>
         <div className='flex flex-col items-center gap-3'>
           <div className='relative h-12 w-12'>
             {systemConfigLoading ? (
@@ -292,35 +294,35 @@ export function SetupWizard() {
               <img
                 src={logo}
                 alt={t('System logo')}
-                className='h-12 w-12 rounded-full object-cover shadow-sm'
+                className='h-12 w-12 rounded-full object-cover shadow-sm ring-1 ring-[#E5E8EE]'
               />
             )}
           </div>
           {systemConfigLoading ? (
             <Skeleton className='h-7 w-40' />
           ) : (
-            <h1 className='text-2xl font-semibold tracking-tight'>
+            <h1 className='text-[26px] font-semibold leading-tight tracking-tight text-[#0A0E1A]'>
               {t('Initialize')} {systemName}
             </h1>
           )}
-          <p className='text-muted-foreground text-center text-sm sm:text-base'>
+          <p className='max-w-md text-center text-[14px] leading-relaxed text-[#5A6478]'>
             {t(
               'Follow the guided steps to prepare your workspace before the first login.'
             )}
           </p>
         </div>
 
-        <Card className='shadow-lg'>
-          <CardHeader className='space-y-2'>
-            <CardTitle className='text-xl font-semibold'>
+        <div className='rounded-2xl border border-[#E5E8EE] bg-white shadow-sm'>
+          <div className='border-b border-[#E5E8EE] px-6 py-5 sm:px-8'>
+            <h2 className='text-[18px] font-semibold tracking-tight text-[#0A0E1A]'>
               {t('System setup wizard')}
-            </CardTitle>
-            <CardDescription>
+            </h2>
+            <p className='mt-1 text-[13px] leading-relaxed text-[#5A6478]'>
               {t('Complete these steps to finish the initial installation.')}
-            </CardDescription>
-          </CardHeader>
+            </p>
+          </div>
 
-          <CardContent className='space-y-6'>
+          <div className='px-6 py-6 sm:px-8'>
             <ol className='grid gap-3 sm:grid-cols-4'>
               {STEPS.map((step, index) => {
                 const isActive = currentStep === index
@@ -329,32 +331,32 @@ export function SetupWizard() {
                   <li
                     key={step.titleKey}
                     className={cn(
-                      'rounded-xl border p-3',
+                      stepCardCls,
                       isActive
-                        ? 'border-primary ring-primary/20 ring-2'
+                        ? stepCardActiveCls
                         : isCompleted
-                          ? 'border-primary/40 bg-primary/5'
-                          : 'border-muted bg-card'
+                          ? stepCardDoneCls
+                          : stepCardIdleCls
                     )}
                   >
                     <div className='flex items-start gap-3'>
                       <span
                         className={cn(
-                          'flex size-6 items-center justify-center rounded-md border text-xs font-semibold',
+                          stepBadgeBase,
                           isActive
-                            ? 'border-primary bg-primary text-primary-foreground'
+                            ? stepBadgeActive
                             : isCompleted
-                              ? 'border-primary bg-primary text-primary-foreground'
-                              : 'border-muted-foreground/40 text-muted-foreground'
+                              ? stepBadgeDone
+                              : stepBadgeIdle
                         )}
                       >
                         {index + 1}
                       </span>
-                      <div className='space-y-1'>
-                        <p className='text-sm font-semibold'>
+                      <div className='space-y-0.5 min-w-0'>
+                        <p className='text-[13px] font-semibold text-[#0A0E1A]'>
                           {t(step.titleKey)}
                         </p>
-                        <p className='text-muted-foreground text-xs'>
+                        <p className='text-[11.5px] leading-relaxed text-[#8A93A4]'>
                           {t(step.descriptionKey)}
                         </p>
                       </div>
@@ -364,27 +366,29 @@ export function SetupWizard() {
               })}
             </ol>
 
-            {isLoading ? (
-              <LoadingState message={t('Loading setup status…')} />
-            ) : isError ? (
-              <ErrorState
-                title={t('We could not load the setup status.')}
-                onRetry={() => refetch()}
-              />
-            ) : (
-              <Form {...form}>
-                <form
-                  className='space-y-6'
-                  onSubmit={(event) => event.preventDefault()}
-                >
-                  {currentStepComponent}
-                </form>
-              </Form>
-            )}
-          </CardContent>
+            <div className='mt-8'>
+              {isLoading ? (
+                <LoadingState message={t('Loading setup status…')} />
+              ) : isError ? (
+                <ErrorState
+                  title={t('We could not load the setup status.')}
+                  onRetry={() => refetch()}
+                />
+              ) : (
+                <Form {...form}>
+                  <form
+                    className='space-y-0'
+                    onSubmit={(event) => event.preventDefault()}
+                  >
+                    {currentStepComponent}
+                  </form>
+                </Form>
+              )}
+            </div>
+          </div>
 
           {!isLoading && !isError && (
-            <CardFooter className='w-full justify-end border-t'>
+            <div className='flex w-full items-center justify-end border-t border-[#E5E8EE] bg-[#FAFBFC] px-6 py-4 sm:px-8'>
               <StepNavigation
                 currentStep={currentStep}
                 totalSteps={STEPS.length}
@@ -393,9 +397,9 @@ export function SetupWizard() {
                 onSubmit={handleSubmit}
                 isSubmitting={mutation.isPending}
               />
-            </CardFooter>
+            </div>
           )}
-        </Card>
+        </div>
       </div>
     </div>
   )

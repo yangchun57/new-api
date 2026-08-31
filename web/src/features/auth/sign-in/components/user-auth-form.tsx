@@ -59,6 +59,14 @@ import { getServerErrorMessageKey } from '@/lib/server-error-message'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/stores/auth-store'
 
+const inputCls =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white px-3.5 text-[14px] text-[#0A0E1A] shadow-sm placeholder:text-[#B8BFCC] focus-visible:border-[#0A0E1A] focus-visible:ring-[#0A0E1A]/15 aria-invalid:border-rose-400 aria-invalid:ring-rose-400/20'
+const labelCls = 'text-[13px] font-medium text-[#0A0E1A]'
+const btnPrimary =
+  'h-11 rounded-xl bg-[#0A0E1A] text-[14px] font-medium text-white shadow-sm transition-colors hover:bg-[#0A0E1A]/90 active:bg-[#0A0E1A]'
+const btnOutline =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white text-[14px] font-medium text-[#0A0E1A] shadow-sm transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
+
 export function UserAuthForm({
   className,
   redirectTo,
@@ -106,11 +114,11 @@ export function UserAuthForm({
   const hasWeChatLogin = Boolean(status?.wechat_login)
   const hasOAuthLogin = Boolean(
     status?.github_oauth ||
-    status?.discord_oauth ||
-    status?.oidc_enabled ||
-    status?.linuxdo_oauth ||
-    status?.telegram_oauth ||
-    (status?.custom_oauth_providers?.length ?? 0) > 0
+      status?.discord_oauth ||
+      status?.oidc_enabled ||
+      status?.linuxdo_oauth ||
+      status?.telegram_oauth ||
+      (status?.custom_oauth_providers?.length ?? 0) > 0
   )
   const hasAlternativeLogin =
     passkeyLoginEnabled || hasWeChatLogin || hasOAuthLogin
@@ -314,13 +322,13 @@ export function UserAuthForm({
   const alternativeLoginMethods = (
     <>
       {passkeyLoginEnabled && (
-        <div className='mt-2 space-y-1'>
+        <div className='space-y-1.5'>
           <Button
             type='button'
             variant='outline'
             disabled={passkeyButtonDisabled}
             onClick={handlePasskeyLogin}
-            className='h-11 w-full justify-center gap-2 rounded-lg'
+            className={btnOutline}
           >
             {isPasskeyLoading ? (
               <Loader2 className='h-4 w-4 animate-spin' />
@@ -330,14 +338,13 @@ export function UserAuthForm({
             {t('Sign in with Passkey')}
           </Button>
           {!passkeySupported && (
-            <p className='text-muted-foreground text-xs'>
+            <p className='px-1 text-[12px] leading-relaxed text-[#8A93A4]'>
               {t('Passkey is not supported on this device.')}
             </p>
           )}
         </div>
       )}
 
-      {/* OAuth Providers */}
       <OAuthProviders
         status={status}
         redirectTo={redirectTo}
@@ -359,41 +366,43 @@ export function UserAuthForm({
 
         {passwordLoginEnabled && (
           <>
-            {/* Username Field */}
             <FormField
               control={form.control}
               name='username'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('Username or Email')}</FormLabel>
+                  <FormLabel className={labelCls}>
+                    {t('Username or Email')}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={t('Enter your username or email')}
+                      className={inputCls}
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='text-[12px]' />
                 </FormItem>
               )}
             />
 
-            {/* Password Field */}
             <FormField
               control={form.control}
               name='password'
               render={({ field }) => (
-                <FormItem className='relative'>
-                  <FormLabel>{t('Password')}</FormLabel>
+                <FormItem className='relative pt-1'>
+                  <FormLabel className={labelCls}>{t('Password')}</FormLabel>
                   <FormControl>
                     <PasswordInput
                       placeholder={t('Enter password')}
+                      className={inputCls}
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='text-[12px]' />
                   <Link
                     to='/forgot-password'
-                    className='text-muted-foreground absolute end-0 -top-0.5 z-10 text-sm font-medium hover:opacity-75'
+                    className='absolute end-0 top-0 z-10 text-[12px] font-medium text-[#8A93A4] transition-colors hover:text-[#0A0E1A]'
                   >
                     {t('Forgot password?')}
                   </Link>
@@ -401,19 +410,21 @@ export function UserAuthForm({
               )}
             />
 
-            {/* Submit Button */}
             <Button
               type='submit'
-              className='mt-2 w-full justify-center gap-2'
+              className={cn(btnPrimary, 'mt-1 gap-2')}
               disabled={isLoading || (requiresLegalConsent && !agreedToLegal)}
             >
-              {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
+              {isLoading ? (
+                <Loader2 className='h-4 w-4 animate-spin' />
+              ) : (
+                <LogIn className='h-4 w-4' />
+              )}
               {t('Sign in')}
             </Button>
 
-            {/* Turnstile */}
             {isTurnstileEnabled && (
-              <div className='mt-2'>
+              <div className='flex justify-center'>
                 <Turnstile
                   key={turnstileWidgetKey}
                   siteKey={turnstileSiteKey}
@@ -429,7 +440,6 @@ export function UserAuthForm({
           status={status}
           checked={agreedToLegal}
           onCheckedChange={setAgreedToLegal}
-          className='mt-1'
         />
 
         {!hasAlternativeLogin && alternativeLoginMethods}
@@ -443,10 +453,12 @@ export function UserAuthForm({
           description={t(
             'Scan the QR code to follow the official account and reply with “验证码” to receive your verification code.'
           )}
-          contentClassName='max-w-sm'
-          headerClassName='text-left'
-          contentHeight='auto'
-          bodyClassName='space-y-4'
+          contentClassName='max-w-sm gap-0 overflow-hidden rounded-2xl border-[#E5E8EE] bg-white p-0 shadow-xl ring-0 sm:p-0'
+          headerClassName='px-6 pt-6 pb-0'
+          titleClassName='text-[15px] font-semibold text-[#0A0E1A]'
+          descriptionClassName='text-[13px] leading-relaxed text-[#5A6478]'
+          bodyClassName='space-y-4 px-6 py-5'
+          footerClassName='border-t border-[#E5E8EE] bg-[#FAFBFC] px-6 py-4 sm:justify-end'
           footer={
             <>
               <Button
@@ -454,6 +466,7 @@ export function UserAuthForm({
                 variant='outline'
                 onClick={() => handleWeChatDialogChange(false)}
                 disabled={isWeChatSubmitting}
+                className='h-10 rounded-lg border-[#E5E8EE] bg-white text-[13px] text-[#5A6478] hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
               >
                 {t('Cancel')}
               </Button>
@@ -465,7 +478,7 @@ export function UserAuthForm({
                   !wechatCode.trim() ||
                   (requiresLegalConsent && !agreedToLegal)
                 }
-                className='gap-2'
+                className='h-10 gap-2 rounded-lg bg-[#0A0E1A] text-[13px] text-white hover:bg-[#0A0E1A]/90'
               >
                 {isWeChatSubmitting ? (
                   <Loader2 className='h-4 w-4 animate-spin' />
@@ -480,22 +493,28 @@ export function UserAuthForm({
               <img
                 src={wechatQrCodeUrl}
                 alt={t('WeChat login QR code')}
-                className='h-40 w-40 rounded-md border object-contain'
+                className='h-44 w-44 rounded-xl border border-[#E5E8EE] object-contain p-2'
               />
             </div>
           ) : (
-            <p className='text-muted-foreground text-sm'>
+            <p className='rounded-xl bg-[#FAFBFC] px-4 py-3 text-[13px] text-[#8A93A4]'>
               {t('QR code is not configured. Please contact support.')}
             </p>
           )}
           <div className='grid gap-2'>
-            <Label htmlFor='wechat-code'>{t('Verification code')}</Label>
+            <Label
+              htmlFor='wechat-code'
+              className='text-[13px] font-medium text-[#0A0E1A]'
+            >
+              {t('Verification code')}
+            </Label>
             <Input
               id='wechat-code'
               placeholder={t('Enter the verification code')}
               value={wechatCode}
               onChange={(event) => setWeChatCode(event.target.value)}
               autoComplete='one-time-code'
+              className={inputCls}
             />
           </div>
         </Dialog>

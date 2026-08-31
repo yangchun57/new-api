@@ -91,15 +91,19 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
     copyToClipboard(props.model.model_name || '')
   }
 
+  const handleCardClick = () => {
+    props.onClick()
+  }
+
   let priceSummary: ReactNode
   if (dynamicSummary) {
     if (dynamicSummary.isSpecialExpression) {
       priceSummary = (
         <span className='min-w-0'>
-          <span className='text-amber-700 dark:text-amber-300'>
+          <span className='text-[#B45309]'>
             {t('Special billing expression')}
           </span>
-          <code className='text-muted-foreground/70 mt-0.5 line-clamp-1 block font-mono text-[11px] break-all'>
+          <code className='mt-0.5 line-clamp-1 block font-mono text-[11px] break-all text-[#8A93A4]'>
             {dynamicSummary.rawExpression}
           </code>
         </span>
@@ -110,10 +114,10 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
           {dynamicSummary.primaryEntries.map((entry) => (
             <span
               key={entry.key}
-              className='text-muted-foreground whitespace-nowrap'
+              className='whitespace-nowrap text-[12px] text-[#5A6478]'
             >
               {t(entry.shortLabel)}{' '}
-              <span className='text-foreground font-mono font-semibold'>
+              <span className='font-mono text-[15px] font-semibold tabular-nums text-[#0A0E1A]'>
                 {entry.formatted}
               </span>
             </span>
@@ -122,7 +126,7 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
       )
     } else {
       priceSummary = (
-        <span className='text-muted-foreground text-sm'>
+        <span className='text-[13px] text-[#5A6478]'>
           {t('Dynamic Pricing')}
         </span>
       )
@@ -130,9 +134,9 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
   } else if (isTokenBased) {
     priceSummary = (
       <>
-        <span className='text-muted-foreground whitespace-nowrap'>
+        <span className='whitespace-nowrap text-[12px] text-[#5A6478]'>
           {t('Input')}{' '}
-          <span className='text-foreground font-mono font-semibold'>
+          <span className='font-mono text-[15px] font-semibold tabular-nums text-[#0A0E1A]'>
             {formatPrice(
               props.model,
               'input',
@@ -144,9 +148,9 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
             )}
           </span>
         </span>
-        <span className='text-muted-foreground whitespace-nowrap'>
+        <span className='whitespace-nowrap text-[12px] text-[#5A6478]'>
           {t('Output')}{' '}
-          <span className='text-foreground font-mono font-semibold'>
+          <span className='font-mono text-[15px] font-semibold tabular-nums text-[#0A0E1A]'>
             {formatPrice(
               props.model,
               'output',
@@ -159,9 +163,9 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
           </span>
         </span>
         {hasCachedPrice && (
-          <span className='text-muted-foreground whitespace-nowrap'>
+          <span className='whitespace-nowrap text-[12px] text-[#5A6478]'>
             {t('Cached')}{' '}
-            <span className='text-foreground font-mono font-semibold'>
+            <span className='font-mono text-[15px] font-semibold tabular-nums text-[#0A0E1A]'>
               {formatPrice(
                 props.model,
                 'cache',
@@ -178,8 +182,8 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
     )
   } else {
     priceSummary = (
-      <span className='text-muted-foreground whitespace-nowrap'>
-        <span className='text-foreground font-mono font-semibold'>
+      <span className='whitespace-nowrap text-[12px] text-[#5A6478]'>
+        <span className='font-mono text-[15px] font-semibold tabular-nums text-[#0A0E1A]'>
           {formatRequestPrice(
             props.model,
             showRechargePrice,
@@ -195,44 +199,47 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
 
   return (
     <div
+      onClick={handleCardClick}
       className={cn(
-        'group relative flex flex-col rounded-xl border p-3 transition-colors sm:p-5',
-        'hover:bg-muted/20'
+        'group relative flex cursor-pointer flex-col p-4 sm:p-5',
+        'pl-card pl-card-hover'
       )}
     >
-      {/* Header: icon + name + price + actions */}
-      <div className='flex items-start justify-between gap-2.5 sm:gap-3'>
-        <div className='flex min-w-0 items-start gap-2.5 sm:gap-3'>
-          <div className='bg-muted/40 flex size-9 shrink-0 items-center justify-center rounded-lg sm:size-10 sm:rounded-xl'>
+      <div className='flex items-start justify-between gap-3'>
+        <div className='flex min-w-0 items-start gap-3'>
+          <div className='flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#F7F8FA] sm:size-11'>
             {modelIcon || (
-              <span className='text-muted-foreground text-sm font-bold'>
+              <span className='font-mono text-[14px] font-semibold text-[#5A6478]'>
                 {initial}
               </span>
             )}
           </div>
           <div className='min-w-0'>
-            <h3 className='text-foreground truncate font-mono text-[15px] leading-tight font-bold'>
+            <h3 className='truncate font-mono text-[15px] leading-tight font-semibold tracking-tight text-[#0A0E1A]'>
               {props.model.model_name}
             </h3>
-            <div className='mt-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-sm sm:mt-1 sm:gap-x-3'>
+            <div className='mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5'>
               {priceSummary}
             </div>
           </div>
         </div>
 
-        <div className='flex shrink-0 items-center gap-1.5'>
+        <div className='flex shrink-0 items-center gap-1'>
           <button
             type='button'
-            onClick={props.onClick}
-            className='text-muted-foreground hover:text-foreground hover:bg-muted inline-flex items-center gap-1 rounded-md border px-2 py-1 text-xs transition-colors sm:px-2.5 sm:py-1.5'
+            onClick={(e) => {
+              e.stopPropagation()
+              props.onClick()
+            }}
+            className='pl-cta-primary inline-flex items-center gap-0.5 rounded-full bg-[#0A0E1A] px-3 py-1.5 pl-font-display text-[11px] font-semibold text-white transition-colors'
           >
             {t('Details')}
-            <ChevronRight className='size-3.5' />
+            <ChevronRight className='size-3' />
           </button>
           <button
             type='button'
             onClick={handleCopy}
-            className='text-muted-foreground hover:text-foreground hover:bg-muted rounded-md border p-1.5 transition-colors'
+            className='inline-flex size-7 items-center justify-center rounded-full text-[#8A93A4] transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
             title={t('Copy')}
           >
             <Copy className='size-3.5' />
@@ -240,16 +247,14 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
         </div>
       </div>
 
-      {/* Description */}
-      <p className='text-muted-foreground mt-2 line-clamp-1 flex-1 text-[13px] leading-relaxed sm:mt-4 sm:line-clamp-2 sm:min-h-[2.5rem]'>
+      <p className='mt-3 line-clamp-1 flex-1 text-[13px] leading-relaxed text-[#5A6478] sm:mt-4 sm:line-clamp-2 sm:min-h-[2.5rem]'>
         {props.model.description || t('No description available.')}
       </p>
 
-      {/* Footer: left metadata and right performance summary share row alignment */}
-      <div className='mt-2 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-2 gap-y-1 sm:mt-4'>
+      <div className='mt-3 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-2 gap-y-1 sm:mt-4'>
         <div className='flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1'>
           {primaryGroup && (
-            <span className='text-muted-foreground text-sm font-medium'>
+            <span className='text-[13px] font-medium text-[#0A0E1A]'>
               {primaryGroup}
             </span>
           )}
@@ -257,17 +262,20 @@ export const ModelCard = memo(function ModelCard(props: ModelCardProps) {
         </div>
         <ModelPerfBadge perf={props.perf} className='row-span-2 self-start' />
 
-        <div className='flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-0.5 sm:gap-x-3 sm:gap-y-1'>
+        <div className='flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-0.5 sm:gap-x-3'>
           {bottomTags.map((item) => (
-            <span key={item} className='text-muted-foreground/70 text-xs'>
+            <span
+              key={item}
+              className='rounded-full border border-[#EEF0F4] bg-[#FAFBFC] px-2 py-0.5 text-[11px] text-[#5A6478]'
+            >
               {item}
             </span>
           ))}
-          <span className='text-muted-foreground/50 text-xs'>
+          <span className='pl-font-mono text-[10px] font-medium text-[#8A93A4]'>
             {tokenUnitLabel}
           </span>
           {hiddenCount > 0 && (
-            <span className='text-muted-foreground/40 text-xs'>
+            <span className='pl-font-mono text-[10px] font-medium text-[#B8BFCC]'>
               +{hiddenCount}
             </span>
           )}

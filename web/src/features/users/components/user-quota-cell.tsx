@@ -34,9 +34,9 @@ type UserQuotaCellProps = {
 }
 
 function getQuotaProgressColor(percentage: number): string {
-  if (percentage <= 10) return '[&_[data-slot=progress-indicator]]:bg-rose-500'
-  if (percentage <= 30) return '[&_[data-slot=progress-indicator]]:bg-amber-500'
-  return '[&_[data-slot=progress-indicator]]:bg-emerald-500'
+  if (percentage <= 10) return '[&_[data-slot=progress-indicator]]:bg-[#E5484D]'
+  if (percentage <= 30) return '[&_[data-slot=progress-indicator]]:bg-[#D97706]'
+  return '[&_[data-slot=progress-indicator]]:bg-[#16A34A]'
 }
 
 export function UserQuotaCell(props: UserQuotaCellProps) {
@@ -64,11 +64,11 @@ export function UserQuotaCell(props: UserQuotaCellProps) {
           <div className='w-full min-w-0 cursor-help space-y-1.5 overflow-hidden' />
         }
       >
-        <div className='grid min-w-0 grid-cols-2 gap-x-4 text-xs'>
-          <span className='min-w-0 truncate font-medium tabular-nums'>
+        <div className='grid min-w-0 grid-cols-2 gap-x-4 text-[13px]'>
+          <span className='min-w-0 truncate font-semibold tabular-nums text-[#0A0E1A]'>
             {formattedRemaining}
           </span>
-          <span className='text-muted-foreground min-w-0 truncate text-right tabular-nums'>
+          <span className='min-w-0 truncate text-right tabular-nums text-[#8A93A4]'>
             {formattedTotal}
           </span>
         </div>

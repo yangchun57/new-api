@@ -51,8 +51,8 @@ export function CreemConfirmDialog({
       onOpenChange={onOpenChange}
       title={t('Confirm Creem Purchase')}
       description={t('Review your purchase details before proceeding.')}
-      contentClassName='max-sm:w-[calc(100vw-1.5rem)] sm:max-w-[425px]'
-      footerClassName='grid grid-cols-2 gap-2 sm:flex'
+      contentClassName='max-sm:w-[calc(100vw-1.5rem)] sm:max-w-[425px] bg-white ring-[#E5E8EE] shadow-[0_8px_30px_rgba(10,14,26,0.08)]'
+      footerClassName='grid grid-cols-2 gap-2 sm:flex bg-[#F7F8FA] border-[#E5E8EE]'
       contentHeight='auto'
       bodyClassName='space-y-4'
       footer={
@@ -73,18 +73,18 @@ export function CreemConfirmDialog({
     >
       <div className='space-y-3 py-3 sm:space-y-4 sm:py-4'>
         <div className='flex items-center justify-between'>
-          <span className='text-muted-foreground'>{t('Product')}</span>
-          <span className='font-medium'>{product.name}</span>
+          <span className='text-[13px] text-[#5A6478]'>{t('Product')}</span>
+          <span className='text-[13px] font-medium text-[#0A0E1A]'>{product.name}</span>
         </div>
         <div className='flex items-center justify-between'>
-          <span className='text-muted-foreground'>{t('Price')}</span>
-          <span className='text-primary font-medium'>
+          <span className='text-[13px] text-[#5A6478]'>{t('Price')}</span>
+          <span className='text-[16px] font-semibold tracking-[-0.015em] text-[#0A0E1A] tabular-nums'>
             {formatCreemPrice(product.price, product.currency)}
           </span>
         </div>
         <div className='flex items-center justify-between'>
-          <span className='text-muted-foreground'>{t('Quota')}</span>
-          <span className='font-medium'>{formatNumber(product.quota)}</span>
+          <span className='text-[13px] text-[#5A6478]'>{t('Quota')}</span>
+          <span className='text-[13px] font-medium text-[#0A0E1A] tabular-nums'>{formatNumber(product.quota)}</span>
         </div>
       </div>
     </Dialog>

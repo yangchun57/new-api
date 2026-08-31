@@ -255,22 +255,22 @@ function AnnouncementsContent({
 
           return (
             <div key={announcementKey}>
-              <div className='py-3'>
+              <div className='py-2.5'>
                 <div className='flex items-start gap-3'>
                   <AnnouncementDot type={item.type} />
-                  <div className='flex min-w-0 flex-1 flex-col gap-2'>
-                    <div className='text-sm'>
+                  <div className='flex min-w-0 flex-1 flex-col gap-1.5'>
+                    <div className='text-[13px] leading-relaxed text-[#0A0E1A]'>
                       <RichContent breaks content={item.content || ''} />
                     </div>
 
                     {item.extra ? (
-                      <div className='text-muted-foreground text-xs'>
+                      <div className='text-[12px] text-[#8A93A4]'>
                         <RichContent breaks content={item.extra} />
                       </div>
                     ) : null}
 
                     {absoluteTime ? (
-                      <div className='text-muted-foreground text-xs'>
+                      <div className='text-[12px] text-[#8A93A4]'>
                         {relativeTime ? `${relativeTime} • ` : null}
                         {absoluteTime}
                       </div>
@@ -309,16 +309,16 @@ export function NotificationPopover({
           <Button
             variant='ghost'
             size='icon'
-            className={cn('relative size-9', className)}
+            className={cn('relative size-9 rounded-lg text-[#5A6478] hover:bg-[#F0F2F6] hover:text-[#0A0E1A]', className)}
             aria-label={t('Notifications')}
           />
         }
       >
-        <Bell className='size-[1.2rem]' />
+        <Bell className='size-[18px]' />
         {unreadCount > 0 ? (
           <Badge
             variant='destructive'
-            className='absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center px-1 text-[10px] font-semibold tabular-nums'
+            className='absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 text-[10px] font-semibold tabular-nums'
           >
             {unreadCount > 99 ? '99+' : unreadCount}
           </Badge>
@@ -328,11 +328,11 @@ export function NotificationPopover({
       <PopoverContent
         align='end'
         sideOffset={8}
-        className='w-[min(26rem,calc(100vw-1rem))] gap-3 p-3'
+        className='w-[min(26rem,calc(100vw-1rem))] rounded-xl border-[#E5E8EE] p-3 shadow-lg'
       >
-        <PopoverHeader className='gap-1 px-1'>
-          <PopoverTitle>{t('System Announcements')}</PopoverTitle>
-          <p className='text-muted-foreground text-xs'>
+        <PopoverHeader className='gap-1 px-1 pb-2'>
+          <PopoverTitle className='text-[14px] font-semibold text-[#0A0E1A]'>{t('System Announcements')}</PopoverTitle>
+          <p className='text-[12px] text-[#8A93A4]'>
             {t('Latest platform updates and notices')}
           </p>
         </PopoverHeader>
@@ -341,12 +341,12 @@ export function NotificationPopover({
           value={activeTab}
           onValueChange={onTabChange as (value: string) => void}
         >
-          <TabsList className='grid w-full grid-cols-2'>
-            <TabsTrigger value='notice' className='gap-1.5'>
+          <TabsList className='grid w-full grid-cols-2 rounded-lg bg-[#F7F8FA] p-0.5'>
+            <TabsTrigger value='notice' className='gap-1.5 rounded-md text-[13px] font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm'>
               <Bell className='size-3.5' />
               {t('Notice')}
             </TabsTrigger>
-            <TabsTrigger value='announcements' className='gap-1.5'>
+            <TabsTrigger value='announcements' className='gap-1.5 rounded-md text-[13px] font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm'>
               <Megaphone className='size-3.5' />
               {t('Timeline')}
             </TabsTrigger>
@@ -365,8 +365,8 @@ export function NotificationPopover({
           </TabsContent>
         </Tabs>
 
-        <div className='flex justify-end'>
-          <Button size='sm' onClick={() => onOpenChange(false)}>
+        <div className='flex justify-end pt-1'>
+          <Button size='sm' className='h-8 rounded-lg bg-[#0A0E1A] px-3 text-[13px] font-medium text-white hover:bg-[#0A0E1A]/90' onClick={() => onOpenChange(false)}>
             {t('Close')}
           </Button>
         </div>

@@ -55,8 +55,8 @@ export function PromptDialog({
         <div className='space-y-4 py-4'>
           {/* Original Prompt */}
           <div className='space-y-2'>
-            <Label className='text-sm font-semibold'>{t('Prompt')}</Label>
-            <div className='bg-muted/50 relative rounded-md border p-3'>
+            <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Prompt')}</Label>
+            <div className='bg-[#F7F8FA] relative rounded-xl border border-[#E5E8EE] p-4'>
               <Button
                 variant='ghost'
                 size='sm'
@@ -65,12 +65,12 @@ export function PromptDialog({
                 title={t('Copy to clipboard')}
               >
                 {copiedText === prompt ? (
-                  <Check className='size-4 text-green-600' />
+                  <Check className='size-4 text-[#16A34A]' />
                 ) : (
                   <Copy className='size-4' />
                 )}
               </Button>
-              <p className='pr-10 text-sm leading-relaxed break-words whitespace-pre-wrap'>
+              <p className='pr-10 text-[13px] leading-relaxed break-words whitespace-pre-wrap text-[#5A6478]'>
                 {prompt || '-'}
               </p>
             </div>
@@ -79,10 +79,10 @@ export function PromptDialog({
           {/* English Prompt */}
           {promptEn && (
             <div className='space-y-2'>
-              <Label className='text-sm font-semibold'>
+              <Label className='text-[13px] font-medium text-[#0A0E1A]'>
                 {t('Prompt (EN)')}
               </Label>
-              <div className='bg-muted/50 relative rounded-md border p-3'>
+              <div className='bg-[#F7F8FA] relative rounded-xl border border-[#E5E8EE] p-4'>
                 <Button
                   variant='ghost'
                   size='sm'
@@ -91,12 +91,12 @@ export function PromptDialog({
                   title={t('Copy to clipboard')}
                 >
                   {copiedText === promptEn ? (
-                    <Check className='size-4 text-green-600' />
+                    <Check className='size-4 text-[#16A34A]' />
                   ) : (
                     <Copy className='size-4' />
                   )}
                 </Button>
-                <p className='pr-10 text-sm leading-relaxed break-words whitespace-pre-wrap'>
+                <p className='pr-10 text-[13px] leading-relaxed break-words whitespace-pre-wrap text-[#5A6478]'>
                   {promptEn}
                 </p>
               </div>

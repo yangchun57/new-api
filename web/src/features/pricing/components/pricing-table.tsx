@@ -96,20 +96,33 @@ export function PricingTable(props: PricingTableProps) {
         emptyDescription={t('No models match your current filters.')}
         skeletonKeyPrefix='pricing-skeleton'
         applyHeaderSize
+        containerClassName='pl-card border-[#E5E8EE] bg-white shadow-none rounded-[var(--pl-radius-card)]'
+        tableContainerClassName=''
+        tableClassName=''
+        tableHeaderClassName='bg-[#FAFBFC]'
+        tableHeaderRowClassName='border-b border-[#F0F2F6] hover:bg-transparent'
+        tableBodyClassName=''
+        tableBodyRowClassName='border-b border-[#F0F2F6] transition-colors hover:bg-[#FAFBFC] cursor-pointer'
         getColumnClassName={(_columnId, kind) =>
-          kind === 'header' ? 'text-muted-foreground font-medium' : undefined
+          kind === 'header'
+            ? 'pl-font-display text-[11px] font-semibold uppercase tracking-wider text-[#8A93A4] h-10'
+            : 'text-[13px] text-[#3A4252] h-14'
         }
         renderRow={(row: Row<PricingModel>) => (
           <DataTableRow
             key={row.id}
             row={row}
-            className='hover:bg-muted/30 cursor-pointer transition-colors'
+            className='cursor-pointer'
             onClick={() => handleRowClick(row.original)}
           />
         )}
       />
 
-      {!isLoading && models.length > 0 && <DataTablePagination table={table} />}
+      {!isLoading && models.length > 0 && (
+        <div className='pl-card px-4 py-3'>
+          <DataTablePagination table={table} />
+        </div>
+      )}
     </div>
   )
 }

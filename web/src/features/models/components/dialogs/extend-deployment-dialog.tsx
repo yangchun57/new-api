@@ -184,24 +184,24 @@ export function ExtendDeploymentDialog({
     >
       {isLoadingDetails ? (
         <div className='flex items-center justify-center py-10'>
-          <Loader2 className='text-muted-foreground h-6 w-6 animate-spin' />
+          <Loader2 className='text-[#8A93A4] h-6 w-6 animate-spin' />
         </div>
       ) : (
         <div className='space-y-4'>
-          <div className='text-muted-foreground text-sm'>
+          <div className='text-[#8A93A4] text-[13px]'>
             {t('Deployment ID')}:{' '}
-            <span className='font-mono'>{deploymentId}</span>
+            <span className='font-mono tabular-nums text-[#0A0E1A]'>{deploymentId}</span>
           </div>
 
           <div className='space-y-2'>
-            <div className='text-sm font-medium'>{t('Duration (hours)')}</div>
+            <div className='text-[13px] font-medium text-[#0A0E1A]'>{t('Duration (hours)')}</div>
             <Input
               type='number'
               min={1}
               value={hours}
               onChange={(e) => setHours(toInt(e.target.value, 1))}
             />
-            <div className='text-muted-foreground text-xs'>
+            <div className='text-[#8A93A4] text-[12px]'>
               {t('This will extend the deployment by the specified hours.')}
             </div>
           </div>
@@ -209,8 +209,8 @@ export function ExtendDeploymentDialog({
           <Separator />
 
           <div className='space-y-1'>
-            <div className='text-sm font-medium'>{t('Estimated cost')}</div>
-            <div className='text-muted-foreground text-sm'>
+            <div className='text-[13px] font-medium text-[#0A0E1A]'>{t('Estimated cost')}</div>
+            <div className='text-[#5A6478] text-[13px] tabular-nums'>
               {isLoadingPrice || isFetchingPrice ? (
                 <span className='inline-flex items-center gap-2'>
                   <Loader2 className='h-4 w-4 animate-spin' />
@@ -223,7 +223,7 @@ export function ExtendDeploymentDialog({
               )}
             </div>
             {!priceParams ? (
-              <div className='text-muted-foreground text-xs'>
+              <div className='text-[#8A93A4] text-[12px]'>
                 {t('Unable to estimate price for this deployment.')}
               </div>
             ) : null}

@@ -73,17 +73,17 @@ export function ImageDialog({
     >
       <ScrollArea className='max-h-[600px]'>
         <div className='py-4'>
-          <div className='bg-muted/50 relative flex min-h-[300px] items-center justify-center rounded-lg border'>
+          <div className='bg-[#F7F8FA] relative flex min-h-[300px] items-center justify-center rounded-xl border border-[#E5E8EE]'>
             {/* Skeleton - show when loading or error */}
             {(isLoading || hasError) && (
-              <Skeleton className='absolute inset-0 h-full w-full rounded-lg' />
+              <Skeleton className='absolute inset-0 h-full w-full rounded-xl' />
             )}
 
             {/* Actual Image */}
             <img
               src={imageUrl}
               alt={t('Generated image')}
-              className={`max-h-[550px] w-full rounded-lg object-contain ${
+              className={`max-h-[550px] w-full rounded-xl object-contain ${
                 isLoading || hasError ? 'opacity-0' : 'opacity-100'
               }`}
               onLoad={handleImageLoad}
@@ -94,7 +94,7 @@ export function ImageDialog({
             {/* Error text overlay (shown on skeleton) */}
             {hasError && (
               <div className='absolute inset-0 flex items-center justify-center'>
-                <p className='text-muted-foreground text-sm'>
+                <p className='text-[#5A6478] text-[13px]'>
                   {t('Failed to load image')}
                 </p>
               </div>
@@ -102,8 +102,8 @@ export function ImageDialog({
           </div>
 
           {/* Image URL */}
-          <div className='bg-muted mt-4 rounded-md p-3'>
-            <p className='text-muted-foreground font-mono text-xs break-all'>
+          <div className='bg-[#F7F8FA] mt-4 rounded-xl p-4'>
+            <p className='font-mono text-[12px] break-all text-[#5A6478]'>
               {imageUrl}
             </p>
           </div>

@@ -109,8 +109,8 @@ export function PresetSelector(props: PresetSelectorProps) {
   }
 
   return (
-    <SettingsControlGroup className='space-y-3 border-dashed'>
-      <p className='text-sm font-medium'>{t('Quick Setup from Preset')}</p>
+    <SettingsControlGroup className='space-y-3 rounded-xl border border-[#E5E8EE] border-dashed bg-[#F7F8FA] px-4 py-3'>
+      <p className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>{t('Quick Setup from Preset')}</p>
       <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
         <div className='space-y-1.5'>
           <Label>{t('Preset Template')}</Label>

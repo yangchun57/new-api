@@ -242,7 +242,7 @@ export function GlobalSettingsCard({ defaultValues }: GlobalSettingsCardProps) {
 
           <div className='space-y-4'>
             <div className='flex items-center gap-2'>
-              <h3 className='text-base font-semibold'>
+              <h3 className='text-[16px] font-semibold text-[#0A0E1A]'>
                 {t('ChatCompletions -> Responses Compatibility')}
               </h3>
               <StatusBadge

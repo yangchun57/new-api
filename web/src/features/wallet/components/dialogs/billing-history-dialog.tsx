@@ -103,20 +103,19 @@ export function BillingHistoryDialog({
         description={t(
           'View your topup transaction records and payment history'
         )}
-        contentClassName='flex max-h-[calc(100dvh-2rem)] flex-col max-sm:w-screen max-sm:max-w-none max-sm:rounded-none max-sm:p-4 sm:max-w-4xl'
+        contentClassName='flex max-h-[calc(100dvh-2rem)] flex-col max-sm:w-screen max-sm:max-w-none max-sm:rounded-none max-sm:p-4 sm:max-w-4xl bg-white ring-[#E5E8EE] shadow-[0_8px_30px_rgba(10,14,26,0.08)]'
         contentHeight='auto'
         bodyClassName='space-y-3'
       >
         <div className='min-h-0 space-y-3'>
-          {/* Search and Filter Bar */}
           <div className='flex items-center gap-2'>
             <div className='relative flex-1'>
-              <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+              <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#8A93A4]' />
               <Input
                 placeholder={t('Search by order number...')}
                 value={keyword}
                 onChange={(e) => handleSearch(e.target.value)}
-                className='h-9 pl-10'
+                className='h-9 pl-10 border-[#E5E8EE] bg-white text-[13px] text-[#0A0E1A] placeholder:text-[#B8BFCC] focus-visible:border-[#0A0E1A]/30 focus-visible:ring-[#0A0E1A]/10'
               />
             </div>
             <Select
@@ -131,7 +130,7 @@ export function BillingHistoryDialog({
                 value !== null && handlePageSizeChange(parseInt(value))
               }
             >
-              <SelectTrigger className='h-9 w-[92px] sm:w-32'>
+              <SelectTrigger className='h-9 w-[92px] sm:w-32 rounded-md border-[#E5E8EE] bg-white text-[13px] text-[#0A0E1A]'>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent alignItemWithTrigger={false}>
@@ -145,33 +144,35 @@ export function BillingHistoryDialog({
             </Select>
           </div>
 
-          {/* Records List */}
           <div className='max-h-[min(54vh,520px)] overflow-y-auto pr-1'>
             {loading ? (
               <div className='space-y-3'>
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className='rounded-lg border p-3 sm:p-4'>
+                  <div
+                    key={i}
+                    className='rounded-xl border border-[#E5E8EE] bg-white p-3 sm:p-4'
+                  >
                     <div className='flex items-start justify-between'>
                       <div className='flex-1 space-y-2'>
-                        <Skeleton className='h-4 w-48' />
-                        <Skeleton className='h-3 w-32' />
+                        <Skeleton className='h-4 w-48 rounded-md' />
+                        <Skeleton className='h-3 w-32 rounded-md' />
                       </div>
-                      <Skeleton className='h-5 w-16' />
+                      <Skeleton className='h-5 w-16 rounded-md' />
                     </div>
                     <div className='mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4'>
-                      <Skeleton className='h-3 w-full' />
-                      <Skeleton className='h-3 w-full' />
-                      <Skeleton className='h-3 w-full' />
+                      <Skeleton className='h-3 w-full rounded-md' />
+                      <Skeleton className='h-3 w-full rounded-md' />
+                      <Skeleton className='h-3 w-full rounded-md' />
                     </div>
                   </div>
                 ))}
               </div>
             ) : records.length === 0 ? (
-              <div className='text-muted-foreground flex min-h-40 flex-col items-center justify-center py-10 text-center'>
-                <p className='text-sm font-medium'>
+              <div className='flex min-h-40 flex-col items-center justify-center py-10 text-center'>
+                <p className='text-[13px] font-medium text-[#0A0E1A]'>
                   {t('No billing records found')}
                 </p>
-                <p className='mt-1 text-xs'>
+                <p className='mt-1 text-[12px] text-[#8A93A4]'>
                   {keyword
                     ? t('Try adjusting your search')
                     : t('Your transaction history will appear here')}
@@ -184,19 +185,18 @@ export function BillingHistoryDialog({
                   return (
                     <div
                       key={record.id}
-                      className='rounded-lg border p-3 sm:p-4'
+                      className='rounded-xl border border-[#E5E8EE] bg-white p-3 sm:p-4'
                     >
-                      {/* Header Row */}
                       <div className='flex items-start justify-between gap-2'>
                         <div className='flex-1 space-y-1'>
                           <div className='flex min-w-0 items-center gap-2'>
-                            <code className='text-foreground truncate font-mono text-sm'>
+                            <code className='text-[#0A0E1A] truncate font-mono text-[13px] tabular-nums'>
                               {record.trade_no}
                             </code>
                             <Button
                               variant='ghost'
                               size='sm'
-                              className='h-5 w-5 p-0'
+                              className='h-6 w-6 rounded-md p-0 text-[#5A6478] hover:bg-[#F0F2F6] hover:text-[#0A0E1A] active:bg-[#E8EBF1]'
                               onClick={() => copyToClipboard(record.trade_no)}
                             >
                               {copiedText === record.trade_no ? (
@@ -214,7 +214,7 @@ export function BillingHistoryDialog({
                               />
                             )}
                           </div>
-                          <div className='text-muted-foreground text-xs'>
+                          <div className='text-[12px] text-[#8A93A4]'>
                             {formatTimestamp(record.create_time)}
                           </div>
                         </div>
@@ -226,21 +226,20 @@ export function BillingHistoryDialog({
                         />
                       </div>
 
-                      {/* Details Grid */}
                       <div className='mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:grid-cols-3 sm:gap-4'>
                         <div className='space-y-1'>
-                          <Label className='text-muted-foreground text-xs'>
+                          <Label className='text-[12px] text-[#8A93A4]'>
                             {t('Payment Method')}
                           </Label>
-                          <div className='text-sm font-medium'>
+                          <div className='text-[13px] font-medium text-[#0A0E1A]'>
                             {getPaymentMethodName(record.payment_method, t)}
                           </div>
                         </div>
                         <div className='space-y-1'>
-                          <Label className='text-muted-foreground text-xs'>
+                          <Label className='text-[12px] text-[#8A93A4]'>
                             {t('Amount')}
                           </Label>
-                          <div className='text-sm font-semibold'>
+                          <div className='text-[13px] font-semibold text-[#0A0E1A] tabular-nums'>
                             {formatCurrencyFromUSD(record.amount, {
                               digitsLarge: 2,
                               digitsSmall: 2,
@@ -249,16 +248,15 @@ export function BillingHistoryDialog({
                           </div>
                         </div>
                         <div className='space-y-1'>
-                          <Label className='text-muted-foreground text-xs'>
+                          <Label className='text-[12px] text-[#8A93A4]'>
                             {t('Payment')}
                           </Label>
-                          <div className='text-sm font-semibold text-red-600'>
+                          <div className='text-[13px] font-semibold text-red-600 tabular-nums'>
                             {formatNumber(record.money)}
                           </div>
                         </div>
                       </div>
 
-                      {/* Admin Actions */}
                       {isAdmin && record.status === 'pending' && (
                         <div className='mt-4 flex justify-end'>
                           <Button
@@ -266,6 +264,7 @@ export function BillingHistoryDialog({
                             variant='outline'
                             onClick={() => setConfirmTradeNo(record.trade_no)}
                             disabled={completing}
+                            className='rounded-md'
                           >
                             {t('Complete Order')}
                           </Button>
@@ -278,10 +277,9 @@ export function BillingHistoryDialog({
             )}
           </div>
 
-          {/* Pagination */}
           {!loading && records.length > 0 && (
-            <div className='flex flex-col items-center gap-3 border-t pt-4 sm:flex-row sm:items-center sm:justify-between'>
-              <div className='text-muted-foreground text-xs sm:text-sm'>
+            <div className='flex flex-col items-center gap-3 border-t border-[#E5E8EE] pt-4 sm:flex-row sm:items-center sm:justify-between'>
+              <div className='text-[12px] text-[#8A93A4] sm:text-[13px]'>
                 {t('Showing')} {(page - 1) * pageSize + 1}-
                 {Math.min(page * pageSize, total)} {t('of')} {total}
               </div>
@@ -291,13 +289,13 @@ export function BillingHistoryDialog({
                   size='sm'
                   onClick={() => handlePageChange(page - 1)}
                   disabled={page <= 1}
-                  className='h-8 w-8 p-0'
+                  className='h-8 w-8 rounded-md p-0'
                 >
                   <ChevronLeft className='h-4 w-4' />
                 </Button>
-                <div className='text-muted-foreground flex items-center gap-1 text-sm'>
-                  <span className='font-medium'>{page}</span>
-                  <span>/</span>
+                <div className='flex items-center gap-1 text-[13px] text-[#5A6478]'>
+                  <span className='font-semibold text-[#0A0E1A]'>{page}</span>
+                  <span className='text-[#B8BFCC]'>/</span>
                   <span>{totalPages}</span>
                 </div>
                 <Button
@@ -305,7 +303,7 @@ export function BillingHistoryDialog({
                   size='sm'
                   onClick={() => handlePageChange(page + 1)}
                   disabled={page >= totalPages}
-                  className='h-8 w-8 p-0'
+                  className='h-8 w-8 rounded-md p-0'
                 >
                   <ChevronRight className='h-4 w-4' />
                 </Button>
@@ -315,21 +313,20 @@ export function BillingHistoryDialog({
         </div>
       </Dialog>
 
-      {/* Confirm Complete Order Dialog */}
       <AlertDialog
         open={!!confirmTradeNo}
         onOpenChange={(open) => !open && setConfirmTradeNo(null)}
       >
-        <AlertDialogContent>
+        <AlertDialogContent className='bg-white ring-[#E5E8EE] shadow-[0_8px_30px_rgba(10,14,26,0.08)]'>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t('Complete Order')}</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className='text-[16px] font-semibold tracking-[-0.015em] text-[#0A0E1A] leading-none'>{t('Complete Order')}</AlertDialogTitle>
+            <AlertDialogDescription className='text-[13px] leading-relaxed text-[#5A6478]'>
               {t(
                 'Are you sure you want to manually complete this order? The user will be credited with the corresponding quota.'
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
+          <AlertDialogFooter className='bg-[#F7F8FA] border-[#E5E8EE]'>
             <AlertDialogCancel disabled={completing}>
               {t('Cancel')}
             </AlertDialogCancel>

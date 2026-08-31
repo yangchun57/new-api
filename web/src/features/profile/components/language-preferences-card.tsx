@@ -112,8 +112,8 @@ export function LanguagePreferencesCard(props: LanguagePreferencesCardProps) {
     >
       <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4'>
         <div className='space-y-1'>
-          <div className='text-sm font-medium'>{t('Interface Language')}</div>
-          <p className='text-muted-foreground line-clamp-2 text-xs sm:text-sm'>
+          <div className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{t('Interface Language')}</div>
+          <p className='line-clamp-2 text-[13px] leading-relaxed text-[#5A6478]'>
             {t(
               'Language preferences sync across your signed-in devices and affect API error messages.'
             )}
@@ -143,7 +143,7 @@ export function LanguagePreferencesCard(props: LanguagePreferencesCardProps) {
             </SelectContent>
           </Select>
           {saving && (
-            <Loader2 className='text-muted-foreground size-4 animate-spin' />
+            <Loader2 className='size-4 animate-spin text-[#8A93A4]' />
           )}
         </div>
       </div>

@@ -340,7 +340,7 @@ export function RoutingReliabilitySection({
 
           <div className='flex min-w-0 flex-col gap-4'>
             <div className='flex flex-col gap-1'>
-              <h4 className='text-sm font-medium'>{t('Request retry')}</h4>
+              <h4 className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Request retry')}</h4>
             </div>
             <div className='grid min-w-0 gap-6 xl:grid-cols-[minmax(12rem,24rem)_minmax(0,1fr)]'>
               <FormField
@@ -385,7 +385,7 @@ export function RoutingReliabilitySection({
                       {autoRetryParsed.ok &&
                         autoRetryParsed.normalized &&
                         autoRetryParsed.normalized !== field.value.trim() && (
-                          <span className='text-muted-foreground'>
+                          <span className='text-[#8A93A4]'>
                             {t('Normalized:')} {autoRetryParsed.normalized}
                           </span>
                         )}
@@ -401,7 +401,7 @@ export function RoutingReliabilitySection({
 
           <div className='flex min-w-0 flex-col gap-4'>
             <div className='flex flex-col gap-1'>
-              <h4 className='text-sm font-medium'>
+              <h4 className='text-[14px] font-semibold text-[#0A0E1A]'>
                 {t('Channel health checks')}
               </h4>
             </div>
@@ -562,7 +562,7 @@ export function RoutingReliabilitySection({
 
           <div className='flex min-w-0 flex-col gap-4'>
             <div className='flex flex-col gap-1'>
-              <h4 className='text-sm font-medium'>{t('Auto-disable rules')}</h4>
+              <h4 className='text-[14px] font-semibold text-[#0A0E1A]'>{t('Auto-disable rules')}</h4>
             </div>
             <div className='grid min-w-0 gap-6 lg:grid-cols-2'>
               <FormField
@@ -631,7 +631,7 @@ export function RoutingReliabilitySection({
                       {autoDisableParsed.ok &&
                         autoDisableParsed.normalized &&
                         autoDisableParsed.normalized !== field.value.trim() && (
-                          <span className='text-muted-foreground'>
+                          <span className='text-[#8A93A4]'>
                             {t('Normalized:')} {autoDisableParsed.normalized}
                           </span>
                         )}

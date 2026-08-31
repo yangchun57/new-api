@@ -114,7 +114,7 @@ export function StatusCodeRiskDialog({
     >
       <div className='space-y-4'>
         {open ? (
-          <div className='border-warning/40 bg-warning/5 rounded-lg border p-3 sm:p-4'>
+          <div className='border-warning/40 bg-warning/5 rounded-xl border p-3 sm:p-4'>
             <Suspense
               fallback={
                 <div
@@ -123,7 +123,7 @@ export function StatusCodeRiskDialog({
                 />
               }
             >
-              <Markdown className='[&_h3]:text-warning text-sm [&_h3]:text-base'>
+              <Markdown className='[&_h3]:text-warning text-[13px] text-[#5A6478] [&_h3]:text-[14px] [&_h3]:font-semibold [&_p]:text-[#5A6478] [&_p]:text-[13px]'>
                 {t('High-risk status code retry risk disclaimer')}
               </Markdown>
             </Suspense>
@@ -131,13 +131,13 @@ export function StatusCodeRiskDialog({
         ) : null}
 
         {detailItems.length > 0 && (
-          <div className='border-destructive/30 bg-destructive/5 rounded-lg border p-3'>
-            <p className='mb-2 text-sm font-medium'>
+          <div className='border-destructive/30 bg-destructive/5 rounded-xl border p-3'>
+            <p className='mb-2 text-[#0A0E1A] text-[14px] font-semibold'>
               {t('Detected high-risk status code redirect rules')}
             </p>
-            <ul className='list-inside list-disc text-sm'>
+            <ul className='list-inside list-disc text-[13px] text-[#5A6478]'>
               {detailItems.map((item) => (
-                <li key={item} className='font-mono text-xs'>
+                <li key={item} className='font-mono text-[12px]'>
                   {item}
                 </li>
               ))}
@@ -155,7 +155,7 @@ export function StatusCodeRiskDialog({
               />
               <Label
                 htmlFor={`risk-check-${idx}`}
-                className='text-sm leading-tight'
+                className='text-[#0A0E1A] text-[13px] leading-tight'
               >
                 {t(key)}
               </Label>
@@ -164,9 +164,9 @@ export function StatusCodeRiskDialog({
         </div>
 
         <div className='space-y-1.5'>
-          <Label className='text-sm'>
+          <Label className='text-[#0A0E1A] text-[13px] font-medium'>
             {t('Action confirmation')}:{' '}
-            <code className='bg-muted rounded px-1 text-xs'>
+            <code className='bg-[#F7F8FA] rounded px-1 text-[12px]'>
               {requiredText}
             </code>
           </Label>
@@ -176,7 +176,7 @@ export function StatusCodeRiskDialog({
             placeholder={t('High-risk status code retry input placeholder')}
           />
           {confirmText && !textMatches && (
-            <p className='text-destructive text-xs'>
+            <p className='text-destructive text-[12px]'>
               {t('High-risk status code retry input mismatch')}
             </p>
           )}

@@ -42,7 +42,7 @@ export function CreemProductsSection({
     return (
       <div className='grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 md:grid-cols-3'>
         {Array.from({ length: 3 }).map((_, i) => (
-          <Skeleton key={i} className='h-24 rounded-lg' />
+          <Skeleton key={i} className='h-24 rounded-xl' />
         ))}
       </div>
     )
@@ -58,15 +58,15 @@ export function CreemProductsSection({
         <Card
           key={product.productId}
           data-card-hover='false'
-          className='cursor-pointer'
+          className='cursor-pointer rounded-xl border-[#E5E8EE] bg-white transition-colors hover:bg-[#F0F2F6] active:bg-[#E8EBF1]'
           onClick={() => onProductSelect(product)}
         >
           <CardContent className='p-3 text-center sm:p-4'>
-            <div className='mb-2 text-lg font-medium'>{product.name}</div>
-            <div className='text-muted-foreground mb-2 text-sm'>
+            <div className='mb-2 text-[13px] font-medium text-[#0A0E1A]'>{product.name}</div>
+            <div className='text-[#5A6478] mb-2 text-[13px] leading-relaxed'>
               {t('Quota')}: {formatNumber(product.quota)}
             </div>
-            <div className='text-primary text-lg font-semibold'>
+            <div className='text-[#0A0E1A] text-[16px] font-semibold tracking-[-0.015em]'>
               {formatCreemPrice(product.price, product.currency)}
             </div>
           </CardContent>

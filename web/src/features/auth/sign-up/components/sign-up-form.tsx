@@ -54,6 +54,14 @@ import { isAuthBundle } from '@/lib/api'
 import { getServerErrorMessageKey } from '@/lib/server-error-message'
 import { cn } from '@/lib/utils'
 
+const inputCls =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white px-3.5 text-[14px] text-[#0A0E1A] shadow-sm placeholder:text-[#B8BFCC] focus-visible:border-[#0A0E1A] focus-visible:ring-[#0A0E1A]/15 aria-invalid:border-rose-400 aria-invalid:ring-rose-400/20'
+const labelCls = 'text-[13px] font-medium text-[#0A0E1A]'
+const btnPrimary =
+  'h-11 rounded-xl bg-[#0A0E1A] text-[14px] font-medium text-white shadow-sm transition-colors hover:bg-[#0A0E1A]/90 active:bg-[#0A0E1A]'
+const btnOutline =
+  'h-11 rounded-xl border-[#E5E8EE] bg-white text-[14px] font-medium text-[#0A0E1A] shadow-sm transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
+
 export function SignUpForm({
   className,
   ...props
@@ -144,7 +152,6 @@ export function SignUpForm({
       return
     }
 
-    // Validate email verification if required
     if (emailVerificationRequired) {
       if (!data.email) {
         toast.error(t('Please enter your email'))
@@ -247,85 +254,95 @@ export function SignUpForm({
         className={cn('grid gap-4', className)}
         {...props}
       >
-        {/* Username Field */}
         <FormField
           control={form.control}
           name='username'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('Username')}</FormLabel>
+              <FormLabel className={labelCls}>{t('Username')}</FormLabel>
               <FormControl>
-                <Input placeholder={t('Enter your username')} {...field} />
+                <Input
+                  placeholder={t('Enter your username')}
+                  className={inputCls}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className='text-[12px]' />
             </FormItem>
           )}
         />
 
-        {/* Password Field */}
         <FormField
           control={form.control}
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('Password')}</FormLabel>
+              <FormLabel className={labelCls}>{t('Password')}</FormLabel>
               <FormControl>
                 <PasswordInput
                   placeholder={t('Enter password (8-20 characters)')}
+                  className={inputCls}
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className='text-[12px]' />
             </FormItem>
           )}
         />
 
-        {/* Confirm Password Field */}
         <FormField
           control={form.control}
           name='confirmPassword'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('Confirm password')}</FormLabel>
+              <FormLabel className={labelCls}>
+                {t('Confirm password')}
+              </FormLabel>
               <FormControl>
-                <PasswordInput placeholder={t('Confirm password')} {...field} />
+                <PasswordInput
+                  placeholder={t('Confirm password')}
+                  className={inputCls}
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className='text-[12px]' />
             </FormItem>
           )}
         />
 
-        {/* Email Verification Section */}
         {emailVerificationRequired && (
           <>
-            {/* Email Field */}
             <FormField
               control={form.control}
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel className={labelCls}>
                     {t('Email (required for verification)')}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={t('name@example.com')}
                       type='email'
+                      className={inputCls}
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='text-[12px]' />
                 </FormItem>
               )}
             />
 
-            {/* Verification Code Field */}
             <div className='flex items-end gap-2'>
               <div className='flex-1'>
+                <Label className={cn(labelCls, 'mb-2 block')}>
+                  {t('Verification code')}
+                </Label>
                 <Input
-                  placeholder={t('Verification code')}
+                  placeholder={t('Enter verification code')}
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
+                  className={inputCls}
                 />
               </div>
               <Button
@@ -339,6 +356,7 @@ export function SignUpForm({
                   !turnstileReady
                 }
                 onClick={handleSendVerificationCode}
+                className={cn(btnOutline, 'min-w-[120px] shrink-0 px-4')}
               >
                 {verificationCodeAction}
               </Button>
@@ -346,9 +364,8 @@ export function SignUpForm({
           </>
         )}
 
-        {/* Turnstile */}
         {isTurnstileEnabled && (
-          <div className='mt-2'>
+          <div className='flex justify-center'>
             <Turnstile
               key={turnstileWidgetKey}
               siteKey={turnstileSiteKey}
@@ -361,13 +378,11 @@ export function SignUpForm({
           status={status}
           checked={agreedToLegal}
           onCheckedChange={setAgreedToLegal}
-          className='mt-1'
         />
 
-        {/* Submit Button */}
         <Button
           type='submit'
-          className='mt-2 w-full justify-center gap-2'
+          className={cn(btnPrimary, 'mt-1 gap-2')}
           disabled={
             isLoading ||
             (requiresLegalConsent && !agreedToLegal) ||
@@ -384,7 +399,6 @@ export function SignUpForm({
             disabled={isLoading || (requiresLegalConsent && !agreedToLegal)}
             onWeChatLogin={hasWeChatLogin ? handleOpenWeChatDialog : undefined}
             isWeChatLoading={isWeChatSubmitting}
-            className='pt-2'
           />
         )}
       </form>
@@ -397,10 +411,12 @@ export function SignUpForm({
           description={t(
             'Scan the QR code to follow the official account and reply with “验证码” to receive your verification code.'
           )}
-          contentClassName='max-w-sm'
-          headerClassName='text-left'
-          contentHeight='auto'
-          bodyClassName='space-y-4'
+          contentClassName='max-w-sm gap-0 overflow-hidden rounded-2xl border-[#E5E8EE] bg-white p-0 shadow-xl ring-0 sm:p-0'
+          headerClassName='px-6 pt-6 pb-0'
+          titleClassName='text-[15px] font-semibold text-[#0A0E1A]'
+          descriptionClassName='text-[13px] leading-relaxed text-[#5A6478]'
+          bodyClassName='space-y-4 px-6 py-5'
+          footerClassName='border-t border-[#E5E8EE] bg-[#FAFBFC] px-6 py-4 sm:justify-end'
           footer={
             <>
               <Button
@@ -408,6 +424,7 @@ export function SignUpForm({
                 variant='outline'
                 onClick={() => handleWeChatDialogChange(false)}
                 disabled={isWeChatSubmitting}
+                className='h-10 rounded-lg border-[#E5E8EE] bg-white text-[13px] text-[#5A6478] hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
               >
                 {t('Cancel')}
               </Button>
@@ -419,7 +436,7 @@ export function SignUpForm({
                   !wechatCode.trim() ||
                   (requiresLegalConsent && !agreedToLegal)
                 }
-                className='gap-2'
+                className='h-10 gap-2 rounded-lg bg-[#0A0E1A] text-[13px] text-white hover:bg-[#0A0E1A]/90'
               >
                 {isWeChatSubmitting ? (
                   <Loader2 className='h-4 w-4 animate-spin' />
@@ -434,22 +451,28 @@ export function SignUpForm({
               <img
                 src={wechatQrCodeUrl}
                 alt={t('WeChat login QR code')}
-                className='h-40 w-40 rounded-md border object-contain'
+                className='h-44 w-44 rounded-xl border border-[#E5E8EE] object-contain p-2'
               />
             </div>
           ) : (
-            <p className='text-muted-foreground text-sm'>
+            <p className='rounded-xl bg-[#FAFBFC] px-4 py-3 text-[13px] text-[#8A93A4]'>
               {t('QR code is not configured. Please contact support.')}
             </p>
           )}
           <div className='grid gap-2'>
-            <Label htmlFor='wechat-code'>{t('Verification code')}</Label>
+            <Label
+              htmlFor='wechat-code-su'
+              className='text-[13px] font-medium text-[#0A0E1A]'
+            >
+              {t('Verification code')}
+            </Label>
             <Input
-              id='wechat-code'
+              id='wechat-code-su'
               placeholder={t('Enter the verification code')}
               value={wechatCode}
               onChange={(event) => setWeChatCode(event.target.value)}
               autoComplete='one-time-code'
+              className={inputCls}
             />
           </div>
         </Dialog>

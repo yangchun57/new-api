@@ -371,7 +371,7 @@ export function MultiKeyManageDialog({
             </div>
           </div>
           {!canEditSensitive && (
-            <p className='text-muted-foreground text-xs'>
+            <p className='text-[#8A93A4] text-[12px]'>
               {t('No permission to perform this action')}
             </p>
           )}
@@ -380,10 +380,10 @@ export function MultiKeyManageDialog({
           <div className='min-h-0 flex-1 overflow-auto rounded-md border'>
             {isLoading ? (
               <div className='flex items-center justify-center py-12'>
-                <Loader2 className='text-muted-foreground h-8 w-8 animate-spin' />
+                <Loader2 className='text-[#8A93A4] h-8 w-8 animate-spin' />
               </div>
             ) : keys.length === 0 ? (
-              <div className='text-muted-foreground py-12 text-center'>
+              <div className='text-[#8A93A4] py-12 text-center'>
                 {t('No keys found')}
               </div>
             ) : (
@@ -397,7 +397,7 @@ export function MultiKeyManageDialog({
                     id: 'index',
                     header: t('Index'),
                     className: 'w-20',
-                    cellClassName: 'font-mono text-sm',
+                    cellClassName: 'font-mono text-[12px]',
                     cell: (key) => `#${key.index + 1}`,
                   },
                   {
@@ -410,14 +410,14 @@ export function MultiKeyManageDialog({
                     id: 'reason',
                     header: t('Disabled Reason'),
                     className: 'min-w-[200px]',
-                    cellClassName: 'max-w-xs truncate text-sm',
+                    cellClassName: 'max-w-xs truncate text-[13px]',
                     cell: (key) => key.reason || '-',
                   },
                   {
                     id: 'disabled-time',
                     header: t('Disabled Time'),
                     className: 'w-44',
-                    cellClassName: 'text-muted-foreground text-sm',
+                    cellClassName: 'text-[#8A93A4] text-[12px]',
                     cell: (key) => formatKeyTimestamp(key.disabled_time),
                   },
                   {
@@ -441,7 +441,7 @@ export function MultiKeyManageDialog({
           {/* Pagination */}
           {totalPages > 1 && (
             <div className='flex shrink-0 items-center justify-between'>
-              <div className='text-muted-foreground text-sm'>
+              <div className='text-[#8A93A4] text-[12px]'>
                 {t('Page {{current}} of {{total}}', {
                   current: currentPage,
                   total: totalPages,

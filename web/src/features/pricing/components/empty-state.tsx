@@ -32,14 +32,16 @@ export function EmptyState(props: EmptyStateProps) {
   const hasSearch = Boolean(props.searchQuery?.trim())
 
   return (
-    <div className='flex min-h-[320px] flex-col items-center justify-center rounded-lg border border-dashed px-6 py-12 text-center'>
-      <Search className='text-muted-foreground/40 mb-3 size-10' />
+    <div className='pl-card flex min-h-[360px] flex-col items-center justify-center px-6 py-16 text-center'>
+      <div className='mb-4 flex size-14 items-center justify-center rounded-2xl bg-[#F7F8FA]'>
+        <Search className='size-6 text-[#5A6478]' />
+      </div>
 
-      <h3 className='text-foreground mb-1 text-base font-semibold'>
+      <h3 className='pl-font-display text-[18px] font-semibold tracking-tight text-[#0A0E1A]'>
         {t('No models found')}
       </h3>
 
-      <p className='text-muted-foreground mb-5 max-w-xs text-sm'>
+      <p className='mt-2 max-w-sm text-[14px] leading-relaxed text-[#5A6478]'>
         {hasSearch
           ? t(
               'No results for "{{query}}". Try adjusting your search or filters.',
@@ -49,7 +51,12 @@ export function EmptyState(props: EmptyStateProps) {
       </p>
 
       {(props.hasActiveFilters || hasSearch) && (
-        <Button variant='outline' size='sm' onClick={props.onClearFilters}>
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={props.onClearFilters}
+          className='mt-6 rounded-full border-[#E5E8EE] bg-white pl-nav-shadow pl-cta-secondary text-[13px] text-[#0A0E1A] hover:bg-white'
+        >
           {t('Clear all filters')}
         </Button>
       )}

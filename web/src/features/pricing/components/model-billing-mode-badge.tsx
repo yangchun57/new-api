@@ -18,7 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { useTranslation } from 'react-i18next'
 
-import { StatusBadge, type StatusVariant } from '@/components/status-badge'
+import { cn } from '@/lib/utils'
 
 import { isDynamicPricingModel } from '../lib/dynamic-price'
 import { isTokenBasedModel } from '../lib/model-helpers'
@@ -32,23 +32,29 @@ interface ModelBillingModeBadgeProps {
 export function ModelBillingModeBadge(props: ModelBillingModeBadgeProps) {
   const { t } = useTranslation()
   let label = t('Per Request')
-  let variant: StatusVariant = 'purple'
+  let textColor = 'text-[#7c3aed]'
+  let bgColor = 'bg-[#F5F3FF]'
 
   if (isDynamicPricingModel(props.model)) {
     label = t('Dynamic Pricing')
-    variant = 'warning'
+    textColor = 'text-[#B45309]'
+    bgColor = 'bg-[#FEF3C7]/70'
   } else if (isTokenBasedModel(props.model)) {
     label = t('Token-based')
-    variant = 'info'
+    textColor = 'text-[#0369A1]'
+    bgColor = 'bg-[#E0F2FE]'
   }
 
   return (
-    <StatusBadge
-      label={label}
-      variant={variant}
-      copyable={false}
-      size='sm'
-      className={props.className}
-    />
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full border border-transparent px-2 py-0.5 pl-font-display text-[10px] font-semibold tracking-wide',
+        bgColor,
+        textColor,
+        props.className
+      )}
+    >
+      {label}
+    </span>
   )
 }

@@ -74,9 +74,8 @@ const INSTANCE_SKELETON_KEYS = [
 ]
 
 const STATUS_CLASS_NAME: Record<SystemInstanceStatus, string> = {
-  online:
-    'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300',
-  stale: 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
+  online: 'bg-emerald-50 text-emerald-700',
+  stale: 'bg-amber-50 text-amber-700',
 }
 
 const STATUS_DOT_CLASS_NAME: Record<SystemInstanceStatus, string> = {
@@ -135,7 +134,7 @@ function formatBytes(bytes?: number): string {
 }
 
 function ringColorClass(percent: number | null) {
-  if (percent === null) return 'text-muted-foreground/40'
+  if (percent === null) return 'text-[#8A93A4]/40'
   if (percent >= 90) return 'text-red-500'
   if (percent >= 70) return 'text-amber-500'
   return 'text-emerald-500'
@@ -171,7 +170,7 @@ function RingProgress(props: RingProgressProps) {
         fill='none'
         strokeWidth={stroke}
         stroke='currentColor'
-        className='text-muted'
+        className='text-[#E5E8EE]'
       />
       <circle
         cx={size / 2}
@@ -205,7 +204,7 @@ function ResourceCell(props: ResourceCellProps) {
   const content = (
     <div className='flex items-center gap-2'>
       <RingProgress percent={percent} />
-      <span className='font-mono text-[11px] tabular-nums'>
+      <span className='font-mono text-[11px] tabular-nums text-[#5A6478]'>
         {formatPercent(props.value)}
       </span>
     </div>
@@ -216,7 +215,7 @@ function ResourceCell(props: ResourceCellProps) {
   return (
     <TooltipProvider delay={100}>
       <Tooltip>
-        <TooltipTrigger className='block w-full rounded-sm text-left focus-visible:ring-2 focus-visible:outline-none'>
+        <TooltipTrigger className='block w-full rounded-md text-left focus-visible:ring-2 focus-visible:outline-none'>
           {content}
         </TooltipTrigger>
         <TooltipContent className='max-w-80'>{props.tooltip}</TooltipContent>
@@ -239,34 +238,34 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
     <div className='overflow-x-auto'>
       <Table className='min-w-[1230px]'>
         <TableHeader>
-          <TableRow className='bg-muted/40 hover:bg-muted/40'>
-            <TableHead className='h-9 min-w-[240px] px-4 text-xs'>
+          <TableRow className='bg-[#F7F8FA] hover:bg-[#F7F8FA]'>
+            <TableHead className='h-9 min-w-[240px] px-4 font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Instances')}
             </TableHead>
-            <TableHead className='h-9 w-[110px] text-xs'>
+            <TableHead className='h-9 w-[110px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Status')}
             </TableHead>
-            <TableHead className='h-9 w-[100px] text-xs'>{t('Role')}</TableHead>
-            <TableHead className='h-9 w-[96px] text-xs'>{t('CPU')}</TableHead>
-            <TableHead className='h-9 w-[96px] text-xs'>
+            <TableHead className='h-9 w-[100px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>{t('Role')}</TableHead>
+            <TableHead className='h-9 w-[96px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>{t('CPU')}</TableHead>
+            <TableHead className='h-9 w-[96px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Memory')}
             </TableHead>
-            <TableHead className='h-9 w-[96px] text-xs'>
+            <TableHead className='h-9 w-[96px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Storage')}
             </TableHead>
-            <TableHead className='h-9 w-[100px] text-xs'>
+            <TableHead className='h-9 w-[100px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Version')}
             </TableHead>
-            <TableHead className='h-9 w-[140px] text-xs'>
+            <TableHead className='h-9 w-[140px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Runtime')}
             </TableHead>
-            <TableHead className='h-9 w-[170px] text-xs'>
+            <TableHead className='h-9 w-[170px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Started')}
             </TableHead>
-            <TableHead className='h-9 w-[170px] text-xs'>
+            <TableHead className='h-9 w-[170px] font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Last Seen')}
             </TableHead>
-            <TableHead className='h-9 w-[90px] pr-4 text-right text-xs'>
+            <TableHead className='h-9 w-[90px] pr-4 text-right font-mono text-[11px] font-normal tracking-[0.08em] text-[#8A93A4]'>
               {t('Actions')}
             </TableHead>
           </TableRow>
@@ -281,7 +280,7 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
               props.isDeletingInstance &&
               props.deletingNodeName === instance.node_name
             return (
-              <TableRow key={instance.node_name} className='hover:bg-muted/30'>
+              <TableRow key={instance.node_name} className='border-b border-[#E5E8EE] hover:bg-[#F0F2F6]'>
                 <TableCell className='px-4 py-2.5 align-middle'>
                   <div className='flex min-w-0 items-center gap-2'>
                     <span
@@ -293,18 +292,18 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
                     />
                     <div className='min-w-0'>
                       <div className='flex min-w-0 items-center gap-1.5'>
-                        <span className='truncate text-sm font-medium'>
+                        <span className='truncate text-[13px] font-medium leading-none text-[#0A0E1A]'>
                           {getNodeName(instance)}
                         </span>
                         {shouldConfigure && (
                           <Popover>
                             <PopoverTrigger
-                              className='inline-flex shrink-0 rounded-full focus-visible:ring-2 focus-visible:outline-none'
+                              className='inline-flex shrink-0 rounded-md focus-visible:ring-2 focus-visible:outline-none'
                               aria-label={t('Configure NODE_NAME')}
                             >
                               <Badge
                                 variant='outline'
-                                className='border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/30 dark:bg-amber-500/15 dark:text-amber-300'
+                                className='border-amber-200 bg-amber-50 text-amber-700'
                               >
                                 <AlertTriangle
                                   className='size-3'
@@ -312,27 +311,27 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
                                 />
                               </Badge>
                             </PopoverTrigger>
-                            <PopoverContent align='start' className='w-80'>
+                            <PopoverContent align='start' className='w-80 rounded-xl border-[#E5E8EE] bg-white p-4'>
                               <PopoverHeader>
-                                <PopoverTitle>
+                                <PopoverTitle className='text-[13px] font-medium leading-none text-[#0A0E1A]'>
                                   {t('Configure NODE_NAME')}
                                 </PopoverTitle>
-                                <PopoverDescription>
+                                <PopoverDescription className='mt-2 text-[13px] leading-relaxed text-[#5A6478]'>
                                   {t(
                                     'This instance is using an automatic hostname. Set NODE_NAME to a stable unique value for multi-instance management.'
                                   )}
                                 </PopoverDescription>
                               </PopoverHeader>
-                              <div className='space-y-2 text-xs'>
+                              <div className='mt-3 space-y-2 text-[12px]'>
                                 <div>
-                                  <div className='mb-1 font-medium'>
+                                  <div className='mb-1 font-mono text-[11px] tracking-[0.08em] text-[#8A93A4]'>
                                     {t('Example')}
                                   </div>
-                                  <code className='bg-muted block rounded-md px-2 py-1.5 font-mono text-[11px] break-all'>
+                                  <code className='block rounded-md bg-[#F7F8FA] px-2 py-1.5 font-mono text-[11px] break-all text-[#0A0E1A]'>
                                     NODE_NAME=new-api-master-1
                                   </code>
                                 </div>
-                                <p className='text-muted-foreground'>
+                                <p className='text-[12px] text-[#8A93A4]'>
                                   {t(
                                     'Use a different stable value for each instance, then restart the service.'
                                   )}
@@ -342,7 +341,7 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
                           </Popover>
                         )}
                       </div>
-                      <div className='text-muted-foreground truncate font-mono text-[11px]'>
+                      <div className='truncate font-mono text-[11px] text-[#8A93A4]'>
                         {instance.info?.host?.hostname || '-'}
                       </div>
                     </div>
@@ -392,24 +391,24 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
                     value={storage?.used_percent}
                     tooltip={
                       storage ? (
-                        <div className='space-y-1 text-xs'>
+                        <div className='space-y-1 text-[12px]'>
                           <div className='grid grid-cols-[auto_1fr] gap-x-3 gap-y-1'>
-                            <span className='text-muted-foreground'>
+                            <span className='text-[#8A93A4]'>
                               {t('Used')}
                             </span>
-                            <span className='font-mono'>
+                            <span className='font-mono text-[#0A0E1A]'>
                               {formatBytes(storage.used_bytes)}
                             </span>
-                            <span className='text-muted-foreground'>
+                            <span className='text-[#8A93A4]'>
                               {t('Free')}
                             </span>
-                            <span className='font-mono'>
+                            <span className='font-mono text-[#0A0E1A]'>
                               {formatBytes(storage.free_bytes)}
                             </span>
-                            <span className='text-muted-foreground'>
+                            <span className='text-[#8A93A4]'>
                               {t('Total')}
                             </span>
-                            <span className='font-mono'>
+                            <span className='font-mono text-[#0A0E1A]'>
                               {formatBytes(storage.total_bytes)}
                             </span>
                           </div>
@@ -419,20 +418,20 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
                   />
                 </TableCell>
                 <TableCell className='py-2.5 align-middle'>
-                  <div className='truncate font-mono text-xs'>
+                  <div className='truncate font-mono text-[11px] text-[#5A6478]'>
                     {instance.info?.runtime?.version || '-'}
                   </div>
                 </TableCell>
                 <TableCell className='py-2.5 align-middle'>
-                  <div className='truncate font-mono text-xs'>
+                  <div className='truncate font-mono text-[11px] text-[#5A6478]'>
                     {runtimeLabel(instance)}
                   </div>
                 </TableCell>
-                <TableCell className='text-muted-foreground py-2.5 align-middle text-xs whitespace-nowrap'>
+                <TableCell className='py-2.5 align-middle text-[12px] whitespace-nowrap text-[#8A93A4]'>
                   {formatTimestampToDate(instance.started_at)}
                 </TableCell>
                 <TableCell
-                  className='text-muted-foreground py-2.5 align-middle text-xs whitespace-nowrap'
+                  className='py-2.5 align-middle text-[12px] whitespace-nowrap text-[#8A93A4]'
                   title={formatTimestampToDate(instance.last_seen_at)}
                 >
                   {formatTimestampRelative(
@@ -477,7 +476,7 @@ function SystemInstancesList(props: SystemInstancesTableProps) {
                       </Tooltip>
                     </TooltipProvider>
                   ) : (
-                    <span className='text-muted-foreground text-xs'>-</span>
+                    <span className='text-[12px] text-[#8A93A4]'>-</span>
                   )}
                 </TableCell>
               </TableRow>
@@ -576,7 +575,7 @@ export function SystemInstancesPanel() {
   let instancesContent: ReactNode
   if (loading) {
     instancesContent = (
-      <div className='space-y-2 p-4 sm:p-5'>
+      <div className='space-y-2 p-5'>
         {INSTANCE_SKELETON_KEYS.map((key) => (
           <Skeleton key={key} className='h-9 w-full rounded-md' />
         ))}
@@ -599,21 +598,21 @@ export function SystemInstancesPanel() {
     )
   } else if (instances.length === 0) {
     instancesContent = (
-      <div className='px-4 py-10 text-center sm:px-5'>
-        <div className='bg-muted mx-auto mb-3 flex size-10 items-center justify-center rounded-lg'>
+      <div className='px-5 py-10 text-center'>
+        <div className='mx-auto mb-3 flex size-10 items-center justify-center rounded-md bg-[#F7F8FA]'>
           <ServerCog
-            className='text-muted-foreground size-5'
+            className='size-5 text-[#8A93A4]'
             aria-hidden='true'
           />
         </div>
-        <p className='text-muted-foreground text-sm'>
+        <p className='text-[13px] text-[#5A6478]'>
           {t('No instances have reported yet.')}
         </p>
       </div>
     )
   } else {
     instancesContent = (
-      <div className='p-4 sm:p-5'>
+      <div className='p-5'>
         <SystemInstancesList
           instances={instances}
           deletingNodeName={deletingNodeName}
@@ -630,17 +629,17 @@ export function SystemInstancesPanel() {
     <>
       <section
         data-slot='card'
-        className='group/card bg-card text-card-foreground border-border/70 shadow-card overflow-hidden rounded-lg border'
+        className='group/card overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
       >
-        <div className='flex flex-col gap-3 border-b px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5'>
+        <div className='flex flex-col gap-3 border-b border-[#E5E8EE] px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
           <div className='min-w-0'>
-            <div className='flex items-center gap-2'>
-              <span className='bg-muted text-muted-foreground inline-flex size-7 items-center justify-center rounded-md'>
+            <div className='flex items-center gap-3'>
+              <span className='inline-flex size-8 items-center justify-center rounded-md bg-[#F7F8FA] text-[#5A6478]'>
                 <ServerCog className='size-4' aria-hidden='true' />
               </span>
               <div className='min-w-0'>
-                <h3 className='text-sm font-semibold'>{t('Instances')}</h3>
-                <p className='text-muted-foreground mt-0.5 text-xs'>
+                <h3 className='text-[16px] font-semibold leading-none tracking-[-0.015em] text-[#0A0E1A]'>{t('Instances')}</h3>
+                <p className='mt-1.5 text-[13px] text-[#5A6478]'>
                   {t(
                     'Nodes reporting from this deployment and their latest heartbeat.'
                   )}
@@ -649,7 +648,7 @@ export function SystemInstancesPanel() {
             </div>
           </div>
           <div className='flex shrink-0 flex-wrap items-center gap-2 sm:justify-end'>
-            <span className='text-muted-foreground text-xs' aria-live='polite'>
+            <span className='text-[12px] text-[#8A93A4]' aria-live='polite'>
               {t('Auto-refreshing every {{seconds}}s', {
                 seconds: INSTANCE_POLL_INTERVAL_MS / 1000,
               })}

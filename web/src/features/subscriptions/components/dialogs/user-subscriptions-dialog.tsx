@@ -285,7 +285,7 @@ export function UserSubscriptionsDialog(props: Props) {
             <StaticDataTable
               data={loading ? [] : subs}
               getRowKey={(record) => record.subscription.id}
-              emptyClassName={loading ? 'py-8' : 'text-muted-foreground py-8'}
+              emptyClassName={loading ? 'py-8' : 'py-8 text-[#8A93A4]'}
               emptyContent={
                 loading ? t('Loading...') : t('No subscription records')
               }
@@ -303,10 +303,10 @@ export function UserSubscriptionsDialog(props: Props) {
 
                     return (
                       <div>
-                        <div className='font-medium'>
+                        <div className='text-[13px] font-medium leading-none text-[#0A0E1A]'>
                           {planTitleMap.get(sub.plan_id) || `#${sub.plan_id}`}
                         </div>
-                        <div className='text-muted-foreground text-sm'>
+                        <div className='text-[12px] text-[#8A93A4]'>
                           {t('Source')}: {sub.source || '-'}
                         </div>
                       </div>
@@ -327,7 +327,7 @@ export function UserSubscriptionsDialog(props: Props) {
                     const sub = record.subscription
 
                     return (
-                      <div className='text-sm'>
+                      <div className='text-[13px] text-[#5A6478]'>
                         <div>
                           {t('Start')}: {formatTimestamp(sub.start_time)}
                         </div>
@@ -455,7 +455,7 @@ export function UserSubscriptionsDialog(props: Props) {
           handleConfirm={handleResetConfirm}
           isLoading={resetting}
         >
-          <label className='flex items-center justify-between gap-3 rounded-md border px-3 py-2 text-sm'>
+          <label className='flex items-center justify-between gap-3 rounded-md border border-[#E5E8EE] bg-[#FFFFFF] px-3 py-2 text-[13px] text-[#0A0E1A]'>
             <span>{t('Advance next reset time')}</span>
             <Switch
               checked={advanceResetTime}

@@ -105,16 +105,16 @@ export function ProfileSecurityCard({
               key={item.title}
               type='button'
               onClick={item.action}
-              className={`flex items-center gap-3 rounded-lg border p-3 text-left md:flex-col md:gap-2 md:p-4 md:text-center ${
-                item.variant === 'destructive' ? 'border-destructive/30' : ''
+              className={`flex items-center gap-3 rounded-xl border border-[#E5E8EE] p-3 text-left transition-colors hover:border-[#D8DCE5] hover:bg-[#F7F8FA] md:flex-col md:gap-2 md:p-4 md:text-center ${
+                item.variant === 'destructive' ? 'border-destructive/30 hover:border-destructive/40 hover:bg-destructive/5' : ''
               }`}
             >
               <IconBadge tone='neutral' size='sm'>
                 <item.icon />
               </IconBadge>
               <div className='min-w-0 md:contents'>
-                <p className='text-sm font-medium'>{item.title}</p>
-                <p className='text-muted-foreground line-clamp-1 text-xs md:line-clamp-none'>
+                <p className='text-[13px] font-medium leading-none text-[#0A0E1A]'>{item.title}</p>
+                <p className='line-clamp-1 text-[12px] text-[#8A93A4] md:line-clamp-none'>
                   {item.description}
                 </p>
               </div>

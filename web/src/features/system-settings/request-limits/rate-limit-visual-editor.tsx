@@ -124,7 +124,7 @@ export function RateLimitVisualEditor({
     <div className='space-y-4'>
       <div className='flex items-center gap-4'>
         <div className='relative flex-1'>
-          <Search className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
+          <Search className='text-[#8A93A4] absolute top-2.5 left-2.5 h-4 w-4' />
           <Input
             placeholder={t('Search group names...')}
             value={searchText}
@@ -141,6 +141,8 @@ export function RateLimitVisualEditor({
       <StaticDataTable
         data={filteredRateLimits}
         getRowKey={(limit) => limit.groupName}
+        className='rounded-xl border-[#E5E8EE] shadow-none'
+        headerRowClassName='bg-[#F7F8FA] hover:bg-[#F7F8FA]'
         emptyContent={
           searchText
             ? t('No groups match your search')
@@ -152,16 +154,16 @@ export function RateLimitVisualEditor({
           {
             id: 'group',
             header: t('Group Name'),
-            cellClassName: 'font-medium',
+            cellClassName: 'font-mono text-[12px] text-[#0A0E1A]',
             cell: (limit) => limit.groupName,
           },
           {
             id: 'max-requests',
             header: t('Max Requests (incl. failures)'),
-            className: 'text-right',
+            className: 'text-right text-[12px] font-medium text-[#8A93A4]',
             cellClassName: 'text-right',
             cell: (limit) => (
-              <span className='font-mono'>
+              <span className='font-mono text-[13px] tabular-nums font-semibold text-[#0A0E1A]'>
                 {limit.maxRequests === 0
                   ? t('Unlimited')
                   : limit.maxRequests.toLocaleString()}
@@ -171,10 +173,10 @@ export function RateLimitVisualEditor({
           {
             id: 'max-success',
             header: t('Max Success'),
-            className: 'text-right',
+            className: 'text-right text-[12px] font-medium text-[#8A93A4]',
             cellClassName: 'text-right',
             cell: (limit) => (
-              <span className='font-mono'>
+              <span className='font-mono text-[13px] tabular-nums font-semibold text-[#0A0E1A]'>
                 {limit.maxSuccess.toLocaleString()}
               </span>
             ),

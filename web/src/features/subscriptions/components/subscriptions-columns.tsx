@@ -52,9 +52,11 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
           const plan = row.original.plan
           return (
             <div className='max-w-full min-w-0'>
-              <div className='truncate font-medium'>{plan.title}</div>
+              <div className='truncate font-medium text-[13px] leading-none text-[#0A0E1A]'>
+                {plan.title}
+              </div>
               {plan.subtitle && (
-                <div className='text-muted-foreground truncate text-xs'>
+                <div className='truncate text-[12px] text-[#8A93A4]'>
                   {plan.subtitle}
                 </div>
               )}
@@ -68,7 +70,7 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
         id: 'price',
         header: t('Price'),
         cell: ({ row }) => (
-          <span className='font-semibold text-emerald-600'>
+          <span className='text-[13px] font-semibold text-emerald-600'>
             ${Number(row.original.plan.price_amount || 0).toFixed(2)}
           </span>
         ),
@@ -78,7 +80,7 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
         id: 'duration',
         header: t('Validity'),
         cell: ({ row }) => (
-          <span className='text-muted-foreground'>
+          <span className='text-[13px] text-[#5A6478]'>
             {formatDuration(row.original.plan, t)}
           </span>
         ),
@@ -89,7 +91,7 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
         header: t('Quota Reset'),
         meta: { mobileHidden: true },
         cell: ({ row }) => (
-          <span className='text-muted-foreground'>
+          <span className='text-[13px] text-[#5A6478]'>
             {formatResetPeriod(row.original.plan, t)}
           </span>
         ),
@@ -101,7 +103,7 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
         header: t('Priority'),
         meta: { mobileHidden: true },
         cell: ({ row }) => (
-          <span className='text-muted-foreground'>
+          <span className='text-[13px] text-[#5A6478]'>
             {row.original.plan.sort_order}
           </span>
         ),
@@ -167,7 +169,7 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
         cell: ({ row }) => {
           const total = Number(row.original.plan.total_amount || 0)
           return (
-            <span className='text-muted-foreground'>
+            <span className='text-[13px] text-[#5A6478]'>
               {total > 0 ? formatQuota(total) : t('Unlimited')}
             </span>
           )
@@ -182,7 +184,7 @@ export function useSubscriptionsColumns(): ColumnDef<PlanRecord>[] {
           const group = row.original.plan.upgrade_group
           if (!group) {
             return (
-              <span className='text-muted-foreground'>{t('No Upgrade')}</span>
+              <span className='text-[13px] text-[#5A6478]'>{t('No Upgrade')}</span>
             )
           }
           return (

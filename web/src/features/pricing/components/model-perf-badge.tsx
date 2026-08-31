@@ -79,18 +79,18 @@ export const ModelPerfBadge = memo(function ModelPerfBadge(
       )}
     >
       <div title={t('Average latency')} className='min-w-0'>
-        <div className='text-muted-foreground/55 text-[10px] leading-4'>
+        <div className='pl-font-mono text-[9px] leading-4 text-[#8A93A4]'>
           {t('Latency short')}
         </div>
-        <div className='text-muted-foreground/80 font-mono text-xs leading-4 whitespace-nowrap'>
+        <div className='whitespace-nowrap font-mono text-[11px] leading-4 font-semibold text-[#0A0E1A]'>
           {formatCompactLatency(avg_latency_ms)}
         </div>
       </div>
       <div title={t('Throughput')} className='min-w-0'>
-        <div className='text-muted-foreground/55 truncate text-[10px] leading-4'>
+        <div className='pl-font-mono truncate text-[9px] leading-4 text-[#8A93A4]'>
           {t('Throughput short')}
         </div>
-        <div className='text-muted-foreground/80 font-mono text-xs leading-4 whitespace-nowrap'>
+        <div className='whitespace-nowrap font-mono text-[11px] leading-4 font-semibold text-[#0A0E1A]'>
           {formatCompactThroughput(avg_tps)}
         </div>
       </div>
@@ -98,7 +98,7 @@ export const ModelPerfBadge = memo(function ModelPerfBadge(
         title={`${t('Success rate')}: ${success_rate.toFixed(1)}%`}
         className='min-w-0'
       >
-        <div className='text-muted-foreground/55 truncate text-[10px] leading-4'>
+        <div className='pl-font-mono truncate text-[9px] leading-4 text-[#8A93A4]'>
           {t('Status short')}
         </div>
         <div className='flex h-4 items-center justify-end gap-0.5'>
@@ -110,11 +110,7 @@ export const ModelPerfBadge = memo(function ModelPerfBadge(
                 index === 0 && 'h-2',
                 index === 1 && 'h-2.5',
                 index === 2 && 'h-3',
-                rate == null
-                  ? index === 0
-                    ? 'bg-muted-foreground/10'
-                    : 'bg-muted-foreground/15'
-                  : getSuccessRateDotClass(rate)
+                rate == null ? 'bg-[#F0F2F6]' : getSuccessRateDotClass(rate)
               )}
             />
           ))}

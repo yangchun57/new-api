@@ -91,11 +91,11 @@ export function ConfigDrawer() {
             variant='ghost'
             aria-label={t('Open theme settings')}
             aria-describedby='config-drawer-description'
-            className='max-md:hidden'
+            className='size-9 rounded-lg text-[#5A6478] hover:bg-[#F0F2F6] hover:text-[#0A0E1A] max-md:hidden'
           />
         }
       >
-        <Palette className='size-[1.2rem]' aria-hidden='true' />
+        <Palette className='size-[18px]' aria-hidden='true' />
       </SheetTrigger>
       <SheetContent className={sideDrawerContentClassName('sm:max-w-md')}>
         <SheetHeader className={sideDrawerHeaderClassName()}>

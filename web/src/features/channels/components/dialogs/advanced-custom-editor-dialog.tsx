@@ -718,7 +718,7 @@ export function AdvancedCustomEditorDialog({
           <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
             <div>
               <p className='font-medium'>{t('Forwarding Routes')}</p>
-              <p className='text-muted-foreground text-xs'>
+              <p className='text-[#8A93A4] text-[12px]'>
                 {t('Add routes individually or replace them from a template.')}
               </p>
             </div>
@@ -751,7 +751,7 @@ export function AdvancedCustomEditorDialog({
                       >
                         <div className='flex min-w-0 flex-col gap-1 leading-snug whitespace-normal'>
                           <span>{option.label}</span>
-                          <span className='text-muted-foreground font-mono text-xs break-all'>
+                          <span className='text-[#8A93A4] font-mono text-[12px] break-all'>
                             {option.value}
                           </span>
                         </div>
@@ -844,7 +844,7 @@ export function AdvancedCustomEditorDialog({
                   render={
                     <button
                       type='button'
-                      className='hover:bg-muted/50 focus-visible:ring-ring/50 flex min-h-11 w-full items-center gap-3 rounded-md px-3 py-2 text-left outline-none focus-visible:ring-3'
+                      className='hover:bg-[#F0F2F6] focus-visible:ring-ring/50 flex min-h-11 w-full items-center gap-3 rounded-md px-3 py-2 text-left outline-none focus-visible:ring-3'
                     />
                   }
                 >
@@ -872,7 +872,7 @@ export function AdvancedCustomEditorDialog({
                         )}
                       />
                     </span>
-                    <span className='text-muted-foreground block truncate font-mono text-xs'>
+                    <span className='text-[#8A93A4] block truncate font-mono text-[12px]'>
                       {routeGroup.incomingPath}
                     </span>
                   </span>
@@ -956,11 +956,11 @@ export function AdvancedCustomEditorDialog({
             aria-invalid={Boolean(jsonError)}
             ariaLabel={t('Advanced text editing')}
           />
-          <p className='text-muted-foreground mt-2 text-xs'>
+          <p className='text-[#8A93A4] mt-2 text-[12px]'>
             {t('Edit JSON text directly. Format will be validated on save.')}
           </p>
           {jsonError ? (
-            <p className='text-destructive mt-1 text-xs'>{jsonError}</p>
+            <p className='text-destructive mt-1 text-[12px]'>{jsonError}</p>
           ) : null}
         </TabsContent>
       </Tabs>
@@ -1002,13 +1002,13 @@ function ManagementRouteEditor({
 
   if (!route) {
     return (
-      <div className='flex min-h-52 flex-col items-center justify-center gap-4 rounded-lg border border-dashed p-6 text-center'>
+      <div className='flex min-h-52 flex-col items-center justify-center gap-4 rounded-xl border border-dashed p-6 text-center'>
         <div>
-          <p className='font-medium'>{title}</p>
-          <p className='text-muted-foreground mt-1 max-w-lg text-sm'>
+          <p className='text-[#0A0E1A] text-[14px] font-semibold'>{title}</p>
+          <p className='text-[#8A93A4] mt-1 max-w-lg text-[12px]'>
             {description}
           </p>
-          <p className='text-muted-foreground mt-2 font-mono text-xs'>{path}</p>
+          <p className='text-[#8A93A4] mt-2 font-mono text-[12px]'>{path}</p>
         </div>
         <Button
           type='button'
@@ -1038,12 +1038,12 @@ function ManagementRouteEditor({
   }
 
   return (
-    <div className='flex flex-col gap-4 rounded-lg border p-4'>
+    <div className='flex flex-col gap-4 rounded-xl border p-4'>
       <div className='flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>
         <div>
-          <p className='font-medium'>{title}</p>
-          <p className='text-muted-foreground mt-1 text-sm'>{description}</p>
-          <p className='text-muted-foreground mt-1 font-mono text-xs'>{path}</p>
+          <p className='text-[#0A0E1A] text-[14px] font-semibold'>{title}</p>
+          <p className='text-[#8A93A4] mt-1 text-[12px]'>{description}</p>
+          <p className='text-[#8A93A4] mt-1 font-mono text-[12px]'>{path}</p>
         </div>
         <Button
           type='button'
@@ -1121,7 +1121,7 @@ function ManagementRouteEditor({
           </>
         ) : null}
       </div>
-      <p className='text-muted-foreground text-xs'>
+      <p className='text-[#8A93A4] text-[12px]'>
         {t(upstreamPathDescriptionKey)}
       </p>
     </div>
@@ -1175,15 +1175,15 @@ function RouteGroupEditor({
   return (
     <section
       className={cn(
-        'border-border overflow-hidden rounded-md border',
+        'border-[#E5E8EE] overflow-hidden rounded-md border',
         groupHasError && 'border-destructive/60'
       )}
     >
       {!hideHeader ? (
-        <div className='bg-muted/20 flex flex-col gap-3 p-3 lg:flex-row lg:items-center lg:justify-between'>
+        <div className='bg-[#F7F8FA]/40 flex flex-col gap-3 p-3 lg:flex-row lg:items-center lg:justify-between'>
           <div className='flex min-w-0 flex-1 flex-col gap-2'>
             <div className='flex flex-wrap items-center gap-2'>
-              <span className='text-sm font-medium'>{t('Route group')}</span>
+              <span className='text-[#0A0E1A] text-[14px] font-semibold'>{t('Route group')}</span>
               <Badge variant='secondary'>
                 {group.routeRows.length} {t('Routes')}
               </Badge>
@@ -1231,7 +1231,7 @@ function RouteGroupEditor({
                     >
                       <div className='flex min-w-0 flex-col gap-1 leading-snug whitespace-normal'>
                         <span>{option.label}</span>
-                        <span className='text-muted-foreground font-mono text-xs break-all'>
+                        <span className='text-[#8A93A4] font-mono text-[12px] break-all'>
                           {option.value}
                         </span>
                       </div>
@@ -1257,7 +1257,7 @@ function RouteGroupEditor({
       ) : null}
 
       <div className={cn('px-3 py-2', !hideHeader && 'border-t')}>
-        <p className='text-muted-foreground text-xs leading-relaxed'>
+        <p className='text-[#8A93A4] text-[12px] leading-relaxed'>
           {isModelListGroup
             ? t(
                 'This route discovers upstream OpenAI models and cannot be split or matched by client model rules.'
@@ -1267,7 +1267,7 @@ function RouteGroupEditor({
               )}
         </p>
         {groupHasError && validationError ? (
-          <p className='text-destructive mt-1 text-xs'>
+          <p className='text-destructive mt-1 text-[12px]'>
             {validationError.routeIndex !== undefined
               ? `${t('Route')} ${validationError.routeIndex + 1}: `
               : ''}
@@ -1278,7 +1278,7 @@ function RouteGroupEditor({
 
       <div
         className={cn(
-          'text-muted-foreground hidden items-center gap-2 border-t bg-muted/10 px-3 py-2 text-xs font-medium lg:grid',
+          'text-[#8A93A4] hidden items-center gap-2 border-t bg-[#F7F8FA]/20 px-3 py-2 text-[12px] font-medium lg:grid',
           routeEditorGridClassName
         )}
       >
@@ -1433,7 +1433,7 @@ function RouteEditor({
         <div className='flex min-w-0 items-start justify-between gap-3 md:col-span-2 lg:col-span-1'>
           <div className='min-w-0 space-y-2'>
             <div className='flex min-w-0 flex-wrap items-center gap-2'>
-              <div className='text-sm font-medium'>
+              <div className='text-[#0A0E1A] text-[13px] font-medium'>
                 {t('Route')} {index + 1}
               </div>
               {isModelListRoute ? (
@@ -1520,7 +1520,7 @@ function RouteEditor({
                         variant={ruleKind === 'regex' ? 'outline' : 'secondary'}
                         className='max-w-full gap-1.5 font-mono'
                       >
-                        <span className='font-sans text-[10px] font-semibold tracking-normal uppercase'>
+                        <span className='pl-font-mono text-[10px] font-semibold'>
                           {t(ruleKind === 'regex' ? 'Regex' : 'Exact')}
                         </span>
                         <span className='truncate'>{displayModel}</span>
@@ -1550,7 +1550,7 @@ function RouteEditor({
               incomingPath
             )}
           />
-          <p className='text-muted-foreground text-xs leading-relaxed lg:hidden'>
+          <p className='text-[#8A93A4] text-[12px] leading-relaxed lg:hidden'>
             {t(upstreamPathDescriptionKey)}
           </p>
         </FieldBlock>
@@ -1650,7 +1650,7 @@ function RouteEditor({
       </div>
 
       {errorMessage ? (
-        <p className='text-destructive text-xs'>{t(errorMessage)}</p>
+        <p className='text-destructive text-[12px]'>{t(errorMessage)}</p>
       ) : null}
 
       {authMode === 'header' || authMode === 'query' ? (
@@ -1666,7 +1666,7 @@ function RouteEditor({
             <FieldBlock
               label={t('Auth name')}
               className='lg:gap-1'
-              labelClassName='lg:text-xs'
+              labelClassName='lg:text-[12px]'
             >
               <Input
                 value={route.auth?.name || ''}
@@ -1679,7 +1679,7 @@ function RouteEditor({
             <FieldBlock
               label={t('Auth value')}
               className='lg:gap-1'
-              labelClassName='lg:text-xs'
+              labelClassName='lg:text-[12px]'
             >
               <Input
                 value={route.auth?.value || ''}
@@ -1710,7 +1710,7 @@ function ModelRuleHelpPopover() {
             type='button'
             variant='ghost'
             size='icon'
-            className='text-muted-foreground hover:text-foreground size-6'
+            className='text-[#8A93A4] hover:text-[#0A0E1A] size-6'
             aria-label={t('Client model matching help')}
           />
         }
@@ -1725,13 +1725,13 @@ function ModelRuleHelpPopover() {
       >
         <PopoverHeader className='gap-1'>
           <PopoverTitle>{t('Client model matching')}</PopoverTitle>
-          <PopoverDescription className='text-xs leading-relaxed'>
+          <PopoverDescription className='text-[12px] leading-relaxed'>
             {t(
               'Rules match the original model value from the client request body.'
             )}
           </PopoverDescription>
         </PopoverHeader>
-        <div className='text-muted-foreground space-y-2 text-xs leading-relaxed'>
+        <div className='text-[#8A93A4] space-y-2 text-[12px] leading-relaxed'>
           <p>
             {t(
               'Use exact model names such as gpt-4o, or regex rules prefixed with re: such as re:^gemini-.'
@@ -1800,7 +1800,7 @@ function FieldBlock({
 }) {
   return (
     <div className={cn('flex min-w-0 flex-col gap-2', className)}>
-      <span className={cn('text-sm font-medium', labelClassName)}>{label}</span>
+      <span className={cn('text-[#0A0E1A] text-[13px] font-medium', labelClassName)}>{label}</span>
       {children}
     </div>
   )

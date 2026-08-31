@@ -140,13 +140,13 @@ export function CacheStatsDialog(props: Props) {
       contentHeight='auto'
       bodyClassName='space-y-4'
     >
-      <p className='text-muted-foreground text-xs'>
+      <p className='text-[12px] text-[#8A93A4]'>
         {t(
           'Hit criteria: If cached tokens exist in usage, it counts as a hit.'
         )}
       </p>
       {loading ? (
-        <div className='text-muted-foreground py-8 text-center text-sm'>
+        <div className='py-8 text-center text-[13px] text-[#5A6478]'>
           {t('Loading...')}
         </div>
       ) : rows.length > 0 ? (
@@ -154,9 +154,9 @@ export function CacheStatsDialog(props: Props) {
           {rows.map((row) => (
             <div
               key={row.key}
-              className='flex justify-between gap-4 border-b pb-1 text-sm'
+              className='flex justify-between gap-4 border-b border-[#E5E8EE] pb-1 text-[13px] text-[#0A0E1A]'
             >
-              <span className='text-muted-foreground'>{row.key}</span>
+              <span className='text-[#8A93A4]'>{row.key}</span>
               <span className='text-right font-medium break-all'>
                 {row.value}
               </span>
@@ -164,7 +164,7 @@ export function CacheStatsDialog(props: Props) {
           ))}
         </div>
       ) : (
-        <div className='text-muted-foreground py-8 text-center text-sm'>
+        <div className='py-8 text-center text-[13px] text-[#5A6478]'>
           {t('No data available')}
         </div>
       )}

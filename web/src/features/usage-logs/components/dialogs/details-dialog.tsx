@@ -98,9 +98,9 @@ const CHANNEL_FIELD_LABELS: Record<string, string> = {
 function timingTextColorClass(
   variant: 'success' | 'warning' | 'danger'
 ): string {
-  if (variant === 'success') return 'text-emerald-600'
-  if (variant === 'warning') return 'text-amber-600'
-  return 'text-rose-600'
+  if (variant === 'success') return 'text-[#16A34A]'
+  if (variant === 'warning') return 'text-[#D97706]'
+  return 'text-[#E5484D]'
 }
 
 function DetailRow(props: {
@@ -110,15 +110,15 @@ function DetailRow(props: {
   muted?: boolean
 }) {
   return (
-    <div className='grid min-w-0 grid-cols-[5.25rem_minmax(0,1fr)] gap-2 text-sm sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-3'>
-      <span className='text-muted-foreground min-w-0 text-xs'>
+    <div className='grid min-w-0 grid-cols-[5.25rem_minmax(0,1fr)] gap-2 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-3'>
+      <span className='pl-font-mono min-w-0 text-[11px] text-[#8A93A4]'>
         {props.label}
       </span>
       <span
         className={cn(
-          'max-w-full min-w-0 text-xs break-all sm:wrap-break-word',
+          'max-w-full min-w-0 text-[13px] break-all sm:wrap-break-word text-[#0A0E1A]',
           props.mono && 'font-mono',
-          props.muted && 'text-muted-foreground'
+          props.muted && 'text-[#5A6478]'
         )}
       >
         {props.value}
@@ -140,8 +140,8 @@ function DetailSection(props: {
     <div className='min-w-0 space-y-1.5'>
       <Label
         className={cn(
-          'flex items-center gap-1.5 text-xs font-semibold',
-          isDanger && 'text-red-500'
+          'flex items-center gap-1.5 text-[13px] font-medium',
+          isDanger && 'text-[#E5484D]'
         )}
       >
         {props.icon && (
@@ -153,10 +153,10 @@ function DetailSection(props: {
       </Label>
       <div
         className={cn(
-          'min-w-0 space-y-1 overflow-hidden rounded-md border p-2.5 max-sm:p-2',
+          'min-w-0 space-y-1 overflow-hidden rounded-xl border border-[#E5E8EE] p-2.5 max-sm:p-2',
           isDanger
-            ? 'border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/20'
-            : 'bg-muted/30'
+            ? 'border-[#FCA5A5] bg-[#FEF2F2]'
+            : 'bg-[#F7F8FA]'
         )}
       >
         {props.children}
@@ -661,7 +661,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
                 <span>
                   {props.log.channel}
                   {props.log.channel_name && (
-                    <span className='text-muted-foreground'>
+                    <span className='text-[#8A93A4]'>
                       {' '}
                       ({props.log.channel_name})
                     </span>
@@ -751,7 +751,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
                 aria-label={t('Copy to clipboard')}
               >
                 {copiedText === conversionLabel ? (
-                  <Check className='size-3 text-green-600' />
+                  <Check className='size-3 text-[#16A34A]' />
                 ) : (
                   <Copy className='size-3' />
                 )}
@@ -764,9 +764,9 @@ export function DetailsDialog(props: DetailsDialogProps) {
                     mono
                   />
                 )}
-                <div className='flex min-w-0 items-center gap-1.5 text-xs'>
+                <div className='flex min-w-0 items-center gap-1.5 text-[12px]'>
                   <Route
-                    className='text-muted-foreground size-3'
+                    className='text-[#8A93A4] size-3'
                     aria-hidden='true'
                   />
                   <span className='min-w-0 break-all sm:wrap-break-word'>
@@ -785,7 +785,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
             label={t('Quota clamped')}
             variant='danger'
           >
-            <p className='mb-1 text-xs wrap-break-word'>
+            <p className='mb-1 text-[13px] text-[#5A6478] wrap-break-word'>
               {t('Quota saturation protection triggered')}
             </p>
             <DetailRow
@@ -820,7 +820,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
             label={t('Reject Reason')}
             variant='danger'
           >
-            <p className='text-xs wrap-break-word'>{other.reject_reason}</p>
+            <p className='text-[13px] text-[#5A6478] wrap-break-word'>{other.reject_reason}</p>
           </DetailSection>
         )}
 
@@ -880,7 +880,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
               />
             ))}
             {showLegacyTopupWarning && (
-              <div className='flex items-start gap-1.5 text-xs text-amber-600 dark:text-amber-400'>
+              <div className='flex items-start gap-1.5 text-[12px] text-[#D97706]'>
                 <Info className='mt-0.5 size-3.5 shrink-0' aria-hidden='true' />
                 <span>
                   {t(
@@ -898,7 +898,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
             label={
               <span className='flex items-center gap-1.5'>
                 <UserCog
-                  className='text-muted-foreground size-3.5'
+                  className='text-[#8A93A4] size-3.5'
                   aria-hidden='true'
                 />
                 {t('Operator Admin')}
@@ -1094,11 +1094,11 @@ export function DetailsDialog(props: DetailsDialogProps) {
               value={
                 <span className='flex items-center gap-1'>
                   {isUsageBillingPathLocal(other.admin_info) ? (
-                    <Monitor className='size-3 text-blue-500' />
+                    <Monitor className='size-3 text-[#2E4BFF]' />
                   ) : (
-                    <Cloud className='size-3 text-emerald-500' />
+                    <Cloud className='size-3 text-[#16A34A]' />
                   )}
-                  <span className='text-xs'>
+                  <span className='text-[12px] text-[#0A0E1A]'>
                     {getUsageBillingPathLabel(t, other.admin_info)}
                   </span>
                 </span>
@@ -1140,7 +1140,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
             )}
             {Array.isArray(other.stream_status.errors) &&
               other.stream_status.errors.length > 0 && (
-                <pre className='bg-background/60 mt-1 max-h-32 overflow-y-auto rounded border p-2 font-mono text-[11px] leading-relaxed wrap-break-word whitespace-pre-wrap'>
+                <pre className='bg-[#F7F8FA] mt-1 max-h-32 overflow-y-auto rounded-xl p-4 font-mono text-[12px] leading-relaxed text-[#5A6478] wrap-break-word whitespace-pre-wrap'>
                   {other.stream_status.errors.join('\n')}
                 </pre>
               )}
@@ -1208,7 +1208,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
               return (
                 <div
                   key={`${parsed.action}-${parsed.content}`}
-                  className='bg-background/60 flex min-w-0 flex-col gap-1.5 rounded border p-2 sm:flex-row sm:items-start sm:gap-2'
+                  className='bg-white flex min-w-0 flex-col gap-1.5 rounded-md border border-[#E5E8EE] p-2 sm:flex-row sm:items-start sm:gap-2'
                 >
                   <StatusBadge
                     variant='neutral'
@@ -1216,7 +1216,7 @@ export function DetailsDialog(props: DetailsDialogProps) {
                     className='shrink-0 font-medium'
                     copyable={false}
                   />
-                  <span className='min-w-0 font-mono text-[11px] leading-relaxed break-all sm:wrap-break-word'>
+                  <span className='min-w-0 font-mono text-[12px] leading-relaxed break-all text-[#5A6478] sm:wrap-break-word'>
                     {parsed.content}
                   </span>
                 </div>
@@ -1228,23 +1228,23 @@ export function DetailsDialog(props: DetailsDialogProps) {
         {/* Content */}
         {details && (
           <div className='space-y-1.5'>
-            <Label className='text-xs font-semibold'>{t('Content')}</Label>
-            <div className='bg-muted/30 relative min-w-0 overflow-hidden rounded-md border p-2.5'>
+            <Label className='text-[13px] font-medium text-[#0A0E1A]'>{t('Content')}</Label>
+            <div className='bg-[#F7F8FA] relative min-w-0 overflow-hidden rounded-xl border border-[#E5E8EE] p-4'>
               <Button
                 variant='ghost'
                 size='sm'
-                className='absolute top-1.5 right-1.5 h-5 w-5 p-0'
+                className='absolute top-2 right-2 h-7 w-7 p-0'
                 onClick={() => copyToClipboard(details)}
                 title={t('Copy to clipboard')}
                 aria-label={t('Copy to clipboard')}
               >
                 {copiedText === details ? (
-                  <Check className='size-3 text-green-600' />
+                  <Check className='size-3.5 text-[#16A34A]' />
                 ) : (
-                  <Copy className='size-3' />
+                  <Copy className='size-3.5' />
                 )}
               </Button>
-              <p className='min-w-0 pr-6 text-xs leading-relaxed break-all whitespace-pre-wrap sm:wrap-break-word'>
+              <p className='min-w-0 pr-8 font-mono text-[12px] leading-relaxed break-all text-[#5A6478] whitespace-pre-wrap sm:wrap-break-word'>
                 {details}
               </p>
             </div>

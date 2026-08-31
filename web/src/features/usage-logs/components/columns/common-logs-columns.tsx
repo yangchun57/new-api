@@ -296,7 +296,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
 
         return (
           <div className='flex min-w-0 flex-col gap-0.5'>
-            <span className='truncate font-mono text-xs tabular-nums'>
+            <span className='truncate text-[12px] tabular-nums text-[#8A93A4]'>
               {formatTimestampToDate(timestamp)}
             </span>
             <StatusBadge
@@ -304,7 +304,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
               variant={config.color as StatusBadgeProps['variant']}
               size='sm'
               copyable={false}
-              className='-ml-1.5 !text-xs [&_span]:!text-xs'
+              className='-ml-1.5 text-[12px] [&_span]:text-[12px]'
             />
           </div>
         )
@@ -368,7 +368,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                       copyText={String(log.channel)}
                       size='sm'
                       showDot={false}
-                      className='font-mono'
+                      className='font-mono text-[12px]'
                     />
                     {showMultiKeyIndex && (
                       <StatusBadge
@@ -377,7 +377,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                         showDot={false}
                         copyable={false}
                         variant='neutral'
-                        className='h-5 min-w-5 justify-center rounded-full px-1 font-mono text-xs'
+                        className='h-5 min-w-5 justify-center rounded-full border-[#E5E8EE] bg-[#F7F8FA] px-1 font-mono text-[11px] text-[#5A6478]'
                         aria-label={`${t('Key')} ${multiKeyIndex}`}
                       />
                     )}
@@ -387,25 +387,25 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                           render={
                             <button
                               type='button'
-                              className='text-muted-foreground hover:text-foreground focus-visible:ring-ring inline-flex size-5 shrink-0 items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:outline-none'
+                              className='inline-flex size-5 shrink-0 items-center justify-center rounded-full text-[#8A93A4] transition-colors hover:text-[#0A0E1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4BFF]/30'
                               aria-label={t('Retry Chain')}
                               onClick={(e) => e.stopPropagation()}
                             />
                           }
                         >
                           <GitBranch
-                            className='size-3.5 text-amber-500'
+                            className='size-3.5 text-[#D97706]'
                             aria-hidden='true'
                           />
                         </PopoverTrigger>
                         <PopoverContent
                           side='top'
                           align='start'
-                          className='w-64 text-xs'
+                          className='w-64 text-[12px]'
                         >
                           <div className='flex flex-col gap-1'>
-                            <p className='font-medium'>{t('Retry Chain')}</p>
-                            <p className='text-muted-foreground font-mono break-all'>
+                            <p className='text-[13px] font-medium text-[#0A0E1A]'>{t('Retry Chain')}</p>
+                            <p className='break-all font-mono text-[12px] text-[#5A6478]'>
                               {channelChain}
                             </p>
                           </div>
@@ -415,7 +415,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                     {affinity && (
                       <button
                         type='button'
-                        className='absolute -top-1 -right-1 leading-none text-amber-500'
+                        className='absolute -top-1 -right-1 leading-none text-[#D97706]'
                         onClick={(e) => {
                           e.stopPropagation()
                           setAffinityTarget({
@@ -435,33 +435,33 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                     )}
                   </div>
                   {log.channel_name && (
-                    <span className='text-muted-foreground/70 truncate [font-family:var(--font-body)] !text-xs'>
+                    <span className='truncate [font-family:var(--font-body)] text-[12px] text-[#8A93A4]'>
                       {channelName}
                     </span>
                   )}
                 </TooltipTrigger>
                 <TooltipContent>
                   <div className='space-y-1'>
-                    <p>
+                    <p className='text-[13px] text-[#0A0E1A]'>
                       {sensitiveVisible ? channelDisplay : channelIdDisplay}
                     </p>
                     {channelChain && (
-                      <p className='text-muted-foreground text-xs'>
+                      <p className='text-[12px] text-[#8A93A4]'>
                         {t('Chain')}: {channelChain}
                       </p>
                     )}
                     {showMultiKeyIndex && (
-                      <p className='text-muted-foreground text-xs'>
+                      <p className='text-[12px] text-[#8A93A4]'>
                         {t('Key')}: {multiKeyIndex}
                       </p>
                     )}
                     {affinity && (
-                      <div className='border-t pt-1 text-xs'>
-                        <p className='font-medium'>{t('Channel Affinity')}</p>
-                        <p>
+                      <div className='border-t border-[#E5E8EE] pt-1 text-[12px]'>
+                        <p className='text-[13px] font-medium text-[#0A0E1A]'>{t('Channel Affinity')}</p>
+                        <p className='text-[#5A6478]'>
                           {t('Rule')}: {affinity.rule_name || '-'}
                         </p>
-                        <p>
+                        <p className='text-[#5A6478]'>
                           {t('Group')}:{' '}
                           {sensitiveVisible
                             ? affinity.using_group ||
@@ -499,11 +499,11 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                 setUserInfoDialogOpen(true)
               }}
             >
-              <Avatar className='ring-border/60 size-6 ring-1 max-sm:hidden'>
+              <Avatar className='size-6 max-sm:hidden ring-1 ring-[#E5E8EE]'>
                 <AvatarFallback
                   className={cn(
                     'text-[11px] font-semibold',
-                    !sensitiveVisible && 'bg-muted text-muted-foreground'
+                    !sensitiveVisible && 'bg-[#F7F8FA] text-[#8A93A4]'
                   )}
                   style={
                     sensitiveVisible
@@ -518,7 +518,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                 <Tooltip>
                   <TooltipTrigger
                     render={
-                      <span className='text-muted-foreground max-w-[100px] truncate text-sm hover:underline' />
+                      <span className='max-w-[100px] truncate text-[13px] font-medium text-[#0A0E1A] hover:underline' />
                     }
                   >
                     {sensitiveVisible ? log.username : '••••'}
@@ -563,7 +563,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                   copyText={sensitiveVisible ? tokenName : undefined}
                   size='sm'
                   showDot={false}
-                  className='border-border/60 bg-muted/30 text-foreground h-6 max-w-full gap-1.5 overflow-hidden rounded-md border px-2 py-0.5 [font-family:var(--font-body)]'
+                  className='h-6 max-w-full gap-1.5 overflow-hidden rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-2 py-0.5 text-[13px] font-medium text-[#0A0E1A] [font-family:var(--font-body)]'
                 />
               </TooltipTrigger>
               {sensitiveVisible && tokenName.length > 16 && (
@@ -574,19 +574,19 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
             </Tooltip>
           </TooltipProvider>
           {(group || groupRatio != null) && (
-            <span className='block max-w-full truncate text-xs leading-none'>
+            <span className='block max-w-full truncate text-[12px] leading-none'>
               {group ? (
                 <GroupBadge
                   group={group}
                   label={sensitiveVisible ? undefined : '••••'}
                   type='text'
                   size='sm'
-                  className='inline align-baseline text-xs leading-none [&>span]:leading-none'
+                  className='inline align-baseline text-[12px] leading-none [&>span]:leading-none'
                 />
               ) : null}
               {group && groupRatio != null ? ' ' : null}
               {groupRatio != null ? (
-                <span className='text-muted-foreground/60 relative top-px align-baseline tabular-nums'>
+                <span className='relative top-px align-baseline tabular-nums text-[#8A93A4]'>
                   {formatRatioCompact(groupRatio)}x
                 </span>
               ) : null}
@@ -654,7 +654,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
         const promptTokens = log.prompt_tokens || 0
         const completionTokens = log.completion_tokens || 0
         if (promptTokens === 0 && completionTokens === 0) {
-          return <span className='text-muted-foreground text-xs'>-</span>
+          return <span className='text-[12px] text-[#8A93A4]'>-</span>
         }
 
         const cacheReadTokens = other?.cache_tokens || 0
@@ -667,19 +667,19 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
 
         return (
           <div className='flex flex-col gap-0.5'>
-            <span className='font-mono text-xs font-medium tabular-nums'>
+            <span className='text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
               {promptTokens.toLocaleString()} /{' '}
               {completionTokens.toLocaleString()}
             </span>
             {(cacheReadTokens > 0 || cacheWriteTokens > 0) && (
               <div className='flex items-center gap-1 text-[11px]'>
                 {cacheReadTokens > 0 && (
-                  <span className='text-muted-foreground/60'>
+                  <span className='text-[#8A93A4]'>
                     {t('Cache')}↓ {cacheReadTokens.toLocaleString()}
                   </span>
                 )}
                 {cacheWriteTokens > 0 && (
-                  <span className='text-muted-foreground/60'>
+                  <span className='text-[#8A93A4]'>
                     ↑ {cacheWriteTokens.toLocaleString()}
                   </span>
                 )}
@@ -734,13 +734,13 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
         const segments = buildDetailSegments(log, other, t, isAdmin)
         const primary = segments[0]
         const hasMore = segments.length > 1
-        let primaryTextClass = 'text-foreground'
+        let primaryTextClass = 'text-[#0A0E1A]'
         if (primary?.muted) {
-          primaryTextClass = 'text-muted-foreground/60'
+          primaryTextClass = 'text-[#5A6478]'
         } else if (primary?.danger) {
-          primaryTextClass = 'text-red-600 dark:text-red-400'
+          primaryTextClass = 'text-[#E5484D]'
         }
-        let detailPreview = <span className='text-muted-foreground/40'>—</span>
+        let detailPreview = <span className='text-[#B8BFCC]'>—</span>
         if (primary) {
           detailPreview = (
             <span
@@ -751,7 +751,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
             >
               {primary.text}
               {hasMore && (
-                <span className='text-muted-foreground/40 ml-0.5'>
+                <span className='ml-0.5 text-[#8A93A4]'>
                   +{segments.length - 1}
                 </span>
               )}
@@ -759,7 +759,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
           )
         } else if (log.content) {
           detailPreview = (
-            <span className='text-muted-foreground truncate group-hover:underline'>
+            <span className='truncate text-[#5A6478] group-hover:underline'>
               {log.content}
             </span>
           )
@@ -769,7 +769,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
           <>
             <button
               type='button'
-              className='group flex max-w-[200px] items-center gap-1 text-left text-xs'
+              className='group flex max-w-[200px] items-center gap-1 text-left text-[12px]'
               onClick={() => setDialogOpen(true)}
               title={t('Click to view full details')}
             >

@@ -76,7 +76,7 @@ export function ProfileSettingsCard({
         <TabsList className='grid w-full grid-cols-2 items-stretch gap-1 rounded-xl p-1 group-data-horizontal/tabs:h-10'>
           <TabsTrigger
             value='bindings'
-            className='h-full gap-2 rounded-lg px-3 py-0 leading-none'
+            className='h-full gap-2 rounded-md px-3 py-0 leading-none'
           >
             <Link2 className='h-4 w-4' />
             <span className='hidden sm:inline'>{t('Account Bindings')}</span>
@@ -84,7 +84,7 @@ export function ProfileSettingsCard({
           </TabsTrigger>
           <TabsTrigger
             value='settings'
-            className='h-full gap-2 rounded-lg px-3 py-0 leading-none'
+            className='h-full gap-2 rounded-md px-3 py-0 leading-none'
           >
             <Settings className='h-4 w-4' />
             <span className='hidden sm:inline'>

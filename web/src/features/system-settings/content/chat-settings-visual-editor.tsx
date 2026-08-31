@@ -131,7 +131,7 @@ export function ChatSettingsVisualEditor({
     <div className='space-y-4'>
       <div className='flex items-center gap-4'>
         <div className='relative flex-1'>
-          <Search className='text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4' />
+          <Search className='absolute top-2.5 left-2.5 h-4 w-4 text-[#8A93A4]' />
           <Input
             placeholder={t('Search chat presets...')}
             value={searchText}
@@ -159,13 +159,13 @@ export function ChatSettingsVisualEditor({
           {
             id: 'name',
             header: t('Chat Client Name'),
-            cellClassName: 'font-medium',
+            cellClassName: 'font-medium text-[13px] text-[#0A0E1A]',
             cell: (chat) => chat.name,
           },
           {
             id: 'url',
             header: t('URL'),
-            cellClassName: 'max-w-md truncate font-mono text-sm',
+            cellClassName: 'max-w-md truncate font-mono text-[12px] text-[#5A6478]',
             cell: (chat) => chat.url,
           },
           {
