@@ -25,7 +25,8 @@ import { isHttpUrl } from '@/lib/content-format'
 import { getHomePageContent } from '../api'
 import type { HomePageContentResult } from '../types'
 
-const STORAGE_KEY = 'home_page_content'
+const STORAGE_KEY = 'home_page_content_v2'
+const LEGACY_STORAGE_KEYS = ['home_page_content']
 
 /**
  * Hook to load and manage custom home page content
@@ -38,8 +39,9 @@ export function useHomePageContent(): HomePageContentResult {
   useEffect(() => {
     let mounted = true
 
+    LEGACY_STORAGE_KEYS.forEach((k) => localStorage.removeItem(k))
+
     const loadContent = async () => {
-      // Load from localStorage first for immediate display
       const cached = localStorage.getItem(STORAGE_KEY)
       if (cached && mounted) {
         setContent(cached)
@@ -51,11 +53,10 @@ export function useHomePageContent(): HomePageContentResult {
 
         if (!mounted) return
 
-        if (success && data) {
+        if (success && data && data.trim()) {
           setContent(data)
           localStorage.setItem(STORAGE_KEY, data)
         } else {
-          // Clear content if API returns empty
           setContent('')
           localStorage.removeItem(STORAGE_KEY)
         }

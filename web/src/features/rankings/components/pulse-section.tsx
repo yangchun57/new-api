@@ -46,7 +46,7 @@ export function PulseSection(props: PulseSectionProps) {
       <PulseCard
         title={t('Trending up')}
         description={t('Models climbing the leaderboard')}
-        icon={<TrendingUp className='size-4 text-emerald-500' />}
+        icon={<TrendingUp className='size-4 text-[#22C55E]' />}
       >
         {props.movers.length === 0 ? (
           <PulseEmpty label={t('No notable climbers right now')} />
@@ -62,7 +62,7 @@ export function PulseSection(props: PulseSectionProps) {
       <PulseCard
         title={t('Trending down')}
         description={t('Models losing positions')}
-        icon={<TrendingDown className='size-4 text-rose-500' />}
+        icon={<TrendingDown className='size-4 text-[#E54D4D]' />}
       >
         {props.droppers.length === 0 ? (
           <PulseEmpty label={t('No notable drops right now')} />
@@ -85,24 +85,24 @@ function PulseCard(props: {
   children: React.ReactNode
 }) {
   return (
-    <div className='bg-card overflow-hidden rounded-lg border'>
-      <header className='border-b px-4 py-3'>
-        <h3 className='text-foreground inline-flex items-center gap-2 text-sm font-semibold'>
+    <div className='pl-card pl-card-hover overflow-hidden'>
+      <header className='px-5 py-4'>
+        <h3 className='pl-font-display inline-flex items-center gap-2 text-[14px] font-semibold tracking-tight text-[#0A0E1A]'>
           {props.icon}
           {props.title}
         </h3>
-        <p className='text-muted-foreground/80 mt-0.5 text-xs'>
+        <p className='mt-0.5 text-[12px] leading-snug text-[#5A6478]'>
           {props.description}
         </p>
       </header>
-      <div className='py-1'>{props.children}</div>
+      <div className='border-t border-[#E5E8EE] py-1'>{props.children}</div>
     </div>
   )
 }
 
 function PulseEmpty(props: { label: string }) {
   return (
-    <div className='text-muted-foreground/80 px-4 py-6 text-center text-xs'>
+    <div className='px-5 py-8 text-center pl-font-mono text-[12px] text-[#8A93A4]'>
       {props.label}
     </div>
   )
@@ -110,28 +110,31 @@ function PulseEmpty(props: { label: string }) {
 
 function MoverRow(props: { row: RankingMover; intent: 'up' | 'down' }) {
   return (
-    <li className='flex items-center gap-3 px-4 py-2'>
-      <span className='shrink-0'>{getLobeIcon(props.row.vendor_icon, 20)}</span>
+    <li className='flex items-center gap-3 border-b border-[#E5E8EE]/60 px-5 py-2.5 last:border-b-0 transition-colors hover:bg-[#F7F8FA]/60'>
+      <span className='shrink-0 rounded-[8px] bg-[#F7F8FA] p-1.5'>
+        {getLobeIcon(props.row.vendor_icon, 20)}
+      </span>
       <div className='min-w-0 flex-1'>
         <ModelLink
           modelName={props.row.model_name}
-          className='text-foreground block truncate font-mono text-xs font-medium'
+          className='pl-font-mono block truncate text-[12.5px] font-medium text-[#0A0E1A]'
         >
           {props.row.model_name}
         </ModelLink>
-        <p className='text-muted-foreground/80 truncate text-[11px]'>
-          #{props.row.current_rank} ·{' '}
-          <VendorLink vendor={props.row.vendor}>
+        <p className='pl-font-mono mt-0.5 truncate text-[11px] text-[#8A93A4]'>
+          <span className='text-[#5A6478]'>#{props.row.current_rank}</span>
+          <span className='mx-1.5 text-[#CBD3E0]'>·</span>
+          <VendorLink vendor={props.row.vendor} className='text-[#8A93A4] hover:text-[#0A0E1A]'>
             {props.row.vendor.toLowerCase()}
           </VendorLink>
         </p>
       </div>
       <span
         className={cn(
-          'inline-flex shrink-0 items-center gap-0.5 font-mono text-xs font-semibold tabular-nums',
+          'pl-font-mono inline-flex shrink-0 items-center gap-0.5 rounded-full px-2 py-0.5 text-[11.5px] font-semibold tabular-nums',
           props.intent === 'up'
-            ? 'text-emerald-600 dark:text-emerald-400'
-            : 'text-rose-600 dark:text-rose-400'
+            ? 'bg-[#E8FBF0] text-[#16A34A]'
+            : 'bg-[#FEECEC] text-[#C93838]'
         )}
       >
         {props.intent === 'up' ? (

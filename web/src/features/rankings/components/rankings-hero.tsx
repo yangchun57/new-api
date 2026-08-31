@@ -34,60 +34,54 @@ type RankingsHeroProps = {
   onPeriodChange: (period: RankingPeriod) => void
 }
 
-/**
- * Hero strip for the rankings page. Intentionally minimal — title +
- * subtitle + period tabs only.
- */
 export function RankingsHero(props: RankingsHeroProps) {
   const { t } = useTranslation()
 
   return (
-    <section className='space-y-5'>
-      <div className='space-y-2'>
-        <h1 className='text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] font-bold tracking-tight'>
-          {t('Rankings')}
-        </h1>
-        <p className='text-muted-foreground/80 max-w-2xl text-sm'>
-          {t(
-            'Discover the most-used models and rising vendors on the platform, updated from live usage data.'
-          )}
-        </p>
-      </div>
+    <section className='pl-fade-up space-y-6 pt-4'>
+      {/* Title row */}
+      <div className='flex flex-col gap-5 md:flex-row md:items-end md:justify-between'>
+        <div className='space-y-3'>
+          <h1 className='pl-font-display text-[clamp(2rem,4vw,2.75rem)] leading-[1.1] font-bold tracking-tight text-[#0A0E1A]'>
+            {t('Rankings')}
+          </h1>
+          <p className='max-w-2xl text-[15px] leading-relaxed text-[#5A6478]'>
+            {t(
+              'Discover the most-used models and rising vendors on the platform, updated from live usage data.'
+            )}
+          </p>
+        </div>
 
-      {/* Underline tabs for period — clean and unobtrusive. */}
-      <div
-        role='tablist'
-        aria-label={t('Period')}
-        className='border-border/60 flex items-center border-b'
-      >
-        {PERIODS.map((p) => {
-          const isActive = props.period === p.id
-          return (
-            <button
-              key={p.id}
-              role='tab'
-              type='button'
-              aria-selected={isActive}
-              onClick={() => props.onPeriodChange(p.id)}
-              className={cn(
-                'focus-visible:ring-ring/40 relative -mb-px rounded-sm px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none',
-                isActive
-                  ? 'text-foreground'
-                  : 'text-muted-foreground hover:text-foreground'
-              )}
-            >
-              {t(p.labelKey)}
-              <span
-                aria-hidden
+        {/* Pill tabs */}
+        <div
+          role='tablist'
+          aria-label={t('Period')}
+          className='inline-flex items-center gap-1 rounded-full border border-[#E5E8EE] bg-white p-1 pl-nav-shadow self-start md:self-auto'
+        >
+          {PERIODS.map((p) => {
+            const isActive = props.period === p.id
+            return (
+              <button
+                key={p.id}
+                role='tab'
+                type='button'
+                aria-selected={isActive}
+                onClick={() => props.onPeriodChange(p.id)}
                 className={cn(
-                  'bg-foreground absolute inset-x-3 -bottom-px h-[2px] rounded-full transition-opacity',
-                  isActive ? 'opacity-100' : 'opacity-0'
+                  'pl-font-display relative h-8 rounded-full px-3.5 text-[12.5px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4BFF]/30',
+                  isActive
+                    ? 'bg-[#0A0E1A] text-white shadow-[0_2px_6px_rgba(10,14,26,0.15)]'
+                    : 'text-[#5A6478] hover:text-[#0A0E1A]'
                 )}
-              />
-            </button>
-          )
-        })}
+              >
+                {t(p.labelKey)}
+              </button>
+            )
+          })}
+        </div>
       </div>
     </section>
   )
 }
+
+// end of file

@@ -31,10 +31,9 @@ interface HeroProps {
   isAuthenticated?: boolean
 }
 
-// Stylized three-dots indicator representing "More"
 const MoreIcon = () => (
   <svg
-    className='text-muted-foreground/60 group-hover:text-foreground size-6 shrink-0 transition-colors'
+    className='pl-more-dot size-4 shrink-0 text-[#8a93a4] transition-colors group-hover:text-[#0A0E1A]'
     viewBox='0 0 24 24'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
@@ -45,7 +44,7 @@ const MoreIcon = () => (
   </svg>
 )
 
-export function Hero(props: HeroProps) {
+export function PremiumHero(props: HeroProps) {
   const { t } = useTranslation()
   const { status } = useStatus()
   const docsUrl =
@@ -53,7 +52,7 @@ export function Hero(props: HeroProps) {
 
   const renderDocsButton = () => {
     const className =
-      'group border-border/50 hover:border-border hover:bg-muted/50 inline-flex h-11 items-center gap-1.5 rounded-none px-5 font-mono text-sm font-semibold tracking-wide uppercase'
+      'pl-cta-secondary group inline-flex h-11 items-center gap-1.5 rounded-full border border-[#E5E8EE] bg-white px-5 pl-font-display text-[13px] font-semibold text-[#0A0E1A] hover:bg-[#F7F8FA]'
     const isExternal = docsUrl.startsWith('http')
     if (isExternal) {
       return (
@@ -64,7 +63,7 @@ export function Hero(props: HeroProps) {
             <a href={docsUrl} target='_blank' rel='noopener noreferrer' />
           }
         >
-          <BookOpen className='text-muted-foreground/80 group-hover:text-foreground size-4 transition-colors duration-200' />
+          <BookOpen className='size-4 text-[#5A6478] transition-colors group-hover:text-[#0A0E1A]' />
           <span>{t('Docs')}</span>
         </Button>
       )
@@ -75,70 +74,74 @@ export function Hero(props: HeroProps) {
         className={className}
         render={<Link to={docsUrl} />}
       >
-        <BookOpen className='text-muted-foreground/80 group-hover:text-foreground size-4 transition-colors duration-200' />
+        <BookOpen className='size-4 text-[#5A6478] transition-colors group-hover:text-[#0A0E1A]' />
         <span>{t('Docs')}</span>
       </Button>
     )
   }
 
   return (
-    <section className='relative z-10 px-6 pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28'>
-      <div className='mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-8'>
-        {/* Left Column: Title, description, action buttons and application support */}
+    <section className='relative isolate overflow-hidden bg-[#F7F8FA] px-6 pt-28 pb-20 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28'>
+      {/* Background: 24px grid + blue/green radial glows */}
+      <div className='pointer-events-none absolute inset-0 pl-grid-bg opacity-70' />
+      <div className='pointer-events-none absolute inset-0 pl-glow-blue' />
+      <div className='pointer-events-none absolute inset-0 pl-glow-green' />
+
+      <div className='relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-8'>
+        {/* Left Column */}
         <div className='flex flex-col items-start text-left lg:col-span-6'>
-          {/* Top Pill Badge */}
+          {/* Top live pill */}
           <div
-            className='landing-animate-fade-up mb-5 inline-flex items-center gap-2 border border-success/30 bg-success/10 px-3 py-1.5 font-mono text-[11px] font-medium tracking-wider text-success uppercase opacity-0'
-            style={{ animationDelay: '0ms' }}
+            className='pl-fade-up pl-delay-1 mb-5 inline-flex items-center gap-2 rounded-full border border-[#22C55E]/25 bg-[#E8FBF0] px-3 py-1.5 pl-font-mono text-[11px] text-[#16A34A]'
           >
-            <span className='relative inline-flex size-1.5 rounded-full bg-success' />
+            <span className='relative inline-flex size-1.5 rounded-full bg-[#22C55E] pl-pulse-dot' />
             <span>{t('AI Application Infrastructure Foundation')}</span>
           </div>
 
           <h1
-            className='landing-animate-fade-up text-[clamp(2.25rem,4.5vw,3.25rem)] leading-[1.15] font-bold tracking-tight'
-            style={{ animationDelay: '60ms' }}
+            className='pl-fade-up pl-delay-2 pl-font-display text-[clamp(2.25rem,4.5vw,3.25rem)] leading-[1.12] font-bold tracking-tight text-[#0A0E1A]'
           >
             {t('Unified API Gateway for')}
             <br />
-            {t('Vast Range of AI Models')}
+            <span className='pl-font-serif-italic'>
+              {t('Vast Range of AI Models')}
+            </span>
           </h1>
           <p
-            className='landing-animate-fade-up text-muted-foreground/80 mt-5 max-w-xl text-base leading-relaxed opacity-0 md:text-[15px]'
-            style={{ animationDelay: '120ms' }}
+            className='pl-fade-up pl-delay-3 mt-5 max-w-xl text-[15px] leading-relaxed text-[#5A6478]'
           >
             {t(
               'Access a vast selection of models via a standard, unified API protocol. Power AI applications, manage digital assets, and connect the Future.'
             )}
           </p>
 
+          {/* CTAs — same count/order/text as original Hero */}
           <div
-            className='landing-animate-fade-up mt-8 flex flex-wrap items-center gap-3 opacity-0'
-            style={{ animationDelay: '180ms' }}
+            className='pl-fade-up pl-delay-4 mt-8 flex flex-wrap items-center gap-3'
           >
             {props.isAuthenticated ? (
               <>
                 <Button
-                  className='group bg-foreground text-background hover:bg-foreground/90 inline-flex h-11 items-center gap-1.5 rounded-none px-5 font-mono text-sm font-semibold tracking-wide uppercase'
+                  className='group inline-flex h-11 items-center gap-1.5 rounded-full bg-[#0A0E1A] px-5 pl-font-display text-[13px] font-semibold text-white pl-cta-primary hover:bg-[#0A0E1A]/90'
                   render={<Link to='/dashboard' />}
                 >
                   {t('Go to Dashboard')}
-                  <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
+                  <ArrowRight className='ml-1 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
                 </Button>
                 {renderDocsButton()}
               </>
             ) : (
               <>
                 <Button
-                  className='group bg-foreground text-background hover:bg-foreground/90 inline-flex h-11 items-center gap-1.5 rounded-none px-5 font-mono text-sm font-semibold tracking-wide uppercase'
+                  className='group inline-flex h-11 items-center gap-1.5 rounded-full bg-[#0A0E1A] px-5 pl-font-display text-[13px] font-semibold text-white pl-cta-primary hover:bg-[#0A0E1A]/90'
                   render={<Link to='/sign-up' />}
                 >
                   {t('Get Started')}
-                  <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
+                  <ArrowRight className='ml-1 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
                 </Button>
                 <Button
                   variant='outline'
-                  className='border-border/50 hover:border-border hover:bg-muted/50 h-11 rounded-none px-5 font-mono text-sm font-semibold tracking-wide uppercase'
+                  className='pl-cta-secondary inline-flex h-11 items-center gap-1.5 rounded-full border border-[#E5E8EE] bg-white px-5 pl-font-display text-[13px] font-semibold text-[#0A0E1A] hover:bg-[#F7F8FA]'
                   render={<Link to='/pricing' />}
                 >
                   {t('View Pricing')}
@@ -148,46 +151,42 @@ export function Hero(props: HeroProps) {
             )}
           </div>
 
-          {/* Supported Apps */}
+          {/* Supported Apps — same 3 tiles, same copy/links as original */}
           <div
-            className='landing-animate-fade-up mt-10 w-full max-w-xl opacity-0'
-            style={{ animationDelay: '240ms' }}
+            className='pl-fade-up pl-delay-5 mt-10 w-full max-w-xl'
           >
             <div className='mb-4 flex flex-col gap-1'>
-              <span className='text-muted-foreground/50 text-[10px] font-bold tracking-[0.15em] uppercase'>
+              <span className='pl-font-mono text-[10px] text-[#5A6478]'>
                 {t('Supported Applications')}
               </span>
-              <p className='text-muted-foreground/60 text-xs leading-relaxed'>
+              <p className='text-[12px] leading-relaxed text-[#8a93a4]'>
                 {t(
                   'Supports one-click configuration and perfectly adapts to NewAPI multi-protocol configuration.'
                 )}
               </p>
             </div>
             <div className='flex flex-wrap items-center gap-3'>
-              {/* Cherry Studio */}
               <a
                 href='https://cherry-ai.com'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group border-border/40 bg-muted/15 text-foreground/80 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-3 rounded-none border px-5 py-2.5 text-sm font-medium transition-colors duration-300'
+                className='group inline-flex items-center gap-3 rounded-full border border-[#E5E8EE] bg-white px-5 py-2.5 pl-nav-shadow text-[13px] font-medium text-[#0A0E1A] transition-colors duration-200 hover:border-[#0A0E1A] hover:bg-white'
               >
-                <CherryStudio.Color size={24} className='shrink-0' />
+                <CherryStudio.Color size={22} className='shrink-0' />
                 <span>Cherry Studio</span>
               </a>
 
-              {/* CC Switch */}
               <a
                 href='https://ccswitch.io'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group border-border/40 bg-muted/15 text-foreground/80 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-3 rounded-none border px-5 py-2.5 text-sm font-medium transition-colors duration-300'
+                className='group inline-flex items-center gap-3 rounded-full border border-[#E5E8EE] bg-white px-5 py-2.5 pl-nav-shadow text-[13px] font-medium text-[#0A0E1A] transition-colors duration-200 hover:border-[#0A0E1A] hover:bg-white'
               >
                 <img
                   src='https://ccswitch.io/favicon.png'
                   alt='CC Switch'
-                  className='size-6 shrink-0 object-contain'
+                  className='size-5 shrink-0 object-contain'
                   onError={(e) => {
-                    // Fallback to a styled text avatar if the remote favicon fails to load in sandbox or local environments
                     e.currentTarget.style.display = 'none'
                     const fallback = e.currentTarget.nextSibling as HTMLElement
                     if (fallback) fallback.style.display = 'flex'
@@ -195,15 +194,14 @@ export function Hero(props: HeroProps) {
                 />
                 <span
                   style={{ display: 'none' }}
-                  className='bg-success/10 text-success dark:bg-success/10 dark:text-success size-6 shrink-0 items-center justify-center text-[10px] font-bold'
+                  className='inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-[#E8FBF0] pl-font-mono text-[9px] text-[#16A34A]'
                 >
                   CC
                 </span>
                 <span>CC Switch</span>
               </a>
 
-              {/* "More" */}
-              <div className='group border-border/40 bg-muted/15 text-foreground/55 hover:border-border hover:bg-muted/30 hover:text-foreground flex cursor-default items-center gap-2.5 rounded-none border px-5 py-2.5 text-sm font-medium transition-colors duration-300'>
+              <div className='group inline-flex cursor-default items-center gap-2 rounded-full border border-[#E5E8EE] bg-white px-5 py-2.5 pl-nav-shadow text-[13px] font-medium text-[#5A6478] transition-colors duration-200 hover:border-[#0A0E1A] hover:bg-white hover:text-[#0A0E1A]'>
                 <MoreIcon />
                 <span>{t('More Apps')}</span>
               </div>
@@ -211,12 +209,15 @@ export function Hero(props: HeroProps) {
           </div>
         </div>
 
-        {/* Right Column: Hero Terminal API Demo */}
+        {/* Right Column: original terminal demo, wrapped in a premium card shell */}
         <div
-          className='landing-animate-fade-up flex w-full justify-center opacity-0 lg:col-span-6'
-          style={{ animationDelay: '320ms' }}
+          className='pl-fade-up pl-delay-6 flex w-full justify-center lg:col-span-6'
         >
-          <HeroTerminalDemo className='mt-8 lg:mt-0' />
+          <div className='relative mt-8 w-full max-w-[520px] lg:mt-0'>
+            <div className='relative overflow-hidden rounded-[16px] border border-[#E5E8EE] bg-white pl-nav-shadow'>
+              <HeroTerminalDemo className='w-full' />
+            </div>
+          </div>
         </div>
       </div>
     </section>

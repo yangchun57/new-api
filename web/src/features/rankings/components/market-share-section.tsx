@@ -21,7 +21,6 @@ import { PieChart } from 'lucide-react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useChartTheme } from '@/lib/use-chart-theme'
 import { VCHART_OPTION } from '@/lib/vchart'
 
 import { formatShare, formatTokens } from '../lib/format'
@@ -35,9 +34,6 @@ const PERIOD_DESCRIPTIONS: Record<RankingPeriod, string> = {
   year: 'Token share by model author across the past year',
 }
 
-/** Stable colour palette for vendors, used in both the share chart and the
- * legend dots. Falls back to a neutral palette for unknown vendors so that
- * future additions still render. */
 const VENDOR_COLOURS: Record<string, string> = {
   OpenAI: '#10a37f',
   Anthropic: '#d97757',
@@ -58,19 +54,19 @@ const VENDOR_COLOURS: Record<string, string> = {
 }
 
 const FALLBACK_PALETTE = [
-  '#0ea5e9',
-  '#22c55e',
-  '#a855f7',
-  '#f97316',
-  '#14b8a6',
-  '#eab308',
-  '#ec4899',
-  '#84cc16',
-  '#6366f1',
-  '#10b981',
-  '#f43f5e',
-  '#0891b2',
-  '#94a3b8',
+  '#2E4BFF',
+  '#22C55E',
+  '#A855F7',
+  '#F97316',
+  '#14B8A6',
+  '#EAB308',
+  '#EC4899',
+  '#84CC16',
+  '#6366F1',
+  '#10B981',
+  '#F43F5E',
+  '#0891B2',
+  '#94A3B8',
 ]
 
 function buildVendorColourMap(names: string[]): Record<string, string> {
@@ -88,6 +84,8 @@ function buildVendorColourMap(names: string[]): Record<string, string> {
 }
 
 const MAX_VENDORS_IN_LIST = 12
+const CHART_TEXT = 'rgba(10, 14, 26, 0.58)'
+const CHART_GRID = 'rgba(10, 14, 26, 0.08)'
 
 type MarketShareSectionProps = {
   history: VendorShareSeries
@@ -95,22 +93,8 @@ type MarketShareSectionProps = {
   period: RankingPeriod
 }
 
-/**
- * Combined "Market Share" card: a 100%-stacked bar chart showing each
- * vendor's slice of total token volume, paired below with a two-column
- * vendor list.
- */
 export function MarketShareSection(props: MarketShareSectionProps) {
   const { t } = useTranslation()
-  const { resolvedTheme, themeReady } = useChartTheme()
-  const chartTextColor =
-    resolvedTheme === 'dark'
-      ? 'rgba(255, 255, 255, 0.68)'
-      : 'rgba(15, 23, 42, 0.58)'
-  const chartGridColor =
-    resolvedTheme === 'dark'
-      ? 'rgba(255, 255, 255, 0.12)'
-      : 'rgba(15, 23, 42, 0.12)'
 
   const colourMap = useMemo(
     () => buildVendorColourMap(props.history.vendors.map((v) => v.name)),
@@ -144,7 +128,7 @@ export function MarketShareSection(props: MarketShareSectionProps) {
         {
           orient: 'bottom',
           label: {
-            style: { fill: chartTextColor, fontSize: 10 },
+            style: { fill: CHART_TEXT, fontSize: 10 },
             autoHide: true,
             autoLimit: true,
           },
@@ -157,11 +141,11 @@ export function MarketShareSection(props: MarketShareSectionProps) {
           label: {
             formatMethod: (val: number | string) =>
               `${Math.round(Number(val) * 100)}%`,
-            style: { fill: chartTextColor, fontSize: 10 },
+            style: { fill: CHART_TEXT, fontSize: 10 },
           },
           grid: {
             visible: true,
-            style: { lineDash: [3, 3], stroke: chartGridColor },
+            style: { lineDash: [3, 3], stroke: CHART_GRID },
           },
         },
       ],
@@ -204,7 +188,7 @@ export function MarketShareSection(props: MarketShareSectionProps) {
       },
       animationAppear: { duration: 500 },
     }
-  }, [chartGridColor, chartTextColor, colourMap, orderedPoints])
+  }, [colourMap, orderedPoints])
 
   const visible = props.rows.slice(0, MAX_VENDORS_IN_LIST)
   const half = Math.ceil(visible.length / 2)
@@ -212,54 +196,52 @@ export function MarketShareSection(props: MarketShareSectionProps) {
   const right = visible.slice(half)
 
   return (
-    <section className='bg-card overflow-hidden rounded-lg border'>
-      {/* Chart block ----------------------------------------------------- */}
-      <header className='px-5 py-4'>
-        <h2 className='text-foreground inline-flex items-center gap-2 text-base font-semibold'>
-          <PieChart className='text-primary size-4' />
+    <section className='pl-card pl-card-hover'>
+      <header className='border-b border-[#E5E8EE] px-6 py-5'>
+        <h2 className='pl-font-display inline-flex items-center gap-2 text-[15px] font-semibold text-[#0A0E1A]'>
+          <PieChart className='size-4 text-[#2E4BFF]' />
           {t('Market Share')}
         </h2>
-        <p className='text-muted-foreground mt-1 text-sm'>
+        <p className='mt-1 text-[13px] text-[#5A6478]'>
           {t(PERIOD_DESCRIPTIONS[props.period])}
         </p>
       </header>
 
-      <div className='px-5 pb-5'>
+      <div className='px-6 pt-5 pb-2'>
         <div className='h-60 sm:h-72'>
-          {themeReady && spec ? (
+          {spec ? (
             <VChart
-              key={`vendor-share-${resolvedTheme}-${props.period}`}
+              key={`vendor-share-light-${props.period}`}
               spec={{
                 ...spec,
-                theme: resolvedTheme === 'dark' ? 'dark' : 'light',
+                theme: 'light',
                 background: 'transparent',
               }}
               option={VCHART_OPTION}
             />
           ) : (
-            <div className='text-muted-foreground/80 flex h-full items-center justify-center text-xs'>
+            <div className='flex h-full items-center justify-center text-xs text-[#8A93A4]'>
               {t('No history data available')}
             </div>
           )}
         </div>
       </div>
 
-      {/* Vendor list block ----------------------------------------------- */}
-      <div className='border-t'>
-        <header className='px-5 pt-4 pb-2'>
-          <h3 className='text-foreground text-sm font-semibold'>
+      <div className='border-t border-[#E5E8EE] px-6 pt-4 pb-5'>
+        <header className='mb-2'>
+          <h3 className='pl-font-display text-[13px] font-semibold text-[#0A0E1A]'>
             {t('By model author')}
           </h3>
-          <p className='text-muted-foreground/80 mt-0.5 text-xs'>
+          <p className='mt-0.5 text-[12px] text-[#8A93A4]'>
             {t('Vendors ranked by aggregated token volume')}
           </p>
         </header>
         {visible.length === 0 ? (
-          <div className='text-muted-foreground/80 px-5 py-8 text-center text-sm'>
+          <div className='py-8 text-center text-sm text-[#8A93A4]'>
             {t('No vendor data available')}
           </div>
         ) : (
-          <div className='grid grid-cols-1 gap-x-8 px-5 pt-1 pb-4 md:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-x-8 md:grid-cols-2'>
             <VendorList rows={left} colourMap={colourMap} />
             {right.length > 0 && (
               <VendorList rows={right} colourMap={colourMap} />
@@ -279,7 +261,7 @@ function VendorList(props: {
     <ul>
       {props.rows.map((vendor) => (
         <li key={vendor.vendor} className='flex items-center gap-3 py-2.5'>
-          <span className='text-muted-foreground/80 w-6 shrink-0 text-right font-mono text-xs tabular-nums'>
+          <span className='w-6 shrink-0 text-right pl-font-mono text-[11px] text-[#8A93A4] tabular-nums'>
             {vendor.rank}.
           </span>
           <span
@@ -291,15 +273,15 @@ function VendorList(props: {
           />
           <VendorLink
             vendor={vendor.vendor}
-            className='text-foreground min-w-0 flex-1 truncate text-sm font-medium'
+            className='pl-font-display min-w-0 flex-1 truncate text-[13.5px] font-medium text-[#0A0E1A]'
           >
             {vendor.vendor}
           </VendorLink>
           <div className='shrink-0 text-right'>
-            <div className='text-foreground font-mono text-sm font-semibold tabular-nums'>
+            <div className='pl-font-display text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
               {formatTokens(vendor.total_tokens)}
             </div>
-            <div className='text-muted-foreground/80 font-mono text-[11px] tabular-nums'>
+            <div className='pl-font-mono text-[10px] tabular-nums text-[#8A93A4]'>
               {formatShare(vendor.share)}
             </div>
           </div>

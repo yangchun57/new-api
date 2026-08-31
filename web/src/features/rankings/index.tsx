@@ -57,23 +57,19 @@ export function Rankings() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <div className='relative'>
+      <div className='relative isolate min-h-[calc(100vh-4rem)] overflow-hidden bg-[#F7F8FA]'>
+        {/* Background grid + glows, matching the homepage premium shell */}
         <div
           aria-hidden
-          className='pointer-events-none absolute inset-x-0 top-0 h-[600px] opacity-20 dark:opacity-[0.10]'
-          style={{
-            background: [
-              'radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 80%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 60%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 40% 35% at 50% 70%, oklch(0.70 0.12 280 / 40%) 0%, transparent 70%)',
-            ].join(', '),
-            maskImage:
-              'linear-gradient(to bottom, black 40%, transparent 100%)',
-            WebkitMaskImage:
-              'linear-gradient(to bottom, black 40%, transparent 100%)',
-          }}
+          className='pointer-events-none absolute inset-0 pl-grid-bg opacity-80'
         />
-        <PageTransition className='relative mx-auto w-full max-w-[1280px] space-y-8 px-3 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-12 xl:px-8'>
+        <div aria-hidden className='pointer-events-none absolute inset-0 pl-glow-blue' />
+        <div
+          aria-hidden
+          className='pointer-events-none absolute inset-0 pl-glow-green'
+        />
+
+        <PageTransition className='relative z-10 mx-auto w-full max-w-[1200px] space-y-6 px-4 pt-28 pb-16 sm:px-6 lg:pt-32 lg:pb-20'>
           <RankingsHero period={period} onPeriodChange={handlePeriodChange} />
 
           {rankingsQuery.isLoading ? (
@@ -115,9 +111,12 @@ export function Rankings() {
 function RankingsLoading() {
   return (
     <div className='space-y-6'>
-      <Skeleton className='h-[420px] w-full rounded-xl' />
-      <Skeleton className='h-[360px] w-full rounded-xl' />
-      <Skeleton className='h-[180px] w-full rounded-xl' />
+      <Skeleton className='pl-skeleton h-[460px] w-full rounded-[16px]' />
+      <Skeleton className='pl-skeleton h-[420px] w-full rounded-[16px]' />
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+        <Skeleton className='pl-skeleton h-[260px] w-full rounded-[16px]' />
+        <Skeleton className='pl-skeleton h-[260px] w-full rounded-[16px]' />
+      </div>
     </div>
   )
 }
@@ -125,11 +124,11 @@ function RankingsLoading() {
 function RankingsError(props: { message: string }) {
   const { t } = useTranslation()
   return (
-    <div className='bg-card rounded-xl border border-dashed px-6 py-12 text-center'>
-      <h2 className='text-foreground text-base font-semibold'>
+    <div className='rounded-[16px] border border-[#E5E8EE] bg-white px-6 py-12 text-center pl-nav-shadow'>
+      <h2 className='pl-font-display text-base font-semibold text-[#0A0E1A]'>
         {t('Unable to load rankings')}
       </h2>
-      <p className='text-muted-foreground mx-auto mt-2 max-w-md text-sm'>
+      <p className='mx-auto mt-2 max-w-md text-sm leading-relaxed text-[#5A6478]'>
         {props.message}
       </p>
     </div>

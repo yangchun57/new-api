@@ -26,9 +26,315 @@ For commercial licensing, please contact support@quantumnous.com
  * that activates it. Loaded globally so font-switching is instantaneous
  * with no FOUT once the variable is fetched. */
 @import '@fontsource-variable/lora';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/playfair-display';
+@import '@fontsource-variable/jetbrains-mono';
 
 @import './theme.css';
 @import './theme-presets.css';
+
+/* ── Premium Minimalism Landing (scoped) ──
+   Color & typography tokens for the new hero. Does not alter the rest of
+   the app theme. Light-only; the rest of the product keeps its own light/dark. */
+:root {
+  --pl-ink: #0a0e1a;
+  --pl-surface: #ffffff;
+  --pl-bg: #f7f8fa;
+  --pl-brand: #2e4bff;
+  --pl-live: #22c55e;
+  --pl-border: #e5e8ee;
+  --pl-muted: #5a6478;
+  --pl-shadow-sm: 0 1px 2px rgba(10, 14, 26, 0.05);
+  --pl-shadow-md: 0 4px 14px rgba(10, 14, 26, 0.10);
+  --pl-shadow-lg: 0 12px 40px rgba(10, 14, 26, 0.14);
+  --pl-radius-pill: 999px;
+  --pl-radius-card: 16px;
+  --pl-radius-card-sm: 12px;
+  --pl-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pl-font-display {
+  font-family: 'Inter Variable', 'Inter', var(--font-sans);
+  font-feature-settings: 'ss01', 'cv11';
+}
+.pl-font-serif-italic {
+  font-family: 'Playfair Display Variable', 'Playfair Display', Georgia,
+    serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.pl-font-mono {
+  font-family: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace,
+    SFMono-Regular, Menlo, monospace;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+/* Grid background (24px) */
+.pl-grid-bg {
+  background-image:
+    linear-gradient(to right, var(--pl-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pl-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 30%,
+    #000 0%,
+    #000 55%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 30%,
+    #000 0%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+/* Radial light glows */
+.pl-glow-blue {
+  background: radial-gradient(
+    circle at 20% 15%,
+    rgba(46, 75, 255, 0.08) 0%,
+    transparent 55%
+  );
+}
+.pl-glow-green {
+  background: radial-gradient(
+    circle at 85% 10%,
+    rgba(34, 197, 94, 0.08) 0%,
+    transparent 50%
+  );
+}
+
+/* Live dot pulse */
+@keyframes pl-pulse-dot {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(34, 197, 94, 0.55),
+      0 0 0 0 rgba(34, 197, 94, 0.35);
+  }
+  70% {
+    box-shadow:
+      0 0 0 6px rgba(34, 197, 94, 0),
+      0 0 0 12px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(34, 197, 94, 0),
+      0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+.pl-pulse-dot {
+  animation: pl-pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-pulse-dot {
+    animation: none;
+  }
+}
+
+/* Events/sec number ticker (subtle opacity pulse so it feels live) */
+@keyframes pl-ticker-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.78;
+  }
+}
+.pl-ticker {
+  animation: pl-ticker-pulse 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-ticker {
+    animation: none;
+  }
+}
+
+/* Invoice card — double border */
+.pl-invoice {
+  position: relative;
+  border-radius: var(--pl-radius-card);
+  background: var(--pl-surface);
+  border: 1px solid var(--pl-border);
+  box-shadow: var(--pl-shadow-md);
+  transition: transform 300ms var(--pl-ease-out),
+    box-shadow 300ms ease;
+  will-change: transform;
+}
+.pl-invoice:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--pl-shadow-lg);
+}
+.pl-invoice::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: calc(var(--pl-radius-card) + 6px);
+  border: 1px dashed var(--pl-border);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-invoice {
+    transition: none;
+  }
+  .pl-invoice:hover {
+    transform: none;
+  }
+}
+
+/* Progress bar gradient */
+.pl-progress-fill {
+  background: linear-gradient(
+    90deg,
+    #2e4bff 0%,
+    #22a7ff 35%,
+    #22c59c 65%,
+    #a3e635 100%
+  );
+}
+
+/* Marquee */
+@keyframes pl-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.pl-marquee-track {
+  animation: pl-marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-marquee-track {
+    animation: none;
+  }
+}
+
+/* Floating card entrance */
+@keyframes pl-float-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pl-fade-up {
+  animation: pl-float-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.pl-delay-1 {
+  animation-delay: 60ms;
+}
+.pl-delay-2 {
+  animation-delay: 140ms;
+}
+.pl-delay-3 {
+  animation-delay: 220ms;
+}
+.pl-delay-4 {
+  animation-delay: 300ms;
+}
+.pl-delay-5 {
+  animation-delay: 380ms;
+}
+.pl-delay-6 {
+  animation-delay: 500ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* CTA — primary ink pill + secondary outline */
+.pl-cta-primary {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: transform 200ms var(--pl-ease-out),
+    box-shadow 200ms ease, background-color 200ms ease;
+}
+.pl-cta-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+.pl-cta-secondary {
+  transition: transform 200ms var(--pl-ease-out),
+    border-color 200ms ease, background-color 200ms ease;
+}
+.pl-cta-secondary:hover {
+  transform: translateY(-1px);
+  border-color: var(--pl-ink);
+}
+.pl-nav-shadow {
+  box-shadow: var(--pl-shadow-sm);
+}
+.pl-card {
+  background: var(--pl-surface);
+  border: 1px solid var(--pl-border);
+  border-radius: var(--pl-radius-card);
+  box-shadow: var(--pl-shadow-sm);
+  overflow: hidden;
+}
+.pl-card-hover {
+  transition: transform 300ms var(--pl-ease-out), box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+.pl-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pl-shadow-md);
+  border-color: rgba(10, 14, 26, 0.14);
+}
+.pl-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(10, 14, 26, 0.04) 0%,
+    rgba(10, 14, 26, 0.08) 50%,
+    rgba(10, 14, 26, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: pl-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes pl-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-card-hover {
+    transition: none;
+  }
+  .pl-card-hover:hover {
+    transform: none;
+  }
+  .pl-skeleton {
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl-cta-primary,
+  .pl-cta-secondary {
+    transition: none;
+  }
+  .pl-cta-primary:hover,
+  .pl-cta-secondary:hover {
+    transform: none;
+  }
+}
+
+/* Tabular nums for amounts */
+.pl-tabular {
+  font-variant-numeric: tabular-nums;
+}
 
 /* Shiki dual themes: token colors follow dark theme (pre background stays `bg-background` on the block) */
 @layer components {

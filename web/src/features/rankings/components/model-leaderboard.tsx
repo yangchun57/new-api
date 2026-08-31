@@ -75,23 +75,23 @@ function ModelList(props: {
           key={row.model_name}
           className={
             compact
-              ? 'flex items-center gap-3 py-2'
-              : 'flex items-center gap-3 py-2.5'
+              ? 'group flex items-center gap-3 border-b border-[#E5E8EE]/60 py-2.5 last:border-b-0 transition-colors hover:bg-[#F7F8FA]/50'
+              : 'group flex items-center gap-3 border-b border-[#E5E8EE]/60 py-3 last:border-b-0 transition-colors hover:bg-[#F7F8FA]/50'
           }
         >
-          <span className='text-muted-foreground/80 w-6 shrink-0 text-right font-mono text-xs tabular-nums'>
-            {row.rank}.
+          <span className='pl-font-mono w-7 shrink-0 text-right text-[12px] font-semibold tabular-nums text-[#8A93A4]'>
+            {row.rank}
           </span>
-          <span className='shrink-0'>
-            {getLobeIcon(row.vendor_icon, compact ? 20 : 22)}
+          <span className='shrink-0 rounded-[8px] bg-[#F7F8FA] p-1.5'>
+            {getLobeIcon(row.vendor_icon, compact ? 18 : 20)}
           </span>
           <div className='min-w-0 flex-1'>
             <ModelLink
               modelName={row.model_name}
               className={
                 compact
-                  ? 'text-foreground block truncate font-mono text-xs font-medium'
-                  : 'text-foreground block truncate font-mono text-sm font-medium'
+                  ? 'pl-font-mono block truncate text-[12.5px] font-medium text-[#0A0E1A]'
+                  : 'pl-font-mono block truncate text-[13.5px] font-medium text-[#0A0E1A]'
               }
             >
               {row.model_name}
@@ -99,12 +99,12 @@ function ModelList(props: {
             <p
               className={
                 compact
-                  ? 'text-muted-foreground/80 truncate text-[11px] italic'
-                  : 'text-muted-foreground/80 truncate text-xs italic'
+                  ? 'pl-font-mono mt-0.5 truncate text-[11px] text-[#8A93A4]'
+                  : 'pl-font-mono mt-0.5 truncate text-[11.5px] text-[#8A93A4]'
               }
             >
               by{' '}
-              <VendorLink vendor={row.vendor}>
+              <VendorLink vendor={row.vendor} className='text-[#8A93A4] hover:text-[#0A0E1A]'>
                 {row.vendor.toLowerCase()}
               </VendorLink>
             </p>
@@ -113,15 +113,15 @@ function ModelList(props: {
             <div
               className={
                 compact
-                  ? 'text-foreground font-mono text-xs font-semibold tabular-nums'
-                  : 'text-foreground font-mono text-sm font-semibold tabular-nums'
+                  ? 'pl-font-mono text-[12.5px] font-semibold tabular-nums text-[#0A0E1A]'
+                  : 'pl-font-mono text-[13.5px] font-semibold tabular-nums text-[#0A0E1A]'
               }
             >
               {formatTokens(row.total_tokens)}
               {!compact && (
                 <>
                   {' '}
-                  <span className='text-muted-foreground/80 font-normal'>
+                  <span className='font-normal text-[#8A93A4]'>
                     {t('tokens')}
                   </span>
                 </>
@@ -129,7 +129,7 @@ function ModelList(props: {
             </div>
             <GrowthText
               value={row.growth_pct}
-              className={compact ? 'text-[10px]' : 'text-[11px]'}
+              className={compact ? 'mt-0.5 text-[10px]' : 'mt-0.5 text-[11px]'}
             />
           </div>
         </li>

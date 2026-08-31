@@ -26,8 +26,9 @@ import { useTheme } from '@/context/theme-provider'
 import { isLikelyHtml } from '@/lib/content-format'
 import { useAuthStore } from '@/stores/auth-store'
 
-import { CTA, Features, Hero, HowItWorks, Stats } from './components'
-import { useHomePageContent } from './hooks'
+import { CTA, Features, HowItWorks, Stats } from './components';
+import { PremiumHero } from './components/sections/premium-hero';
+import { useHomePageContent } from './hooks';
 
 export function Home() {
   const { i18n, t } = useTranslation()
@@ -122,7 +123,7 @@ export function Home() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <Hero isAuthenticated={isAuthenticated} />
+      <PremiumHero isAuthenticated={isAuthenticated} />
       <Stats />
       <Features />
       <HowItWorks />
