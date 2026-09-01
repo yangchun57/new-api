@@ -149,4 +149,11 @@ export interface ManageUserQuotaPayload {
 // Dialog Types
 // ============================================================================
 
-export type UsersDialogType = 'create' | 'update' | 'delete'
+export type UsersDialogType = 'create' | 'update' | 'delete' | 'usage'
+
+/** Minimal token info used for the API key filter in the user usage dialog */
+export interface UserTokenOption {
+  id: number
+  name: string
+  key: string
+}

@@ -19,9 +19,11 @@ For commercial licensing, please contact support@quantumnous.com
 import type { PermissionCatalog } from '@/lib/admin-permissions'
 import { api } from '@/lib/api'
 import type { CustomOAuthBinding } from '@/lib/oauth'
+import type { QuotaDataItem } from '@/features/dashboard/types'
 
 import type {
   User,
+  UserTokenOption,
   GetUsersParams,
   GetUsersResponse,
   SearchUsersParams,
@@ -210,5 +212,35 @@ export async function adminUnbindCustomOAuth(
   const res = await api.delete(
     `/api/user/${userId}/oauth/bindings/${providerId}`
   )
+  return res.data
+}
+
+// ============================================================================
+// User Token Usage APIs (admin)
+// ============================================================================
+
+/**
+ * Get quota/usage data for a user within a time range.
+ * Pass token_id to narrow the query to a single API key.
+ */
+export async function getUserQuotaDates(params: {
+  user_id: number
+  token_id?: number
+  start_timestamp: number
+  end_timestamp: number
+}): Promise<{ success: boolean; message?: string; data?: QuotaDataItem[] }> {
+  const res = await api.get('/api/data/user', { params })
+  return res.data
+}
+
+/**
+ * Get all tokens belonging to a user (for the API key filter).
+ */
+export async function getUserTokens(
+  userId: number
+): Promise<{ success: boolean; message?: string; data?: UserTokenOption[] }> {
+  const res = await api.get('/api/data/user/tokens', {
+    params: { user_id: userId },
+  })
   return res.data
 }

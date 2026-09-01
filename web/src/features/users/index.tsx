@@ -20,6 +20,8 @@ import { useTranslation } from 'react-i18next'
 
 import { SectionPageLayout } from '@/components/layout'
 
+import { TokenUsageDialog } from '@/features/keys/components/token-usage-dialog'
+
 import { UsersDeleteDialog } from './components/users-delete-dialog'
 import { UsersMutateDrawer } from './components/users-mutate-drawer'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
@@ -48,6 +50,11 @@ function UsersContent() {
         currentRow={open === 'update' ? currentRow || undefined : undefined}
       />
       <UsersDeleteDialog />
+      <TokenUsageDialog
+        open={open === 'usage'}
+        onOpenChange={(isOpen) => !isOpen && setOpen(null)}
+        user={open === 'usage' ? currentRow : null}
+      />
     </>
   )
 }

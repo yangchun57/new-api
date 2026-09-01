@@ -343,7 +343,12 @@ export function DataTableToolbar<TData>(props: DataTableToolbarProps<TData>) {
 
   if (hasLeftActions) {
     return (
-      <div className={cn('flex flex-col gap-2', props.className)}>
+      <div
+        className={cn(
+          'rounded-xl border border-[#E5E8EE] bg-white p-2.5 sm:p-3',
+          props.className
+        )}
+      >
         <div className='flex flex-wrap items-center gap-2 sm:gap-3'>
           {props.customSearch !== undefined ? props.customSearch : searchInput}
           {props.additionalSearch}
@@ -354,12 +359,12 @@ export function DataTableToolbar<TData>(props: DataTableToolbarProps<TData>) {
         </div>
 
         {expanded && hasExpandable && (
-          <div className='flex flex-wrap items-center gap-2 sm:gap-3'>
+          <div className='mt-2 flex flex-wrap items-center gap-2 sm:gap-3'>
             {props.expandable}
           </div>
         )}
 
-        <div className='flex flex-wrap items-center gap-2 sm:gap-3'>
+        <div className='mt-2 flex flex-wrap items-center gap-2 sm:gap-3'>
           {props.leftActions}
           <div className='ms-auto flex shrink-0 items-center gap-1.5 sm:gap-2'>
             {props.preActions}
@@ -376,22 +381,24 @@ export function DataTableToolbar<TData>(props: DataTableToolbarProps<TData>) {
   return (
     <div
       className={cn(
-        'flex flex-wrap items-center gap-2 sm:gap-3',
+        'rounded-xl border border-[#E5E8EE] bg-white p-2.5 sm:p-3',
         props.className
       )}
     >
-      {props.customSearch !== undefined ? props.customSearch : searchInput}
-      {props.additionalSearch}
-      {filterChips}
-      {expanded && hasExpandable && props.expandable}
+      <div className='flex flex-wrap items-center gap-2 sm:gap-3'>
+        {props.customSearch !== undefined ? props.customSearch : searchInput}
+        {props.additionalSearch}
+        {filterChips}
+        {expanded && hasExpandable && props.expandable}
 
-      <div className='ms-auto flex shrink-0 items-center gap-1.5 sm:gap-2'>
-        {props.preActions}
-        {resetButton}
-        {searchButton}
-        {viewToggleNode}
-        {viewOptionsNode}
-        {expandToggle}
+        <div className='ms-auto flex shrink-0 items-center gap-1.5 sm:gap-2'>
+          {props.preActions}
+          {resetButton}
+          {searchButton}
+          {viewToggleNode}
+          {viewOptionsNode}
+          {expandToggle}
+        </div>
       </div>
     </div>
   )

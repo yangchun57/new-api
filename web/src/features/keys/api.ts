@@ -27,6 +27,7 @@ import type {
   ApiKeyFormData,
   TokenAutoGroupsConfig,
 } from './types'
+import type { QuotaDataItem } from '../dashboard/types'
 
 // ============================================================================
 // API Key Management
@@ -123,5 +124,15 @@ export async function fetchTokenKeysBatch(ids: number[]): Promise<{
   data?: { keys: Record<number, string> }
 }> {
   const res = await api.post('/api/token/batch/keys', { ids })
+  return res.data
+}
+
+// Get quota/usage data for a single token within a time range
+export async function getTokenQuotaDates(params: {
+  token_id: number
+  start_timestamp: number
+  end_timestamp: number
+}): Promise<{ success: boolean; message?: string; data?: QuotaDataItem[] }> {
+  const res = await api.get('/api/data/token', { params })
   return res.data
 }

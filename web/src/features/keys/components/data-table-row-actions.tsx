@@ -27,6 +27,7 @@ import {
   Copy,
   Link,
   Loader2,
+  BarChart3,
 } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -230,6 +231,25 @@ export function DataTableRowActions<TData>({
           <Edit />
         </TooltipTrigger>
         <TooltipContent>{t('Edit')}</TooltipContent>
+      </Tooltip>
+
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Button
+              variant='ghost'
+              size='icon-sm'
+              onClick={() => {
+                setCurrentRow(apiKey)
+                setOpen('usage')
+              }}
+              aria-label={t('Token Usage')}
+            />
+          }
+        >
+          <BarChart3 />
+        </TooltipTrigger>
+        <TooltipContent>{t('Token Usage')}</TooltipContent>
       </Tooltip>
 
       <DataTableRowActionMenu

@@ -298,6 +298,9 @@ func SetApiRouter(router *gin.Engine) {
 		dataRoute.GET("/", middleware.AdminAuth(), controller.GetAllQuotaDates)
 		dataRoute.GET("/users", middleware.AdminAuth(), controller.GetQuotaDatesByUser)
 		dataRoute.GET("/self", middleware.UserAuth(), controller.GetUserQuotaDates)
+		dataRoute.GET("/token", middleware.UserAuth(), middleware.DisableCache(), controller.GetTokenQuotaDates)
+		dataRoute.GET("/user/tokens", middleware.AdminAuth(), middleware.DisableCache(), controller.GetAdminUserTokens)
+		dataRoute.GET("/user", middleware.AdminAuth(), middleware.DisableCache(), controller.GetAdminUserQuotaDates)
 		dataRoute.GET("/flow", middleware.AdminAuth(), controller.GetAllFlowQuotaDates)
 		dataRoute.GET("/flow/self", middleware.UserAuth(), controller.GetUserFlowQuotaDates)
 
@@ -318,6 +321,15 @@ func SetApiRouter(router *gin.Engine) {
 			prefillGroupRoute.POST("/", controller.CreatePrefillGroup)
 			prefillGroupRoute.PUT("/", controller.UpdatePrefillGroup)
 			prefillGroupRoute.DELETE("/:id", controller.DeletePrefillGroup)
+		}
+
+		distributionGroupRoute := apiRouter.Group("/distribution_group")
+		distributionGroupRoute.Use(middleware.AdminAuth())
+		{
+			distributionGroupRoute.GET("/", controller.GetDistributionGroups)
+			distributionGroupRoute.POST("/", controller.CreateDistributionGroup)
+			distributionGroupRoute.PUT("/", controller.UpdateDistributionGroup)
+			distributionGroupRoute.DELETE("/:id", controller.DeleteDistributionGroup)
 		}
 
 		mjRoute := apiRouter.Group("/mj")

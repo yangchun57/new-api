@@ -28,6 +28,7 @@ import {
   ShieldAlert,
   Link2,
   CreditCard,
+  BarChart3,
 } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -81,6 +82,11 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const handleDelete = () => {
     setCurrentRow(user)
     setOpen('delete')
+  }
+
+  const handleUsage = () => {
+    setCurrentRow(user)
+    setOpen('usage')
   }
 
   const handleManage = async (action: Exclude<ManageUserAction, 'delete'>) => {
@@ -155,6 +161,22 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           <Pencil />
         </TooltipTrigger>
         <TooltipContent>{t('Edit')}</TooltipContent>
+      </Tooltip>
+
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Button
+              variant='ghost'
+              size='icon-sm'
+              onClick={handleUsage}
+              aria-label={t('Token Usage')}
+            />
+          }
+        >
+          <BarChart3 />
+        </TooltipTrigger>
+        <TooltipContent>{t('Token Usage')}</TooltipContent>
       </Tooltip>
 
       <DataTableRowActionMenu

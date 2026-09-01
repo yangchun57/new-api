@@ -141,6 +141,20 @@ func GetAllTokens(c *gin.Context) {
 	common.ApiSuccess(c, pageInfo)
 }
 
+func GetAdminUserTokens(c *gin.Context) {
+	userId, err := strconv.Atoi(c.Query("user_id"))
+	if err != nil || userId <= 0 {
+		common.ApiErrorMsg(c, "invalid user_id")
+		return
+	}
+	tokens, err := model.GetAllUserTokens(userId, 0, operation_setting.GetMaxUserTokens())
+	if err != nil {
+		common.ApiError(c, err)
+		return
+	}
+	common.ApiSuccess(c, buildMaskedTokenResponses(tokens))
+}
+
 func SearchTokens(c *gin.Context) {
 	userId := c.GetInt("id")
 	keyword := c.Query("keyword")
