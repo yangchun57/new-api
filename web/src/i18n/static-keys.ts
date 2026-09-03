@@ -573,6 +573,14 @@ export const STATIC_I18N_KEYS = [
   'Telegram binding failed. Please try again.',
   'Verification scope is missing',
 
+  // Chat logs (conversation records)
+  'Conversation Records',
+  'All Roles',
+  'Assistant',
+  'Tool',
+  'Failed to load chat logs',
+  'Failed to search chat logs',
+
   // Distribution
   'Commission',
   'Refund',

@@ -131,6 +131,9 @@ func main() {
 	// Daily distribution consumption settlement task (00:05)
 	service.StartDistributionDailySettlementTask()
 
+	// Session content retention cleanup (chat_logs), master-only
+	service.StartChatLogCleanup()
+
 	// Report this process as a system instance so the System Info page can show
 	// all currently alive nodes in multi-instance deployments.
 	service.StartSystemInstanceReporter()

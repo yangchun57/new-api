@@ -26,6 +26,7 @@ import {
   LayoutDashboard,
   ListTodo,
   MessageSquare,
+  MessagesSquare,
   Radio,
   ServerCog,
   Settings,
@@ -91,6 +92,11 @@ export function useSidebarData(): SidebarData {
             title: t('Usage Logs'),
             url: '/usage-logs/common',
             icon: FileText,
+          },
+          {
+            title: t('Conversation Records'),
+            url: '/chat-logs',
+            icon: MessagesSquare,
           },
           {
             title: t('Task Logs'),

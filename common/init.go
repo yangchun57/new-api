@@ -86,6 +86,9 @@ func InitEnv() {
 	// Initialize variables from constants.go that were using environment variables
 	DebugEnabled = os.Getenv("DEBUG") == "true"
 	MemoryCacheEnabled = os.Getenv("MEMORY_CACHE_ENABLED") == "true"
+	ChatLogEnabled = GetEnvOrDefaultBool("CHAT_LOG_ENABLED", false)
+	ChatLogMaxBodyKB = GetEnvOrDefault("CHAT_LOG_MAX_BODY_KB", 64)
+	ChatLogRetentionDays = GetEnvOrDefault("CHAT_LOG_RETENTION_DAYS", 0)
 	IsMasterNode = os.Getenv("NODE_TYPE") != "slave"
 	initNodeNameIdentity()
 	TLSInsecureSkipVerify = GetEnvOrDefaultBool("TLS_INSECURE_SKIP_VERIFY", false)

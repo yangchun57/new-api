@@ -98,6 +98,13 @@ var MemoryCacheEnabled bool
 
 var LogConsumeEnabled = true
 
+// ChatLogEnabled 是否启用会话正文留存（chat_logs 表）。
+// ChatLogMaxBodyKB 单条正文留存上限（KB），超出部分截断。
+// ChatLogRetentionDays 会话正文留存天数，<=0 表示不自动清理。
+var ChatLogEnabled = false
+var ChatLogMaxBodyKB = 64
+var ChatLogRetentionDays = 0
+
 var TLSInsecureSkipVerify bool
 var InsecureTLSConfig = &tls.Config{InsecureSkipVerify: true}
 

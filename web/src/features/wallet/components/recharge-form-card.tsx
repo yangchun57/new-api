@@ -33,11 +33,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { formatNumber } from '@/lib/format'
+import { formatLocalCurrencyAmount, getCurrencyDisplay } from '@/lib/currency'
 import { cn } from '@/lib/utils'
 
 import {
-  formatCurrency,
   getDiscountLabel,
   getPaymentIcon,
   getMinTopupAmount,
@@ -141,6 +140,11 @@ export function RechargeFormCard({
     Array.isArray(waffoPayMethods) && waffoPayMethods.length > 0
   const minTopup = getMinTopupAmount(topupInfo)
   const redemptionEnabled = topupInfo?.enable_redemption !== false
+  const { meta: displayMeta } = getCurrencyDisplay()
+  const currencySymbol =
+    displayMeta.kind === 'custom' || displayMeta.kind === 'currency'
+      ? displayMeta.symbol
+      : '$'
 
   if (loading) {
     return (
@@ -254,7 +258,7 @@ export function RechargeFormCard({
                         >
                           <div className='flex w-full items-center justify-between'>
                             <div className='text-[13px] font-semibold text-[#0A0E1A] sm:text-[16px]'>
-                              {formatNumber(displayValue)}
+                              {formatLocalCurrencyAmount(displayValue)}
                             </div>
                             {hasDiscount && (
                               <div className='text-[12px] font-medium text-green-600'>
@@ -263,11 +267,11 @@ export function RechargeFormCard({
                             )}
                           </div>
                           <div className='text-[#5A6478] mt-1.5 w-full text-[12px] sm:mt-2'>
-                            Pay {formatCurrency(actualPrice)}
+                            Pay {formatLocalCurrencyAmount(actualPrice)}
                             {hasDiscount && savedAmount > 0 && (
                               <span className='text-green-600'>
                                 {' '}
-                                • Save {formatCurrency(savedAmount)}
+                                • Save {formatLocalCurrencyAmount(savedAmount)}
                               </span>
                             )}
                           </div>
@@ -286,16 +290,21 @@ export function RechargeFormCard({
                   {t('Custom Amount')}
                 </Label>
                 <div className='grid grid-cols-[minmax(0,1fr)_minmax(110px,0.55fr)] gap-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center'>
-                  <Input
-                    id='topup-amount'
-                    type='number'
-                    value={localAmount}
-                    onChange={(e) => handleAmountChange(e.target.value)}
-                    min={minTopup}
-                    step='any'
-                    placeholder={`Minimum ${minTopup}`}
-                    className='h-9 text-[13px] sm:h-10 sm:text-[13px] border-[#E5E8EE]'
-                  />
+                  <div className='relative'>
+                    <span className='text-[#5A6478] pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-[13px]'>
+                      {currencySymbol}
+                    </span>
+                    <Input
+                      id='topup-amount'
+                      type='number'
+                      value={localAmount}
+                      onChange={(e) => handleAmountChange(e.target.value)}
+                      min={minTopup}
+                      step='any'
+                      placeholder={`Minimum ${minTopup}`}
+                      className='h-9 pr-3 pl-7 text-[13px] sm:h-10 sm:text-[13px] border-[#E5E8EE]'
+                    />
+                  </div>
                   <div className='bg-[#F7F8FA] flex min-h-9 items-center justify-between gap-2 rounded-md border border-[#E5E8EE] px-3 lg:min-w-52'>
                     <span className='text-[#8A93A4] truncate text-[12px]'>
                       {t('Amount to pay:')}
@@ -304,7 +313,7 @@ export function RechargeFormCard({
                       <Skeleton className='h-5 w-16' />
                     ) : (
                       <span className='text-[13px] font-semibold text-[#0A0E1A]'>
-                        {formatCurrency(paymentAmount)}
+                        {formatLocalCurrencyAmount(paymentAmount)}
                       </span>
                     )}
                   </div>

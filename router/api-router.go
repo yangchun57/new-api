@@ -274,6 +274,10 @@ func SetApiRouter(router *gin.Engine) {
 			redemptionRoute.DELETE("/invalid", controller.DeleteInvalidRedemption)
 			redemptionRoute.DELETE("/:id", controller.DeleteRedemption)
 		}
+		chatLogRoute := apiRouter.Group("/chat-log")
+		chatLogRoute.GET("/", middleware.AdminAuth(), controller.GetAllChatLogs)
+		chatLogRoute.GET("/self", middleware.UserAuth(), controller.GetUserChatLogs)
+
 		logRoute := apiRouter.Group("/log")
 		logRoute.GET("/", middleware.AdminAuth(), controller.GetAllLogs)
 		logRoute.GET("/stat", middleware.AdminAuth(), controller.GetLogsStat)
