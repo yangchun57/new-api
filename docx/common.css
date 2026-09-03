@@ -1,0 +1,348 @@
+/* ============================================================
+   NewApi 文档共享样式表 (common.css)
+   ------------------------------------------------------------
+   本文件汇总了 docs/ 目录下所有 HTML 文档共用的样式。
+   生成新文档时：写裸 HTML，在 <head> 中引用本文件即可，无需内嵌 <style>。
+
+   引用方式（裸 HTML 中）：
+     <link rel="stylesheet" href="common.css">
+
+   图标说明：
+     文档内所有图标均为阿里巴巴 Ant Design 图标的内联 SVG
+     （<svg class="icon" viewBox="64 64 896 896">...<path fill="currentColor"/>），
+     零外部依赖，离线可用。图标随文字颜色（currentColor）与字号缩放。
+   ============================================================ */
+
+/* ---------- 设计令牌 (CSS 变量) ---------- */
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --ink: #1f2733;
+  --muted: #5b6472;
+  --line: #e6eaf0;
+  --accent: #6d28d9;
+  --accent-soft: #f1e9fe;
+  --green: #17a34a;
+  --green-soft: #e8f7ee;
+  --orange: #d97706;
+  --orange-soft: #fdf3e3;
+  --red: #dc2626;
+  --red-soft: #fdeaea;
+  --blue: #2563eb;
+  --blue-soft: #eaf1fe;
+  --purple: #7c3aed;
+  --purple-soft: #f1e9fe;
+  --heading: #16233b;
+}
+
+/* ---------- 基础重置 ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 40px 28px 80px; }
+
+/* ---------- Hero 头图 ---------- */
+.hero {
+  background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 55%, #8b5cf6 100%);
+  color: #fff;
+  border-radius: 18px;
+  padding: 44px 40px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 240px; height: 240px;
+  background: rgba(255, 255, 255, .08);
+  border-radius: 50%;
+}
+.hero .tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, .18);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.hero h1 { font-size: 29px; font-weight: 700; margin-bottom: 10px; }
+.hero p { font-size: 15px; opacity: .92; max-width: 740px; }
+.hero .meta {
+  margin-top: 18px;
+  font-size: 13px;
+  opacity: .8;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.hero .meta i { margin-right: 6px; }
+
+/* ---------- 目录 ---------- */
+.toc {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 28px;
+  margin-bottom: 28px;
+}
+.toc h2 { font-size: 15px; margin-bottom: 14px; color: var(--accent); }
+.toc ol { padding-left: 20px; }
+.toc li { margin: 6px 0; font-size: 14px; }
+.toc a { color: var(--ink); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+
+/* ---------- 章节 ---------- */
+section { margin-bottom: 26px; }
+.sec {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 30px 34px;
+}
+.sec h2 {
+  font-size: 21px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sec h2 .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.sec .lead { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+.sec h3 { font-size: 17px; margin: 22px 0 10px; color: var(--heading); }
+.sec h3 i { color: var(--accent); margin-right: 8px; }
+.sec p { font-size: 14.5px; margin: 8px 0; }
+.sec ul, .sec ol { padding-left: 22px; margin: 8px 0; }
+.sec li { font-size: 14.5px; margin: 6px 0; }
+.sec strong { color: var(--heading); }
+
+/* ---------- 代码 ---------- */
+code.inline {
+  background: #eef2f8;
+  color: #c2410c;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 13px;
+}
+pre {
+  background: #1f2733;
+  color: #e6edf7;
+  border-radius: 10px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 14px 0;
+}
+pre .cm { color: #8b98ab; }
+
+/* ---------- 提示框 (Callout) ---------- */
+.box { border-radius: 10px; padding: 16px 18px; margin: 16px 0; font-size: 14px; }
+.box i { margin-right: 8px; font-size: 15px; }
+.box.tip   { background: var(--green-soft);   border-left: 4px solid var(--green); }
+.box.warn  { background: var(--orange-soft);  border-left: 4px solid var(--orange); }
+.box.error { background: var(--red-soft);     border-left: 4px solid var(--red); }
+.box.info  { background: var(--blue-soft);    border-left: 4px solid var(--blue); }
+.box.tip i   { color: var(--green); }
+.box.warn i  { color: var(--orange); }
+.box.error i { color: var(--red); }
+.box.info i  { color: var(--blue); }
+.box .bt { font-weight: 700; display: block; margin-bottom: 3px; }
+
+/* ---------- 表格 ---------- */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+th, td {
+  border: 1px solid var(--line);
+  padding: 11px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #f0f4fb; color: var(--heading); font-weight: 600; }
+tr:nth-child(even) td { background: #fafbfd; }
+td code {
+  background: #eef2f8;
+  color: #c2410c;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12.5px;
+}
+
+/* ---------- 结论框 ---------- */
+.verdict {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1px solid #f59e0b;
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 18px 0;
+}
+.verdict .icon {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: #f59e0b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.verdict b { font-size: 17px; display: block; margin-bottom: 4px; }
+.verdict p { font-size: 14px; color: #78350f; }
+
+/* ---------- 徽章 ---------- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge.hard   { background: var(--red-soft);     color: var(--red); }
+.badge.mid    { background: var(--orange-soft);  color: var(--orange); }
+.badge.easy   { background: var(--green-soft);   color: var(--green); }
+.badge.blue   { background: var(--blue-soft);    color: var(--blue); }
+.badge.purple { background: var(--purple-soft);  color: var(--purple); }
+
+/* ---------- 评分条 (meter) ---------- */
+.meter { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+.meter .label { width: 130px; font-size: 14px; flex-shrink: 0; }
+.meter .bar { flex: 1; height: 14px; background: #eef0f4; border-radius: 8px; overflow: hidden; }
+.meter .fill { height: 100%; border-radius: 8px; }
+.meter .val { width: 46px; font-size: 13px; font-weight: 700; text-align: right; }
+
+/* ---------- 项目卡片 (repo) ---------- */
+.repo {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.repo:last-child { border-bottom: none; }
+.repo .logo {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #fff;
+}
+.repo .hd { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.repo .hd b { font-size: 16px; }
+.repo .desc { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+.repo .tags { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+.repo a.repolink { font-size: 12.5px; color: var(--accent); text-decoration: none; word-break: break-all; }
+.repo a.repolink:hover { text-decoration: underline; }
+
+/* ---------- 步骤流 (steps) ---------- */
+.steps { counter-reset: step; list-style: none; padding-left: 0 !important; margin: 12px 0; }
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 6px 0 6px 52px;
+  margin: 0;
+}
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 4px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+.steps > li + li::after {
+  content: "";
+  position: absolute;
+  left: 14px; top: -6px; bottom: -6px;
+  width: 2px;
+  background: var(--line);
+}
+.steps li b { display: block; color: var(--heading); }
+.steps li .desc { color: var(--muted); font-size: 13.5px; }
+
+/* 步骤流 —— 卡片变体（教程类文档使用 .step 而非 .steps>li） */
+.step {
+  position: relative;
+  padding: 14px 16px 14px 58px;
+  margin: 12px 0;
+  background: #fafbfd;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute; left: 16px; top: 14px;
+  width: 28px; height: 28px;
+  background: var(--accent); color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+}
+.step b { color: var(--heading); }
+.step p { margin: 3px 0; }
+
+/* ---------- 参考来源 (ref) ---------- */
+.ref { font-size: 12.5px; color: var(--muted); }
+.ref li { margin: 4px 0; word-break: break-all; }
+
+/* ---------- 内联 SVG 图标 ---------- */
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+
+/* ---------- 页脚 ---------- */
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 40px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+  .wrap { padding: 20px 14px 60px; }
+  .hero { padding: 30px 22px; }
+  .hero h1 { font-size: 23px; }
+  .sec { padding: 22px 18px; }
+  pre { font-size: 12px; }
+  table { font-size: 13px; }
+  th, td { padding: 8px 9px; }
+}

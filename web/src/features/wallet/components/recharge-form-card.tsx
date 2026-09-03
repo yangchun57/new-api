@@ -122,7 +122,7 @@ export function RechargeFormCard({
 
   const handleAmountChange = (value: string) => {
     setLocalAmount(value)
-    const numValue = Number.parseInt(value) || 0
+    const numValue = Number.parseFloat(value) || 0
     if (numValue >= 0) {
       onTopupAmountChange(numValue)
     }
@@ -132,7 +132,8 @@ export function RechargeFormCard({
     topupInfo?.enable_online_topup ||
     topupInfo?.enable_stripe_topup ||
     enableWaffoTopup ||
-    enableWaffoPancakeTopup
+    enableWaffoPancakeTopup ||
+    topupInfo?.enable_wechat_native_topup
   const hasAnyTopup = hasConfigurableTopup || enableCreemTopup
   const hasStandardPaymentMethods =
     Array.isArray(topupInfo?.pay_methods) && topupInfo.pay_methods.length > 0
@@ -291,6 +292,7 @@ export function RechargeFormCard({
                     value={localAmount}
                     onChange={(e) => handleAmountChange(e.target.value)}
                     min={minTopup}
+                    step='any'
                     placeholder={`Minimum ${minTopup}`}
                     className='h-9 text-[13px] sm:h-10 sm:text-[13px] border-[#E5E8EE]'
                   />

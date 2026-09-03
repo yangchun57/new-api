@@ -59,6 +59,16 @@ function isDisabledUserRow(user: User) {
   return isUserDeleted(user) || user.status === USER_STATUS.DISABLED
 }
 
+function resolveRowClassName(
+  user: User,
+  isMobile: boolean
+): string | undefined {
+  if (!isDisabledUserRow(user)) {
+    return undefined
+  }
+  return isMobile ? DISABLED_ROW_MOBILE : DISABLED_ROW_DESKTOP
+}
+
 export function UsersTable() {
   const { t } = useTranslation()
   const columns = useUsersColumns()
@@ -83,6 +93,7 @@ export function UsersTable() {
       { columnId: 'status', searchKey: 'status', type: 'array' },
       { columnId: 'role', searchKey: 'role', type: 'array' },
       { columnId: 'group', searchKey: 'group', type: 'string' },
+      { columnId: 'distribution', searchKey: 'distribution', type: 'array' },
     ],
   })
   const statusFilter =
@@ -91,6 +102,10 @@ export function UsersTable() {
       | undefined) ?? []
   const roleFilter =
     (columnFilters.find((filter) => filter.id === 'role')?.value as
+      | string[]
+      | undefined) ?? []
+  const distributionFilter =
+    (columnFilters.find((filter) => filter.id === 'distribution')?.value as
       | string[]
       | undefined) ?? []
   const groupFilter =
@@ -129,13 +144,17 @@ export function UsersTable() {
       statusFilter,
       roleFilter,
       groupFilter,
+      distributionFilter,
       sortParams,
       refreshTrigger,
     ],
     queryFn: async () => {
       const hasFilter = globalFilter?.trim()
       const hasColumnFilter =
-        statusFilter.length > 0 || roleFilter.length > 0 || Boolean(groupFilter)
+        statusFilter.length > 0 ||
+        roleFilter.length > 0 ||
+        Boolean(groupFilter) ||
+        distributionFilter.length > 0
       const params = {
         p: pagination.pageIndex + 1,
         page_size: pagination.pageSize,
@@ -150,6 +169,7 @@ export function UsersTable() {
               status: statusFilter[0] ?? '',
               role: roleFilter[0] ?? '',
               group: groupFilter,
+              distribution_enabled: distributionFilter[0] ?? '',
             })
           : await getUsers(params)
 
@@ -230,14 +250,19 @@ export function UsersTable() {
             options: getUserRoleOptions(t),
             singleSelect: true,
           },
+          {
+            columnId: 'distribution',
+            title: t('Distribution permission'),
+            options: [
+              { value: 'true', label: t('Enabled') },
+              { value: 'false', label: t('Disabled') },
+            ],
+            singleSelect: true,
+          },
         ],
       }}
-      getRowClassName={(row, { isMobile }) =>
-        isDisabledUserRow(row.original)
-          ? isMobile
-            ? DISABLED_ROW_MOBILE
-            : DISABLED_ROW_DESKTOP
-          : undefined
+      getRowClassName={({ original }, { isMobile }) =>
+        resolveRowClassName(original, isMobile)
       }
       bulkActions={<DataTableBulkActions table={table} />}
     />

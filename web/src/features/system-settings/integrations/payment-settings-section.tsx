@@ -18,7 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Code2, Eye, ShieldAlert } from 'lucide-react'
+import { Code2, Eye, ShieldAlert, Upload } from 'lucide-react'
 import * as React from 'react'
 import { useForm, type Resolver } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -45,6 +45,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 
@@ -62,11 +63,14 @@ import { AmountDiscountVisualEditor } from './amount-discount-visual-editor'
 import { AmountOptionsVisualEditor } from './amount-options-visual-editor'
 import { CreemProductsVisualEditor } from './creem-products-visual-editor'
 import { PaymentMethodsVisualEditor } from './payment-methods-visual-editor'
+import { ConfiguredBadge } from './configured-badge'
 import {
+  collectConfiguredSensitiveKeys,
   formatJsonForEditor,
   getJsonError,
   normalizeJsonForComparison,
   removeTrailingSlash,
+  stripSensitiveMasks,
 } from './utils'
 import { saveWaffoPancakeConfig } from './waffo-pancake-api'
 import {
@@ -92,6 +96,52 @@ function isHttpOriginUrl(value: string) {
   } catch {
     return false
   }
+}
+
+interface PemFileUploadProps {
+  onFileRead: (content: string) => void
+}
+
+function PemFileUpload({ onFileRead }: PemFileUploadProps) {
+  const { t } = useTranslation()
+  const inputRef = React.useRef<HTMLInputElement | null>(null)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) {
+      return
+    }
+    const reader = new FileReader()
+    reader.addEventListener('load', () => {
+      if (typeof reader.result === 'string') {
+        onFileRead(reader.result)
+      }
+    })
+    reader.readAsText(file)
+    event.target.value = ''
+  }
+
+  return (
+    <>
+      <input
+        ref={inputRef}
+        type='file'
+        accept='.pem,.key,.crt,.cer,.txt,application/x-pem-file,text/plain'
+        className='hidden'
+        onChange={handleChange}
+      />
+      <Button
+        type='button'
+        variant='outline'
+        size='sm'
+        onClick={() => inputRef.current?.click()}
+        className='w-full sm:w-auto'
+      >
+        <Upload className='mr-2 h-3 w-3' />
+        {t('Upload file')}
+      </Button>
+    </>
+  )
 }
 
 const paymentSchema = z.object({
@@ -176,6 +226,14 @@ const paymentSchema = z.object({
   WaffoPancakeMerchantID: z.string(),
   WaffoPancakePrivateKey: z.string(),
   WaffoPancakeReturnURL: z.string(),
+  WechatNativeEnabled: z.boolean(),
+  WechatNativeAppId: z.string(),
+  WechatNativeMchId: z.string(),
+  WechatNativeApiV3Key: z.string(),
+  WechatNativeMchSerialNo: z.string(),
+  WechatNativePrivateKey: z.string(),
+  WechatNativePlatformCert: z.string(),
+  WechatNativeMinTopUp: z.coerce.number().min(0.01),
 })
 
 type PaymentFormValues = z.infer<typeof paymentSchema>
@@ -224,11 +282,20 @@ export function PaymentSettingsSection({
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const updateOption = useUpdateOption()
+  const configuredSensitiveKeys = React.useMemo(
+    () =>
+      collectConfiguredSensitiveKeys(
+        defaultValues,
+        waffoDefaultValues,
+        waffoPancakeDefaultValues
+      ),
+    [defaultValues, waffoDefaultValues, waffoPancakeDefaultValues]
+  )
   const initialFormValues = React.useMemo<PaymentFormValues>(
     () => ({
-      ...defaultValues,
-      ...waffoDefaultValues,
-      ...waffoPancakeDefaultValues,
+      ...stripSensitiveMasks(defaultValues),
+      ...stripSensitiveMasks(waffoDefaultValues),
+      ...stripSensitiveMasks(waffoPancakeDefaultValues),
     }),
     [defaultValues, waffoDefaultValues, waffoPancakeDefaultValues]
   )
@@ -457,6 +524,14 @@ export function PaymentSettingsSection({
       WaffoPancakeReturnURL: removeTrailingSlash(
         values.WaffoPancakeReturnURL.trim()
       ),
+      WechatNativeEnabled: values.WechatNativeEnabled,
+      WechatNativeAppId: values.WechatNativeAppId.trim(),
+      WechatNativeMchId: values.WechatNativeMchId.trim(),
+      WechatNativeApiV3Key: values.WechatNativeApiV3Key.trim(),
+      WechatNativeMchSerialNo: values.WechatNativeMchSerialNo.trim(),
+      WechatNativePrivateKey: values.WechatNativePrivateKey.trim(),
+      WechatNativePlatformCert: values.WechatNativePlatformCert.trim(),
+      WechatNativeMinTopUp: values.WechatNativeMinTopUp,
     }
 
     const initial = {
@@ -504,6 +579,14 @@ export function PaymentSettingsSection({
       WaffoPancakeReturnURL: removeTrailingSlash(
         initialRef.current.WaffoPancakeReturnURL.trim()
       ),
+      WechatNativeEnabled: initialRef.current.WechatNativeEnabled,
+      WechatNativeAppId: initialRef.current.WechatNativeAppId.trim(),
+      WechatNativeMchId: initialRef.current.WechatNativeMchId.trim(),
+      WechatNativeApiV3Key: initialRef.current.WechatNativeApiV3Key.trim(),
+      WechatNativeMchSerialNo: initialRef.current.WechatNativeMchSerialNo.trim(),
+      WechatNativePrivateKey: initialRef.current.WechatNativePrivateKey.trim(),
+      WechatNativePlatformCert: initialRef.current.WechatNativePlatformCert.trim(),
+      WechatNativeMinTopUp: initialRef.current.WechatNativeMinTopUp,
     }
 
     const updates: Array<{ key: string; value: string | number | boolean }> = []
@@ -701,6 +784,70 @@ export function PaymentSettingsSection({
       updates.push({ key: 'WaffoPayMethods', value: sanitized.WaffoPayMethods })
     }
 
+    if (sanitized.WechatNativeEnabled !== initial.WechatNativeEnabled) {
+      updates.push({
+        key: 'WechatNativeEnabled',
+        value: sanitized.WechatNativeEnabled,
+      })
+    }
+
+    if (sanitized.WechatNativeAppId !== initial.WechatNativeAppId) {
+      updates.push({
+        key: 'WechatNativeAppId',
+        value: sanitized.WechatNativeAppId,
+      })
+    }
+
+    if (sanitized.WechatNativeMchId !== initial.WechatNativeMchId) {
+      updates.push({
+        key: 'WechatNativeMchId',
+        value: sanitized.WechatNativeMchId,
+      })
+    }
+
+    if (
+      sanitized.WechatNativeApiV3Key &&
+      sanitized.WechatNativeApiV3Key !== initial.WechatNativeApiV3Key
+    ) {
+      updates.push({
+        key: 'WechatNativeApiV3Key',
+        value: sanitized.WechatNativeApiV3Key,
+      })
+    }
+
+    if (sanitized.WechatNativeMchSerialNo !== initial.WechatNativeMchSerialNo) {
+      updates.push({
+        key: 'WechatNativeMchSerialNo',
+        value: sanitized.WechatNativeMchSerialNo,
+      })
+    }
+
+    if (
+      sanitized.WechatNativePrivateKey &&
+      sanitized.WechatNativePrivateKey !== initial.WechatNativePrivateKey
+    ) {
+      updates.push({
+        key: 'WechatNativePrivateKey',
+        value: sanitized.WechatNativePrivateKey,
+      })
+    }
+
+    if (
+      sanitized.WechatNativePlatformCert !== initial.WechatNativePlatformCert
+    ) {
+      updates.push({
+        key: 'WechatNativePlatformCert',
+        value: sanitized.WechatNativePlatformCert,
+      })
+    }
+
+    if (sanitized.WechatNativeMinTopUp !== initial.WechatNativeMinTopUp) {
+      updates.push({
+        key: 'WechatNativeMinTopUp',
+        value: sanitized.WechatNativeMinTopUp,
+      })
+    }
+
     const hasWaffoPancakeChanges =
       sanitized.WaffoPancakeMerchantID !== initial.WaffoPancakeMerchantID ||
       sanitized.WaffoPancakePrivateKey.length > 0 ||
@@ -877,8 +1024,9 @@ export function PaymentSettingsSection({
           />
           <Tabs defaultValue='general' className='min-w-0'>
             <div className='overflow-x-auto pb-1'>
-              <TabsList className='grid min-w-[44rem] grid-cols-6'>
+              <TabsList className='grid min-w-[44rem] grid-cols-7'>
                 <TabsTrigger value='general'>{t('General')}</TabsTrigger>
+                <TabsTrigger value='wechat-native'>WeChat Native</TabsTrigger>
                 <TabsTrigger value='epay'>Epay</TabsTrigger>
                 <TabsTrigger value='stripe'>{t('Stripe')}</TabsTrigger>
                 <TabsTrigger value='creem'>Creem</TabsTrigger>
@@ -1235,7 +1383,12 @@ export function PaymentSettingsSection({
                     name='EpayKey'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('Epay secret key')}</FormLabel>
+                        <FormLabel>
+                          {t('Epay secret key')}
+                          {configuredSensitiveKeys.has('EpayKey') && (
+                            <ConfiguredBadge />
+                          )}
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type='password'
@@ -1309,7 +1462,12 @@ export function PaymentSettingsSection({
                     name='StripeApiSecret'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('API secret')}</FormLabel>
+                        <FormLabel>
+                          {t('API secret')}
+                          {configuredSensitiveKeys.has('StripeApiSecret') && (
+                            <ConfiguredBadge />
+                          )}
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type='password'
@@ -1335,7 +1493,12 @@ export function PaymentSettingsSection({
                     name='StripeWebhookSecret'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('Webhook secret')}</FormLabel>
+                        <FormLabel>
+                          {t('Webhook secret')}
+                          {configuredSensitiveKeys.has(
+                            'StripeWebhookSecret'
+                          ) && <ConfiguredBadge />}
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type='password'
@@ -1486,7 +1649,12 @@ export function PaymentSettingsSection({
                     name='CreemApiKey'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('API Key')}</FormLabel>
+                        <FormLabel>
+                          {t('API Key')}
+                          {configuredSensitiveKeys.has('CreemApiKey') && (
+                            <ConfiguredBadge />
+                          )}
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type='password'
@@ -1512,7 +1680,12 @@ export function PaymentSettingsSection({
                     name='CreemWebhookSecret'
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('Webhook Secret')}</FormLabel>
+                        <FormLabel>
+                          {t('Webhook Secret')}
+                          {configuredSensitiveKeys.has(
+                            'CreemWebhookSecret'
+                          ) && <ConfiguredBadge />}
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type='password'
@@ -1618,6 +1791,251 @@ export function PaymentSettingsSection({
             </TabsContent>
 
             <TabsContent
+              value='wechat-native'
+              className={paymentTabContentClassName}
+            >
+              <div className='space-y-4'>
+                <div>
+                  <h3 className='text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]'>
+                    WeChat Native
+                  </h3>
+                  <p className='text-[13px] text-[#5A6478]'>
+                    {t(
+                      'Direct WeChat Pay merchant integration (bypasses Epay aggregators)'
+                    )}
+                  </p>
+                </div>
+
+                <div className='rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-4 text-[13px] text-[#1E40AF]'>
+                  <p className='mb-2 font-semibold'>
+                    {t('Webhook Configuration:')}
+                  </p>
+                  <ul className='list-inside list-disc space-y-1'>
+                    <li>
+                      {t('Webhook URL:')}{' '}
+                      <code className='rounded bg-[#DBEAFE] px-1 py-0.5 font-mono text-[12px]'>
+                        {'<ServerAddress>/api/user/wechat-native/notify'}
+                      </code>
+                    </li>
+                    <li>
+                      {t(
+                        'Register this URL in the WeChat Pay merchant platform.'
+                      )}
+                    </li>
+                  </ul>
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name='WechatNativeEnabled'
+                  render={({ field }) => (
+                    <SettingsSwitchItem>
+                      <SettingsSwitchContent>
+                        <FormLabel>{t('Enable WeChat Native')}</FormLabel>
+                        <FormDescription>
+                          {t('Enable direct WeChat Pay Native payments')}
+                        </FormDescription>
+                      </SettingsSwitchContent>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </SettingsSwitchItem>
+                  )}
+                />
+
+                <div className='grid gap-6 md:grid-cols-2'>
+                  <FormField
+                    control={form.control}
+                    name='WechatNativeAppId'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t('App ID')}</FormLabel>
+                        <FormControl>
+                          <Input
+                            autoComplete='off'
+                            className='font-mono text-[12px] bg-card'
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(event.target.value)
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name='WechatNativeMchId'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t('Merchant ID')}</FormLabel>
+                        <FormControl>
+                          <Input
+                            autoComplete='off'
+                            className='font-mono text-[12px] bg-card tabular-nums'
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(event.target.value)
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='grid gap-6 md:grid-cols-2'>
+                  <FormField
+                    control={form.control}
+                    name='WechatNativeApiV3Key'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          {t('APIv3 Key')}
+                          {configuredSensitiveKeys.has(
+                            'WechatNativeApiV3Key'
+                          ) && <ConfiguredBadge />}
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type='password'
+                            placeholder={t('Enter new key to update')}
+                            autoComplete='new-password'
+                            className='font-mono text-[12px] bg-card'
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(event.target.value)
+                            }
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          {t('Leave blank unless rotating the secret')}
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name='WechatNativeMchSerialNo'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t('Merchant certificate serial number')}</FormLabel>
+                        <FormControl>
+                          <Input
+                            autoComplete='off'
+                            className='font-mono text-[12px] bg-card tabular-nums'
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(event.target.value)
+                            }
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name='WechatNativeMinTopUp'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('Minimum top-up')}</FormLabel>
+                      <FormControl>
+                        <Input
+                          type='number'
+                          min={0.01}
+                          step={0.01}
+                          className='font-mono text-[12px] bg-card tabular-nums'
+                          {...safeNumberFieldProps(field)}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='WechatNativePrivateKey'
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
+                        <FormLabel>
+                          {t('Merchant private key (apiclient_key.pem)')}
+                          {configuredSensitiveKeys.has(
+                            'WechatNativePrivateKey'
+                          ) && <ConfiguredBadge />}
+                        </FormLabel>
+                        <PemFileUpload onFileRead={field.onChange} />
+                      </div>
+                      <FormControl>
+                        <Textarea
+                          rows={6}
+                          autoComplete='off'
+                          className='font-mono text-[12px] bg-card'
+                          placeholder={
+                            '-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+                          }
+                          {...field}
+                          onChange={(event) =>
+                            field.onChange(event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {t('Paste the contents of apiclient_key.pem')}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='WechatNativePlatformCert'
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
+                        <FormLabel>{t('Platform certificate (wechatpay cert)')}</FormLabel>
+                        <PemFileUpload onFileRead={field.onChange} />
+                      </div>
+                      <FormControl>
+                        <Textarea
+                          rows={6}
+                          autoComplete='off'
+                          className='font-mono text-[12px] bg-card'
+                          placeholder={
+                            '-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----'
+                          }
+                          {...field}
+                          onChange={(event) =>
+                            field.onChange(event.target.value)
+                          }
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {t(
+                          'Paste the WeChat Pay platform certificate used to verify callbacks'
+                        )}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </TabsContent>
+
+            <TabsContent
               value='waffo-pancake'
               className={paymentTabContentClassName}
             >
@@ -1628,6 +2046,7 @@ export function PaymentSettingsSection({
                 selectedBinding={waffoPancakeSelection}
                 savedBinding={waffoPancakeSavedBinding}
                 onSelectedBindingChange={setWaffoPancakeSelection}
+                configuredKeys={configuredSensitiveKeys}
               />
             </TabsContent>
 
@@ -1637,6 +2056,7 @@ export function PaymentSettingsSection({
                 onValueChange={setWaffoValue}
                 payMethods={waffoPayMethods}
                 onPayMethodsChange={setWaffoPayMethods}
+                configuredKeys={configuredSensitiveKeys}
               />
             </TabsContent>
           </Tabs>

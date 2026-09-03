@@ -1,0 +1,2064 @@
+[SYS] 2026/09/02 - 17:31:52 | initializing token encoders 
+[SYS] 2026/09/02 - 17:31:52 | token encoders initialized 
+[SYS] 2026/09/02 - 17:31:52 | SQL_DSN not set, using SQLite as database 
+[SYS] 2026/09/02 - 17:31:52 | database migration started 
+
+2026/09/02 17:31:53 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[210.225ms] [33m[rows:5][35m CREATE INDEX `idx_users_we_chat_id` ON `users`(`wechat_id`)[0m
+
+2026/09/02 17:31:54 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[255.755ms] [33m[rows:5][35m CREATE INDEX `idx_users_distribution_group_id` ON `users`(`distribution_group_id`)[0m
+
+2026/09/02 17:31:55 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[208.170ms] [33m[rows:5][35m CREATE INDEX `idx_users_device_fingerprint` ON `users`(`device_fingerprint`)[0m
+
+2026/09/02 17:31:57 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[203.237ms] [33m[rows:0][35m CREATE INDEX `idx_vendors_deleted_at` ON `vendors`(`deleted_at`)[0m
+
+2026/09/02 17:32:00 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[212.793ms] [33m[rows:0][35m CREATE UNIQUE INDEX `ux_provider_userid` ON `user_oauth_bindings`(`provider_id`,`provider_user_id`)[0m
+[SYS] 2026/09/02 - 17:32:02 | system is already initialized at: 2026-08-27 11:29:42 +0800 CST 
+[SYS] 2026/09/02 - 17:32:02 | REDIS_CONN_STRING not set, Redis is not enabled 
+[SYS] 2026/09/02 - 17:32:02 | i18n initialized with languages: zh-CN, zh-TW, en 
+[SYS] 2026/09/02 - 17:32:02 | Loaded 0 custom OAuth providers 
+[SYS] 2026/09/02 - 17:32:02 | New API v0.0.0 started 
+[INFO] 2026/09/02 - 17:32:02 | SYSTEM | codex credential auto-refresh task started: tick=10m0s threshold=24h0m0s 
+[SYS] 2026/09/02 - 17:32:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 17:32:02 | 保存数据看板数据成功，共保存0条数据 
+[INFO] 2026/09/02 - 17:32:02 | SYSTEM | system task runner started: runner=DESKTOP-JQ9KQG2-PfhgSGn3 idle_interval=15s 
+[INFO] 2026/09/02 - 17:32:02 | SYSTEM | subscription quota reset task started: tick=1m0s 
+[INFO] 2026/09/02 - 17:32:02 | SYSTEM | distribution daily settlement task started: tick=1m0s, schedule=00:05 
+
+  [33mWarning: Refresh cookie is not secure and refresh/logout Origin validation is disabled. Please set SESSION_COOKIE_SECURE=true in production.[0m
+
+
+  [32mNew API v0.0.0[0m  ready in 9863 ms
+
+  ➜  [1mLocal:[0m   http://localhost:3000/
+
+2026/09/02 17:32:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[247.872ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 17:32:02 [32mD:/newWorkSpace/a新工作/new-api2/service/codex_credential_refresh_task.go:80 [33mSLOW SQL >= 200ms
+[0m[31;1m[229.542ms] [33m[rows:0][35m SELECT `id`,`name`,`key`,`status`,`channel_info` FROM `channels` WHERE type = ? AND (status = ? OR status = ?) ORDER BY id asc LIMIT 200[0m
+
+2026/09/02 17:32:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:362 [33mSLOW SQL >= 200ms
+[0m[31;1m[244.405ms] [33m[rows:0][35m SELECT * FROM `system_task_locks` WHERE locked_until < ?[0m
+  ➜  [1mNetwork:[0m http://172.29.32.1:3000/
+  ➜  [1mNetwork:[0m http://192.168.201.18:3000/
+
+[SYS] 2026/09/02 - 17:33:02 | syncing options from database 
+
+2026/09/02 17:33:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[216.620ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 17:33:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[253.908ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 17:34:02 | syncing options from database 
+[SYS] 2026/09/02 - 17:35:02 | syncing options from database 
+
+2026/09/02 17:35:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[232.529ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 17:36:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:36:20 | api | 202609020936203804297008268d9d6HDgBQVeh | 200 |      1.0612ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:36:20 | api | 202609020936206101614008268d9d6wBVRwu9k | 401 |      4.2499ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:36:20 | api | 202609020936207102476008268d9d6I6uG29gw | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:36:20 | api | 202609020936207137149008268d9d64YjHGKyx | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:36:20 | api | 202609020936207272740008268d9d67bY4qPqs | 200 |            0s |       127.0.0.1 |     GET /api/status
+
+2026/09/02 17:36:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[202.545ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 17:36:47 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:115 [33mSLOW SQL >= 200ms
+[0m[31;1m[203.180ms] [33m[rows:1][35m INSERT INTO `system_tasks` (`task_id`,`type`,`status`,`active_key`,`payload`,`state`,`result`,`error`,`locked_by`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING `id`[0m
+[SYS] 2026/09/02 - 17:37:02 | syncing options from database 
+[SYS] 2026/09/02 - 17:37:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 17:37:02 | 保存数据看板数据成功，共保存0条数据 
+[GIN] 2026/09/02 - 17:37:14 | api | 202609020937137310876008268d9d6icdlCvLf | 200 |    577.7461ms |       127.0.0.1 |    POST /api/user/login?turnstile=
+[GIN] 2026/09/02 - 17:37:14 | api | 202609020937148187802008268d9d6LEa387WV | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:15 | api | 202609020937150315712008268d9d6Q67bRcxR | 200 |      2.0018ms |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:37:15 | api | 202609020937151306409008268d9d6s7fippBZ | 200 |       3.003ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:37:17 | api | 202609020937174340963008268d9d6lirRcfzJ | 200 |        1.01ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:37:17 | api | 202609020937174370982008268d9d6b16X5dGQ | 200 |      2.9945ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:37:17 | api | 202609020937174401079008268d9d6dtbG3KrF | 200 |       4.986ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:37:28 | api | 202609020937287652453008268d9d6TQoYErGU | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937290752388008268d9d6ji2MA0St | 200 |     120.653ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937295478417008268d9d6oDUKzTx6 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937295608343008268d9d6Oz0AVa3q | 200 |      2.0076ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937296442399008268d9d697WJOXPs | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937296447625008268d9d6XMaqR0Ug | 200 |       623.1µs |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937296453856008268d9d64xSgnvX2 | 200 |       1.728ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937296503582008268d9d6ZUSiWjwk | 200 |      6.2683ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:37:29 | api | 202609020937296478394008268d9d6htGIVlri | 200 |       10.25ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:37:56 | api | 202609020937565222583008268d9d6XWokCO9s | 200 |      1.0007ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:56 | api | 202609020937567125878008268d9d6ZYCv7gyy | 200 |      162.71ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937571680210008268d9d66XfGdpGW | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937571780451008268d9d6wKpJtrVQ | 200 |       998.5µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937572241672008268d9d6mpsrzsnW | 200 |       522.9µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937572252517008268d9d693FLqABr | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937572263255008268d9d6kHn9iTk6 | 200 |      1.0428ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937572279077008268d9d673A4t2fk | 200 |      1.4037ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:37:57 | api | 202609020937572310053008268d9d6fAGjcqKF | 200 |      3.7378ms |       127.0.0.1 |     GET /api/user/aff
+[SYS] 2026/09/02 - 17:38:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:38:08 | api | 202609020938083646901008268d9d62F1c07Sl | 200 |         995µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938090905734008268d9d6EirqjUrx | 200 |    143.0895ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938097684166008268d9d6yEb7f4BA | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938097808777008268d9d6NVHv57r8 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938099247729008268d9d6fua1nSBI | 200 |      2.9962ms |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938099327449008268d9d6Sqmaytn7 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938099327449008268d9d6X5Ok5ntR | 200 |      2.0145ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938099342741008268d9d6bhrmtUFZ | 200 |        6.37ms |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938099352679008268d9d6WhC4ISIT | 200 |      6.3709ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:38:09 | api | 202609020938099372719008268d9d6hDEGL3GZ | 200 |     10.3686ms |       127.0.0.1 |     GET /api/user/self
+[SYS] 2026/09/02 - 17:39:02 | syncing options from database 
+[SYS] 2026/09/02 - 17:40:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:40:07 | api | 202609020940078970812008268d9d6AqDa2K6i | 200 |       1.222ms |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/02 - 17:40:07 | api | 202609020940079049137008268d9d6ciIAOAVv | 200 |      2.3316ms |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/02 - 17:40:07 | api | 202609020940079103136008268d9d6w3roNbSq | 200 |      2.0155ms |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/02 - 17:40:07 | api | 202609020940079163119008268d9d67LA9Iuai | 200 |      1.0009ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:40:07 | api | 202609020940079223129008268d9d6gmccaua7 | 200 |       998.8µs |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:40:07 | api | 202609020940079275455008268d9d6ZA39qNtl | 200 |       704.2µs |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/02 - 17:40:08 | api | 202609020940083010482008268d9d6DY7SmL53 | 200 |      1.0011ms |       127.0.0.1 |    POST /api/user/amount
+[SYS] 2026/09/02 - 17:41:02 | syncing options from database 
+[SYS] 2026/09/02 - 17:42:02 | syncing options from database 
+[SYS] 2026/09/02 - 17:42:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 17:42:02 | 保存数据看板数据成功，共保存0条数据 
+[GIN] 2026/09/02 - 17:42:26 | api | 202609020942269417748008268d9d6LSXsOzGE | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942274602603008268d9d6tDmzuNgL | 200 |    114.2249ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277594444008268d9d6NIvPpoFj | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277707307008268d9d6zTlzMSY3 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277934399008268d9d64umaxlyb | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277950792008268d9d6Gb0miOQS | 200 |       525.9µs |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277956051008268d9d6K017HlNr | 200 |       2.121ms |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277987777008268d9d6w6bwAIPu | 200 |       996.4µs |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942277997741008268d9d6QJNx1zPh | 200 |      2.0126ms |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942278037776008268d9d6Zm7IEVL8 | 200 |      1.9997ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942278057773008268d9d6X5gvavP3 | 200 |      1.9993ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:42:27 | api | 202609020942278077766008268d9d6tVzzfyrs | 200 |       997.5µs |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/02 - 17:42:28 | api | 202609020942280076013008268d9d6ei0d0b1a | 200 |      1.0474ms |       127.0.0.1 |    POST /api/user/amount
+[SYS] 2026/09/02 - 17:43:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943323671661008268d9d6AvIUWirc | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943325463626008268d9d6Ai9JUvDV | 200 |    131.1904ms |       127.0.0.1 |    POST /api/user/auth/refresh
+
+2026/09/02 17:43:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[219.371ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943328971962008268d9d6LLw1MG99 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329071898008268d9d616W7fVEl | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329432186008268d9d6tqKtBWLj | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329452159008268d9d6OzgAg3FV | 200 |      1.8291ms |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329481710008268d9d6SjRSpjUB | 200 |      3.4915ms |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329506625008268d9d6vabozY4J | 200 |      2.0025ms |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329526650008268d9d6wv3RTWE9 | 200 |      7.0741ms |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329536649008268d9d6z1R3kQTn | 200 |      6.0742ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329637623008268d9d6REYr3EuF | 200 |      2.0005ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:43:32 | api | 202609020943329657628008268d9d6Pzs9R7Ll | 200 |      1.0006ms |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/02 - 17:43:33 | api | 202609020943333526610008268d9d6dJlNxHLj | 200 |      5.0113ms |       127.0.0.1 |    POST /api/user/amount
+[SYS] 2026/09/02 - 17:44:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:44:32 | api | 202609020944326649126008268d9d6dWnhCsbC | 200 |       999.8µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:44:33 | api | 202609020944336651668008268d9d6qYiF81fx | 200 |    131.6479ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:44:34 | api | 202609020944349012494008268d9d6KMFuqIzk | 200 |       994.8µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:44:34 | api | 202609020944349618431008268d9d6v5bxzahe | 200 |       280.9µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944353672036008268d9d6jWnoMUsB | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944353672036008268d9d6N1khC3F8 | 200 |       985.8µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944353783957008268d9d6MoU1IKRC | 200 |     19.4912ms |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944353783957008268d9d6vy05PYAP | 200 |     23.4928ms |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944354301172008268d9d6UKXA0dks | 200 |      1.0035ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944354321157008268d9d60kCOwr8l | 200 |      1.0054ms |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944354598656008268d9d636TjF9PV | 200 |      1.0173ms |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/02 - 17:44:35 | api | 202609020944354598656008268d9d6TCeA9re4 | 200 |      1.0173ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:44:36 | api | 202609020944364895946008268d9d6Y7yoIncN | 200 |      2.2566ms |       127.0.0.1 |    POST /api/user/amount
+[SYS] 2026/09/02 - 17:45:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:45:28 | api | 202609020945288998482008268d9d6erL44rBB | 200 |       515.6µs |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:45:30 | api | 202609020945300488585008268d9d6DUWVMZVE | 200 |      1.0591ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:45:30 | api | 202609020945300488585008268d9d6tD1ra1Gx | 200 |      1.0591ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:45:35 | api | 202609020945351349278008268d9d6aIBWLM7h | 200 |    123.7779ms |       127.0.0.1 |    POST /api/distribution/freeze
+[GIN] 2026/09/02 - 17:45:35 | api | 202609020945353198297008268d9d6DgT81R91 | 200 |    113.9758ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:45:38 | api | 202609020945380119901008268d9d6rUBjwMau | 200 |    198.0721ms |       127.0.0.1 |    POST /api/distribution/freeze
+[GIN] 2026/09/02 - 17:45:38 | api | 202609020945388319705008268d9d64WtAS7nv | 200 |       531.3µs |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945420682404008268d9d6yrgIQvyO | 200 |       370.8µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945422895797008268d9d6BNiz6qmU | 200 |    120.4598ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945426893068008268d9d6HO1qyBhk | 200 |       410.4µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945427431742008268d9d6wYDmsGFE | 200 |       207.6µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945427742050008268d9d693PQ7TEt | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945427752070008268d9d6D1Uk5Irv | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945427752070008268d9d6CH56jDyH | 200 |      2.0015ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:45:42 | api | 202609020945427772085008268d9d64jDf0EQS | 200 |      1.9976ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:45:50 | api | 202609020945501722351008268d9d6sIx0MpSM | 200 |      1.5321ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:45:50 | api | 202609020945501740723008268d9d6Y2aukZjF | 200 |            0s |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:45:50 | api | 202609020945501730579008268d9d6EPZ960hf | 200 |      9.0878ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:45:54 | api | 202609020945543564568008268d9d6bkSgA9mV | 200 |      2.5114ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:46:01 | api | 202609020946011463027008268d9d6GpgJMGZG | 200 |       778.9µs |       127.0.0.1 |     GET /api/distribution/ledgers?p=1&page_size=20
+[SYS] 2026/09/02 - 17:46:02 | syncing options from database 
+[GIN] 2026/09/02 - 17:46:04 | api | 202609020946040709160008268d9d6ekkPQo2p | 200 |       573.3µs |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:46:04 | api | 202609020946041340189008268d9d6fsxjO0LG | 200 |      2.9904ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:46:23 | api | 202609020946239398616008268d9d6t7xhNpW1 | 200 |      1.0013ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20&group_id=1
+[GIN] 2026/09/02 - 17:46:25 | api | 202609020946251652638008268d9d6rgJgxJRQ | 200 |      1.0004ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+
+2026/09/02 17:46:45 [32mD:/newWorkSpace/a新工作/new-api2/model/distribution_ledger.go:263 [33mSLOW SQL >= 200ms
+[0m[31;1m[1350.626ms] [33m[rows:1][35m UPDATE `users` SET `distribution_debt`=distribution_debt + ? WHERE id = ? AND `users`.`deleted_at` IS NULL[0m
+
+2026/09/02 17:46:49 [32mD:/newWorkSpace/a新工作/new-api2/model/distribution_ledger.go:275 [33mSLOW SQL >= 200ms
+[0m[31;1m[2378.859ms] [33m[rows:1][35m INSERT INTO `distribution_ledgers` (`user_id`,`invitee_id`,`top_up_id`,`trade_no`,`type`,`amount`,`consumed_quota`,`settle_date`,`debt_applied`,`credited`,`remark`,`created_time`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id`[0m
+[GIN] 2026/09/02 - 17:46:52 | api | 202609020946445810111008268d9d6ed37FEx2 | 200 |    8.1580214s |       127.0.0.1 |    POST /api/distribution/deduct
+
+2026/09/02 17:46:59 [32mD:/newWorkSpace/a新工作/new-api2/model/log.go:103 [33mSLOW SQL >= 200ms
+[0m[31;1m[7181.155ms] [33m[rows:1][35m INSERT INTO `logs` (`user_id`,`created_at`,`type`,`content`,`username`,`token_name`,`model_name`,`quota`,`prompt_tokens`,`completion_tokens`,`use_time`,`is_stream`,`channel_id`,`token_id`,`group`,`ip`,`request_id`,`upstream_request_id`,`other`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id`[0m
+
+2026/09/02 17:46:59 [32mD:/newWorkSpace/a新工作/new-api2/model/user_session.go:203 [33mSLOW SQL >= 200ms
+[0m[31;1m[5401.178ms] [33m[rows:1][35m SELECT * FROM `user_sessions` WHERE sid = ? ORDER BY `user_sessions`.`sid` LIMIT 1[0m
+[GIN] 2026/09/02 - 17:47:01 | api | 202609020946545313717008268d9d6rlG5ILVI | 200 |    6.7067865s |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[SYS] 2026/09/02 - 17:47:02 | syncing options from database 
+[SYS] 2026/09/02 - 17:47:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 17:47:02 | 保存数据看板数据成功，共保存0条数据 
+
+2026/09/02 17:47:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:169 [33mSLOW SQL >= 200ms
+[0m[31;1m[825.246ms] [33m[rows:0][35m SELECT * FROM `system_tasks` WHERE id IN (SELECT MIN(id) FROM `system_tasks` WHERE type IN (?,?,?,?,?) AND status = ? GROUP BY `type`)[0m
+
+2026/09/02 17:47:05 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[2975.278ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 17:47:05 [32mD:/newWorkSpace/a新工作/new-api2/model/option.go:26 [33mSLOW SQL >= 200ms
+[0m[31;1m[2738.978ms] [33m[rows:8][35m SELECT * FROM `options`[0m
+[GIN] 2026/09/02 - 17:47:13 | api | 202609020947134158799008268d9d6cRrPDr8F | 200 |      9.4683ms |       127.0.0.1 |    POST /api/distribution/deduct_all
+
+2026/09/02 17:47:13 [32mD:/newWorkSpace/a新工作/new-api2/model/log.go:103 [33mSLOW SQL >= 200ms
+[0m[31;1m[249.565ms] [33m[rows:1][35m INSERT INTO `logs` (`user_id`,`created_at`,`type`,`content`,`username`,`token_name`,`model_name`,`quota`,`prompt_tokens`,`completion_tokens`,`use_time`,`is_stream`,`channel_id`,`token_id`,`group`,`ip`,`request_id`,`upstream_request_id`,`other`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id`[0m
+[GIN] 2026/09/02 - 17:47:13 | api | 202609020947136772066008268d9d6x9o7eH8d | 200 |       3.357ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:48:01 | api | 202609020948011329797008268d9d670qp5xdJ | 200 |       1.001ms |       127.0.0.1 |     GET /api/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:48:01 | api | 202609020948019483065008268d9d6jA7cIJo6 | 200 |      1.0003ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:48:04 | api | 202609020948047930501008268d9d6HSGY3wtR | 200 |      4.0526ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:48:04 | api | 202609020948047950188008268d9d6J06OL9Dy | 200 |       5.586ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[SYS] 2026/09/02 - 17:48:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:48:19 | api | 202609020948195293675008268d9d6b5QHXM2l | 200 |            0s |       127.0.0.1 |     GET /api/status
+
+2026/09/02 17:48:20 [32mD:/newWorkSpace/a新工作/new-api2/model/user_session.go:476 [33mSLOW SQL >= 200ms
+[0m[31;1m[426.788ms] [33m[rows:1][35m UPDATE `user_sessions` SET `last_active_at`=?,`previous_refresh_hash`=?,`previous_valid_until`=?,`refresh_hash`=? WHERE sid = ? AND user_id = ? AND status = ? AND revoked_at = ? AND expires_at > ? AND refresh_hash = ?[0m
+[GIN] 2026/09/02 - 17:48:20 | api | 202609020948202492898008268d9d6bpv8pb1D | 200 |    432.3839ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/02 - 17:48:21 | api | 202609020948211280322008268d9d6huPgTHNd | 200 |         809µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:48:21 | api | 202609020948212046278008268d9d6Mrc6WRH8 | 200 |       996.3µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:48:21 | api | 202609020948212788113008268d9d6eZgkCOKZ | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:48:21 | api | 202609020948212788113008268d9d6zYphvnRp | 200 |      1.0005ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:48:21 | api | 202609020948212678096008268d9d6yXDaSA6B | 200 |     12.0023ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:48:21 | api | 202609020948212658076008268d9d66lFljuUL | 200 |     15.0021ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:48:25 | api | 202609020948249471710008268d9d6Sn4DJybK | 200 |    291.5388ms |       127.0.0.1 |    POST /api/user/auth/logout
+[GIN] 2026/09/02 - 17:48:25 | api | 202609020948254123973008268d9d6a0XIb25U | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:48:25 | api | 202609020948254143951008268d9d6ip9QFHfB | 200 |      1.0081ms |       127.0.0.1 |     GET /api/status
+
+2026/09/02 17:48:29 [32mD:/newWorkSpace/a新工作/new-api2/model/user_session.go:154 [33mSLOW SQL >= 200ms
+[0m[31;1m[257.372ms] [33m[rows:1][35m INSERT INTO `user_sessions` (`sid`,`user_id`,`version`,`user_auth_version`,`status`,`refresh_hash`,`previous_refresh_hash`,`previous_valid_until`,`login_method`,`ip`,`user_agent`,`created_at`,`last_active_at`,`expires_at`,`revoked_at`,`revoked_reason`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)[0m
+
+2026/09/02 17:48:29 [32mD:/newWorkSpace/a新工作/new-api2/model/user.go:1376 [33mSLOW SQL >= 200ms
+[0m[31;1m[323.748ms] [33m[rows:1][35m UPDATE `users` SET `last_login_at`=? WHERE id = ? AND `users`.`deleted_at` IS NULL[0m
+
+2026/09/02 17:48:29 [32mD:/newWorkSpace/a新工作/new-api2/model/log.go:103 [33mSLOW SQL >= 200ms
+[0m[31;1m[265.361ms] [33m[rows:1][35m INSERT INTO `logs` (`user_id`,`created_at`,`type`,`content`,`username`,`token_name`,`model_name`,`quota`,`prompt_tokens`,`completion_tokens`,`use_time`,`is_stream`,`channel_id`,`token_id`,`group`,`ip`,`request_id`,`upstream_request_id`,`other`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id`[0m
+[GIN] 2026/09/02 - 17:48:29 | api | 202609020948286953740008268d9d6PMswsODJ | 200 |    954.5795ms |       127.0.0.1 |    POST /api/user/login?turnstile=
+[GIN] 2026/09/02 - 17:48:29 | api | 202609020948297839341008268d9d6RXwGN07V | 200 |       996.1µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:48:30 | api | 202609020948300994238008268d9d6eB0ZOfce | 200 |     11.9958ms |       127.0.0.1 |     GET /api/uptime/status
+[GIN] 2026/09/02 - 17:48:30 | api | 202609020948301314251008268d9d6sgMNmOpn | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:48:30 | api | 202609020948301304212008268d9d6fuetSyB0 | 200 |      3.0279ms |       127.0.0.1 |     GET /api/data/self?start_timestamp=1788259709&end_timestamp=1788346109&default_time=hour
+[GIN] 2026/09/02 - 17:48:30 | api | 202609020948303077059008268d9d63G9vozI6 | 200 |      2.9745ms |       127.0.0.1 |     GET /api/user/models
+[GIN] 2026/09/02 - 17:48:30 | api | 202609020948303436747008268d9d6FcQ5jGx6 | 200 |      1.0052ms |       127.0.0.1 |     GET /api/token/?p=1&size=10
+
+2026/09/02 17:48:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[282.769ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[GIN] 2026/09/02 - 17:48:33 | api | 202609020948331935114008268d9d6HhkCLZRv | 200 |      1.9955ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:48:33 | api | 202609020948331965025008268d9d6u22YJRtR | 200 |      1.0049ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:48:33 | api | 202609020948331975074008268d9d6FOeE8BIp | 200 |      2.9992ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:48:35 | api | 202609020948354685174008268d9d6djwFWqsG | 200 |      5.0176ms |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[GIN] 2026/09/02 - 17:48:43 | api | 202609020948431423382008268d9d6hYW8oa3R | 200 |    170.1091ms |       127.0.0.1 |    POST /api/user/auth/logout
+[GIN] 2026/09/02 - 17:48:43 | api | 202609020948435143921008268d9d6AdawG1LB | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:48:43 | api | 202609020948435153839008268d9d6gNb8AFGa | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948467888400008268d9d6f431kX3O | 200 |    486.7205ms |       127.0.0.1 |    POST /api/user/login?turnstile=
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948473647238008268d9d6vgmkLoRN | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948474968551008268d9d6Eo4Z0hSZ | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948474978559008268d9d67XGXvBbm | 200 |      1.9996ms |       127.0.0.1 |     GET /api/data/self?start_timestamp=1788259727&end_timestamp=1788346127&default_time=hour
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948475066486008268d9d6zUrhh31h | 200 |      2.1313ms |       127.0.0.1 |     GET /api/perf-metrics/summary?hours=24
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948475093201008268d9d6IEN2DOkl | 200 |            0s |       127.0.0.1 |     GET /api/uptime/status
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948475128143008268d9d6LwJbBU4t | 200 |      1.0753ms |       127.0.0.1 |     GET /api/token/?p=1&size=10
+[GIN] 2026/09/02 - 17:48:47 | api | 202609020948475133357008268d9d6QiBnarSa | 200 |      1.0734ms |       127.0.0.1 |     GET /api/user/models
+[GIN] 2026/09/02 - 17:48:51 | api | 202609020948518004805008268d9d6q7w0exYG | 200 |           1ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:48:52 | api | 202609020948526469166008268d9d6Or9eNGvs | 200 |       2.003ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:48:52 | api | 202609020948526479281008268d9d6wSPg0PtU | 200 |       991.5µs |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:49:04 | api | 202609020949049631707008268d9d6lseD8FEx | 200 |      2.6791ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20&keyword=admin
+[SYS] 2026/09/02 - 17:49:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:49:06 | api | 202609020949066718867008268d9d6yzt4H30K | 200 |      1.7167ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[SYS] 2026/09/02 - 17:50:05 | syncing options from database 
+
+2026/09/02 17:51:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[209.850ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 17:51:05 | syncing options from database 
+[SYS] 2026/09/02 - 17:52:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 17:52:02 | 保存数据看板数据成功，共保存0条数据 
+
+2026/09/02 17:52:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[541.922ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 17:52:05 | syncing options from database 
+[SYS] 2026/09/02 - 17:53:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:53:15 | api | 202609020953154580304008268d9d6tHaF5h4W | 200 |       1.987ms |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[GIN] 2026/09/02 - 17:53:28 | api | 202609020953280737309008268d9d6omg7Uzzo | 200 |      1.0005ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:53:28 | api | 202609020953280787257008268d9d6F4jcMnvO | 200 |      1.0013ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:53:28 | api | 202609020953280817295008268d9d6xVAsvasN | 200 |       996.3µs |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:53:31 | api | 202609020953314132841008268d9d6PFoaW9ew | 200 |     14.9597ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:54:02 | api | 202609020954024218351008268d9d6fwBNf8WZ | 200 |      2.0111ms |       127.0.0.1 |     GET /api/distribution_group/1/members?p=1&page_size=20
+
+2026/09/02 17:54:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[214.374ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 17:54:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:54:06 | api | 202609020954062772556008268d9d6fykj0Nm8 | 200 |      2.2249ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:54:06 | api | 202609020954062782543008268d9d6AT5pIO1f | 200 |      3.9063ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/02 - 17:54:48 | api | 202609020954489489431008268d9d6UTG4T9tm | 200 |      8.5074ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:54:48 | api | 202609020954489674605008268d9d6OX2RWaJu | 200 |      9.5448ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:54:48 | api | 202609020954489770053008268d9d6ei2XI0nj | 200 |      3.9875ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[SYS] 2026/09/02 - 17:55:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:55:08 | api | 202609020955087797391008268d9d63MVYTWKC | 200 |      2.5149ms |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[GIN] 2026/09/02 - 17:55:16 | api | 202609020955165282678008268d9d6QVrvE2yx | 200 |       982.3µs |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:55:16 | api | 202609020955165302470008268d9d6Y6abnONP | 200 |      2.0028ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:55:16 | api | 202609020955165322498008268d9d6t1W1Izpb | 200 |      1.9988ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:55:27 | api | 202609020955275953486008268d9d6L2RmoqUl | 200 |       995.1µs |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[GIN] 2026/09/02 - 17:55:44 | api | 202609020955446156737008268d9d68TJ0OmcE | 200 |      1.0595ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:55:44 | api | 202609020955446156737008268d9d60ie3Z7aq | 200 |      7.1783ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:55:44 | api | 202609020955446162081008268d9d6DSFbA2QO | 200 |      6.6439ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:55:49 | api | 202609020955492813275008268d9d6Xb8slGJ3 | 200 |      1.0002ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/02 - 17:56:02 | api | 202609020956027459371008268d9d6l0YQV6Ps | 200 |     45.6426ms |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:56:02 | api | 202609020956027985781008268d9d6fB3Vsgfc | 200 |      1.0017ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:56:02 | api | 202609020956028085815008268d9d6xhfOp90f | 200 |      4.9966ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/02 - 17:56:05 | api | 202609020956055091885008268d9d60NwbVMvl | 200 |       1.997ms |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[SYS] 2026/09/02 - 17:56:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:56:22 | api | 202609020956223082348008268d9d6ae4ISbdI | 200 |       519.6µs |       127.0.0.1 |     GET /api/group/
+[GIN] 2026/09/02 - 17:56:22 | api | 202609020956223072191008268d9d6ftrd0LHK | 200 |      2.6368ms |       127.0.0.1 |     GET /api/user/?p=1&page_size=20
+[GIN] 2026/09/02 - 17:56:22 | api | 202609020956223132537008268d9d6OsHc46K7 | 200 |         997µs |       127.0.0.1 |     GET /api/authz/catalog
+[GIN] 2026/09/02 - 17:56:30 | api | 202609020956300052060008268d9d6BHZCkekn | 200 |      3.9813ms |       127.0.0.1 |     GET /api/user/5
+[SYS] 2026/09/02 - 17:57:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 17:57:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 17:57:05 | syncing options from database 
+[GIN] 2026/09/02 - 17:57:23 | api | 202609020957236248290008268d9d6VsTGm4t8 | 200 |      2.0044ms |       127.0.0.1 |     GET /api/user/distribution/invitees?p=1&page_size=20
+[GIN] 2026/09/02 - 17:57:25 | api | 202609020957256104412008268d9d6yBJ8fmhL | 200 |       996.4µs |       127.0.0.1 |     GET /api/user/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/02 - 17:57:25 | api | 202609020957257595529008268d9d6GBMYHxNh | 200 |       995.7µs |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/02 - 17:57:25 | api | 202609020957259272960008268d9d6Nn4COxAw | 200 |      1.5201ms |       127.0.0.1 |     GET /api/user/self
+[SYS] 2026/09/02 - 17:58:05 | syncing options from database 
+[SYS] 2026/09/02 - 17:59:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:00:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:01:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:02:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:02:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:02:05 | syncing options from database 
+
+2026/09/02 18:02:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[258.991ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 18:03:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:04:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:05:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:06:05 | syncing options from database 
+
+2026/09/02 18:06:47 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:276 [33mSLOW SQL >= 200ms
+[0m[31;1m[202.270ms] [33m[rows:1][35m INSERT INTO `system_task_locks` (`type`,`task_id`,`locked_by`,`locked_until`,`updated_at`) VALUES (?,?,?,?,?)[0m
+[SYS] 2026/09/02 - 18:07:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:07:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:07:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:08:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:09:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:10:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:11:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:12:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:12:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:12:05 | syncing options from database 
+
+2026/09/02 18:13:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[306.753ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 18:13:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:14:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:15:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:16:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:17:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:17:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:17:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:18:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:19:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:20:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:21:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:22:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:22:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:22:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:23:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:24:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:25:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:26:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:27:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:27:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:27:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:28:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:29:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:30:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:31:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:32:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:32:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:32:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:33:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:34:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:35:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:36:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:37:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:37:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:37:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:38:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:39:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:40:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:41:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:42:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:42:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:42:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:43:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:44:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:45:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:46:05 | syncing options from database 
+[SYS] 2026/09/02 - 18:47:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:47:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:47:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:48:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:49:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:50:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:51:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:52:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:52:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:52:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:53:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:54:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:55:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:56:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:57:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 18:57:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 18:57:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:58:06 | syncing options from database 
+[SYS] 2026/09/02 - 18:59:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:00:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:01:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:02:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:02:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:02:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:03:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:04:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:05:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:06:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:07:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:07:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:07:06 | syncing options from database 
+
+2026/09/02 19:08:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[202.782ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 19:08:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:09:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:10:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:11:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:12:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:12:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:12:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:13:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:14:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:15:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:16:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:17:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:17:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:17:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:18:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:19:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:20:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:21:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:22:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:22:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:22:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:23:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:24:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:25:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:26:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:27:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:27:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:27:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:28:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:29:06 | syncing options from database 
+
+2026/09/02 19:30:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[505.388ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 19:30:03 [32mD:/newWorkSpace/a新工作/new-api2/service/authz/adapter.go:23 [33mSLOW SQL >= 200ms
+[0m[31;1m[571.726ms] [33m[rows:3][35m SELECT * FROM `casbin_rule` ORDER BY id asc[0m
+[SYS] 2026/09/02 - 19:30:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:31:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:32:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:32:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:32:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:33:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:34:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:35:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:36:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:37:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:37:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:37:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:38:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:39:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:40:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:41:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:42:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:42:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:42:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:43:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:44:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:45:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:46:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:47:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:47:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:47:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:48:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:49:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:50:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:51:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:52:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:52:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:52:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:53:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:54:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:55:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:56:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:57:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 19:57:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 19:57:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:58:06 | syncing options from database 
+[SYS] 2026/09/02 - 19:59:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:00:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:01:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:02:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:02:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:02:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:03:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:04:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:05:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:06:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:07:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:07:02 | 保存数据看板数据成功，共保存0条数据 
+
+2026/09/02 20:07:02 [32mD:/newWorkSpace/a新工作/new-api2/model/db_time.go:14 [33mSLOW SQL >= 200ms
+[0m[31;1m[677.223ms] [33m[rows:1][35m SELECT strftime('%s','now')[0m
+
+2026/09/02 20:07:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[609.114ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 20:07:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:08:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:09:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:10:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:11:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:12:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:12:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:12:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:13:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:14:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:15:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:16:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:17:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:17:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:17:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:18:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:19:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:20:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:21:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:22:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:22:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:22:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:23:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:24:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:25:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:26:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:27:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:27:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:27:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:28:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:29:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:30:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:31:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:32:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:32:02 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:32:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:33:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:34:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:35:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:36:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:37:02 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:37:02 | 保存数据看板数据成功，共保存0条数据 
+
+2026/09/02 20:37:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[472.325ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 20:37:03 [32mD:/newWorkSpace/a新工作/new-api2/model/db_time.go:14 [33mSLOW SQL >= 200ms
+[0m[31;1m[780.346ms] [33m[rows:1][35m SELECT strftime('%s','now')[0m
+[SYS] 2026/09/02 - 20:37:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:38:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:39:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:40:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:41:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:42:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:43:06 | syncing options from database 
+
+2026/09/02 20:43:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[200.433ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 20:44:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:45:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:46:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:47:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:48:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:49:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:50:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:51:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:52:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:53:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:54:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:55:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:56:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 20:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 20:57:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:58:06 | syncing options from database 
+[SYS] 2026/09/02 - 20:59:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:00:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:01:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:02:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:03:06 | syncing options from database 
+
+2026/09/02 21:04:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[225.643ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 21:04:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:05:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:06:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:07:06 | syncing options from database 
+
+2026/09/02 21:08:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[273.339ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 21:08:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:09:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:10:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:11:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:12:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:13:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:14:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:15:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:16:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:17:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:18:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:19:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:20:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:21:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:22:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:23:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:24:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:25:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:26:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:27:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:28:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:29:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:30:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:31:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:32:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:33:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:34:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:35:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:36:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:37:06 | syncing options from database 
+
+2026/09/02 21:37:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[652.476ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 21:38:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:39:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:40:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:41:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:42:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:43:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:44:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:45:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:46:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:47:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:48:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:49:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:50:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:51:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:52:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:53:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:54:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:55:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:56:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 21:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 21:57:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:58:06 | syncing options from database 
+[SYS] 2026/09/02 - 21:59:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:00:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:01:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:02:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:03:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:04:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:05:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:06:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:07:06 | syncing options from database 
+
+2026/09/02 22:07:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[506.306ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 22:08:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:09:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:10:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:11:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:12:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:13:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:14:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:15:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:16:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:17:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:18:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:19:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:20:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:21:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:22:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:23:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:24:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:25:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:26:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:27:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:28:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:29:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:30:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:31:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:32:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:33:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:34:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:35:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:36:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:37:06 | syncing options from database 
+
+2026/09/02 22:37:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[520.970ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 22:38:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:39:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:40:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:41:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:42:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:43:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:44:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:45:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:46:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:47:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:48:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:49:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:50:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:51:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:52:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:53:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:54:06 | syncing options from database 
+
+2026/09/02 22:55:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[526.451ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 22:55:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:56:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 22:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 22:57:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:58:06 | syncing options from database 
+[SYS] 2026/09/02 - 22:59:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:00:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:01:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:02:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:03:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:04:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:05:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:06:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:07:06 | syncing options from database 
+
+2026/09/02 23:07:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[435.130ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 23:07:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:379 [33mSLOW SQL >= 200ms
+[0m[31;1m[261.573ms] [33m[rows:1][35m DELETE FROM `system_task_locks` WHERE task_id = ? AND locked_by = ?[0m
+[SYS] 2026/09/02 - 23:08:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:09:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:10:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:11:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:12:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:13:06 | syncing options from database 
+
+2026/09/02 23:14:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[233.652ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 23:14:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:15:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:16:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:17:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:18:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:19:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:20:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:21:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:22:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:23:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:24:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:25:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:26:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:27:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:28:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:29:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:30:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:31:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:32:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:33:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:34:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:35:06 | syncing options from database 
+
+2026/09/02 23:35:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[205.827ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/02 23:36:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[205.366ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 23:36:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:37:06 | syncing options from database 
+
+2026/09/02 23:37:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[531.003ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/02 - 23:38:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:39:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:40:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:41:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:42:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:43:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:44:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:45:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:46:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:47:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:48:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:49:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:50:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:51:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:52:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:53:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:54:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:55:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:56:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/02 - 23:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/02 - 23:57:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:58:06 | syncing options from database 
+[SYS] 2026/09/02 - 23:59:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:02:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:08:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:13:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:14:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:15:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:16:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:17:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:18:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:19:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:20:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:21:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:22:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:23:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:24:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:25:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:26:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:27:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:28:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:29:06 | syncing options from database 
+
+2026/09/03 00:29:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[515.661ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 00:30:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:31:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:32:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:33:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:34:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:35:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:36:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:37:06 | syncing options from database 
+
+2026/09/03 00:38:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[489.135ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 00:38:03 [32mD:/newWorkSpace/a新工作/new-api2/model/db_time.go:14 [33mSLOW SQL >= 200ms
+[0m[31;1m[880.010ms] [33m[rows:1][35m SELECT strftime('%s','now')[0m
+[SYS] 2026/09/03 - 00:38:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:39:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:40:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:41:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:42:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:43:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:44:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:45:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:46:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:47:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:48:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:49:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:50:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:51:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:52:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:53:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:54:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:55:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:56:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 00:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 00:57:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:58:06 | syncing options from database 
+[SYS] 2026/09/03 - 00:59:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:02:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:08:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:13:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:14:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:15:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:16:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:17:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:18:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:19:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:20:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:21:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:22:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:23:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:24:06 | syncing options from database 
+
+2026/09/03 01:25:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[218.508ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 01:25:06 | syncing options from database 
+
+2026/09/03 01:26:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[366.483ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 01:26:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:27:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:28:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:29:06 | syncing options from database 
+
+2026/09/03 01:29:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[656.394ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 01:30:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:31:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:32:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:33:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:34:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:35:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:36:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:37:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:38:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:39:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:40:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:41:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:42:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:43:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:44:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:45:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:46:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:47:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:48:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:49:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:50:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:51:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:52:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:53:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:54:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:55:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:56:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 01:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 01:57:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:58:06 | syncing options from database 
+[SYS] 2026/09/03 - 01:59:06 | syncing options from database 
+
+2026/09/03 02:00:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[217.196ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 02:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:02:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:08:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:13:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:14:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:15:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:16:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:17:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:18:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:19:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:20:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:21:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:22:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:23:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:24:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:25:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:26:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:27:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:28:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:29:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:30:06 | syncing options from database 
+
+2026/09/03 02:30:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[202.119ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 02:31:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[202.729ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 02:31:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:32:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:33:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:34:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:35:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:36:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:37:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:38:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:39:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:40:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:41:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:42:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:43:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:44:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:45:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:46:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:47:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:48:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:49:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:50:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:51:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:52:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:53:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:54:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:55:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:56:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 02:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 02:57:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:58:06 | syncing options from database 
+[SYS] 2026/09/03 - 02:59:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:02:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:08:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:13:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:14:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:15:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:16:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:17:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:18:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:19:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:20:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:21:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:22:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:23:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:24:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:25:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:26:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:27:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:28:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:29:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:30:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:31:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:32:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:33:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:34:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:35:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:36:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:37:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:38:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:39:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:40:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:41:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:42:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:43:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:44:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:45:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:46:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:47:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:48:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:49:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:50:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:51:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:52:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:53:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:54:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:55:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:56:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 03:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 03:57:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:58:06 | syncing options from database 
+[SYS] 2026/09/03 - 03:59:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:02:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:08:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:13:06 | syncing options from database 
+
+2026/09/03 04:13:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[225.183ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 04:14:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:15:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:16:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:17:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:18:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:19:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:20:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:21:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:22:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:23:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:24:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:25:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:26:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:27:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:28:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:29:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:30:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:31:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:32:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:33:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:34:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:35:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:36:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:37:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:38:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:39:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:40:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:41:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:42:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:43:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:44:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:45:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:46:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:47:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:48:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:49:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:50:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:51:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:52:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:53:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:54:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:55:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:56:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 04:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 04:57:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:58:06 | syncing options from database 
+[SYS] 2026/09/03 - 04:59:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:02:06 | syncing options from database 
+
+2026/09/03 05:02:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[220.481ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 05:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:08:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:13:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:14:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:15:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:16:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:17:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:18:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:19:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:20:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:21:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:22:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:23:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:24:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:25:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:26:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:27:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:28:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:29:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:30:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:31:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:32:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:33:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:34:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:35:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:36:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:37:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:38:06 | syncing options from database 
+
+2026/09/03 05:38:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[577.088ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 05:39:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:40:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:41:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:42:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:43:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:44:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:45:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:46:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:47:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:48:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:49:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:50:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:51:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:52:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:53:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:54:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:55:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:56:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 05:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 05:57:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:58:06 | syncing options from database 
+[SYS] 2026/09/03 - 05:59:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:00:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:01:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:02:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:03:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:04:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:05:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:06:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:07:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:08:06 | syncing options from database 
+
+2026/09/03 06:08:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[502.421ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 06:09:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:10:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:11:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:12:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:13:06 | syncing options from database 
+[SYS] 2026/09/03 - 06:14:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:15:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:16:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:17:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:18:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:19:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:20:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:21:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:22:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:23:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:24:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:25:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:26:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:27:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:28:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:29:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:30:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:31:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:32:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:33:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:34:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:35:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:36:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:37:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:38:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:39:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:40:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:41:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:42:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:43:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:44:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:45:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:46:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:47:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:48:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:49:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:50:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:51:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:52:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:53:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:54:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:55:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:56:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 06:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 06:57:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:58:07 | syncing options from database 
+[SYS] 2026/09/03 - 06:59:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:00:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:01:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:02:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:03:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:04:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:05:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:06:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:07:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:08:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:09:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:10:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:11:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:12:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:13:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:14:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:15:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:16:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:17:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:18:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:19:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:20:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:21:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:22:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:23:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:24:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:25:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:26:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:27:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:28:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:29:07 | syncing options from database 
+
+2026/09/03 07:30:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[332.624ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 07:30:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:31:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:32:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:33:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:34:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:35:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:36:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:37:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:38:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:39:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:40:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:41:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:42:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:43:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:44:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:45:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:46:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:47:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:48:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:49:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:50:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:51:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:52:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:53:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:54:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:55:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:56:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 07:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 07:57:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:58:07 | syncing options from database 
+[SYS] 2026/09/03 - 07:59:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:00:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:01:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:02:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:03:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:04:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:05:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:06:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:07:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:08:07 | syncing options from database 
+
+2026/09/03 08:09:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[549.407ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 08:09:03 [32mD:/newWorkSpace/a新工作/new-api2/model/subscription.go:1149 [33mSLOW SQL >= 200ms
+[0m[31;1m[880.591ms] [33m[rows:0][35m SELECT * FROM `user_subscriptions` WHERE status = ? AND end_time > 0 AND end_time <= ? ORDER BY end_time asc, id asc LIMIT 300[0m
+[SYS] 2026/09/03 - 08:09:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:10:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:11:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:12:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:13:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:14:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:15:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:16:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:17:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:17:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:18:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:19:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:20:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:21:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:22:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:23:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:24:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:25:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:26:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:27:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:28:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:29:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:30:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:31:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:32:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:33:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:34:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:35:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:36:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:37:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:37:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:38:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:39:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:40:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:41:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:42:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:43:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:44:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:45:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:46:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:47:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:48:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:49:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:50:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:51:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:52:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:53:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:54:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:55:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:56:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 08:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 08:57:07 | syncing options from database 
+
+2026/09/03 08:57:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[807.659ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 08:58:07 | syncing options from database 
+[SYS] 2026/09/03 - 08:59:07 | syncing options from database 
+[SYS] 2026/09/03 - 09:00:07 | syncing options from database 
+[SYS] 2026/09/03 - 09:01:07 | syncing options from database 
+[SYS] 2026/09/03 - 09:02:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:02:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:02:07 | syncing options from database 
+
+2026/09/03 09:03:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[267.278ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:03:07 | syncing options from database 
+[GIN] 2026/09/03 - 09:03:41 | api | 202609030103417524875008268d9d6CH1bNux1 | 200 |    127.7292ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 09:03:44 | api | 202609030103445233557008268d9d6SBno3OsX | 200 |       967.2µs |       127.0.0.1 |     GET /api/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/03 - 09:03:45 | api | 202609030103451196872008268d9d6GCNx2aPd | 200 |       576.9µs |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/03 - 09:03:45 | api | 202609030103451196872008268d9d6gy1T4qqe | 200 |      1.6467ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/03 - 09:04:02 | api | 202609030104021053268008268d9d6ef814dJK | 200 |      2.9386ms |       127.0.0.1 |     GET /api/group/
+[GIN] 2026/09/03 - 09:04:02 | api | 202609030104021017951008268d9d6NcoWO3JD | 200 |     11.4613ms |       127.0.0.1 |     GET /api/user/?p=1&page_size=20
+[GIN] 2026/09/03 - 09:04:02 | api | 202609030104021102708008268d9d6Kwa3ZjxW | 200 |     13.9902ms |       127.0.0.1 |     GET /api/authz/catalog
+[SYS] 2026/09/03 - 09:04:07 | syncing options from database 
+[GIN] 2026/09/03 - 09:04:44 | api | 202609030104445653455008268d9d6qhoYOoJE | 200 |      1.0531ms |       127.0.0.1 |     GET /api/user/2
+[GIN] 2026/09/03 - 09:05:01 | api | 202609030105011021051008268d9d6yVy3EJAt | 200 |      1.0021ms |       127.0.0.1 |     GET /api/distribution_group/
+[SYS] 2026/09/03 - 09:05:07 | syncing options from database 
+
+2026/09/03 09:06:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[218.087ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:06:07 | syncing options from database 
+
+2026/09/03 09:06:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[206.777ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:07:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:07:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:07:07 | syncing options from database 
+[SYS] 2026/09/03 - 09:08:07 | syncing options from database 
+[SYS] 2026/09/03 - 09:09:07 | syncing options from database 
+
+2026/09/03 09:09:17 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:248 [33mSLOW SQL >= 200ms
+[0m[31;1m[216.220ms] [33m[rows:1][35m UPDATE `system_tasks` SET `locked_by`=?,`status`=?,`updated_at`=? WHERE id = ? AND type = ? AND status = ?[0m
+
+2026/09/03 09:09:17 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:318 [33mSLOW SQL >= 200ms
+[0m[31;1m[217.587ms] [33m[rows:1][35m UPDATE `system_tasks` SET `state`=?,`updated_at`=? WHERE (task_id = ? AND status = ? AND locked_by = ?) AND (EXISTS (SELECT 1 FROM system_task_locks WHERE system_task_locks.task_id = system_tasks.task_id AND system_task_locks.locked_by = ? AND system_task_locks.locked_until >= ?))[0m
+
+2026/09/03 09:09:40 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[8431.964ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:10:07 | syncing options from database 
+
+2026/09/03 09:10:08 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[5952.823ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:10:08 [32mD:/newWorkSpace/a新工作/new-api2/service/authz/adapter.go:23 [33mSLOW SQL >= 200ms
+[0m[31;1m[612.283ms] [33m[rows:3][35m SELECT * FROM `casbin_rule` ORDER BY id asc[0m
+
+2026/09/03 09:10:08 [32mD:/newWorkSpace/a新工作/new-api2/model/option.go:26 [33mSLOW SQL >= 200ms
+[0m[31;1m[569.713ms] [33m[rows:8][35m SELECT * FROM `options`[0m
+[SYS] 2026/09/03 - 09:11:08 | syncing options from database 
+[SYS] 2026/09/03 - 09:12:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:12:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:12:08 | syncing options from database 
+[SYS] 2026/09/03 - 09:13:08 | syncing options from database 
+[SYS] 2026/09/03 - 09:14:08 | syncing options from database 
+
+2026/09/03 09:14:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[201.911ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:15:08 | syncing options from database 
+[SYS] 2026/09/03 - 09:16:08 | syncing options from database 
+[GIN] 2026/09/03 - 09:16:16 | api | 202609030116161899426008268d9d6iVwg1N4g | 200 |      3.0134ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/03 - 09:16:16 | api | 202609030116161899426008268d9d6yTrK0gAI | 200 |      3.0134ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/03 - 09:16:20 | api | 202609030116208367210008268d9d6n8G8vpFa | 200 |    110.4121ms |       127.0.0.1 |    POST /api/distribution/freeze
+[GIN] 2026/09/03 - 09:16:20 | api | 202609030116209941843008268d9d6gewQx4yE | 200 |      2.1056ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/03 - 09:16:23 | api | 202609030116230374672008268d9d6S94Mriub | 200 |    189.3401ms |       127.0.0.1 |    POST /api/distribution/freeze
+[GIN] 2026/09/03 - 09:16:23 | api | 202609030116232738002008268d9d6vL34fy6o | 200 |    141.2311ms |       127.0.0.1 |     GET /api/distribution/users?p=1&page_size=20
+[GIN] 2026/09/03 - 09:16:28 | api | 202609030116286820428008268d9d6t300az5h | 200 |       970.5µs |       127.0.0.1 |     GET /api/distribution/ledgers?p=1&page_size=20
+[GIN] 2026/09/03 - 09:16:30 | api | 202609030116303816637008268d9d66REpo6Qr | 200 |       858.9µs |       127.0.0.1 |     GET /api/distribution_group/
+[SYS] 2026/09/03 - 09:17:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:17:03 | 保存数据看板数据成功，共保存0条数据 
+[GIN] 2026/09/03 - 09:17:07 | api | 202609030117073495812008268d9d6fb3479dd | 200 |      1.0035ms |       127.0.0.1 |     GET /api/distribution_group/1/members?p=1&page_size=20
+[SYS] 2026/09/03 - 09:17:08 | syncing options from database 
+[GIN] 2026/09/03 - 09:17:52 | api | 202609030117521790023008268d9d6s1ndz0d8 | 200 |      2.0071ms |       127.0.0.1 |     GET /api/distribution_group/1/members?p=1&page_size=20
+[SYS] 2026/09/03 - 09:18:08 | syncing options from database 
+[SYS] 2026/09/03 - 09:19:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:20:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:21:09 | syncing options from database 
+
+2026/09/03 09:21:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[375.430ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:22:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:22:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:22:09 | syncing options from database 
+
+2026/09/03 09:23:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[314.868ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:23:09 | syncing options from database 
+
+2026/09/03 09:23:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[269.866ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:24:09 | syncing options from database 
+
+2026/09/03 09:24:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[367.245ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:25:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[230.034ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:25:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:26:09 | syncing options from database 
+
+2026/09/03 09:26:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[218.680ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:27:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:27:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:27:09 | syncing options from database 
+
+2026/09/03 09:27:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[281.057ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:28:09 | syncing options from database 
+[GIN] 2026/09/03 - 09:29:01 | api | 202609030129015475827008268d9d6slprWHDb | 401 |     49.4522ms |       127.0.0.1 |     GET /api/distribution_group/
+[GIN] 2026/09/03 - 09:29:02 | api | 202609030129021502549008268d9d6kO4FkPAp | 200 |     184.644ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 09:29:02 | api | 202609030129025477252008268d9d643Ts4aqz | 200 |     32.2569ms |       127.0.0.1 |     GET /api/distribution_group/
+[SYS] 2026/09/03 - 09:29:09 | syncing options from database 
+[GIN] 2026/09/03 - 09:29:20 | api | 202609030129200628667008268d9d6oF4firra | 200 |      1.0543ms |       127.0.0.1 |     GET /api/distribution_group/
+
+2026/09/03 09:30:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[216.632ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:30:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:31:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:32:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:32:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:32:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:33:09 | syncing options from database 
+
+2026/09/03 09:33:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[341.774ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:34:09 | syncing options from database 
+
+2026/09/03 09:35:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[216.400ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:35:09 | syncing options from database 
+[GIN] 2026/09/03 - 09:35:41 | api | 202609030135418717045008268d9d6M9o5EzwI | 200 |       999.2µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:35:42 | api | 202609030135421286620008268d9d64vR5v2ps | 200 |    150.5663ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 09:35:42 | api | 202609030135426713813008268d9d6bR7w2DVF | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:35:42 | api | 202609030135427243291008268d9d6CuIDhakB | 200 |       997.9µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:35:42 | api | 202609030135427684887008268d9d6N9Cx6BOO | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:35:42 | api | 202609030135427694895008268d9d6Kg7vFXUa | 200 |      1.0002ms |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 09:35:42 | api | 202609030135427704897008268d9d6T8gqB5nl | 200 |      2.0019ms |       127.0.0.1 |     GET /api/distribution_group/
+
+2026/09/03 09:36:04 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[1910.514ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:36:09 [32mD:/newWorkSpace/a新工作/new-api2/service/authz/adapter.go:23 [33mSLOW SQL >= 200ms
+[0m[31;1m[279.521ms] [33m[rows:3][35m SELECT * FROM `casbin_rule` ORDER BY id asc[0m
+[SYS] 2026/09/03 - 09:36:09 | syncing options from database 
+
+2026/09/03 09:36:34 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[1717.127ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:37:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:37:03 | 保存数据看板数据成功，共保存0条数据 
+
+2026/09/03 09:37:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[1125.542ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:37:09 | syncing options from database 
+
+2026/09/03 09:37:09 [32mD:/newWorkSpace/a新工作/new-api2/service/authz/adapter.go:23 [33mSLOW SQL >= 200ms
+[0m[31;1m[409.416ms] [33m[rows:3][35m SELECT * FROM `casbin_rule` ORDER BY id asc[0m
+[SYS] 2026/09/03 - 09:38:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:39:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:40:09 | syncing options from database 
+
+2026/09/03 09:40:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[249.975ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:41:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:42:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:42:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:42:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:43:09 | syncing options from database 
+
+2026/09/03 09:43:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[220.366ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:44:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:45:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:46:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:47:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:47:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:47:09 | syncing options from database 
+
+2026/09/03 09:47:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[216.890ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:48:09 | syncing options from database 
+[GIN] 2026/09/03 - 09:48:55 | api | 202609030148551165124008268d9d6HS6VZtrC | 200 |      1.0858ms |       127.0.0.1 |     GET /api/user/?p=1&page_size=20
+[GIN] 2026/09/03 - 09:48:55 | api | 202609030148551202026008268d9d6j1IgflmR | 200 |      1.1266ms |       127.0.0.1 |     GET /api/group/
+[GIN] 2026/09/03 - 09:48:55 | api | 202609030148551236945008268d9d6i5GyNJ8u | 200 |       548.3µs |       127.0.0.1 |     GET /api/authz/catalog
+[GIN] 2026/09/03 - 09:48:58 | api | 202609030148580384563008268d9d6NcgG0VfH | 200 |      1.0517ms |       127.0.0.1 |     GET /api/user/5
+[SYS] 2026/09/03 - 09:49:09 | syncing options from database 
+[GIN] 2026/09/03 - 09:49:20 | api | 202609030149209532186008268d9d6JNPDwUOF | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149214061643008268d9d6ORqMjFOi | 200 |    111.8366ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149217943090008268d9d6dKSYe1ps | 200 |       998.9µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149218068142008268d9d6w9e1VWsl | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149219002071008268d9d66ZAiyuLM | 200 |      1.0003ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149219002071008268d9d6I75gBtk1 | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149219022079008268d9d6fvujvusl | 200 |      3.0022ms |       127.0.0.1 |     GET /api/user/?p=1&page_size=20
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149219022079008268d9d6pFEaPJh6 | 200 |      5.5349ms |       127.0.0.1 |     GET /api/group/
+[GIN] 2026/09/03 - 09:49:21 | api | 202609030149219055626008268d9d6JdjWKfQe | 200 |      3.2109ms |       127.0.0.1 |     GET /api/authz/catalog
+[GIN] 2026/09/03 - 09:49:27 | web | 202609030149270458039008268d9d6dSXuDF5Q | 404 |    136.3707ms |       127.0.0.1 |    POST /api/distribution/enabled
+[GIN] 2026/09/03 - 09:50:00 | api | 202609030150008081529008268d9d6FRP9Rbx4 | 200 |       998.7µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150012316066008268d9d6xxw5sPLp | 200 |    116.6355ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150015990795008268d9d6HPH3sKOn | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150016113931008268d9d6oXAFa8rH | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150016911164008268d9d6j7n2cKTo | 200 |      1.0016ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150016925761008268d9d6aCZZ4M9g | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150016936329008268d9d6hTwo6xwd | 200 |      1.7075ms |       127.0.0.1 |     GET /api/user/?p=1&page_size=20
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150016947084008268d9d61CBAi8qm | 200 |      2.1058ms |       127.0.0.1 |     GET /api/group/
+[GIN] 2026/09/03 - 09:50:01 | api | 202609030150016962919008268d9d6iKOTMiHd | 200 |      1.5217ms |       127.0.0.1 |     GET /api/authz/catalog
+[GIN] 2026/09/03 - 09:50:03 | web | 202609030150033663428008268d9d6dt4tWdc0 | 404 |            0s |       127.0.0.1 |    POST /api/distribution/enabled
+[SYS] 2026/09/03 - 09:50:09 | syncing options from database 
+[SYS] 2026/09/03 - 09:51:09 | syncing options from database 
+
+2026/09/03 09:51:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[1097.184ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[GIN] 2026/09/03 - 09:51:33 | web | 202609030151332255228008268d9d62TI8JEgR | 200 |    350.2798ms |             ::1 |     GET /wallet
+[GIN] 2026/09/03 - 09:51:40 | web | 202609030151393138003008268d9d66p5xbbIP | 200 |    847.3477ms |             ::1 |     GET /static/css/2029.10e003a7e2.css
+[GIN] 2026/09/03 - 09:51:40 | web | 202609030151393148208008268d9d6se474sJ0 | 200 |    1.0496059s |             ::1 |     GET /static/css/index.85e40cffc9.css
+[GIN] 2026/09/03 - 09:51:40 | web | 202609030151393078659008268d9d6WhTAFqth | 200 |    1.4004252s |             ::1 |     GET /static/js/vendor-tanstack.74c48f25c5.js
+[GIN] 2026/09/03 - 09:51:40 | web | 202609030151397387641008268d9d63MojFLmZ | 200 |    808.3279ms |             ::1 |     GET /static/js/lib-react.064bab1680.js
+[GIN] 2026/09/03 - 09:51:40 | web | 202609030151393138003008268d9d65qOfYLcI | 200 |    1.4054929s |             ::1 |     GET /static/js/vendor-ui-primitives.b17b3046c5.js
+[GIN] 2026/09/03 - 09:51:40 | web | 202609030151397387641008268d9d6xAOgRBbF | 200 |    904.6184ms |             ::1 |     GET /static/js/2029.6cdf9befa3.js
+[GIN] 2026/09/03 - 09:51:41 | web | 202609030151401673537008268d9d6dwAgmJP0 | 200 |    1.7449568s |             ::1 |     GET /static/js/index.4f611efa9c.js
+[GIN] 2026/09/03 - 09:51:42 | api | 202609030151420340132008268d9d6CyNMEDdj | 200 |       553.5µs |             ::1 |     GET /api/status
+
+2026/09/03 09:51:42 [32mD:/newWorkSpace/a新工作/new-api2/model/user_session.go:476 [33mSLOW SQL >= 200ms
+[0m[31;1m[344.059ms] [33m[rows:1][35m UPDATE `user_sessions` SET `last_active_at`=?,`previous_refresh_hash`=?,`previous_valid_until`=?,`refresh_hash`=? WHERE sid = ? AND user_id = ? AND status = ? AND revoked_at = ? AND expires_at > ? AND refresh_hash = ?[0m
+[GIN] 2026/09/03 - 09:51:42 | api | 202609030151425277296008268d9d6wC2cp6Br | 200 |    347.6821ms |             ::1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 09:51:42 | web | 202609030151428932875008268d9d6jJH2lCPR | 200 |      52.187ms |             ::1 |     GET /static/js/async/3724.8aa09a382b.js
+[GIN] 2026/09/03 - 09:51:42 | web | 202609030151428938100008268d9d6U0IRQbnL | 200 |     59.6667ms |             ::1 |     GET /static/js/async/4410.04f63ebbde.js
+[GIN] 2026/09/03 - 09:51:42 | web | 202609030151428938100008268d9d6vW8tdqmd | 200 |    106.1838ms |             ::1 |     GET /static/js/async/9086.8a05e1e933.js
+[GIN] 2026/09/03 - 09:51:43 | web | 202609030151428932875008268d9d6X33zBBki | 200 |    150.4217ms |             ::1 |     GET /static/js/async/1402.ee37477098.js
+[GIN] 2026/09/03 - 09:51:43 | web | 202609030151428927487008268d9d6rASJr8t2 | 200 |    154.3568ms |             ::1 |     GET /static/js/async/349.15552ba8aa.js
+[GIN] 2026/09/03 - 09:51:44 | web | 202609030151428940195008268d9d6AMpkjM9L | 200 |    1.1084654s |             ::1 |     GET /static/js/async/3898.ebb33f5002.js
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441188786008268d9d6vpqZLkDC | 200 |       522.1µs |             ::1 |     GET /api/status
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441295018008268d9d6Vn1zRh9Q | 200 |            0s |             ::1 |     GET /api/status
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441305391008268d9d6H6BvnfvO | 200 |            0s |             ::1 |     GET /api/notice
+[GIN] 2026/09/03 - 09:51:44 | web | 202609030151441254263008268d9d6QE7HJKQT | 200 |     28.0905ms |             ::1 |     GET /logo.png
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441315422008268d9d6kFkA2Ruo | 200 |     53.5012ms |             ::1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441375363008268d9d6orUpOfrY | 200 |     52.6199ms |             ::1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441403045008268d9d6DfqaulL2 | 200 |       52.85ms |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441315422008268d9d6WvtS6wtE | 200 |     62.6146ms |             ::1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441555164008268d9d6iDqnr1Yq | 200 |     39.6416ms |             ::1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151441315422008268d9d6MRWH6ok6 | 200 |     128.808ms |             ::1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 09:51:44 | api | 202609030151444057006008268d9d66LQpAO9s | 200 |      1.0116ms |             ::1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 09:51:44 | web | 202609030151444502508008268d9d60PVgSm9u | 200 |     29.8524ms |             ::1 |     GET /static/font/jetbrains-mono-latin-wght-normal.a865edea07.woff2
+[GIN] 2026/09/03 - 09:51:45 | web | 202609030151453891180008268d9d6h1sWPY3x | 200 |       3.009ms |             ::1 |     GET /static/js/async/1892.e2f6b8aae4.js
+[GIN] 2026/09/03 - 09:51:45 | web | 202609030151453885490008268d9d69VDo1xqS | 200 |    163.4486ms |             ::1 |     GET /static/js/async/8513.46953bdbb6.js
+[GIN] 2026/09/03 - 09:51:45 | web | 202609030151453896642008268d9d69g8sBntv | 200 |    174.6958ms |             ::1 |     GET /static/js/async/3179.6a454597ac.js
+[GIN] 2026/09/03 - 09:51:45 | web | 202609030151455690792008268d9d6AxXDASdI | 200 |    215.5742ms |             ::1 |     GET /static/js/async/5851.ecaa2a3794.js
+[GIN] 2026/09/03 - 09:51:46 | web | 202609030151460103636008268d9d6di9vir1G | 200 |     11.6804ms |             ::1 |     GET /static/js/async/8890.7122214652.js
+[GIN] 2026/09/03 - 09:51:46 | web | 202609030151460053723008268d9d67iG8YQVm | 200 |     28.7544ms |             ::1 |     GET /static/js/async/4057.4054223261.js
+[GIN] 2026/09/03 - 09:51:46 | web | 202609030151460123687008268d9d6W8UhFZ8l | 200 |     87.6967ms |             ::1 |     GET /static/js/async/9645.2b50f48850.js
+[GIN] 2026/09/03 - 09:51:46 | web | 202609030151461322794008268d9d6Ze3jJsd5 | 200 |    407.6298ms |             ::1 |     GET /static/js/async/4573.51580eab43.js
+[GIN] 2026/09/03 - 09:51:46 | web | 202609030151465319773008268d9d6stHyyK2z | 200 |     17.2416ms |             ::1 |     GET /static/js/async/3680.ec1f444b12.js
+[GIN] 2026/09/03 - 09:51:47 | api | 202609030151471909537008268d9d66BaVLXXw | 200 |      1.0044ms |             ::1 |     GET /api/group/
+[GIN] 2026/09/03 - 09:51:47 | api | 202609030151471909537008268d9d6vslEOVJ1 | 200 |      3.2348ms |             ::1 |     GET /api/authz/catalog
+[GIN] 2026/09/03 - 09:51:47 | api | 202609030151471936691008268d9d6gPZXh5jy | 200 |      2.0359ms |             ::1 |     GET /api/user/?p=1&page_size=20
+[GIN] 2026/09/03 - 09:51:48 | web | 202609030151460113720008268d9d6cwws3mzn | 200 |    2.6587074s |             ::1 |     GET /static/js/async/7083.1b52ffe589.js
+[GIN] 2026/09/03 - 09:51:48 | api | 202609030151487638168008268d9d6M3zUJJJT | 200 |      2.0069ms |             ::1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 09:51:48 | api | 202609030151487658237008268d9d6Pwx2JAH1 | 200 |       998.8µs |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:48 | api | 202609030151487668225008268d9d67mH0lV4n | 200 |      1.0027ms |             ::1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 09:51:48 | api | 202609030151487678252008268d9d6Dd6n0wEC | 200 |       997.1µs |             ::1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 09:51:48 | api | 202609030151487688223008268d9d6AcQO3W5Z | 200 |      1.0047ms |             ::1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 09:51:48 | api | 202609030151487648217008268d9d65zLqdv8I | 200 |      5.9988ms |             ::1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 09:51:49 | api | 202609030151492778542008268d9d6gQdQOnMx | 200 |       519.1µs |             ::1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 09:51:49 | api | 202609030151498352647008268d9d6TZMTJ6ug | 200 |       998.1µs |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:49 | api | 202609030151498322701008268d9d6qDT1wJT4 | 200 |    147.3371ms |             ::1 |     GET /api/user/2fa/status
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151498322701008268d9d6vdguDjsV | 200 |    266.2506ms |             ::1 |     GET /api/user/passkey
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151498312700008268d9d6WCfwU6nM | 200 |    339.7606ms |             ::1 |     GET /api/user/sessions
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151504009757008268d9d6RsAlRYza | 200 |      1.4779ms |             ::1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151504014937008268d9d6cEDW5vtJ | 200 |       959.9µs |             ::1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151504019337008268d9d6pSDIbq4h | 200 |       519.9µs |             ::1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151504024536008268d9d6gcBCRaox | 200 |      1.0739ms |             ::1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151504024536008268d9d6csDzVPsM | 200 |      1.0739ms |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151504024536008268d9d6MYeIbh2u | 200 |      1.0739ms |             ::1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 09:51:50 | api | 202609030151505397176008268d9d6dNdPdT94 | 200 |      2.0311ms |             ::1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 09:51:51 | api | 202609030151517390955008268d9d6HTNTndp8 | 200 |       530.4µs |             ::1 |     GET /api/user/2fa/status
+[GIN] 2026/09/03 - 09:51:51 | api | 202609030151517390955008268d9d6ygnSdl9b | 200 |       530.4µs |             ::1 |     GET /api/user/passkey
+[GIN] 2026/09/03 - 09:51:51 | api | 202609030151517390955008268d9d6C7nxSMRP | 200 |       530.4µs |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151523049488008268d9d6iJoJUHdS | 200 |      1.0822ms |             ::1 |     GET /api/user/2fa/status
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151524271539008268d9d6hJQrucwM | 200 |       1.993ms |             ::1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151524281409008268d9d6HPuSL4Dw | 200 |      2.0124ms |             ::1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151524281409008268d9d6wF7rn19Q | 200 |      5.0098ms |             ::1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151524291469008268d9d67v7cJz4c | 200 |      4.9953ms |             ::1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151524291469008268d9d6tRdKB7GJ | 200 |      4.9953ms |             ::1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151524281409008268d9d6M2JFQE0z | 200 |      6.0013ms |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:52 | api | 202609030151528219804008268d9d6fI9h6G8I | 200 |      1.9976ms |             ::1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 09:51:53 | api | 202609030151535120814008268d9d6aD90uxYG | 200 |      1.1207ms |             ::1 |     GET /api/user/2fa/status
+[GIN] 2026/09/03 - 09:51:53 | api | 202609030151535120814008268d9d6dy7biuHB | 200 |      1.1207ms |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:53 | api | 202609030151535114428008268d9d60WZlZqmi | 200 |      2.9367ms |             ::1 |     GET /api/user/passkey
+[GIN] 2026/09/03 - 09:51:53 | api | 202609030151536332165008268d9d6d4gGC0II | 200 |      3.4563ms |             ::1 |     GET /api/user/2fa/status
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151540242381008268d9d6GuauwKTw | 200 |      3.0138ms |             ::1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151540252420008268d9d62rzdjsYf | 200 |      3.0036ms |             ::1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151540272519008268d9d6jEbZstNq | 200 |      3.9987ms |             ::1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151540282456008268d9d63G2bmn41 | 200 |      4.0112ms |             ::1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151540282456008268d9d6mDfvDvoy | 200 |      4.9929ms |             ::1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151540282456008268d9d6HuLl8uwV | 200 |      4.9929ms |             ::1 |     GET /api/user/self
+[GIN] 2026/09/03 - 09:51:54 | api | 202609030151541598655008268d9d63Dn8MXCR | 200 |      1.6043ms |             ::1 |    POST /api/user/amount
+
+2026/09/03 09:52:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[220.095ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:52:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:52:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:52:09 | syncing options from database 
+
+2026/09/03 09:52:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[266.909ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:53:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[384.349ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:53:09 | syncing options from database 
+
+2026/09/03 09:53:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[433.754ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:54:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[400.803ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:54:10 | syncing options from database 
+
+2026/09/03 09:54:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[235.799ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:55:10 | syncing options from database 
+
+2026/09/03 09:56:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[248.120ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:56:10 | syncing options from database 
+
+2026/09/03 09:56:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[243.360ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:57:03 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[717.336ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:57:03 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 09:57:03 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 09:57:10 | syncing options from database 
+
+2026/09/03 09:57:17 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:169 [33mSLOW SQL >= 200ms
+[0m[31;1m[245.332ms] [33m[rows:0][35m SELECT * FROM `system_tasks` WHERE id IN (SELECT MIN(id) FROM `system_tasks` WHERE type IN (?,?,?,?,?) AND status = ? GROUP BY `type`)[0m
+
+2026/09/03 09:57:32 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[320.650ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 09:58:02 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[206.513ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 09:58:10 | syncing options from database 

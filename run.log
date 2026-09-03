@@ -1,0 +1,103 @@
+[SYS] 2026/09/03 - 14:35:22 | initializing token encoders 
+[SYS] 2026/09/03 - 14:35:22 | token encoders initialized 
+[SYS] 2026/09/03 - 14:35:22 | SQL_DSN not set, using SQLite as database 
+[SYS] 2026/09/03 - 14:35:22 | database migration started 
+
+2026/09/03 14:35:23 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[231.667ms] [33m[rows:5][35m CREATE INDEX `idx_users_we_chat_id` ON `users`(`wechat_id`)[0m
+
+2026/09/03 14:35:24 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[539.491ms] [33m[rows:5][35m CREATE INDEX `idx_users_linux_do_id` ON `users`(`linux_do_id`)[0m
+
+2026/09/03 14:35:24 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[341.042ms] [33m[rows:5][35m CREATE INDEX `idx_users_stripe_customer` ON `users`(`stripe_customer`)[0m
+
+2026/09/03 14:35:25 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[232.609ms] [33m[rows:5][35m CREATE INDEX `idx_users_register_ip` ON `users`(`register_ip`)[0m
+
+2026/09/03 14:35:25 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[284.701ms] [33m[rows:5][35m CREATE INDEX `idx_users_git_hub_id` ON `users`(`github_id`)[0m
+
+2026/09/03 14:35:26 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[397.016ms] [33m[rows:5][35m CREATE INDEX `idx_users_oidc_id` ON `users`(`oidc_id`)[0m
+
+2026/09/03 14:35:27 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[385.268ms] [33m[rows:5][35m CREATE INDEX `idx_users_email` ON `users`(`email`)[0m
+
+2026/09/03 14:35:28 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[514.797ms] [33m[rows:0][35m CREATE UNIQUE INDEX `idx_external_identity_user` ON `external_identity_claims`(`provider`,`user_id`)[0m
+
+2026/09/03 14:35:29 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[214.528ms] [33m[rows:0][35m CREATE INDEX `idx_top_ups_user_id` ON `top_ups`(`user_id`)[0m
+
+2026/09/03 14:35:29 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[243.062ms] [33m[rows:0][35m CREATE INDEX `idx_top_ups_trade_no` ON `top_ups`(`trade_no`)[0m
+
+2026/09/03 14:35:30 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[306.021ms] [33m[rows:0][35m CREATE INDEX `idx_models_deleted_at` ON `models`(`deleted_at`)[0m
+
+2026/09/03 14:35:31 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[204.407ms] [33m[rows:0][35m CREATE INDEX `idx_two_fas_user_id` ON `two_fas`(`user_id`)[0m
+
+2026/09/03 14:35:32 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[204.068ms] [33m[rows:0][35m CREATE INDEX `idx_subscription_orders_user_id` ON `subscription_orders`(`user_id`)[0m
+
+2026/09/03 14:35:33 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[225.998ms] [33m[rows:0][35m CREATE INDEX `idx_subscription_orders_trade_no` ON `subscription_orders`(`trade_no`)[0m
+
+2026/09/03 14:35:35 [32mC:/Users/Admin/go/pkg/mod/github.com/glebarez/sqlite@v1.9.0/migrator.go:294 [33mSLOW SQL >= 200ms
+[0m[31;1m[266.435ms] [33m[rows:0][35m CREATE INDEX `idx_perf_bucket_ts` ON `perf_metrics`(`bucket_ts`)[0m
+[SYS] 2026/09/03 - 14:35:35 | system is already initialized at: 2026-08-27 11:29:42 +0800 CST 
+[SYS] 2026/09/03 - 14:35:35 | REDIS_CONN_STRING not set, Redis is not enabled 
+[SYS] 2026/09/03 - 14:35:35 | i18n initialized with languages: zh-CN, zh-TW, en 
+[SYS] 2026/09/03 - 14:35:35 | Loaded 0 custom OAuth providers 
+[SYS] 2026/09/03 - 14:35:35 | New API v0.0.0 started 
+[INFO] 2026/09/03 - 14:35:35 | SYSTEM | codex credential auto-refresh task started: tick=10m0s threshold=24h0m0s 
+[INFO] 2026/09/03 - 14:35:35 | SYSTEM | subscription quota reset task started: tick=1m0s 
+[INFO] 2026/09/03 - 14:35:35 | SYSTEM | distribution daily settlement task started: tick=1m0s, schedule=00:05 
+[INFO] 2026/09/03 - 14:35:35 | SYSTEM | system task runner started: runner=DESKTOP-JQ9KQG2-GxjEhzmZ idle_interval=15s 
+[SYS] 2026/09/03 - 14:35:35 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 14:35:35 | 保存数据看板数据成功，共保存0条数据 
+
+  [33mWarning: Refresh cookie is not secure and refresh/logout Origin validation is disabled. Please set SESSION_COOKIE_SECURE=true in production.[0m
+
+
+  [32mNew API v0.0.0[0m  ready in 13071 ms
+
+  ➜  [1mLocal:[0m   http://localhost:3000/
+  ➜  [1mNetwork:[0m http://172.29.32.1:3000/
+  ➜  [1mNetwork:[0m http://192.168.201.18:3000/
+
+[GIN] 2026/09/03 - 14:36:28 | api | 202609030636280483666008268d9d6FsBWXPoF | 200 |       525.6µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:28 | api | 202609030636285945695008268d9d6HiKzab0s | 401 |      1.0474ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 14:36:28 | api | 202609030636286787162008268d9d69ipY4nhC | 200 |       997.6µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:28 | api | 202609030636286827124008268d9d6MXX0G2ao | 200 |       565.8µs |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:28 | api | 202609030636286938379008268d9d674w1bSgH | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:30 | api | 202609030636300000453008268d9d6qbvZoANm | 200 |    509.3369ms |       127.0.0.1 |    POST /api/user/login?turnstile=
+[GIN] 2026/09/03 - 14:36:30 | api | 202609030636308867622008268d9d65lLJI27I | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 14:36:30 | api | 202609030636308927604008268d9d60cGvSlGK | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:30 | api | 202609030636308927604008268d9d6uwk1r3fH | 200 |      3.9924ms |       127.0.0.1 |     GET /api/option/
+[GIN] 2026/09/03 - 14:36:31 | api | 202609030636311140975008268d9d66DfvqEEu | 200 |      1.0108ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:31 | api | 202609030636311160997008268d9d6FfIoTQFz | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 14:36:31 | api | 202609030636311270968008268d9d6NzbM25h5 | 401 |      1.0007ms |       127.0.0.1 |     GET /api/user/topup/self?p=1&page_size=10
+[SYS] 2026/09/03 - 14:36:35 | syncing options from database 
+[GIN] 2026/09/03 - 14:36:37 | api | 202609030636378261816008268d9d6lr2JM1jq | 200 |      1.0048ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:38 | api | 202609030636387162608008268d9d6owv4r6pw | 200 |     99.3914ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636395262550008268d9d61tuLeunL | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636395447717008268d9d6XnaiIiw4 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396018987008268d9d6waKI9zim | 200 |      1.0041ms |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396029028008268d9d6uwiBHT6j | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396109041008268d9d6L36oYllX | 200 |      1.7865ms |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396120232008268d9d6XCXM9TnP | 200 |      1.7116ms |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396178682008268d9d6QaEKvIVI | 200 |       993.8µs |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396208610008268d9d6nvlq7rHA | 200 |      3.5874ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396270098008268d9d6nEiUl77d | 200 |      1.9325ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/03 - 14:36:39 | api | 202609030636396315575008268d9d6IO24XxNZ | 200 |       1.085ms |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 14:36:40 | api | 202609030636403288593008268d9d62xWFeWCv | 200 |      1.0037ms |       127.0.0.1 |    POST /api/user/amount
+[SYS] 2026/09/03 - 14:37:35 | syncing options from database 
+
+2026/09/03 14:38:07 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[1902.310ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 14:38:28 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:169 [33mSLOW SQL >= 200ms
+[0m[31;1m[7497.368ms] [33m[rows:0][35m SELECT * FROM `system_tasks` WHERE id IN (SELECT MIN(id) FROM `system_tasks` WHERE type IN (?,?,?,?,?) AND status = ? GROUP BY `type`)[0m

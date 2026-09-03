@@ -82,7 +82,7 @@ func InitOptionMap() {
 	common.OptionMap["EpayKey"] = ""
 	common.OptionMap["Price"] = strconv.FormatFloat(operation_setting.Price, 'f', -1, 64)
 	common.OptionMap["USDExchangeRate"] = strconv.FormatFloat(operation_setting.USDExchangeRate, 'f', -1, 64)
-	common.OptionMap["MinTopUp"] = strconv.Itoa(operation_setting.MinTopUp)
+	common.OptionMap["MinTopUp"] = strconv.FormatFloat(operation_setting.MinTopUp, 'f', -1, 64)
 	common.OptionMap["StripeMinTopUp"] = strconv.Itoa(setting.StripeMinTopUp)
 	common.OptionMap["StripeApiSecret"] = setting.StripeApiSecret
 	common.OptionMap["StripeWebhookSecret"] = setting.StripeWebhookSecret
@@ -116,6 +116,14 @@ func InitOptionMap() {
 	common.OptionMap["WaffoPancakeMinTopUp"] = strconv.Itoa(setting.WaffoPancakeMinTopUp)
 	common.OptionMap["WaffoPancakeStoreID"] = setting.WaffoPancakeStoreID
 	common.OptionMap["WaffoPancakeProductID"] = setting.WaffoPancakeProductID
+	common.OptionMap["WechatNativeEnabled"] = strconv.FormatBool(setting.WechatNativeEnabled)
+	common.OptionMap["WechatNativeAppId"] = setting.WechatNativeAppId
+	common.OptionMap["WechatNativeMchId"] = setting.WechatNativeMchId
+	common.OptionMap["WechatNativeApiV3Key"] = setting.WechatNativeApiV3Key
+	common.OptionMap["WechatNativeMchSerialNo"] = setting.WechatNativeMchSerialNo
+	common.OptionMap["WechatNativePrivateKey"] = setting.WechatNativePrivateKey
+	common.OptionMap["WechatNativePlatformCert"] = setting.WechatNativePlatformCert
+	common.OptionMap["WechatNativeMinTopUp"] = strconv.FormatFloat(setting.WechatNativeMinTopUp, 'f', -1, 64)
 	common.OptionMap["TopupGroupRatio"] = common.TopupGroupRatio2JSONString()
 	common.OptionMap["Chats"] = setting.Chats2JsonString()
 	common.OptionMap["AutoGroups"] = setting.AutoGroups2JsonString()
@@ -433,7 +441,7 @@ func updateOptionMap(key string, value string) (err error) {
 	case "USDExchangeRate":
 		operation_setting.USDExchangeRate, _ = strconv.ParseFloat(value, 64)
 	case "MinTopUp":
-		operation_setting.MinTopUp, _ = strconv.Atoi(value)
+		operation_setting.MinTopUp, _ = strconv.ParseFloat(value, 64)
 	case "StripeApiSecret":
 		setting.StripeApiSecret = value
 	case "StripeWebhookSecret":
@@ -498,6 +506,22 @@ func updateOptionMap(key string, value string) (err error) {
 		setting.WaffoPancakeUnitPrice, _ = strconv.ParseFloat(value, 64)
 	case "WaffoPancakeMinTopUp":
 		setting.WaffoPancakeMinTopUp, _ = strconv.Atoi(value)
+	case "WechatNativeEnabled":
+		setting.WechatNativeEnabled = value == "true"
+	case "WechatNativeAppId":
+		setting.WechatNativeAppId = value
+	case "WechatNativeMchId":
+		setting.WechatNativeMchId = value
+	case "WechatNativeApiV3Key":
+		setting.WechatNativeApiV3Key = value
+	case "WechatNativeMchSerialNo":
+		setting.WechatNativeMchSerialNo = value
+	case "WechatNativePrivateKey":
+		setting.WechatNativePrivateKey = value
+	case "WechatNativePlatformCert":
+		setting.WechatNativePlatformCert = value
+	case "WechatNativeMinTopUp":
+		setting.WechatNativeMinTopUp, _ = strconv.ParseFloat(value, 64)
 	case "TopupGroupRatio":
 		err = common.UpdateTopupGroupRatioByJSONString(value)
 	case "GitHubClientId":

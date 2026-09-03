@@ -253,7 +253,7 @@ func InitLogDB() (err error) {
 	return err
 }
 
-var userQuotaColumns = []string{"quota", "used_quota", "aff_quota", "aff_history"}
+var userQuotaColumns = []string{"quota", "used_quota", "aff_quota", "aff_history", "distribution_debt", "distribution_settled_used_quota"}
 
 // ensureUserQuotaColumns rejects a legacy 32-bit wallet schema before any
 // migrations run. The 64-bit-only build intentionally does not auto-upgrade
@@ -302,6 +302,8 @@ func is64BitIntegerType(dbType common.DatabaseType, dataType string) bool {
 func migrateDB() error {
 	// Migrate price_amount column from float/double to decimal for existing tables
 	migrateSubscriptionPlanPriceAmount()
+	// Migrate amount column from integer to double for fractional top-up amounts
+	migrateTopUpAmountToDouble()
 	// Migrate model_limits column from varchar to text for existing tables
 	if err := migrateTokenModelLimitsToText(); err != nil {
 		return err
@@ -327,6 +329,7 @@ func migrateDB() error {
 		&Vendor{},
 		&PrefillGroup{},
 		&DistributionGroup{},
+		&DistributionLedger{},
 		&Setup{},
 		&TwoFA{},
 		&TwoFABackupCode{},
@@ -391,6 +394,7 @@ func migrateDBFast() error {
 		{&Vendor{}, "Vendor"},
 		{&PrefillGroup{}, "PrefillGroup"},
 		{&DistributionGroup{}, "DistributionGroup"},
+		{&DistributionLedger{}, "DistributionLedger"},
 		{&Setup{}, "Setup"},
 		{&TwoFA{}, "TwoFA"},
 		{&TwoFABackupCode{}, "TwoFABackupCode"},
@@ -736,6 +740,61 @@ func migrateSubscriptionPlanPriceAmount() {
 			common.SysLog(fmt.Sprintf("Warning: failed to migrate %s.%s to decimal: %v", tableName, columnName, err))
 		} else {
 			common.SysLog(fmt.Sprintf("Successfully migrated %s.%s to decimal(10,6)", tableName, columnName))
+		}
+	}
+}
+
+// migrateTopUpAmountToDouble migrates top_ups.amount from integer to double so
+// fractional top-up amounts (e.g. 0.01) can be stored. Safe to run multiple
+// times - it checks the column type first. SQLite uses dynamic typing and is
+// skipped, matching the existing migrateSubscriptionPlanPriceAmount pattern.
+func migrateTopUpAmountToDouble() {
+	if common.UsingMainDatabase(common.DatabaseTypeSQLite) {
+		return
+	}
+
+	tableName := "top_ups"
+	columnName := "amount"
+
+	if !DB.Migrator().HasTable(tableName) {
+		return
+	}
+	if !DB.Migrator().HasColumn(&TopUp{}, columnName) {
+		return
+	}
+
+	var alterSQL string
+	if common.UsingMainDatabase(common.DatabaseTypePostgreSQL) {
+		var dataType string
+		if err := DB.Raw(`SELECT data_type FROM information_schema.columns
+			WHERE table_schema = current_schema() AND table_name = ? AND column_name = ?`,
+			tableName, columnName).Scan(&dataType).Error; err != nil {
+			common.SysLog(fmt.Sprintf("Warning: failed to query metadata for %s.%s: %v", tableName, columnName, err))
+		} else if dataType == "double precision" || dataType == "numeric" {
+			return
+		}
+		alterSQL = fmt.Sprintf(`ALTER TABLE %s ALTER COLUMN %s TYPE double precision USING %s::double precision`,
+			tableName, columnName, columnName)
+	} else if common.UsingMainDatabase(common.DatabaseTypeMySQL) {
+		var columnType string
+		if err := DB.Raw(`SELECT COLUMN_TYPE FROM information_schema.columns
+				WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?`,
+			tableName, columnName).Scan(&columnType).Error; err != nil {
+			common.SysLog(fmt.Sprintf("Warning: failed to query metadata for %s.%s: %v", tableName, columnName, err))
+		} else if strings.HasPrefix(strings.ToLower(columnType), "double") {
+			return
+		}
+		alterSQL = fmt.Sprintf("ALTER TABLE %s MODIFY COLUMN %s double NOT NULL DEFAULT 0",
+			tableName, columnName)
+	} else {
+		return
+	}
+
+	if alterSQL != "" {
+		if err := DB.Exec(alterSQL).Error; err != nil {
+			common.SysLog(fmt.Sprintf("Warning: failed to migrate %s.%s to double: %v", tableName, columnName, err))
+		} else {
+			common.SysLog(fmt.Sprintf("Successfully migrated %s.%s to double", tableName, columnName))
 		}
 	}
 }

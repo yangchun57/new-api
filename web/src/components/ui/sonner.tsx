@@ -42,63 +42,56 @@ const Toaster = (props: ToasterProps) => {
           <HugeiconsIcon
             icon={CheckmarkCircle02Icon}
             strokeWidth={2}
-            className='size-4'
+            className='size-4 text-[#30A46C]'
           />
         ),
         info: (
           <HugeiconsIcon
             icon={InformationCircleIcon}
             strokeWidth={2}
-            className='size-4'
+            className='size-4 text-[#0091FF]'
           />
         ),
         warning: (
           <HugeiconsIcon
             icon={Alert02Icon}
             strokeWidth={2}
-            className='size-4'
+            className='size-4 text-[#F5A524]'
           />
         ),
         error: (
           <HugeiconsIcon
             icon={MultiplicationSignCircleIcon}
             strokeWidth={2}
-            className='size-4'
+            className='size-4 text-[#E5484D]'
           />
         ),
         loading: (
           <HugeiconsIcon
             icon={Loading03Icon}
             strokeWidth={2}
-            className='size-4 animate-spin'
+            className='size-4 animate-spin text-[#5A6478]'
           />
         ),
       }}
       style={
         {
-          '--normal-bg': 'var(--popover)',
-          '--normal-text': 'var(--popover-foreground)',
-          '--normal-border': 'var(--border)',
-          '--success-bg':
-            'color-mix(in oklch, var(--success) 16%, var(--popover))',
-          '--success-border':
-            'color-mix(in oklch, var(--success) 35%, var(--border))',
-          '--success-text': 'var(--success)',
-          '--info-bg': 'color-mix(in oklch, var(--info) 16%, var(--popover))',
-          '--info-border':
-            'color-mix(in oklch, var(--info) 35%, var(--border))',
-          '--info-text': 'var(--info)',
-          '--warning-bg':
-            'color-mix(in oklch, var(--warning) 18%, var(--popover))',
-          '--warning-border':
-            'color-mix(in oklch, var(--warning) 38%, var(--border))',
-          '--warning-text': 'var(--warning)',
-          '--error-bg':
-            'color-mix(in oklch, var(--destructive) 16%, var(--popover))',
-          '--error-border':
-            'color-mix(in oklch, var(--destructive) 35%, var(--border))',
-          '--error-text': 'var(--destructive)',
-          '--border-radius': 'var(--radius)',
+          '--normal-bg': 'white',
+          '--normal-text': '#0A0E1A',
+          '--normal-border': '#E5E8EE',
+          '--success-bg': 'white',
+          '--success-border': '#E5E8EE',
+          '--success-text': '#0A0E1A',
+          '--info-bg': 'white',
+          '--info-border': '#E5E8EE',
+          '--info-text': '#0A0E1A',
+          '--warning-bg': 'white',
+          '--warning-border': '#E5E8EE',
+          '--warning-text': '#0A0E1A',
+          '--error-bg': 'white',
+          '--error-border': '#E5E8EE',
+          '--error-text': '#0A0E1A',
+          '--border-radius': '0.75rem',
         } as React.CSSProperties
       }
       {...props}

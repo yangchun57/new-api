@@ -13,13 +13,14 @@ const (
 	MaxCommissionRate = 100.0
 )
 
-// DistributionGroup 分销分组，每个分组可配置按下级充值金额计算的提成比例（0~100%）。
+// DistributionGroup 分销分组，每个分组可配置按下级实际消耗额度计算的提成比例（0~100%）。
 type DistributionGroup struct {
 	Id             int            `json:"id"`
 	Name           string         `json:"name" gorm:"size:64;not null;uniqueIndex:uk_distribution_group_name,where:deleted_at IS NULL"`
-	CommissionRate float64        `json:"commission_rate" gorm:"type:decimal(5,2);not null;default:0"`
+	CommissionRate float64        `json:"commission_rate" gorm:"type:decimal(5,2);size:5;not null;default:0.000000"`
 	IsDefault      bool           `json:"is_default" gorm:"type:boolean;default:false"`
 	Description    string         `json:"description,omitempty" gorm:"type:varchar(255)"`
+	MemberCount    int            `json:"member_count" gorm:"-"`
 	CreatedTime    int64          `json:"created_time" gorm:"bigint"`
 	UpdatedTime    int64          `json:"updated_time" gorm:"bigint"`
 	DeletedAt      gorm.DeletedAt `json:"-" gorm:"index"`
@@ -88,7 +89,37 @@ func GetAllDistributionGroups() ([]*DistributionGroup, error) {
 	if err := DB.Model(&DistributionGroup{}).Order("is_default DESC, id ASC").Find(&groups).Error; err != nil {
 		return nil, err
 	}
+	if err := fillDistributionGroupMemberCounts(groups); err != nil {
+		return nil, err
+	}
 	return groups, nil
+}
+
+// fillDistributionGroupMemberCounts 填充每个分组的成员数
+func fillDistributionGroupMemberCounts(groups []*DistributionGroup) error {
+	if len(groups) == 0 {
+		return nil
+	}
+	type cnt struct {
+		GroupId     int `gorm:"column:distribution_group_id"`
+		MemberCount int `gorm:"column:cnt"`
+	}
+	var counts []cnt
+	if err := DB.Model(&User{}).
+		Select("distribution_group_id, COUNT(*) AS cnt").
+		Where("distribution_group_id > 0").
+		Group("distribution_group_id").
+		Scan(&counts).Error; err != nil {
+		return err
+	}
+	countMap := make(map[int]int, len(counts))
+	for _, c := range counts {
+		countMap[c.GroupId] = c.MemberCount
+	}
+	for _, g := range groups {
+		g.MemberCount = countMap[g.Id]
+	}
+	return nil
 }
 
 // GetDistributionGroupByID 按 ID 获取分组

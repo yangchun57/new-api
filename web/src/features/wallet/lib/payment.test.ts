@@ -24,6 +24,7 @@ import {
   isStripePayment,
   isWaffoPayment,
   isWaffoPancakePayment,
+  isWechatNativePayment,
 } from './payment'
 
 describe('payment type classification', () => {
@@ -33,6 +34,8 @@ describe('payment type classification', () => {
     expect(isWaffoPancakePayment(PAYMENT_TYPES.WAFFO_PANCAKE)).toBe(true)
     expect(isWaffoPancakePayment(PAYMENT_TYPES.WAFFO)).toBe(false)
     expect(isStripePayment(PAYMENT_TYPES.STRIPE)).toBe(true)
+    expect(isWechatNativePayment(PAYMENT_TYPES.WECHAT_NATIVE)).toBe(true)
+    expect(isWechatNativePayment(PAYMENT_TYPES.STRIPE)).toBe(false)
   })
 })
 
@@ -56,6 +59,10 @@ describe('payment dispatch', () => {
           calls.push('pancake')
           return false
         },
+        wechatNative: async () => {
+          calls.push('wechat-native')
+          return false
+        },
       }
     )
 
@@ -76,6 +83,7 @@ describe('payment dispatch', () => {
           return true
         },
         waffoPancake: async () => false,
+        wechatNative: async () => false,
       }
     )
 

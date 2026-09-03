@@ -106,6 +106,13 @@ type User struct {
 	Setting          string                     `json:"setting" gorm:"type:text;column:setting"`
 	Remark           string                     `json:"remark,omitempty" gorm:"type:varchar(255)" validate:"max=255"`
 	StripeCustomer   string                     `json:"stripe_customer" gorm:"type:varchar(64);column:stripe_customer;index"`
+	DistributionGroupId int                     `json:"distribution_group_id" gorm:"type:int;default:0;column:distribution_group_id;index"`
+	DistributionEnabled bool                   `json:"distribution_enabled" gorm:"type:boolean;column:distribution_enabled"`
+	DistributionDebt    int                     `json:"distribution_debt" gorm:"type:bigint;default:0;column:distribution_debt"`
+	DistributionFrozen  bool                    `json:"distribution_frozen" gorm:"type:boolean;column:distribution_frozen"`
+	DistributionSettledUsedQuota int           `json:"distribution_settled_used_quota" gorm:"type:bigint;default:0;column:distribution_settled_used_quota"`
+	RegisterIp          string                  `json:"register_ip,omitempty" gorm:"type:varchar(64);column:register_ip;index"`
+	DeviceFingerprint   string                  `json:"device_fingerprint,omitempty" gorm:"type:varchar(128);column:device_fingerprint;index"`
 	CreatedAt        int64                      `json:"created_at" gorm:"autoCreateTime;column:created_at"`
 	LastLoginAt      int64                      `json:"last_login_at" gorm:"default:0;column:last_login_at"`
 	AuthVersion      int64                      `json:"-" gorm:"type:bigint;not null;default:1;column:auth_version"`
@@ -421,7 +428,7 @@ func GetAllUsers(pageInfo *common.PageInfo, sortOptions ...UserSortOptions) (use
 	return users, total, nil
 }
 
-func SearchUsers(keyword string, group string, role *int, status *int, startIdx int, num int, sortOptions ...UserSortOptions) ([]*User, int64, error) {
+func SearchUsers(keyword string, group string, role *int, status *int, distributionEnabled *bool, startIdx int, num int, sortOptions ...UserSortOptions) ([]*User, int64, error) {
 	var users []*User
 	var total int64
 	var err error
@@ -465,6 +472,9 @@ func SearchUsers(keyword string, group string, role *int, status *int, startIdx 
 		} else {
 			query = query.Where("deleted_at IS NULL").Where("status = ?", *status)
 		}
+	}
+	if distributionEnabled != nil {
+		query = query.Where("distribution_enabled = ?", *distributionEnabled)
 	}
 
 	// 获取总数
@@ -801,6 +811,13 @@ func (user *User) UpdateWithTx(tx *gorm.DB, updatePassword bool) error {
 		"aff_quota",
 		"aff_history",
 		"auth_version",
+		"distribution_group_id",
+		"distribution_enabled",
+		"distribution_debt",
+		"distribution_frozen",
+		"distribution_settled_used_quota",
+		"register_ip",
+		"device_fingerprint",
 	).Updates(newUser).Error; err != nil {
 		return err
 	}
@@ -1470,4 +1487,112 @@ func RootUserExists() bool {
 		return false
 	}
 	return true
+}
+
+type DistributionUserItem struct {
+	Id                  int    `json:"id"`
+	Username            string `json:"username"`
+	DisplayName         string `json:"display_name"`
+	Email               string `json:"email"`
+	Role                int    `json:"role"`
+	Status              int    `json:"status"`
+	DistributionGroupId int    `json:"distribution_group_id"`
+	DistributionFrozen  bool   `json:"distribution_frozen"`
+	DistributionDebt    int    `json:"distribution_debt"`
+	GroupName           string `json:"group_name"`
+	CommissionRate      float64 `json:"commission_rate"`
+	InviterId           int    `json:"inviter_id"`
+	AffCount            int    `json:"aff_count"`
+	CreatedAt           int64  `json:"created_at"`
+}
+
+func SearchDistributionUsers(keyword string, groupId int, frozen *bool, startIdx int, pageSize int) ([]*DistributionUserItem, int64, error) {
+	var items []*DistributionUserItem
+	var total int64
+
+	tx := DB.Table("users AS u").
+		Select("u.id, u.username, u.display_name, u.email, u.role, u.status, "+
+			"u.distribution_group_id, u.distribution_frozen, u.distribution_debt, "+
+			"u.inviter_id, u.aff_count, u.created_at, "+
+			"COALESCE(dg.name, '') AS group_name, COALESCE(dg.commission_rate, 0) AS commission_rate").
+		Joins("LEFT JOIN distribution_groups dg ON dg.id = u.distribution_group_id").
+		Where("u.distribution_group_id > 0")
+
+	if groupId > 0 {
+		tx = tx.Where("u.distribution_group_id = ?", groupId)
+	}
+	if frozen != nil {
+		tx = tx.Where("u.distribution_frozen = ?", *frozen)
+	}
+	if keyword != "" {
+		likeCondition := "(u.username LIKE ? OR u.email LIKE ? OR u.display_name LIKE ?)"
+		likeArgs := []interface{}{"%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%"}
+		if keywordInt, err := strconv.Atoi(keyword); err == nil {
+			likeCondition = "(u.id = ? OR " + likeCondition[1:]
+			likeArgs = append([]interface{}{keywordInt}, likeArgs...)
+		}
+		tx = tx.Where(likeCondition, likeArgs...)
+	}
+
+	if err := tx.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	err := tx.Order("u.id DESC").Limit(pageSize).Offset(startIdx).Find(&items).Error
+	if err != nil {
+		return nil, 0, err
+	}
+	return items, total, nil
+}
+
+func GetDistributionGroupMembers(groupId int, startIdx int, pageSize int) ([]*DistributionUserItem, int64, error) {
+	var items []*DistributionUserItem
+	var total int64
+
+	tx := DB.Table("users AS u").
+		Select("u.id, u.username, u.display_name, u.email, u.role, u.status, "+
+			"u.distribution_group_id, u.distribution_frozen, u.distribution_debt, "+
+			"u.inviter_id, u.aff_count, u.created_at, "+
+			"dg.name AS group_name, dg.commission_rate AS commission_rate").
+		Joins("LEFT JOIN distribution_groups dg ON dg.id = u.distribution_group_id").
+		Where("u.distribution_group_id = ?", groupId)
+
+	if err := tx.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	err := tx.Order("u.id ASC").Limit(pageSize).Offset(startIdx).Find(&items).Error
+	if err != nil {
+		return nil, 0, err
+	}
+	return items, total, nil
+}
+
+type InvitedUserItem struct {
+	Id          int    `json:"id"`
+	Username    string `json:"username"`
+	DisplayName string `json:"display_name"`
+	Email       string `json:"email"`
+	Status      int    `json:"status"`
+	UsedQuota   int    `json:"used_quota"`
+	CreatedAt   int64  `json:"created_at"`
+}
+
+func GetInvitedUsers(inviterId int, startIdx int, pageSize int) ([]*InvitedUserItem, int64, error) {
+	var items []*InvitedUserItem
+	var total int64
+
+	tx := DB.Table("users").
+		Select("id, username, display_name, email, status, used_quota, created_at").
+		Where("inviter_id = ? AND id <> ?", inviterId, inviterId)
+
+	if err := tx.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	err := tx.Order("id DESC").Limit(pageSize).Offset(startIdx).Find(&items).Error
+	if err != nil {
+		return nil, 0, err
+	}
+	return items, total, nil
 }

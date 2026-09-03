@@ -71,13 +71,14 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         </AlertDialogHeader>
         {children}
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>
+          <AlertDialogCancel disabled={isLoading} size='sm'>
             {cancelBtnText ?? t('Cancel')}
           </AlertDialogCancel>
           <Button
             variant={destructive ? 'destructive' : 'default'}
             onClick={handleConfirm}
             disabled={disabled || isLoading}
+            size='sm'
           >
             {confirmText ?? t('Continue')}
           </Button>

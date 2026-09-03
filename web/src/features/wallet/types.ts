@@ -60,6 +60,11 @@ export type WaffoPancakePaymentResponse = ApiResponse<
   | string
 >
 
+export type WechatNativePaymentResponse = ApiResponse<{
+  code_url: string
+  trade_no: string
+}>
+
 /**
  * Creem product configuration
  */
@@ -150,6 +155,10 @@ export interface TopupInfo {
   enable_waffo_pancake_topup?: boolean
   /** Minimum topup amount for Waffo Pancake */
   waffo_pancake_min_topup?: number
+  /** Whether WeChat Native topup is enabled */
+  enable_wechat_native_topup?: boolean
+  /** Minimum topup amount for WeChat Native */
+  wechat_native_min_topup?: number
   /** Whether redemption code usage is enabled */
   enable_redemption?: boolean
   /** Whether compliance confirmation has been completed */

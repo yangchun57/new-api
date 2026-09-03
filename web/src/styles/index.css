@@ -1152,3 +1152,76 @@ For commercial licensing, please contact support@quantumnous.com
     display: none;
   }
 }
+
+/* Sonner toast styles - matching project design system */
+.toaster,
+.toaster * {
+  box-sizing: border-box;
+}
+
+.toaster [data-sonner-toast] {
+  border: 1px solid #E5E8EE !important;
+  box-shadow: 0 8px 30px rgba(10, 14, 26, 0.08) !important;
+  padding: 12px 48px 12px 16px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-height: 44px !important;
+}
+
+[data-sonner-toast] [data-icon] {
+  flex-shrink: 0;
+  margin: 0 !important;
+}
+
+[data-sonner-toast] [data-content] {
+  flex: 1;
+  line-height: 1.5;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-sonner-toast] [data-close-button] {
+  all: unset !important;
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  cursor: pointer !important;
+  color: #8A93A4 !important;
+  opacity: 0.7;
+  transition: opacity 100ms ease, background-color 100ms ease;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  flex-shrink: 0 !important;
+  order: 999 !important;
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  opacity: 1;
+  background: #F7F8FA !important;
+}
+
+[data-sonner-toast] [data-close-button] svg {
+  width: 16px !important;
+  height: 16px !important;
+  display: block !important;
+}
+
+.dark .toaster [data-sonner-toast] {
+  background: #1A1F2E !important;
+  border-color: #2D3748 !important;
+  color: #E5E8EE !important;
+}
+
+.dark .toaster [data-sonner-toast] [data-close-button]:hover {
+  background: #2D3748 !important;
+  color: #E5E8EE !important;
+}

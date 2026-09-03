@@ -1,0 +1,58 @@
+[SYS] 2026/09/03 - 15:49:10 | initializing token encoders 
+[SYS] 2026/09/03 - 15:49:10 | token encoders initialized 
+[SYS] 2026/09/03 - 15:49:10 | SQL_DSN not set, using SQLite as database 
+[SYS] 2026/09/03 - 15:49:10 | database migration started 
+[SYS] 2026/09/03 - 15:49:18 | system is already initialized at: 2026-08-27 11:29:42 +0800 CST 
+[SYS] 2026/09/03 - 15:49:18 | REDIS_CONN_STRING not set, Redis is not enabled 
+[SYS] 2026/09/03 - 15:49:18 | i18n initialized with languages: zh-CN, zh-TW, en 
+[SYS] 2026/09/03 - 15:49:18 | Loaded 0 custom OAuth providers 
+[SYS] 2026/09/03 - 15:49:18 | New API v0.0.0 started 
+[INFO] 2026/09/03 - 15:49:18 | SYSTEM | codex credential auto-refresh task started: tick=10m0s threshold=24h0m0s 
+[SYS] 2026/09/03 - 15:49:18 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 15:49:18 | 保存数据看板数据成功，共保存0条数据 
+[INFO] 2026/09/03 - 15:49:18 | SYSTEM | distribution daily settlement task started: tick=1m0s, schedule=00:05 
+[INFO] 2026/09/03 - 15:49:18 | SYSTEM | system task runner started: runner=DESKTOP-JQ9KQG2-LXAL0eJU idle_interval=15s 
+[INFO] 2026/09/03 - 15:49:18 | SYSTEM | subscription quota reset task started: tick=1m0s 
+
+
+2026/09/03 15:49:18 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[201.604ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+  [33mWarning: Refresh cookie is not secure and refresh/logout Origin validation is disabled. Please set SESSION_COOKIE_SECURE=true in production.[0m
+
+
+  [32mNew API v0.0.0[0m  ready in 8532 ms
+
+  ➜  [1mLocal:[0m   http://localhost:3000/
+  ➜  [1mNetwork:[0m http://172.29.32.1:3000/
+  ➜  [1mNetwork:[0m http://192.168.201.18:3000/
+
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030749597664769008268d9d65qUsKt7p | 200 |    420.5019ms |       127.0.0.1 |    POST /api/user/login?turnstile=
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750003659585008268d9d67TXTloPk | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750003679319008268d9d6xRQq22h5 | 401 |       999.1µs |       127.0.0.1 |     GET /api/user/topup/self?p=1&page_size=10
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750003719328008268d9d6QwgXi18j | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004119364008268d9d6M6QM4s22 | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004158273008268d9d6FM4BkmgM | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004204969008268d9d6MiavJTp6 | 200 |       999.9µs |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004256910008268d9d6k14bFBCB | 200 |      1.0498ms |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004294050008268d9d6akTRrRyy | 200 |      2.0089ms |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004363952008268d9d6qTQEoEJd | 200 |       521.1µs |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004399888008268d9d6Q3wfHPiw | 200 |       526.3µs |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750004430696008268d9d66ktwdWzg | 200 |      1.0004ms |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 15:50:00 | api | 202609030750007918428008268d9d6Yg5vcl10 | 200 |      1.6831ms |       127.0.0.1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 15:50:02 | api | 202609030750024234487008268d9d6xRsiH146 | 200 |      1.9988ms |       127.0.0.1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 15:50:02 | api | 202609030750026040137008268d9d6Ofyx3Iey | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 15:50:02 | api | 202609030750028638313008268d9d6gqYhoZGO | 200 |      99.446ms |       127.0.0.1 |    POST /api/user/auth/refresh
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750031684778008268d9d6B6o8OPuZ | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750031749931008268d9d6BRqZPLA3 | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750031969925008268d9d6pptuM1ik | 200 |            0s |       127.0.0.1 |     GET /api/status
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750031979930008268d9d6tyeQrLpD | 200 |            0s |       127.0.0.1 |     GET /api/notice
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750032025923008268d9d6gZ6DZaaa | 200 |       1.999ms |       127.0.0.1 |     GET /api/subscription/self
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750032015917008268d9d6xeotzNbn | 200 |      3.9995ms |       127.0.0.1 |     GET /api/subscription/plans
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750032025923008268d9d6uMsPI52C | 200 |      3.9991ms |       127.0.0.1 |     GET /api/user/aff
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750032065914008268d9d6b9bPyUA9 | 200 |      1.0004ms |       127.0.0.1 |     GET /api/user/topup/info
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750032035923008268d9d6aTiIHnsB | 200 |      3.9995ms |       127.0.0.1 |     GET /api/user/topup?p=1&page_size=10
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750032035923008268d9d6u0Np9CUH | 200 |      5.9951ms |       127.0.0.1 |     GET /api/user/self
+[GIN] 2026/09/03 - 15:50:03 | api | 202609030750035613325008268d9d64x55Eh0C | 200 |       540.1µs |       127.0.0.1 |    POST /api/user/amount
+[GIN] 2026/09/03 - 15:50:05 | api | 202609030750057439984008268d9d6IVqTSeFb | 200 |       775.5µs |       127.0.0.1 |    POST /api/user/amount
+[SYS] 2026/09/03 - 15:50:18 | syncing options from database 
+[SYS] 2026/09/03 - 15:51:18 | syncing options from database 

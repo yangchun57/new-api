@@ -40,6 +40,7 @@ import {
 } from '../constants'
 import type { User } from '../types'
 import { DataTableRowActions } from './data-table-row-actions'
+import { UserDistributionToggle } from './user-distribution-toggle'
 import { UserQuotaCell } from './user-quota-cell'
 
 export function useUsersColumns(): ColumnDef<User>[] {
@@ -290,6 +291,14 @@ export function useUsersColumns(): ColumnDef<User>[] {
       },
       size: 240,
       enableSorting: false,
+      meta: { mobileHidden: true },
+    },
+    {
+      id: 'distribution',
+      header: t('Distribution'),
+      cell: ({ row }) => <UserDistributionToggle user={row.original} />,
+      enableSorting: false,
+      size: 110,
       meta: { mobileHidden: true },
     },
     {

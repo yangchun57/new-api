@@ -32,6 +32,7 @@ import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 
 import { SettingsSwitchField } from '../components/settings-form-layout'
+import { ConfiguredBadge } from './configured-badge'
 
 export interface WaffoSettingsValues {
   WaffoEnabled: boolean
@@ -68,6 +69,7 @@ interface Props {
   ) => void
   payMethods: PayMethod[]
   onPayMethodsChange: (value: SetStateAction<PayMethod[]>) => void
+  configuredKeys?: ReadonlySet<string>
 }
 
 export function WaffoSettingsSection({
@@ -75,6 +77,7 @@ export function WaffoSettingsSection({
   onValueChange,
   payMethods,
   onPayMethodsChange,
+  configuredKeys,
 }: Props) {
   const { t } = useTranslation()
   const iconFileInputRef = useRef<HTMLInputElement | null>(null)
@@ -177,7 +180,10 @@ export function WaffoSettingsSection({
 
         <div className='grid grid-cols-2 gap-4'>
           <div className='grid gap-1.5'>
-            <Label>{t('API Key (Production)')}</Label>
+            <Label>
+              {t('API Key (Production)')}
+              {configuredKeys?.has('WaffoApiKey') && <ConfiguredBadge />}
+            </Label>
             <Input
               type='password'
               value={values.WaffoApiKey}
@@ -188,7 +194,10 @@ export function WaffoSettingsSection({
             />
           </div>
           <div className='grid gap-1.5'>
-            <Label>{t('API Key (Sandbox)')}</Label>
+            <Label>
+              {t('API Key (Sandbox)')}
+              {configuredKeys?.has('WaffoSandboxApiKey') && <ConfiguredBadge />}
+            </Label>
             <Input
               type='password'
               value={values.WaffoSandboxApiKey}
@@ -213,7 +222,10 @@ export function WaffoSettingsSection({
 
         <div className='grid grid-cols-2 gap-4'>
           <div className='grid gap-1.5'>
-            <Label>{t('RSA Private Key (Production)')}</Label>
+            <Label>
+              {t('RSA Private Key (Production)')}
+              {configuredKeys?.has('WaffoPrivateKey') && <ConfiguredBadge />}
+            </Label>
             <Textarea
               rows={3}
               value={values.WaffoPrivateKey}
@@ -224,7 +236,12 @@ export function WaffoSettingsSection({
             />
           </div>
           <div className='grid gap-1.5'>
-            <Label>{t('RSA Private Key (Sandbox)')}</Label>
+            <Label>
+              {t('RSA Private Key (Sandbox)')}
+              {configuredKeys?.has('WaffoSandboxPrivateKey') && (
+                <ConfiguredBadge />
+              )}
+            </Label>
             <Textarea
               rows={3}
               value={values.WaffoSandboxPrivateKey}

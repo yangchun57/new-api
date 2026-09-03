@@ -53,6 +53,12 @@ var (
 	UserSessionHourlyAlertThreshold  = DefaultUserSessionHourlyAlertThreshold
 )
 
+// SensitiveKeyMask is the placeholder value returned by the options API for
+// sensitive keys (e.g. API keys, private keys, secrets) that are already
+// configured. It lets the frontend show a "configured" state without exposing
+// the real secret value.
+const SensitiveKeyMask = "••••••••"
+
 var OptionMap map[string]string
 var OptionMapRWMutex sync.RWMutex
 
@@ -248,8 +254,9 @@ const (
 )
 
 const (
-	TopUpStatusPending = "pending"
-	TopUpStatusSuccess = "success"
-	TopUpStatusFailed  = "failed"
-	TopUpStatusExpired = "expired"
+	TopUpStatusPending  = "pending"
+	TopUpStatusSuccess  = "success"
+	TopUpStatusFailed   = "failed"
+	TopUpStatusExpired  = "expired"
+	TopUpStatusRefunded = "refunded"
 )

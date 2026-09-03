@@ -360,6 +360,10 @@ func findOrCreateOAuthUser(c *gin.Context, provider oauth.Provider, oauthUser *o
 	}
 	user.Role = common.RoleCommonUser
 	user.Status = common.UserStatusEnabled
+	user.RegisterIp = c.ClientIP()
+	if fingerprint := strings.TrimSpace(c.GetHeader("X-Device-Fingerprint")); fingerprint != "" {
+		user.DeviceFingerprint = fingerprint
+	}
 
 	// Handle affiliate code
 	inviterId := 0

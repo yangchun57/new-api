@@ -29,14 +29,16 @@ import {
   Radio,
   ServerCog,
   Settings,
+  Share2,
   Ticket,
   User,
   Users,
+  UsersRound,
   Wallet,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { type SidebarData } from '@/components/layout/types'
+import type { SidebarData } from '@/components/layout/types'
 import { ROLE } from '@/lib/roles'
 
 /**
@@ -109,6 +111,20 @@ export function useSidebarData(): SidebarData {
             icon: Wallet,
           },
           {
+            title: t('My Distribution'),
+            icon: Share2,
+            items: [
+              {
+                title: t('Overview'),
+                url: '/distribution',
+              },
+              {
+                title: t('Invited Users'),
+                url: '/distribution/invitees',
+              },
+            ],
+          },
+          {
             title: t('Profile'),
             url: '/profile',
             icon: User,
@@ -143,6 +159,24 @@ export function useSidebarData(): SidebarData {
             title: t('Subscriptions'),
             url: '/subscriptions',
             icon: CreditCard,
+          },
+          {
+            title: t('Distribution'),
+            icon: UsersRound,
+            items: [
+              {
+                title: t('Distribution Groups'),
+                url: '/distribution/groups',
+              },
+              {
+                title: t('Distribution Users'),
+                url: '/distribution/users',
+              },
+              {
+                title: t('Distribution Ledgers'),
+                url: '/distribution/ledgers',
+              },
+            ],
           },
           {
             title: t('System Info'),

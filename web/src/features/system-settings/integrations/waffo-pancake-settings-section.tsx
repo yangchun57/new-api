@@ -33,7 +33,8 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 
-import { removeTrailingSlash } from './utils'
+import { ConfiguredBadge } from './configured-badge'
+import { isSensitiveKeyMask, removeTrailingSlash } from './utils'
 import {
   type CatalogStore,
   type PairOrphanError,
@@ -63,6 +64,7 @@ interface Props {
   selectedBinding: WaffoPancakeBinding
   savedBinding: WaffoPancakeBinding
   onSelectedBindingChange: (value: SetStateAction<WaffoPancakeBinding>) => void
+  configuredKeys?: ReadonlySet<string>
 }
 
 const PANCAKE_DASHBOARD_URL = 'https://pancake.waffo.ai/merchant/dashboard'
@@ -77,6 +79,7 @@ export function WaffoPancakeSettingsSection({
   selectedBinding,
   savedBinding,
   onSelectedBindingChange,
+  configuredKeys,
 }: Props) {
   const { t } = useTranslation()
 
@@ -109,7 +112,10 @@ export function WaffoPancakeSettingsSection({
     initialRef.current = parsed
     if (didMountRef.current) return
     didMountRef.current = true
-    lastVerifiedSignature.current = `${parsed.WaffoPancakeMerchantID.trim()}|${parsed.WaffoPancakePrivateKey.trim()}`
+    const savedKey = parsed.WaffoPancakePrivateKey.trim()
+    lastVerifiedSignature.current = `${parsed.WaffoPancakeMerchantID.trim()}|${
+      isSensitiveKeyMask(savedKey) ? '' : savedKey
+    }`
   }, [defaultsSignature])
 
   const productsForChosenStore = React.useMemo(() => {
@@ -433,7 +439,12 @@ export function WaffoPancakeSettingsSection({
         </div>
 
         <div className='grid gap-1.5'>
-          <Label>{t('API Private Key')}</Label>
+          <Label>
+            {t('API Private Key')}
+            {configuredKeys?.has('WaffoPancakePrivateKey') && (
+              <ConfiguredBadge />
+            )}
+          </Label>
           <Textarea
             rows={4}
             placeholder={t('Leave blank to keep the existing key')}

@@ -521,7 +521,7 @@ export function TokenUsageDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton
-        className='max-h-[92vh] w-[calc(100%-1.5rem)] max-w-6xl gap-0 overflow-hidden p-0 sm:max-w-6xl sm:p-0'
+        className='max-h-[92vh] w-[calc(100%-1.5rem)] max-w-[1440px] gap-0 overflow-hidden p-0 sm:max-w-[1440px] sm:p-0'
       >
         <div className='max-h-[92vh] overflow-y-auto'>
           <DialogHeader className='flex flex-row items-start justify-between gap-4 border-b border-[#E5E8EE] px-6 py-5'>

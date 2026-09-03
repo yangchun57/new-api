@@ -77,6 +77,7 @@ func SetApiRouter(router *gin.Engine) {
 			//userRoute.POST("/tokenlog", middleware.CriticalRateLimit(), controller.TokenLog)
 			userRoute.POST("/epay/notify", anonymousRequestBodyLimit, controller.EpayNotify)
 			userRoute.GET("/epay/notify", controller.EpayNotify)
+			userRoute.POST("/wechat-native/notify", anonymousRequestBodyLimit, controller.WechatNativeNotify)
 			userRoute.GET("/groups", controller.GetUserGroups)
 
 			selfRoute := userRoute.Group("/")
@@ -98,6 +99,8 @@ func SetApiRouter(router *gin.Engine) {
 				selfRoute.POST("/passkey/verify/finish", middleware.DisableCache(), controller.PasskeyVerifyFinish)
 				selfRoute.DELETE("/passkey", middleware.DisableCache(), controller.PasskeyDelete)
 				selfRoute.GET("/aff", controller.GetAffCode)
+				selfRoute.GET("/distribution/ledgers", controller.GetSelfDistributionLedgers)
+				selfRoute.GET("/distribution/invitees", controller.GetSelfInvitedUsers)
 				selfRoute.GET("/topup/info", controller.GetTopUpInfo)
 				selfRoute.GET("/topup/self", controller.GetUserTopUps)
 				selfRoute.POST("/topup", middleware.CriticalRateLimit(), controller.TopUp)
@@ -110,6 +113,7 @@ func SetApiRouter(router *gin.Engine) {
 				selfRoute.POST("/waffo/pay", middleware.CriticalRateLimit(), controller.RequestWaffoPay)
 				selfRoute.POST("/waffo-pancake/amount", controller.RequestWaffoPancakeAmount)
 				selfRoute.POST("/waffo-pancake/pay", middleware.CriticalRateLimit(), controller.RequestWaffoPancakePay)
+				selfRoute.POST("/wechat-native/pay", middleware.CriticalRateLimit(), controller.RequestWechatNativePay)
 				selfRoute.POST("/aff_transfer", middleware.UserCriticalRateLimit("aff-transfer"), controller.TransferAffQuota)
 				selfRoute.PUT("/setting", controller.UpdateUserSetting)
 
@@ -135,6 +139,7 @@ func SetApiRouter(router *gin.Engine) {
 				adminRoute.GET("/", controller.GetAllUsers)
 				adminRoute.GET("/topup", controller.GetAllTopUps)
 				adminRoute.POST("/topup/complete", controller.AdminCompleteTopUp)
+				adminRoute.POST("/topup/refund", controller.AdminRefundTopUp)
 				adminRoute.GET("/search", controller.SearchUsers)
 				adminRoute.GET("/:id/oauth/bindings", controller.GetUserOAuthBindingsByAdmin)
 				adminRoute.DELETE("/:id/oauth/bindings/:provider_id", controller.UnbindCustomOAuthByAdmin)
@@ -327,9 +332,22 @@ func SetApiRouter(router *gin.Engine) {
 		distributionGroupRoute.Use(middleware.AdminAuth())
 		{
 			distributionGroupRoute.GET("/", controller.GetDistributionGroups)
+			distributionGroupRoute.GET("/:id/members", controller.GetDistributionGroupMembers)
 			distributionGroupRoute.POST("/", controller.CreateDistributionGroup)
 			distributionGroupRoute.PUT("/", controller.UpdateDistributionGroup)
 			distributionGroupRoute.DELETE("/:id", controller.DeleteDistributionGroup)
+		}
+
+		distributionRoute := apiRouter.Group("/distribution")
+		distributionRoute.Use(middleware.AdminAuth())
+		{
+			distributionRoute.GET("/ledgers", controller.GetDistributionLedgers)
+			distributionRoute.GET("/users", controller.GetDistributionUsers)
+			distributionRoute.POST("/assign_group", controller.SetUserDistributionGroup)
+			distributionRoute.POST("/freeze", controller.SetUserDistributionFrozen)
+			distributionRoute.POST("/enabled", controller.SetUserDistributionEnabled)
+			distributionRoute.POST("/deduct", controller.DeductDistributionCommission)
+			distributionRoute.POST("/deduct_all", controller.DeductAllDistributionCommission)
 		}
 
 		mjRoute := apiRouter.Group("/mj")

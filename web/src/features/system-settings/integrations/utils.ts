@@ -16,6 +16,37 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
+export const SENSITIVE_KEY_MASK = '••••••••'
+
+export function isSensitiveKeyMask(value: string): boolean {
+  return value === SENSITIVE_KEY_MASK
+}
+
+export function stripSensitiveMasks<T>(values: T): T {
+  const record = values as Record<string, unknown>
+  const result: Record<string, unknown> = { ...record }
+  for (const key of Object.keys(result)) {
+    if (result[key] === SENSITIVE_KEY_MASK) {
+      result[key] = ''
+    }
+  }
+  return result as T
+}
+
+export function collectConfiguredSensitiveKeys(
+  ...groups: object[]
+): Set<string> {
+  const keys = new Set<string>()
+  for (const group of groups) {
+    for (const [key, value] of Object.entries(group)) {
+      if (value === SENSITIVE_KEY_MASK) {
+        keys.add(key)
+      }
+    }
+  }
+  return keys
+}
+
 export function removeTrailingSlash(value: string) {
   const trimmed = value.trim()
   if (!trimmed) return ''

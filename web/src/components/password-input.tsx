@@ -40,11 +40,12 @@ export function PasswordInput({
   const [showPassword, setShowPassword] = React.useState(false)
 
   return (
-    <div className={cn('relative', className)}>
+    <div className='relative'>
       <Input
         type={showPassword ? 'text' : 'password'}
         ref={ref}
         disabled={disabled}
+        className={cn('pe-10', className)}
         {...props}
       />
       <Button
@@ -52,7 +53,7 @@ export function PasswordInput({
         size='icon'
         variant='ghost'
         disabled={disabled}
-        className='absolute end-2 top-1/2 h-7 w-7 -translate-y-1/2 rounded-md text-[#8A93A4] transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
+        className='absolute end-2 top-1/2 h-8 w-8 -translate-y-1/2 rounded-md text-[#8A93A4] transition-colors hover:bg-[#F7F8FA] hover:text-[#0A0E1A]'
         onClick={() => setShowPassword((prev) => !prev)}
         aria-label='Toggle password visibility'
       >

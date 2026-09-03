@@ -24,6 +24,7 @@ type RequestErrorLike = {
     data?: {
       error?: {
         code?: string
+        message?: string
       }
       message?: string
     }
@@ -38,11 +39,13 @@ export type RequestErrorDetails = {
 export function parseRequestErrorDetails(error: unknown): RequestErrorDetails {
   const requestError = error as RequestErrorLike
 
+  const message =
+    requestError?.response?.data?.message ||
+    requestError?.response?.data?.error?.message ||
+    requestError?.message
+
   return {
     errorCode: requestError?.response?.data?.error?.code || undefined,
-    errorMessage:
-      requestError?.response?.data?.message ||
-      requestError?.message ||
-      ERROR_MESSAGES.API_REQUEST_ERROR,
+    errorMessage: message?.trim() || ERROR_MESSAGES.API_REQUEST_ERROR,
   }
 }

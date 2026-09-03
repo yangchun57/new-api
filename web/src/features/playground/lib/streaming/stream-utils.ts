@@ -42,25 +42,24 @@ export type StreamErrorDetails = {
 }
 
 export function parseStreamErrorDetails(data?: string): StreamErrorDetails {
-  const fallbackMessage = data || ERROR_MESSAGES.API_REQUEST_ERROR
-
-  if (!data) {
-    return { errorMessage: fallbackMessage }
+  if (!data || !data.trim()) {
+    return { errorMessage: ERROR_MESSAGES.API_REQUEST_ERROR }
   }
 
   try {
     const parsed = JSON.parse(data) as StreamErrorPayload
 
     if (!parsed?.error) {
-      return { errorMessage: fallbackMessage }
+      return { errorMessage: ERROR_MESSAGES.API_REQUEST_ERROR }
     }
 
+    const message = parsed.error.message?.trim()
     return {
       errorCode: parsed.error.code || undefined,
-      errorMessage: parsed.error.message || fallbackMessage,
+      errorMessage: message || ERROR_MESSAGES.API_REQUEST_ERROR,
     }
   } catch {
-    return { errorMessage: fallbackMessage }
+    return { errorMessage: ERROR_MESSAGES.API_REQUEST_ERROR }
   }
 }
 

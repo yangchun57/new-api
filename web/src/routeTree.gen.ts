@@ -38,6 +38,11 @@ import { Route as AuthenticatedChannelsIndexRouteImport } from './routes/_authen
 import { Route as AuthenticatedChatChatIdRouteImport } from './routes/_authenticated/chat/$chatId'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
 import { Route as AuthenticatedDashboardSectionRouteImport } from './routes/_authenticated/dashboard/$section'
+import { Route as AuthenticatedDistributionIndexRouteImport } from './routes/_authenticated/distribution/index'
+import { Route as AuthenticatedDistributionGroupsRouteImport } from './routes/_authenticated/distribution/groups'
+import { Route as AuthenticatedDistributionInviteesRouteImport } from './routes/_authenticated/distribution/invitees'
+import { Route as AuthenticatedDistributionLedgersRouteImport } from './routes/_authenticated/distribution/ledgers'
+import { Route as AuthenticatedDistributionUsersRouteImport } from './routes/_authenticated/distribution/users'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 import { Route as AuthenticatedKeysIndexRouteImport } from './routes/_authenticated/keys/index'
 import { Route as AuthenticatedModelsIndexRouteImport } from './routes/_authenticated/models/index'
@@ -213,6 +218,36 @@ const AuthenticatedDashboardSectionRoute =
   AuthenticatedDashboardSectionRouteImport.update({
     id: '/dashboard/$section',
     path: '/dashboard/$section',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDistributionIndexRoute =
+  AuthenticatedDistributionIndexRouteImport.update({
+    id: '/distribution/',
+    path: '/distribution/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDistributionGroupsRoute =
+  AuthenticatedDistributionGroupsRouteImport.update({
+    id: '/distribution/groups',
+    path: '/distribution/groups',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDistributionInviteesRoute =
+  AuthenticatedDistributionInviteesRouteImport.update({
+    id: '/distribution/invitees',
+    path: '/distribution/invitees',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDistributionLedgersRoute =
+  AuthenticatedDistributionLedgersRouteImport.update({
+    id: '/distribution/ledgers',
+    path: '/distribution/ledgers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDistributionUsersRoute =
+  AuthenticatedDistributionUsersRouteImport.update({
+    id: '/distribution/users',
+    path: '/distribution/users',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedErrorsErrorRoute =
@@ -413,11 +448,16 @@ export interface FileRoutesByFullPath {
   '/user/reset': typeof authUserResetRoute
   '/chat/$chatId': typeof AuthenticatedChatChatIdRoute
   '/dashboard/$section': typeof AuthenticatedDashboardSectionRoute
+  '/distribution/groups': typeof AuthenticatedDistributionGroupsRoute
+  '/distribution/invitees': typeof AuthenticatedDistributionInviteesRoute
+  '/distribution/ledgers': typeof AuthenticatedDistributionLedgersRoute
+  '/distribution/users': typeof AuthenticatedDistributionUsersRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/models/$section': typeof AuthenticatedModelsSectionRoute
   '/usage-logs/$section': typeof AuthenticatedUsageLogsSectionRoute
   '/channels/': typeof AuthenticatedChannelsIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/distribution/': typeof AuthenticatedDistributionIndexRoute
   '/keys/': typeof AuthenticatedKeysIndexRoute
   '/models/': typeof AuthenticatedModelsIndexRoute
   '/playground/': typeof AuthenticatedPlaygroundIndexRoute
@@ -470,11 +510,16 @@ export interface FileRoutesByTo {
   '/user/reset': typeof authUserResetRoute
   '/chat/$chatId': typeof AuthenticatedChatChatIdRoute
   '/dashboard/$section': typeof AuthenticatedDashboardSectionRoute
+  '/distribution/groups': typeof AuthenticatedDistributionGroupsRoute
+  '/distribution/invitees': typeof AuthenticatedDistributionInviteesRoute
+  '/distribution/ledgers': typeof AuthenticatedDistributionLedgersRoute
+  '/distribution/users': typeof AuthenticatedDistributionUsersRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/models/$section': typeof AuthenticatedModelsSectionRoute
   '/usage-logs/$section': typeof AuthenticatedUsageLogsSectionRoute
   '/channels': typeof AuthenticatedChannelsIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/distribution': typeof AuthenticatedDistributionIndexRoute
   '/keys': typeof AuthenticatedKeysIndexRoute
   '/models': typeof AuthenticatedModelsIndexRoute
   '/playground': typeof AuthenticatedPlaygroundIndexRoute
@@ -531,11 +576,16 @@ export interface FileRoutesById {
   '/(auth)/user/reset': typeof authUserResetRoute
   '/_authenticated/chat/$chatId': typeof AuthenticatedChatChatIdRoute
   '/_authenticated/dashboard/$section': typeof AuthenticatedDashboardSectionRoute
+  '/_authenticated/distribution/groups': typeof AuthenticatedDistributionGroupsRoute
+  '/_authenticated/distribution/invitees': typeof AuthenticatedDistributionInviteesRoute
+  '/_authenticated/distribution/ledgers': typeof AuthenticatedDistributionLedgersRoute
+  '/_authenticated/distribution/users': typeof AuthenticatedDistributionUsersRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/models/$section': typeof AuthenticatedModelsSectionRoute
   '/_authenticated/usage-logs/$section': typeof AuthenticatedUsageLogsSectionRoute
   '/_authenticated/channels/': typeof AuthenticatedChannelsIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/distribution/': typeof AuthenticatedDistributionIndexRoute
   '/_authenticated/keys/': typeof AuthenticatedKeysIndexRoute
   '/_authenticated/models/': typeof AuthenticatedModelsIndexRoute
   '/_authenticated/playground/': typeof AuthenticatedPlaygroundIndexRoute
@@ -591,11 +641,16 @@ export interface FileRouteTypes {
     | '/user/reset'
     | '/chat/$chatId'
     | '/dashboard/$section'
+    | '/distribution/groups'
+    | '/distribution/invitees'
+    | '/distribution/ledgers'
+    | '/distribution/users'
     | '/errors/$error'
     | '/models/$section'
     | '/usage-logs/$section'
     | '/channels/'
     | '/dashboard/'
+    | '/distribution/'
     | '/keys/'
     | '/models/'
     | '/playground/'
@@ -648,11 +703,16 @@ export interface FileRouteTypes {
     | '/user/reset'
     | '/chat/$chatId'
     | '/dashboard/$section'
+    | '/distribution/groups'
+    | '/distribution/invitees'
+    | '/distribution/ledgers'
+    | '/distribution/users'
     | '/errors/$error'
     | '/models/$section'
     | '/usage-logs/$section'
     | '/channels'
     | '/dashboard'
+    | '/distribution'
     | '/keys'
     | '/models'
     | '/playground'
@@ -708,11 +768,16 @@ export interface FileRouteTypes {
     | '/(auth)/user/reset'
     | '/_authenticated/chat/$chatId'
     | '/_authenticated/dashboard/$section'
+    | '/_authenticated/distribution/groups'
+    | '/_authenticated/distribution/invitees'
+    | '/_authenticated/distribution/ledgers'
+    | '/_authenticated/distribution/users'
     | '/_authenticated/errors/$error'
     | '/_authenticated/models/$section'
     | '/_authenticated/usage-logs/$section'
     | '/_authenticated/channels/'
     | '/_authenticated/dashboard/'
+    | '/_authenticated/distribution/'
     | '/_authenticated/keys/'
     | '/_authenticated/models/'
     | '/_authenticated/playground/'
@@ -963,6 +1028,41 @@ declare module '@tanstack/react-router' {
       path: '/dashboard/$section'
       fullPath: '/dashboard/$section'
       preLoaderRoute: typeof AuthenticatedDashboardSectionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/distribution/': {
+      id: '/_authenticated/distribution/'
+      path: '/distribution'
+      fullPath: '/distribution/'
+      preLoaderRoute: typeof AuthenticatedDistributionIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/distribution/groups': {
+      id: '/_authenticated/distribution/groups'
+      path: '/distribution/groups'
+      fullPath: '/distribution/groups'
+      preLoaderRoute: typeof AuthenticatedDistributionGroupsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/distribution/invitees': {
+      id: '/_authenticated/distribution/invitees'
+      path: '/distribution/invitees'
+      fullPath: '/distribution/invitees'
+      preLoaderRoute: typeof AuthenticatedDistributionInviteesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/distribution/ledgers': {
+      id: '/_authenticated/distribution/ledgers'
+      path: '/distribution/ledgers'
+      fullPath: '/distribution/ledgers'
+      preLoaderRoute: typeof AuthenticatedDistributionLedgersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/distribution/users': {
+      id: '/_authenticated/distribution/users'
+      path: '/distribution/users'
+      fullPath: '/distribution/users'
+      preLoaderRoute: typeof AuthenticatedDistributionUsersRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/errors/$error': {
@@ -1259,11 +1359,16 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChat2linkRoute: typeof AuthenticatedChat2linkRoute
   AuthenticatedChatChatIdRoute: typeof AuthenticatedChatChatIdRoute
   AuthenticatedDashboardSectionRoute: typeof AuthenticatedDashboardSectionRoute
+  AuthenticatedDistributionGroupsRoute: typeof AuthenticatedDistributionGroupsRoute
+  AuthenticatedDistributionInviteesRoute: typeof AuthenticatedDistributionInviteesRoute
+  AuthenticatedDistributionLedgersRoute: typeof AuthenticatedDistributionLedgersRoute
+  AuthenticatedDistributionUsersRoute: typeof AuthenticatedDistributionUsersRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedModelsSectionRoute: typeof AuthenticatedModelsSectionRoute
   AuthenticatedUsageLogsSectionRoute: typeof AuthenticatedUsageLogsSectionRoute
   AuthenticatedChannelsIndexRoute: typeof AuthenticatedChannelsIndexRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDistributionIndexRoute: typeof AuthenticatedDistributionIndexRoute
   AuthenticatedKeysIndexRoute: typeof AuthenticatedKeysIndexRoute
   AuthenticatedModelsIndexRoute: typeof AuthenticatedModelsIndexRoute
   AuthenticatedPlaygroundIndexRoute: typeof AuthenticatedPlaygroundIndexRoute
@@ -1282,11 +1387,17 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChat2linkRoute: AuthenticatedChat2linkRoute,
   AuthenticatedChatChatIdRoute: AuthenticatedChatChatIdRoute,
   AuthenticatedDashboardSectionRoute: AuthenticatedDashboardSectionRoute,
+  AuthenticatedDistributionGroupsRoute: AuthenticatedDistributionGroupsRoute,
+  AuthenticatedDistributionInviteesRoute:
+    AuthenticatedDistributionInviteesRoute,
+  AuthenticatedDistributionLedgersRoute: AuthenticatedDistributionLedgersRoute,
+  AuthenticatedDistributionUsersRoute: AuthenticatedDistributionUsersRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedModelsSectionRoute: AuthenticatedModelsSectionRoute,
   AuthenticatedUsageLogsSectionRoute: AuthenticatedUsageLogsSectionRoute,
   AuthenticatedChannelsIndexRoute: AuthenticatedChannelsIndexRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  AuthenticatedDistributionIndexRoute: AuthenticatedDistributionIndexRoute,
   AuthenticatedKeysIndexRoute: AuthenticatedKeysIndexRoute,
   AuthenticatedModelsIndexRoute: AuthenticatedModelsIndexRoute,
   AuthenticatedPlaygroundIndexRoute: AuthenticatedPlaygroundIndexRoute,

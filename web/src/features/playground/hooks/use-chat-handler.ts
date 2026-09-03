@@ -170,6 +170,10 @@ export function useChatHandler({
 
   const getDisplayError = useCallback(
     (error: string) => {
+      if (!error || !error.trim()) {
+        return t(ERROR_MESSAGES.API_REQUEST_ERROR)
+      }
+
       if (KNOWN_ERROR_MESSAGES.has(error)) {
         return t(error)
       }
@@ -179,6 +183,10 @@ export function useChatHandler({
         return `${error.slice(0, -ERROR_MESSAGES.CONNECTION_CLOSED.length)}${t(
           ERROR_MESSAGES.CONNECTION_CLOSED
         )}`
+      }
+
+      if (/does not support image input/i.test(error)) {
+        return t('This model does not support image input')
       }
 
       return error

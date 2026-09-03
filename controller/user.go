@@ -262,12 +262,18 @@ func Register(c *gin.Context) {
 	}
 	affCode := user.AffCode // this code is the inviter's code, not the user's own code
 	inviterId, _ := model.GetUserIdByAffCode(affCode)
+	deviceFingerprint := strings.TrimSpace(user.DeviceFingerprint)
+	if deviceFingerprint == "" {
+		deviceFingerprint = strings.TrimSpace(c.GetHeader("X-Device-Fingerprint"))
+	}
 	cleanUser := model.User{
-		Username:    user.Username,
-		Password:    user.Password,
-		DisplayName: user.Username,
-		InviterId:   inviterId,
-		Role:        common.RoleCommonUser, // 明确设置角色为普通用户
+		Username:          user.Username,
+		Password:          user.Password,
+		DisplayName:       user.Username,
+		InviterId:         inviterId,
+		Role:              common.RoleCommonUser, // 明确设置角色为普通用户
+		RegisterIp:        c.ClientIP(),
+		DeviceFingerprint: deviceFingerprint,
 	}
 	if common.EmailVerificationEnabled {
 		cleanUser.Email = user.Email
@@ -354,9 +360,15 @@ func SearchUsers(c *gin.Context) {
 			status = &parsed
 		}
 	}
+	var distributionEnabled *bool
+	if deStr := c.Query("distribution_enabled"); deStr != "" {
+		if parsed, err := strconv.ParseBool(deStr); err == nil {
+			distributionEnabled = &parsed
+		}
+	}
 	pageInfo := common.GetPageQuery(c)
 	sortOptions := model.NewUserSortOptions(c.Query("sort_by"), c.Query("sort_order"))
-	users, total, err := model.SearchUsers(keyword, group, role, status, pageInfo.GetStartIdx(), pageInfo.GetPageSize(), sortOptions)
+	users, total, err := model.SearchUsers(keyword, group, role, status, distributionEnabled, pageInfo.GetStartIdx(), pageInfo.GetPageSize(), sortOptions)
 	if err != nil {
 		common.ApiError(c, err)
 		return
@@ -529,12 +541,15 @@ func buildSelfUserData(user *model.User) map[string]interface{} {
 		"aff_count":         user.AffCount,
 		"aff_quota":         user.AffQuota,
 		"aff_history_quota": user.AffHistoryQuota,
-		"inviter_id":        user.InviterId,
-		"linux_do_id":       user.LinuxDOId,
-		"setting":           user.Setting,
-		"stripe_customer":   user.StripeCustomer,
-		"sidebar_modules":   userSetting.SidebarModules, // 正确提取sidebar_modules字段
-		"permissions":       permissions,
+		"inviter_id":            user.InviterId,
+		"linux_do_id":           user.LinuxDOId,
+		"setting":               user.Setting,
+		"stripe_customer":       user.StripeCustomer,
+		"distribution_group_id": user.DistributionGroupId,
+		"distribution_debt":     user.DistributionDebt,
+		"distribution_frozen":   user.DistributionFrozen,
+		"sidebar_modules":       userSetting.SidebarModules, // 正确提取sidebar_modules字段
+		"permissions":           permissions,
 	}
 }
 

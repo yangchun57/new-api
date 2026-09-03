@@ -89,11 +89,16 @@ api.interceptors.response.use(
       !response.data.success
     ) {
       const messageKey = getServerErrorMessageKey(response.data)
-      toast.error(
+      const data = response.data
+      const errorMsg =
         messageKey
           ? t(messageKey)
-          : response.data.message || t('Request failed')
-      )
+          : (typeof data.message === 'string' && data.message !== 'error'
+              ? data.message
+              : undefined) ||
+            (typeof data.data === 'string' ? data.data : undefined) ||
+            t('Request failed')
+      toast.error(errorMsg)
     }
     return response
   },
@@ -130,9 +135,16 @@ api.interceptors.response.use(
       }
     } else if (!skipErrorHandler) {
       const messageKey = getServerErrorMessageKey(error)
+      const responseData = error?.response?.data
       const message = messageKey
         ? t(messageKey)
-        : error?.response?.data?.message ||
+        : (typeof responseData?.message === 'string' &&
+            responseData.message !== 'error'
+            ? responseData.message
+            : undefined) ||
+          (typeof responseData?.data === 'string'
+            ? responseData.data
+            : undefined) ||
           error?.message ||
           t('Request failed')
       toast.error(message)

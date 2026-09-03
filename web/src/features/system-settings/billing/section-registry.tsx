@@ -153,6 +153,14 @@ const BILLING_SECTIONS = [
           CreemWebhookSecret: settings.CreemWebhookSecret,
           CreemTestMode: settings.CreemTestMode,
           CreemProducts: settings.CreemProducts,
+          WechatNativeEnabled: settings.WechatNativeEnabled ?? false,
+          WechatNativeAppId: settings.WechatNativeAppId ?? '',
+          WechatNativeMchId: settings.WechatNativeMchId ?? '',
+          WechatNativeApiV3Key: settings.WechatNativeApiV3Key ?? '',
+          WechatNativeMchSerialNo: settings.WechatNativeMchSerialNo ?? '',
+          WechatNativePrivateKey: settings.WechatNativePrivateKey ?? '',
+          WechatNativePlatformCert: settings.WechatNativePlatformCert ?? '',
+          WechatNativeMinTopUp: settings.WechatNativeMinTopUp ?? 1,
         }}
         waffoDefaultValues={{
           WaffoEnabled: settings.WaffoEnabled ?? false,
