@@ -111,6 +111,9 @@ func PostSetup(c *gin.Context) {
 			AccessToken: nil,
 			Quota:       100000000,
 		}
+		if def, gErr := model.GetDefaultDistributionGroup(); gErr == nil && def != nil {
+			rootUser.DistributionGroupId = def.Id
+		}
 		err = model.DB.Create(&rootUser).Error
 		if err != nil {
 			c.JSON(200, gin.H{

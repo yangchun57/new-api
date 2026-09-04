@@ -58,6 +58,7 @@ export function MyDistribution() {
     if (!selfData) return null
     return {
       inviter_id: selfData.inviter_id,
+      inviter_name: selfData.inviter_name,
       distribution_group_id: selfData.distribution_group_id,
       distribution_debt: selfData.distribution_debt,
       distribution_frozen: selfData.distribution_frozen,

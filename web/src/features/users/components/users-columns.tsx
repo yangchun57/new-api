@@ -40,7 +40,6 @@ import {
 } from '../constants'
 import type { User } from '../types'
 import { DataTableRowActions } from './data-table-row-actions'
-import { UserDistributionToggle } from './user-distribution-toggle'
 import { UserQuotaCell } from './user-quota-cell'
 
 export function useUsersColumns(): ColumnDef<User>[] {
@@ -227,6 +226,7 @@ export function useUsersColumns(): ColumnDef<User>[] {
         const affCount = user.aff_count || 0
         const affHistoryQuota = user.aff_history_quota || 0
         const inviterId = user.inviter_id || 0
+        const inviterName = user.inviter_name || ''
 
         return (
           <div className='flex max-w-full min-w-0 flex-wrap items-center gap-1 overflow-hidden'>
@@ -265,7 +265,7 @@ export function useUsersColumns(): ColumnDef<User>[] {
                 <TooltipTrigger
                   render={
                     <StatusBadge
-                      label={`${t('Inviter')}: ${inviterId}`}
+                      label={`${t('Inviter')}: ${inviterName || inviterId}`}
                       variant='neutral'
                       copyable={false}
                       className='cursor-help'
@@ -274,7 +274,9 @@ export function useUsersColumns(): ColumnDef<User>[] {
                 />
                 <TooltipContent>
                   <p className='text-xs'>
-                    {t('Invited by user ID')} {inviterId}
+                    {inviterName
+                      ? `${t('Inviter')}: ${inviterName} (#${inviterId})`
+                      : `${t('Inviter')}: #${inviterId}`}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -291,14 +293,6 @@ export function useUsersColumns(): ColumnDef<User>[] {
       },
       size: 240,
       enableSorting: false,
-      meta: { mobileHidden: true },
-    },
-    {
-      id: 'distribution',
-      header: t('Distribution'),
-      cell: ({ row }) => <UserDistributionToggle user={row.original} />,
-      enableSorting: false,
-      size: 110,
       meta: { mobileHidden: true },
     },
     {

@@ -299,6 +299,24 @@ func SetUserDistributionFrozen(userId int, frozen bool) error {
 	return DB.Model(&User{}).Where("id = ?", userId).Update("distribution_frozen", frozen).Error
 }
 
+const distributionEnabledMigratedOptionKey = "distribution_enabled_default_migrated"
+
+// MigrateDistributionEnabledDefault 一次性将存量用户的分销权限默认开启。
+// 使用 Option 标记确保只执行一次，之后管理员仍可单独停用某个用户。
+func MigrateDistributionEnabledDefault() error {
+	var count int64
+	if err := DB.Model(&Option{}).Where("key = ?", distributionEnabledMigratedOptionKey).Count(&count).Error; err != nil {
+		return err
+	}
+	if count > 0 {
+		return nil
+	}
+	if err := DB.Model(&User{}).Where("distribution_enabled = ?", false).Update("distribution_enabled", true).Error; err != nil {
+		return err
+	}
+	return DB.Create(&Option{Key: distributionEnabledMigratedOptionKey, Value: "1"}).Error
+}
+
 // SetUserDistributionEnabled 启用或停用用户的分销权限。无分销权限的用户
 // 不会参与分销结算，也不会作为邀请人产生提成。
 func SetUserDistributionEnabled(userId int, enabled bool) error {
@@ -308,8 +326,7 @@ func SetUserDistributionEnabled(userId int, enabled bool) error {
 	return DB.Model(&User{}).Where("id = ?", userId).Update("distribution_enabled", enabled).Error
 }
 
-// SetUserDistributionGroup 将用户分配到指定分销分组；groupId 为 0 表示移出分组，
-// 结算时回退到默认分组。
+// SetUserDistributionGroup 将用户分配到指定分销分组；groupId 为 0 时归入默认分组。
 func SetUserDistributionGroup(userId int, groupId int) error {
 	if userId <= 0 {
 		return errors.New("用户 ID 为空")
@@ -317,10 +334,18 @@ func SetUserDistributionGroup(userId int, groupId int) error {
 	if groupId < 0 {
 		return errors.New("分销分组 ID 非法")
 	}
-	if groupId > 0 {
-		if _, err := GetDistributionGroupByID(groupId); err != nil {
+	if groupId == 0 {
+		def, err := GetDefaultDistributionGroup()
+		if err != nil {
 			return err
 		}
+		if def == nil {
+			return errors.New("默认分销分组不存在")
+		}
+		groupId = def.Id
+	}
+	if _, err := GetDistributionGroupByID(groupId); err != nil {
+		return err
 	}
 	return DB.Model(&User{}).Where("id = ?", userId).Update("distribution_group_id", groupId).Error
 }

@@ -154,12 +154,13 @@ export function useDistributionUsersColumns(): ColumnDef<DistributionUserItem>[]
       meta: { mobileHidden: true },
       cell: ({ row }) => {
         const inviterId = row.getValue('inviter_id') as number
+        const inviterName = row.original.inviter_name
         if (inviterId <= 0) {
           return <span className='text-[13px] text-[#8A93A4]'>-</span>
         }
         return (
-          <span className='font-mono text-[12px] text-[#5A6478]'>
-            #{inviterId}
+          <span className='text-[12px] text-[#5A6478]'>
+            {inviterName || `#${inviterId}`}
           </span>
         )
       },

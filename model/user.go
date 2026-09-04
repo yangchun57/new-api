@@ -77,46 +77,47 @@ func resolveUserSortOptions(sortOptions []UserSortOptions) UserSortOptions {
 // User if you add sensitive fields, don't forget to clean them in setupLogin function.
 // Otherwise, the sensitive information will be saved on local storage in plain text!
 type User struct {
-	Id               int                        `json:"id"`
-	Username         string                     `json:"username" gorm:"unique;index" validate:"max=20"`
-	Password         string                     `json:"password" gorm:"not null;" validate:"min=8,max=20"`
-	OriginalPassword string                     `json:"original_password" gorm:"-:all"` // this field is only for Password change verification, don't save it to database!
-	DisplayName      string                     `json:"display_name" gorm:"index" validate:"max=20"`
-	Role             int                        `json:"role" gorm:"type:int;default:1"`   // admin, common
-	Status           int                        `json:"status" gorm:"type:int;default:1"` // enabled, disabled
-	Email            string                     `json:"email" gorm:"index" validate:"max=50"`
-	GitHubId         string                     `json:"github_id" gorm:"column:github_id;index"`
-	DiscordId        string                     `json:"discord_id" gorm:"column:discord_id;index"`
-	OidcId           string                     `json:"oidc_id" gorm:"column:oidc_id;index"`
-	WeChatId         string                     `json:"wechat_id" gorm:"column:wechat_id;index"`
-	TelegramId       string                     `json:"telegram_id" gorm:"column:telegram_id;index"`
-	VerificationCode string                     `json:"verification_code" gorm:"-:all"`                         // this field is only for Email verification, don't save it to database!
-	AccessToken      *string                    `json:"-" gorm:"type:char(32);column:access_token;uniqueIndex"` // this token is for system management
-	Quota            int                        `json:"quota" gorm:"type:int;default:0"`
-	UsedQuota        int                        `json:"used_quota" gorm:"type:int;default:0;column:used_quota"` // used quota
-	RequestCount     int                        `json:"request_count" gorm:"type:int;default:0;"`               // request number
-	Group            string                     `json:"group" gorm:"type:varchar(64);default:'default'"`
-	AffCode          string                     `json:"aff_code" gorm:"type:varchar(32);column:aff_code;uniqueIndex"`
-	AffCount         int                        `json:"aff_count" gorm:"type:int;default:0;column:aff_count"`
-	AffQuota         int                        `json:"aff_quota" gorm:"type:int;default:0;column:aff_quota"`           // 邀请剩余额度
-	AffHistoryQuota  int                        `json:"aff_history_quota" gorm:"type:int;default:0;column:aff_history"` // 邀请历史额度
-	InviterId        int                        `json:"inviter_id" gorm:"type:int;column:inviter_id;index"`
-	DeletedAt        gorm.DeletedAt             `gorm:"index"`
-	LinuxDOId        string                     `json:"linux_do_id" gorm:"column:linux_do_id;index"`
-	Setting          string                     `json:"setting" gorm:"type:text;column:setting"`
-	Remark           string                     `json:"remark,omitempty" gorm:"type:varchar(255)" validate:"max=255"`
-	StripeCustomer   string                     `json:"stripe_customer" gorm:"type:varchar(64);column:stripe_customer;index"`
-	DistributionGroupId int                     `json:"distribution_group_id" gorm:"type:int;default:0;column:distribution_group_id;index"`
-	DistributionEnabled bool                   `json:"distribution_enabled" gorm:"type:boolean;column:distribution_enabled"`
-	DistributionDebt    int                     `json:"distribution_debt" gorm:"type:bigint;default:0;column:distribution_debt"`
-	DistributionFrozen  bool                    `json:"distribution_frozen" gorm:"type:boolean;column:distribution_frozen"`
-	DistributionSettledUsedQuota int           `json:"distribution_settled_used_quota" gorm:"type:bigint;default:0;column:distribution_settled_used_quota"`
-	RegisterIp          string                  `json:"register_ip,omitempty" gorm:"type:varchar(64);column:register_ip;index"`
-	DeviceFingerprint   string                  `json:"device_fingerprint,omitempty" gorm:"type:varchar(128);column:device_fingerprint;index"`
-	CreatedAt        int64                      `json:"created_at" gorm:"autoCreateTime;column:created_at"`
-	LastLoginAt      int64                      `json:"last_login_at" gorm:"default:0;column:last_login_at"`
-	AuthVersion      int64                      `json:"-" gorm:"type:bigint;not null;default:1;column:auth_version"`
-	AdminPermissions map[string]map[string]bool `json:"admin_permissions,omitempty" gorm:"-:all"`
+	Id                           int                        `json:"id"`
+	Username                     string                     `json:"username" gorm:"unique;index" validate:"max=20"`
+	Password                     string                     `json:"password" gorm:"not null;" validate:"min=8,max=20"`
+	OriginalPassword             string                     `json:"original_password" gorm:"-:all"` // this field is only for Password change verification, don't save it to database!
+	DisplayName                  string                     `json:"display_name" gorm:"index" validate:"max=20"`
+	Role                         int                        `json:"role" gorm:"type:int;default:1"`   // admin, common
+	Status                       int                        `json:"status" gorm:"type:int;default:1"` // enabled, disabled
+	Email                        string                     `json:"email" gorm:"index" validate:"max=50"`
+	GitHubId                     string                     `json:"github_id" gorm:"column:github_id;index"`
+	DiscordId                    string                     `json:"discord_id" gorm:"column:discord_id;index"`
+	OidcId                       string                     `json:"oidc_id" gorm:"column:oidc_id;index"`
+	WeChatId                     string                     `json:"wechat_id" gorm:"column:wechat_id;index"`
+	TelegramId                   string                     `json:"telegram_id" gorm:"column:telegram_id;index"`
+	VerificationCode             string                     `json:"verification_code" gorm:"-:all"`                         // this field is only for Email verification, don't save it to database!
+	AccessToken                  *string                    `json:"-" gorm:"type:char(32);column:access_token;uniqueIndex"` // this token is for system management
+	Quota                        int                        `json:"quota" gorm:"type:int;default:0"`
+	UsedQuota                    int                        `json:"used_quota" gorm:"type:int;default:0;column:used_quota"` // used quota
+	RequestCount                 int                        `json:"request_count" gorm:"type:int;default:0;"`               // request number
+	Group                        string                     `json:"group" gorm:"type:varchar(64);default:'default'"`
+	AffCode                      string                     `json:"aff_code" gorm:"type:varchar(32);column:aff_code;uniqueIndex"`
+	AffCount                     int                        `json:"aff_count" gorm:"type:int;default:0;column:aff_count"`
+	AffQuota                     int                        `json:"aff_quota" gorm:"type:int;default:0;column:aff_quota"`           // 邀请剩余额度
+	AffHistoryQuota              int                        `json:"aff_history_quota" gorm:"type:int;default:0;column:aff_history"` // 邀请历史额度
+	InviterId                    int                        `json:"inviter_id" gorm:"type:int;column:inviter_id;index"`
+	InviterName                  string                     `json:"inviter_name" gorm:"-:all"`
+	DeletedAt                    gorm.DeletedAt             `gorm:"index"`
+	LinuxDOId                    string                     `json:"linux_do_id" gorm:"column:linux_do_id;index"`
+	Setting                      string                     `json:"setting" gorm:"type:text;column:setting"`
+	Remark                       string                     `json:"remark,omitempty" gorm:"type:varchar(255)" validate:"max=255"`
+	StripeCustomer               string                     `json:"stripe_customer" gorm:"type:varchar(64);column:stripe_customer;index"`
+	DistributionGroupId          int                        `json:"distribution_group_id" gorm:"type:int;default:0;column:distribution_group_id;index"`
+	DistributionEnabled          bool                       `json:"distribution_enabled" gorm:"type:boolean;column:distribution_enabled"`
+	DistributionDebt             int                        `json:"distribution_debt" gorm:"type:bigint;default:0;column:distribution_debt"`
+	DistributionFrozen           bool                       `json:"distribution_frozen" gorm:"type:boolean;column:distribution_frozen"`
+	DistributionSettledUsedQuota int                        `json:"distribution_settled_used_quota" gorm:"type:bigint;default:0;column:distribution_settled_used_quota"`
+	RegisterIp                   string                     `json:"register_ip,omitempty" gorm:"type:varchar(64);column:register_ip;index"`
+	DeviceFingerprint            string                     `json:"device_fingerprint,omitempty" gorm:"type:varchar(128);column:device_fingerprint;index"`
+	CreatedAt                    int64                      `json:"created_at" gorm:"autoCreateTime;column:created_at"`
+	LastLoginAt                  int64                      `json:"last_login_at" gorm:"default:0;column:last_login_at"`
+	AuthVersion                  int64                      `json:"-" gorm:"type:bigint;not null;default:1;column:auth_version"`
+	AdminPermissions             map[string]map[string]bool `json:"admin_permissions,omitempty" gorm:"-:all"`
 }
 
 func (user *User) ToBaseUser() *UserBase {
@@ -425,6 +426,7 @@ func GetAllUsers(pageInfo *common.PageInfo, sortOptions ...UserSortOptions) (use
 		return nil, 0, err
 	}
 
+	fillInviterNames(users)
 	return users, total, nil
 }
 
@@ -497,7 +499,54 @@ func SearchUsers(keyword string, group string, role *int, status *int, distribut
 		return nil, 0, err
 	}
 
+	fillInviterNames(users)
 	return users, total, nil
+}
+
+func fillInviterNames(users []*User) {
+	inviterIds := make([]int, 0, len(users))
+	for _, u := range users {
+		if u != nil && u.InviterId > 0 {
+			inviterIds = append(inviterIds, u.InviterId)
+		}
+	}
+	if len(inviterIds) == 0 {
+		return
+	}
+
+	var inviters []User
+	if err := DB.Unscoped().Select("id", "username", "display_name").Where("id IN ?", inviterIds).Find(&inviters).Error; err != nil {
+		return
+	}
+
+	nameById := make(map[int]string, len(inviters))
+	for i := range inviters {
+		name := inviters[i].Username
+		if name == "" {
+			name = inviters[i].DisplayName
+		}
+		nameById[inviters[i].Id] = name
+	}
+
+	for _, u := range users {
+		if u != nil && u.InviterId > 0 {
+			u.InviterName = nameById[u.InviterId]
+		}
+	}
+}
+
+func GetInviterNameById(inviterId int) string {
+	if inviterId <= 0 {
+		return ""
+	}
+	var inviter User
+	if err := DB.Unscoped().Select("username", "display_name").Where("id = ?", inviterId).First(&inviter).Error; err != nil {
+		return ""
+	}
+	if inviter.Username != "" {
+		return inviter.Username
+	}
+	return inviter.DisplayName
 }
 
 func GetUserById(id int, selectAll bool) (*User, error) {
@@ -593,6 +642,12 @@ func (user *User) TransferAffQuotaToQuota(quota int) error {
 
 func (user *User) prepareForInsert(tx *gorm.DB) error {
 	user.Email = NormalizeEmail(user.Email)
+	user.DistributionEnabled = true
+	if user.DistributionGroupId <= 0 {
+		if def, err := defaultDistributionGroupTx(tx); err == nil && def != nil {
+			user.DistributionGroupId = def.Id
+		}
+	}
 	if err := ensureEmailAvailableWithTx(tx, user.Email, 0); err != nil {
 		return err
 	}
@@ -1490,20 +1545,21 @@ func RootUserExists() bool {
 }
 
 type DistributionUserItem struct {
-	Id                  int    `json:"id"`
-	Username            string `json:"username"`
-	DisplayName         string `json:"display_name"`
-	Email               string `json:"email"`
-	Role                int    `json:"role"`
-	Status              int    `json:"status"`
-	DistributionGroupId int    `json:"distribution_group_id"`
-	DistributionFrozen  bool   `json:"distribution_frozen"`
-	DistributionDebt    int    `json:"distribution_debt"`
-	GroupName           string `json:"group_name"`
+	Id                  int     `json:"id"`
+	Username            string  `json:"username"`
+	DisplayName         string  `json:"display_name"`
+	Email               string  `json:"email"`
+	Role                int     `json:"role"`
+	Status              int     `json:"status"`
+	DistributionGroupId int     `json:"distribution_group_id"`
+	DistributionFrozen  bool    `json:"distribution_frozen"`
+	DistributionDebt    int     `json:"distribution_debt"`
+	GroupName           string  `json:"group_name"`
 	CommissionRate      float64 `json:"commission_rate"`
-	InviterId           int    `json:"inviter_id"`
-	AffCount            int    `json:"aff_count"`
-	CreatedAt           int64  `json:"created_at"`
+	InviterId           int     `json:"inviter_id"`
+	InviterName         string  `json:"inviter_name"`
+	AffCount            int     `json:"aff_count"`
+	CreatedAt           int64   `json:"created_at"`
 }
 
 func SearchDistributionUsers(keyword string, groupId int, frozen *bool, startIdx int, pageSize int) ([]*DistributionUserItem, int64, error) {
@@ -1511,12 +1567,13 @@ func SearchDistributionUsers(keyword string, groupId int, frozen *bool, startIdx
 	var total int64
 
 	tx := DB.Table("users AS u").
-		Select("u.id, u.username, u.display_name, u.email, u.role, u.status, "+
-			"u.distribution_group_id, u.distribution_frozen, u.distribution_debt, "+
-			"u.inviter_id, u.aff_count, u.created_at, "+
-			"COALESCE(dg.name, '') AS group_name, COALESCE(dg.commission_rate, 0) AS commission_rate").
+		Select("u.id, u.username, u.display_name, u.email, u.role, u.status, " +
+			"u.distribution_group_id, u.distribution_frozen, u.distribution_debt, " +
+			"u.inviter_id, u.aff_count, u.created_at, " +
+			"COALESCE(dg.name, '') AS group_name, COALESCE(dg.commission_rate, 0) AS commission_rate, " +
+			"COALESCE(i.username, i.display_name, '') AS inviter_name").
 		Joins("LEFT JOIN distribution_groups dg ON dg.id = u.distribution_group_id").
-		Where("u.distribution_group_id > 0")
+		Joins("LEFT JOIN users AS i ON i.id = u.inviter_id")
 
 	if groupId > 0 {
 		tx = tx.Where("u.distribution_group_id = ?", groupId)
@@ -1553,8 +1610,10 @@ func GetDistributionGroupMembers(groupId int, startIdx int, pageSize int) ([]*Di
 		Select("u.id, u.username, u.display_name, u.email, u.role, u.status, "+
 			"u.distribution_group_id, u.distribution_frozen, u.distribution_debt, "+
 			"u.inviter_id, u.aff_count, u.created_at, "+
-			"dg.name AS group_name, dg.commission_rate AS commission_rate").
+			"dg.name AS group_name, dg.commission_rate AS commission_rate, "+
+			"COALESCE(i.username, i.display_name, '') AS inviter_name").
 		Joins("LEFT JOIN distribution_groups dg ON dg.id = u.distribution_group_id").
+		Joins("LEFT JOIN users AS i ON i.id = u.inviter_id").
 		Where("u.distribution_group_id = ?", groupId)
 
 	if err := tx.Count(&total).Error; err != nil {

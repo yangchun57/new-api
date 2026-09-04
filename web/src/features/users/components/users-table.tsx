@@ -93,7 +93,6 @@ export function UsersTable() {
       { columnId: 'status', searchKey: 'status', type: 'array' },
       { columnId: 'role', searchKey: 'role', type: 'array' },
       { columnId: 'group', searchKey: 'group', type: 'string' },
-      { columnId: 'distribution', searchKey: 'distribution', type: 'array' },
     ],
   })
   const statusFilter =
@@ -102,10 +101,6 @@ export function UsersTable() {
       | undefined) ?? []
   const roleFilter =
     (columnFilters.find((filter) => filter.id === 'role')?.value as
-      | string[]
-      | undefined) ?? []
-  const distributionFilter =
-    (columnFilters.find((filter) => filter.id === 'distribution')?.value as
       | string[]
       | undefined) ?? []
   const groupFilter =
@@ -144,7 +139,6 @@ export function UsersTable() {
       statusFilter,
       roleFilter,
       groupFilter,
-      distributionFilter,
       sortParams,
       refreshTrigger,
     ],
@@ -153,8 +147,7 @@ export function UsersTable() {
       const hasColumnFilter =
         statusFilter.length > 0 ||
         roleFilter.length > 0 ||
-        Boolean(groupFilter) ||
-        distributionFilter.length > 0
+        Boolean(groupFilter)
       const params = {
         p: pagination.pageIndex + 1,
         page_size: pagination.pageSize,
@@ -169,7 +162,6 @@ export function UsersTable() {
               status: statusFilter[0] ?? '',
               role: roleFilter[0] ?? '',
               group: groupFilter,
-              distribution_enabled: distributionFilter[0] ?? '',
             })
           : await getUsers(params)
 
@@ -248,15 +240,6 @@ export function UsersTable() {
             columnId: 'role',
             title: t('Role'),
             options: getUserRoleOptions(t),
-            singleSelect: true,
-          },
-          {
-            columnId: 'distribution',
-            title: t('Distribution permission'),
-            options: [
-              { value: 'true', label: t('Enabled') },
-              { value: 'false', label: t('Disabled') },
-            ],
             singleSelect: true,
           },
         ],

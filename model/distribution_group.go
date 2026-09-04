@@ -131,15 +131,62 @@ func GetDistributionGroupByID(id int) (*DistributionGroup, error) {
 	return &group, nil
 }
 
-// GetDefaultDistributionGroup 获取默认分组，不存在时返回 nil
-func GetDefaultDistributionGroup() (*DistributionGroup, error) {
+// defaultDistributionGroupTx 在指定事务内获取默认分组，不存在时返回 nil。
+func defaultDistributionGroupTx(tx *gorm.DB) (*DistributionGroup, error) {
 	var group DistributionGroup
-	err := DB.Where("is_default = ?", true).First(&group).Error
+	err := tx.Where("is_default = ?", true).First(&group).Error
 	if err != nil {
-		if err == gorm.ErrRecordNotFound {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 		return nil, err
 	}
 	return &group, nil
+}
+
+// GetDefaultDistributionGroup 获取默认分组，不存在时返回 nil
+func GetDefaultDistributionGroup() (*DistributionGroup, error) {
+	return defaultDistributionGroupTx(DB)
+}
+
+// EnsureDefaultDistributionGroup 确保存在一个默认分销分组；不存在时自动创建
+// 一个名称为「默认分组」、提成比例为 0 的分组。
+func EnsureDefaultDistributionGroup() error {
+	def, err := GetDefaultDistributionGroup()
+	if err != nil {
+		return err
+	}
+	if def != nil {
+		return nil
+	}
+	now := common.GetTimestamp()
+	g := &DistributionGroup{
+		Name:           "默认分组",
+		CommissionRate: 0,
+		IsDefault:      true,
+		CreatedTime:    now,
+		UpdatedTime:    now,
+	}
+	return g.Insert()
+}
+
+// AssignUsersToDefaultDistributionGroup 将所有未分配分销分组的用户归入默认分组，
+// 保证每个用户都属于一个分销分组。
+func AssignUsersToDefaultDistributionGroup() error {
+	def, err := GetDefaultDistributionGroup()
+	if err != nil {
+		return err
+	}
+	if def == nil {
+		return nil
+	}
+	return DB.Model(&User{}).Where("distribution_group_id = 0").Update("distribution_group_id", def.Id).Error
+}
+
+// InitializeDistribution 初始化分销：确保默认分组存在，并将存量未分组用户归入默认分组。
+func InitializeDistribution() error {
+	if err := EnsureDefaultDistributionGroup(); err != nil {
+		return err
+	}
+	return AssignUsersToDefaultDistributionGroup()
 }

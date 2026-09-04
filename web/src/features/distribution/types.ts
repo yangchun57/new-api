@@ -61,6 +61,7 @@ export interface DistributionUserItem {
   group_name: string
   commission_rate: number
   inviter_id: number
+  inviter_name: string
   aff_count: number
   created_at: number
 }

@@ -27,6 +27,7 @@ import { formatQuota } from '@/lib/format'
 
 export interface DistributionSelfStatus {
   inviter_id: number
+  inviter_name: string
   distribution_group_id: number
   distribution_debt: number
   distribution_frozen: boolean
@@ -129,10 +130,10 @@ export function InviteCard({ inviteLink, status, loading }: InviteCardProps) {
           </div>
           <div>
             <div className='text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A93A4]'>
-              {t('Inviter ID')}
+              {t('Inviter')}
             </div>
-            <div className='mt-0.5 text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
-              {status?.inviter_id || '-'}
+            <div className='mt-0.5 text-[13px] font-semibold text-[#0A0E1A]'>
+              {status?.inviter_name || (status?.inviter_id ? `#${status.inviter_id}` : '-')}
             </div>
           </div>
         </div>

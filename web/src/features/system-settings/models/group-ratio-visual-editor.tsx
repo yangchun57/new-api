@@ -104,7 +104,8 @@ type RegistryEntry = {
 
 const sectionCardClassName =
   'relative ring-0 before:pointer-events-none before:absolute before:inset-0 before:rounded-xl before:border before:border-[#E5E8EE]'
-const sectionHeaderClassName = 'border-b bg-[#F7F8FA]'
+const sectionHeaderClassName = 'border-b bg-[#F7F8FA] px-4 py-3 sm:px-5'
+const sectionContentClassName = 'p-4 sm:p-5'
 
 let groupPricingIdCounter = 0
 function createGroupPricingId() {
@@ -358,7 +359,7 @@ export const GroupRatioVisualEditor = memo(function GroupRatioVisualEditor({
             )}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className={sectionContentClassName}>
           <div className='space-y-4'>
             {maxTokenAutoGroupsField}
             <GroupNameSelect
@@ -546,7 +547,7 @@ function GroupPricingTable({
           </Button>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className={sectionContentClassName}>
         <div className='space-y-3'>
           <StaticDataTable
             data={rows}
@@ -810,7 +811,7 @@ function GroupOverrideRules({
           )}
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className={sectionContentClassName}>
         <div className='space-y-4'>
           <Button
             onClick={() => {
