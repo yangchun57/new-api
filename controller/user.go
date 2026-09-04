@@ -521,36 +521,46 @@ func buildSelfUserData(user *model.User) map[string]interface{} {
 	userSetting := user.GetSetting()
 	permissions := calculateUserPermissions(user.Role)
 	permissions["admin_permissions"] = authz.Capabilities(user.Id, user.Role)
+	
+	var distributionGroupName string
+	if user.DistributionGroupId > 0 {
+		group, err := model.GetDistributionGroupByID(user.DistributionGroupId)
+		if err == nil && group != nil {
+			distributionGroupName = group.Name
+		}
+	}
+	
 	return map[string]interface{}{
-		"id":                    user.Id,
-		"username":              user.Username,
-		"display_name":          user.DisplayName,
-		"role":                  user.Role,
-		"status":                user.Status,
-		"email":                 user.Email,
-		"github_id":             user.GitHubId,
-		"discord_id":            user.DiscordId,
-		"oidc_id":               user.OidcId,
-		"wechat_id":             user.WeChatId,
-		"telegram_id":           user.TelegramId,
-		"group":                 user.Group,
-		"quota":                 user.Quota,
-		"used_quota":            user.UsedQuota,
-		"request_count":         user.RequestCount,
-		"aff_code":              user.AffCode,
-		"aff_count":             user.AffCount,
-		"aff_quota":             user.AffQuota,
-		"aff_history_quota":     user.AffHistoryQuota,
-		"inviter_id":            user.InviterId,
-		"inviter_name":          model.GetInviterNameById(user.InviterId),
-		"linux_do_id":           user.LinuxDOId,
-		"setting":               user.Setting,
-		"stripe_customer":       user.StripeCustomer,
-		"distribution_group_id": user.DistributionGroupId,
-		"distribution_debt":     user.DistributionDebt,
-		"distribution_frozen":   user.DistributionFrozen,
-		"sidebar_modules":       userSetting.SidebarModules, // 正确提取sidebar_modules字段
-		"permissions":           permissions,
+		"id":                      user.Id,
+		"username":                user.Username,
+		"display_name":            user.DisplayName,
+		"role":                    user.Role,
+		"status":                  user.Status,
+		"email":                   user.Email,
+		"github_id":               user.GitHubId,
+		"discord_id":              user.DiscordId,
+		"oidc_id":                 user.OidcId,
+		"wechat_id":               user.WeChatId,
+		"telegram_id":             user.TelegramId,
+		"group":                   user.Group,
+		"quota":                   user.Quota,
+		"used_quota":              user.UsedQuota,
+		"request_count":           user.RequestCount,
+		"aff_code":                user.AffCode,
+		"aff_count":               user.AffCount,
+		"aff_quota":               user.AffQuota,
+		"aff_history_quota":       user.AffHistoryQuota,
+		"inviter_id":              user.InviterId,
+		"inviter_name":            model.GetInviterNameById(user.InviterId),
+		"linux_do_id":             user.LinuxDOId,
+		"setting":                 user.Setting,
+		"stripe_customer":         user.StripeCustomer,
+		"distribution_group_id":   user.DistributionGroupId,
+		"distribution_group_name": distributionGroupName,
+		"distribution_debt":       user.DistributionDebt,
+		"distribution_frozen":     user.DistributionFrozen,
+		"sidebar_modules":         userSetting.SidebarModules, // 正确提取sidebar_modules字段
+		"permissions":             permissions,
 	}
 }
 

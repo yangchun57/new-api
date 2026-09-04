@@ -81,7 +81,9 @@ export interface InvitedUserItem {
 export interface DistributionLedger {
   id: number
   user_id: number
+  user_name?: string
   invitee_id: number
+  invitee_name?: string
   top_up_id: number
   trade_no: string
   type: number

@@ -29,6 +29,7 @@ export interface DistributionSelfStatus {
   inviter_id: number
   inviter_name: string
   distribution_group_id: number
+  distribution_group_name?: string
   distribution_debt: number
   distribution_frozen: boolean
 }
@@ -60,6 +61,7 @@ export function InviteCard({ inviteLink, status, loading }: InviteCardProps) {
   const frozen = status?.distribution_frozen ?? false
   const debt = status?.distribution_debt ?? 0
   const groupId = status?.distribution_group_id ?? 0
+  const groupName = status?.distribution_group_name || (groupId ? `#${groupId}` : '-')
 
   return (
     <div
@@ -122,10 +124,10 @@ export function InviteCard({ inviteLink, status, loading }: InviteCardProps) {
           </div>
           <div>
             <div className='text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A93A4]'>
-              {t('Group ID')}
+              {t('Group')}
             </div>
-            <div className='mt-0.5 text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
-              {groupId || '-'}
+            <div className='mt-0.5 text-[13px] font-semibold text-[#0A0E1A]'>
+              {groupName}
             </div>
           </div>
           <div>

@@ -47,12 +47,16 @@ export function useLedgerColumns(options?: {
       accessorKey: 'user_id',
       header: t('Commission Owner'),
       meta: { mobileTitle: true },
-      cell: ({ row }) => (
-        <span className='text-[13px] font-medium text-[#0A0E1A]'>
-          {t('User {{id}}', { id: row.getValue('user_id') as number })}
-        </span>
-      ),
-      size: 140,
+      cell: ({ row }) => {
+        const userId = row.getValue('user_id') as number
+        const userName = row.original.user_name
+        return (
+          <span className='text-[13px] font-medium text-[#0A0E1A]'>
+            {userName || t('User {{id}}', { id: userId })}
+          </span>
+        )
+      },
+      size: 160,
     })
   }
 
@@ -63,16 +67,17 @@ export function useLedgerColumns(options?: {
       meta: options?.hideOwner ? { mobileTitle: true } : undefined,
       cell: ({ row }) => {
         const inviteeId = row.getValue('invitee_id') as number
+        const inviteeName = row.original.invitee_name
         if (!inviteeId) {
           return <span className='text-[13px] text-[#8A93A4]'>-</span>
         }
         return (
-          <span className='text-[13px] text-[#5A6478]'>
-            {t('User {{id}}', { id: inviteeId })}
+          <span className='text-[13px] font-medium text-[#0A0E1A]'>
+            {inviteeName || t('User {{id}}', { id: inviteeId })}
           </span>
         )
       },
-      size: 140,
+      size: 160,
     },
     {
       accessorKey: 'type',

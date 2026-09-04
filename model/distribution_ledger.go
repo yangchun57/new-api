@@ -13,7 +13,11 @@ import (
 type DistributionLedger struct {
 	Id            int64  `json:"id"`
 	UserId        int    `json:"user_id" gorm:"index"`
+	User          *User  `gorm:"foreignKey:UserId;references:Id"`
+	UserName      string `json:"user_name" gorm:"-"`
 	InviteeId     int    `json:"invitee_id" gorm:"index"`
+	Invitee       *User  `gorm:"foreignKey:InviteeId;references:Id"`
+	InviteeName   string `json:"invitee_name" gorm:"-"`
 	TopUpId       int    `json:"top_up_id" gorm:"index"`
 	TradeNo       string `json:"trade_no" gorm:"type:varchar(255);index"`
 	Type          int    `json:"type"`
@@ -147,13 +151,13 @@ func settleDistributionConsumption(inviteeId int, settleDate string) (int, error
 		var inviter User
 		if err := lockForUpdate(tx).Select("id", "quota", "distribution_debt", "distribution_frozen", "distribution_enabled", "distribution_group_id", "register_ip", "device_fingerprint", "stripe_customer").Where("id = ?", invitee.InviterId).First(&inviter).Error; err != nil {
 			if errors.Is(err, gorm.ErrRecordNotFound) {
-				return advanceDistributionSettlementWatermark(tx, invitee.Id, invitee.UsedQuota)
+				return nil
 			}
 			return err
 		}
 
-		if !inviter.DistributionEnabled || inviter.DistributionFrozen || invalidDistributionReferral(inviter, invitee) {
-			return advanceDistributionSettlementWatermark(tx, invitee.Id, invitee.UsedQuota)
+		if !inviter.DistributionEnabled || inviter.DistributionFrozen || (common.DistributionAntiCheatEnabled && invalidDistributionReferral(inviter, invitee)) {
+			return nil
 		}
 
 		rate, err := resolveDistributionCommissionRate(tx, inviter.DistributionGroupId)
@@ -161,7 +165,7 @@ func settleDistributionConsumption(inviteeId int, settleDate string) (int, error
 			return err
 		}
 		if rate <= 0 {
-			return advanceDistributionSettlementWatermark(tx, invitee.Id, invitee.UsedQuota)
+			return nil
 		}
 
 		commission, err := common.WalletQuotaFromDecimalStrict(
@@ -171,7 +175,7 @@ func settleDistributionConsumption(inviteeId int, settleDate string) (int, error
 			return err
 		}
 		if commission <= 0 {
-			return advanceDistributionSettlementWatermark(tx, invitee.Id, invitee.UsedQuota)
+			return nil
 		}
 
 		debtRepay := commission
@@ -359,6 +363,33 @@ func GetDistributionLedgers(userId int, pageInfo *common.PageInfo) (ledgers []*D
 	if err = tx.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
-	err = tx.Order("id desc").Limit(pageInfo.GetPageSize()).Offset(pageInfo.GetStartIdx()).Find(&ledgers).Error
+	err = tx.Preload("User", func(db *gorm.DB) *gorm.DB {
+		return db.Select("id", "username", "display_name")
+	}).Preload("Invitee", func(db *gorm.DB) *gorm.DB {
+		return db.Select("id", "username", "display_name")
+	}).Order("id desc").Limit(pageInfo.GetPageSize()).Offset(pageInfo.GetStartIdx()).Find(&ledgers).Error
+	if err != nil {
+		return nil, 0, err
+	}
+	for _, ledger := range ledgers {
+		if ledger.User != nil {
+			if ledger.User.DisplayName != "" {
+				ledger.UserName = ledger.User.DisplayName
+			} else {
+				ledger.UserName = ledger.User.Username
+			}
+		}
+		if ledger.Invitee != nil {
+			if ledger.Invitee.DisplayName != "" {
+				ledger.InviteeName = ledger.Invitee.DisplayName
+			} else {
+				ledger.InviteeName = ledger.Invitee.Username
+			}
+		}
+	}
 	return ledgers, total, err
+}
+
+func (DistributionLedger) TableName() string {
+	return "distribution_ledgers"
 }
