@@ -540,3 +540,66 @@
 [SYS] 2026/09/03 - 17:36:20 | syncing options from database 
 [GIN] 2026/09/03 - 17:37:08 | api | 202609030937086380326008268d9d6zPusr3G8 | 200 |    161.1572ms |       127.0.0.1 |    POST /api/user/auth/refresh
 [SYS] 2026/09/03 - 17:37:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:38:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:39:18 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 17:39:18 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 17:39:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:40:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:41:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:42:20 | syncing options from database 
+
+2026/09/03 17:42:49 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[308.636ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+
+2026/09/03 17:43:19 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[547.508ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 17:43:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:44:18 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 17:44:18 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 17:44:20 | syncing options from database 
+
+2026/09/03 17:44:48 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[217.681ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 17:45:20 | syncing options from database 
+
+2026/09/03 17:45:33 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:115 [33mSLOW SQL >= 200ms
+[0m[31;1m[270.702ms] [33m[rows:1][35m INSERT INTO `system_tasks` (`task_id`,`type`,`status`,`active_key`,`payload`,`state`,`result`,`error`,`locked_by`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING `id`[0m
+
+2026/09/03 17:45:34 [32mD:/newWorkSpace/a新工作/new-api2/model/system_task.go:276 [33mSLOW SQL >= 200ms
+[0m[31;1m[204.958ms] [33m[rows:1][35m INSERT INTO `system_task_locks` (`type`,`task_id`,`locked_by`,`locked_until`,`updated_at`) VALUES (?,?,?,?,?)[0m
+
+2026/09/03 17:45:52 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[250.185ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 17:46:20 | syncing options from database 
+
+2026/09/03 17:46:20 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[260.082ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 17:47:20 | syncing options from database 
+
+2026/09/03 17:47:48 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[261.405ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 17:48:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:49:18 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 17:49:18 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 17:49:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:50:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:51:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:52:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:53:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:54:18 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 17:54:18 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 17:54:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:55:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:56:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:57:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:58:20 | syncing options from database 
+[SYS] 2026/09/03 - 17:59:18 | 正在更新数据看板数据... 
+[SYS] 2026/09/03 - 17:59:18 | 保存数据看板数据成功，共保存0条数据 
+[SYS] 2026/09/03 - 17:59:20 | syncing options from database 
+
+2026/09/03 17:59:48 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[229.964ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
+[SYS] 2026/09/03 - 18:00:20 | syncing options from database 
+
+2026/09/03 18:00:49 [32mD:/newWorkSpace/a新工作/new-api2/model/system_instance.go:69 [33mSLOW SQL >= 200ms
+[0m[31;1m[642.510ms] [33m[rows:1][35m INSERT INTO `system_instances` (`node_name`,`info`,`started_at`,`last_seen_at`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?) ON CONFLICT (`node_name`) DO UPDATE SET `info`=`excluded`.`info`,`started_at`=`excluded`.`started_at`,`last_seen_at`=`excluded`.`last_seen_at`,`updated_at`=`excluded`.`updated_at`[0m
