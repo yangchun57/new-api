@@ -5,6 +5,7 @@ import (
 
 	"github.com/QuantumNous/new-api/common"
 	"github.com/QuantumNous/new-api/model"
+	"github.com/QuantumNous/new-api/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -208,6 +209,17 @@ func GetDistributionUsers(c *gin.Context) {
 	pageInfo.SetTotal(int(total))
 	pageInfo.SetItems(items)
 	common.ApiSuccess(c, pageInfo)
+}
+
+// TriggerDistributionSettlement 管理员手动触发一次分销消费提成结算，立即处理
+// 截至当前仍未结算的下级消耗。
+func TriggerDistributionSettlement(c *gin.Context) {
+	credited, err := service.RunDistributionSettlementNow()
+	if err != nil {
+		common.ApiError(c, err)
+		return
+	}
+	common.ApiSuccess(c, gin.H{"credited": credited})
 }
 
 // GetDistributionGroupMembers 管理员分页查询指定分销分组下的成员。

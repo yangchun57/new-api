@@ -352,6 +352,7 @@ func SetApiRouter(router *gin.Engine) {
 			distributionRoute.POST("/enabled", controller.SetUserDistributionEnabled)
 			distributionRoute.POST("/deduct", controller.DeductDistributionCommission)
 			distributionRoute.POST("/deduct_all", controller.DeductAllDistributionCommission)
+			distributionRoute.POST("/settle", controller.TriggerDistributionSettlement)
 		}
 
 		mjRoute := apiRouter.Group("/mj")

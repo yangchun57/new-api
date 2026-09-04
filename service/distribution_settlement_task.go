@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"sync"
 	"sync/atomic"
@@ -78,4 +79,31 @@ func runDistributionDailySettlementOnce() {
 	if creditedTotal > 0 || common.DebugEnabled {
 		logger.LogInfo(ctx, fmt.Sprintf("distribution daily settlement completed: date=%s credited=%d", settleDate, creditedTotal))
 	}
+}
+
+// RunDistributionSettlementNow 手动触发一次分销消费提成结算，立即处理截至当前
+// 仍未结算的下级消耗，返回本批实际入账的佣金总额。与每日定时任务共享运行锁，
+// 若已有结算正在执行则返回错误。
+func RunDistributionSettlementNow() (int, error) {
+	if !distributionSettlementRunning.CompareAndSwap(false, true) {
+		return 0, errors.New("distribution settlement is already running")
+	}
+	defer distributionSettlementRunning.Store(false)
+
+	ctx := context.Background()
+	settleDate := time.Now().Format("2006-01-02")
+	creditedTotal := 0
+	for {
+		credited, processed, err := model.SettleDistributionDailyConsumption(settleDate, distributionSettlementBatchSize)
+		if err != nil {
+			logger.LogWarn(ctx, fmt.Sprintf("manual distribution settlement failed: %v", err))
+			return creditedTotal, err
+		}
+		creditedTotal += credited
+		if processed < distributionSettlementBatchSize {
+			break
+		}
+	}
+	logger.LogInfo(ctx, fmt.Sprintf("manual distribution settlement completed: date=%s credited=%d", settleDate, creditedTotal))
+	return creditedTotal, nil
 }

@@ -163,6 +163,16 @@ export async function deductAllDistributionCommission(
   return res.data
 }
 
+/** 管理员手动触发一次分销消费提成结算，立即处理未结算的下级消耗。 */
+export async function triggerDistributionSettlement(): Promise<
+  ApiResponse<{ credited: number }>
+> {
+  const res = await api.post('/api/distribution/settle', undefined, {
+    skipBusinessError: true,
+  })
+  return res.data
+}
+
 // ============================================================================
 // Distribution User List APIs (admin)
 // ============================================================================

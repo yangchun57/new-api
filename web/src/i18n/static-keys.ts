@@ -212,6 +212,9 @@ export const STATIC_I18N_KEYS = [
   // Models section-registry nav (dynamic titleKey)
   'Grok',
 
+  // Operations section-registry nav (dynamic titleKey)
+  'Distribution Settlement',
+
   // Channel Affinity section
   'Channel Affinity',
 

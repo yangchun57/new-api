@@ -24,6 +24,7 @@ import {
   applyAuthRotation,
   clearAuthentication,
   refreshAuthentication,
+  type RefreshOutcome,
 } from '@/lib/auth-session'
 import { getServerErrorMessageKey } from '@/lib/server-error-message'
 import { useAuthStore } from '@/stores/auth-store'
@@ -68,7 +69,19 @@ api.get = ((url: string, config: ApiRequestConfig = {}) => {
   return request
 }) as typeof api.get
 
+let isHandling401 = false
+let refreshPromise: Promise<RefreshOutcome> | null = null
+let hasShownSessionExpiredToast = false
+
+function showSessionExpiredToast(): void {
+  if (hasShownSessionExpiredToast) return
+  hasShownSessionExpiredToast = true
+  toast.error(t('Session expired!'))
+}
+
 function redirectToSignIn(): void {
+  if (isHandling401) return
+  isHandling401 = true
   if (
     typeof window !== 'undefined' &&
     window.location.pathname !== '/sign-in'
@@ -108,31 +121,59 @@ api.interceptors.response.use(
     const status = error?.response?.status
 
     if (status === 401) {
-      if (config && !config.skipAuthRefresh && !config.authRetry) {
-        config.authRetry = true
-        const outcome = await refreshAuthentication()
-        if (outcome.kind === 'authenticated') {
-          const token = useAuthStore.getState().auth.accessToken
-          if (token) {
-            config.headers = {
-              ...config.headers,
-              Authorization: `Bearer ${token}`,
-            }
-          }
-          return api.request(config)
+      if (config?.skipAuthRefresh) {
+        if (!isHandling401) {
+          clearAuthentication(false)
+          if (!skipErrorHandler) showSessionExpiredToast()
         }
-
-        if (outcome.kind === 'anonymous' || outcome.kind === 'out_of_sync') {
-          if (!skipErrorHandler) toast.error(t('Session expired!'))
-          redirectToSignIn()
-        }
-      } else if (config?.authRetry) {
-        clearAuthentication(false)
-        if (!skipErrorHandler) toast.error(t('Session expired!'))
         redirectToSignIn()
-      } else if (!skipErrorHandler) {
-        toast.error(t('Session expired!'))
+        throw error
       }
+
+      if (config?.authRetry) {
+        if (!isHandling401) {
+          clearAuthentication(false)
+          if (!skipErrorHandler) showSessionExpiredToast()
+        }
+        redirectToSignIn()
+        throw error
+      }
+
+      if (!config) {
+        if (!skipErrorHandler && !isHandling401) showSessionExpiredToast()
+        throw error
+      }
+
+      config.authRetry = true
+
+      if (!refreshPromise) {
+        refreshPromise = refreshAuthentication().finally(() => {
+          refreshPromise = null
+        })
+      }
+      const outcome = await refreshPromise
+      if (isHandling401) throw error
+
+      if (outcome.kind === 'authenticated') {
+        const token = useAuthStore.getState().auth.accessToken
+        if (token) {
+          config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${token}`,
+          }
+        }
+        return api.request(config)
+      }
+
+      if (outcome.kind === 'transient_error') {
+        throw error
+      }
+
+      if (!isHandling401) {
+        clearAuthentication(false)
+        if (!skipErrorHandler) showSessionExpiredToast()
+      }
+      redirectToSignIn()
     } else if (!skipErrorHandler) {
       const messageKey = getServerErrorMessageKey(error)
       const responseData = error?.response?.data
