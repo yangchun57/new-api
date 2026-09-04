@@ -96,9 +96,6 @@ func isWechatNativeTopUpEnabled() bool {
 	if !isPaymentComplianceConfirmed() {
 		return false
 	}
-	if !setting.WechatNativeEnabled {
-		return false
-	}
 	return isWechatNativeWebhookConfigured()
 }
 

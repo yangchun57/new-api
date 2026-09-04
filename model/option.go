@@ -116,7 +116,6 @@ func InitOptionMap() {
 	common.OptionMap["WaffoPancakeMinTopUp"] = strconv.Itoa(setting.WaffoPancakeMinTopUp)
 	common.OptionMap["WaffoPancakeStoreID"] = setting.WaffoPancakeStoreID
 	common.OptionMap["WaffoPancakeProductID"] = setting.WaffoPancakeProductID
-	common.OptionMap["WechatNativeEnabled"] = strconv.FormatBool(setting.WechatNativeEnabled)
 	common.OptionMap["WechatNativeAppId"] = setting.WechatNativeAppId
 	common.OptionMap["WechatNativeMchId"] = setting.WechatNativeMchId
 	common.OptionMap["WechatNativeApiV3Key"] = setting.WechatNativeApiV3Key
@@ -506,8 +505,6 @@ func updateOptionMap(key string, value string) (err error) {
 		setting.WaffoPancakeUnitPrice, _ = strconv.ParseFloat(value, 64)
 	case "WaffoPancakeMinTopUp":
 		setting.WaffoPancakeMinTopUp, _ = strconv.Atoi(value)
-	case "WechatNativeEnabled":
-		setting.WechatNativeEnabled = value == "true"
 	case "WechatNativeAppId":
 		setting.WechatNativeAppId = value
 	case "WechatNativeMchId":

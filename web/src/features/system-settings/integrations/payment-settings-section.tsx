@@ -226,7 +226,6 @@ const paymentSchema = z.object({
   WaffoPancakeMerchantID: z.string(),
   WaffoPancakePrivateKey: z.string(),
   WaffoPancakeReturnURL: z.string(),
-  WechatNativeEnabled: z.boolean(),
   WechatNativeAppId: z.string(),
   WechatNativeMchId: z.string(),
   WechatNativeApiV3Key: z.string(),
@@ -524,7 +523,6 @@ export function PaymentSettingsSection({
       WaffoPancakeReturnURL: removeTrailingSlash(
         values.WaffoPancakeReturnURL.trim()
       ),
-      WechatNativeEnabled: values.WechatNativeEnabled,
       WechatNativeAppId: values.WechatNativeAppId.trim(),
       WechatNativeMchId: values.WechatNativeMchId.trim(),
       WechatNativeApiV3Key: values.WechatNativeApiV3Key.trim(),
@@ -579,7 +577,6 @@ export function PaymentSettingsSection({
       WaffoPancakeReturnURL: removeTrailingSlash(
         initialRef.current.WaffoPancakeReturnURL.trim()
       ),
-      WechatNativeEnabled: initialRef.current.WechatNativeEnabled,
       WechatNativeAppId: initialRef.current.WechatNativeAppId.trim(),
       WechatNativeMchId: initialRef.current.WechatNativeMchId.trim(),
       WechatNativeApiV3Key: initialRef.current.WechatNativeApiV3Key.trim(),
@@ -784,13 +781,6 @@ export function PaymentSettingsSection({
       updates.push({ key: 'WaffoPayMethods', value: sanitized.WaffoPayMethods })
     }
 
-    if (sanitized.WechatNativeEnabled !== initial.WechatNativeEnabled) {
-      updates.push({
-        key: 'WechatNativeEnabled',
-        value: sanitized.WechatNativeEnabled,
-      })
-    }
-
     if (sanitized.WechatNativeAppId !== initial.WechatNativeAppId) {
       updates.push({
         key: 'WechatNativeAppId',
@@ -860,8 +850,26 @@ export function PaymentSettingsSection({
       return
     }
 
+    let hasUpdateError = false
     for (const update of updates) {
-      await updateOption.mutateAsync(update)
+      try {
+        await updateOption.mutateAsync({ ...update, silent: true })
+      } catch (error) {
+        hasUpdateError = true
+        toast.error(
+          `${t('Failed to update setting')} [${update.key}]: ${
+            error instanceof Error ? error.message : String(error)
+          }`
+        )
+      }
+    }
+
+    const regularUpdatesSucceeded = updates.length > 0 && !hasUpdateError
+    const hasOnlyPancake = updates.length === 0 && hasWaffoPancakeChanges
+
+    if (regularUpdatesSucceeded && !hasWaffoPancakeChanges) {
+      toast.success(t('Saved successfully'))
+      return
     }
 
     if (!hasWaffoPancakeChanges) {
@@ -900,7 +908,11 @@ export function PaymentSettingsSection({
         setWaffoPancakeSavedBinding(savedBinding)
         setWaffoPancakeSelection(savedBinding)
         queryClient.invalidateQueries({ queryKey: ['system-options'] })
-        toast.success(t('Waffo Pancake settings saved'))
+        if (regularUpdatesSucceeded) {
+          toast.success(t('Saved successfully'))
+        } else if (hasOnlyPancake || hasUpdateError) {
+          toast.success(t('Waffo Pancake settings saved'))
+        }
         return
       }
 
@@ -1824,27 +1836,6 @@ export function PaymentSettingsSection({
                     </li>
                   </ul>
                 </div>
-
-                <FormField
-                  control={form.control}
-                  name='WechatNativeEnabled'
-                  render={({ field }) => (
-                    <SettingsSwitchItem>
-                      <SettingsSwitchContent>
-                        <FormLabel>{t('Enable WeChat Native')}</FormLabel>
-                        <FormDescription>
-                          {t('Enable direct WeChat Pay Native payments')}
-                        </FormDescription>
-                      </SettingsSwitchContent>
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </SettingsSwitchItem>
-                  )}
-                />
 
                 <div className='grid gap-6 md:grid-cols-2'>
                   <FormField

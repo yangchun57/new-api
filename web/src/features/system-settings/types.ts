@@ -327,7 +327,6 @@ export type BillingSettings = {
   WaffoPancakeMerchantID: string
   WaffoPancakePrivateKey: string
   WaffoPancakeReturnURL: string
-  WechatNativeEnabled: boolean
   WechatNativeAppId: string
   WechatNativeMchId: string
   WechatNativeApiV3Key: string

@@ -23,6 +23,8 @@ import { toast } from 'sonner'
 import { updateSystemOption } from '../api'
 import type { UpdateOptionRequest } from '../types'
 
+type UpdateOptionVariables = UpdateOptionRequest & { silent?: boolean }
+
 // Configuration keys that require status refresh
 const STATUS_RELATED_KEYS = new Set([
   'HeaderNavModules',
@@ -43,13 +45,14 @@ export function useUpdateOption() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (request: UpdateOptionRequest) => updateSystemOption(request),
+    mutationFn: (variables: UpdateOptionVariables) => {
+      const { silent: _silent, ...request } = variables
+      return updateSystemOption(request)
+    },
     onSuccess: (data, variables) => {
       if (data.success) {
-        // Always refresh system-options
         queryClient.invalidateQueries({ queryKey: ['system-options'] })
 
-        // If updating frontend-display-related config, also refresh status
         if (STATUS_RELATED_KEYS.has(variables.key)) {
           queryClient.invalidateQueries({ queryKey: ['status'] })
           try {
@@ -59,13 +62,17 @@ export function useUpdateOption() {
           }
         }
 
-        toast.success(i18next.t('Setting updated successfully'))
-      } else {
+        if (!variables.silent) {
+          toast.success(i18next.t('Setting updated successfully'))
+        }
+      } else if (!variables.silent) {
         toast.error(data.message || i18next.t('Failed to update setting'))
       }
     },
-    onError: (error: Error) => {
-      toast.error(error.message || i18next.t('Failed to update setting'))
+    onError: (error: Error, variables) => {
+      if (!variables.silent) {
+        toast.error(error.message || i18next.t('Failed to update setting'))
+      }
     },
   })
 }

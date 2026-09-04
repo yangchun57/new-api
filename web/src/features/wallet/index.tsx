@@ -27,13 +27,12 @@ import { getSelf } from '@/lib/api'
 import { AffiliateRewardsCard } from './components/affiliate-rewards-card'
 import { BillingHistoryDialog } from './components/dialogs/billing-history-dialog'
 import { CreemConfirmDialog } from './components/dialogs/creem-confirm-dialog'
-import { PaymentConfirmDialog } from './components/dialogs/payment-confirm-dialog'
 import { TransferDialog } from './components/dialogs/transfer-dialog'
 import { WechatNativePayDialog } from './components/dialogs/wechat-native-pay-dialog'
 import { RechargeFormCard } from './components/recharge-form-card'
 import { SubscriptionPlansCard } from './components/subscription-plans-card'
 import { WalletStatsCard } from './components/wallet-stats-card'
-import { DEFAULT_DISCOUNT_RATE, PAYMENT_TYPES } from './constants'
+import { PAYMENT_TYPES } from './constants'
 import {
   useTopupInfo,
   usePayment,
@@ -69,11 +68,7 @@ export function Wallet(props: WalletProps) {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null)
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethod>()
-  const [selectedWaffoMethodIndex, setSelectedWaffoMethodIndex] = useState<
-    number | null
-  >(null)
   const [paymentLoading, setPaymentLoading] = useState<string | null>(null)
-  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false)
   const [transferDialogOpen, setTransferDialogOpen] = useState(false)
   const [billingDialogOpen, setBillingDialogOpen] = useState(false)
   const [redemptionCode, setRedemptionCode] = useState('')
@@ -96,7 +91,6 @@ export function Wallet(props: WalletProps) {
   const {
     amount: paymentAmount,
     calculating,
-    processing,
     calculatePaymentAmount,
     processPayment,
   } = usePayment()
@@ -108,11 +102,9 @@ export function Wallet(props: WalletProps) {
   } = useAffiliate()
   const { redeeming, redeemCode } = useRedemption()
   const { processing: creemProcessing, processCreemPayment } = useCreemPayment()
-  const { processing: waffoProcessing, processWaffoPayment } = useWaffoPayment()
-  const { processing: pancakeProcessing, processWaffoPancakePayment } =
-    useWaffoPancakePayment()
+  const { processWaffoPayment } = useWaffoPayment()
+  const { processWaffoPancakePayment } = useWaffoPancakePayment()
   const {
-    processing: wechatNativeProcessing,
     result: wechatNativeResult,
     processWechatNativePayment,
     reset: resetWechatNative,
@@ -181,7 +173,6 @@ export function Wallet(props: WalletProps) {
   // Handle payment method selection
   const handlePaymentMethodSelect = async (method: PaymentMethod) => {
     setSelectedPaymentMethod(method)
-    setSelectedWaffoMethodIndex(null)
     setPaymentLoading(method.type)
 
     try {
@@ -191,42 +182,48 @@ export function Wallet(props: WalletProps) {
         return
       }
 
-      // Calculate payment amount and show confirmation dialog
       await calculatePaymentAmount(topupAmount, method.type)
-      setConfirmDialogOpen(true)
+      await dispatchPayment(method, null)
     } finally {
       setPaymentLoading(null)
     }
   }
 
-  // Handle payment confirmation
-  const handlePaymentConfirm = async () => {
-    if (!selectedPaymentMethod) return
+  // Dispatch the selected payment directly
+  const dispatchPayment = useCallback(
+    async (method: PaymentMethod, waffoMethodIndex: number | null) => {
+      const success = await dispatchSelectedPayment(
+        method,
+        topupAmount,
+        waffoMethodIndex,
+        {
+          regular: processPayment,
+          waffo: processWaffoPayment,
+          waffoPancake: processWaffoPancakePayment,
+          wechatNative: async (amount) => {
+            const result = await processWechatNativePayment(amount)
+            if (result) {
+              setWechatNativeDialogOpen(true)
+              return true
+            }
+            return false
+          },
+        }
+      )
 
-    const success = await dispatchSelectedPayment(
-      selectedPaymentMethod,
-      topupAmount,
-      selectedWaffoMethodIndex,
-      {
-        regular: processPayment,
-        waffo: processWaffoPayment,
-        waffoPancake: processWaffoPancakePayment,
-        wechatNative: async (amount) => {
-          const result = await processWechatNativePayment(amount)
-          if (result) {
-            setWechatNativeDialogOpen(true)
-            return true
-          }
-          return false
-        },
+      if (success) {
+        await fetchUser()
       }
-    )
-
-    if (success) {
-      setConfirmDialogOpen(false)
-      await fetchUser()
-    }
-  }
+    },
+    [
+      topupAmount,
+      processPayment,
+      processWaffoPayment,
+      processWaffoPancakePayment,
+      processWechatNativePayment,
+      fetchUser,
+    ]
+  )
 
   // Handle redemption
   const handleRedeem = async () => {
@@ -271,26 +268,21 @@ export function Wallet(props: WalletProps) {
     index: number
   ) => {
     const loadingKey = `waffo-${index}`
-    setSelectedPaymentMethod({
+    const waffoMethod = {
       name: method.name,
       type: PAYMENT_TYPES.WAFFO,
       icon: method.icon,
-    })
-    setSelectedWaffoMethodIndex(index)
+    }
+    setSelectedPaymentMethod(waffoMethod)
     setPaymentLoading(loadingKey)
 
     try {
       await calculatePaymentAmount(topupAmount, PAYMENT_TYPES.WAFFO)
-      setConfirmDialogOpen(true)
+      await dispatchPayment(waffoMethod, index)
     } finally {
       setPaymentLoading(null)
     }
   }
-
-  // Get discount rate for current topup amount
-  const getDiscountRate = useCallback(() => {
-    return topupInfo?.discount?.[topupAmount] || DEFAULT_DISCOUNT_RATE
-  }, [topupInfo, topupAmount])
 
   const handleSubscriptionAvailabilityChange = useCallback(
     (available: boolean) => {
@@ -368,21 +360,6 @@ export function Wallet(props: WalletProps) {
           </div>
         </SectionPageLayout.Content>
       </SectionPageLayout>
-
-      <PaymentConfirmDialog
-        open={confirmDialogOpen}
-        onOpenChange={setConfirmDialogOpen}
-        onConfirm={handlePaymentConfirm}
-        topupAmount={topupAmount}
-        paymentAmount={paymentAmount}
-        paymentMethod={selectedPaymentMethod}
-        calculating={calculating}
-        processing={
-          processing || waffoProcessing || pancakeProcessing || wechatNativeProcessing
-        }
-        discountRate={getDiscountRate()}
-        usdExchangeRate={effectiveUsdExchangeRate}
-      />
 
       <WechatNativePayDialog
         open={wechatNativeDialogOpen}

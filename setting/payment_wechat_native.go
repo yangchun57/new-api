@@ -1,7 +1,6 @@
 package setting
 
 var (
-	WechatNativeEnabled      bool
 	WechatNativeAppId        string
 	WechatNativeMchId        string
 	WechatNativeApiV3Key     string

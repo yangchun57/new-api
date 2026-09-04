@@ -103,7 +103,6 @@ const defaultBillingSettings: BillingSettings = {
   WaffoPancakeReturnURL: '',
   WaffoPancakeStoreID: '',
   WaffoPancakeProductID: '',
-  WechatNativeEnabled: false,
   WechatNativeAppId: '',
   WechatNativeMchId: '',
   WechatNativeApiV3Key: '',
