@@ -18,6 +18,8 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { cn } from '@/lib/utils'
 
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+
 import { useSuppressSettingsSectionHeader } from './settings-page-context'
 
 type SettingsSectionProps = {
@@ -36,21 +38,21 @@ export function SettingsSection({
   const suppressHeader = useSuppressSettingsSectionHeader()
 
   return (
-    <section className={cn('flex flex-col gap-4', className)}>
+    <Card className={cn('flex flex-col gap-0 p-5', className)}>
       {!suppressHeader && (
-        <div className='flex flex-col gap-1'>
+        <CardHeader className='p-0 pb-4'>
           <h3
             {...titleProps}
             className={cn(
-              'text-[14px] font-semibold tracking-[-0.01em] text-[#0A0E1A]',
+              'text-[14px] font-semibold leading-snug tracking-[-0.01em] text-[#0A0E1A]',
               titleProps?.className
             )}
           >
             {title}
           </h3>
-        </div>
+        </CardHeader>
       )}
-      {children}
-    </section>
+      <CardContent className='p-0'>{children}</CardContent>
+    </Card>
   )
 }
