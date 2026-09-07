@@ -230,7 +230,7 @@ export function SystemTasksPanel() {
   return (
     <section
       data-slot='card'
-      className='group/card overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
+      className='group/card flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
     >
       <div className='flex flex-col gap-3 border-b border-[#E5E8EE] px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
         <div className='min-w-0'>
@@ -284,7 +284,10 @@ export function SystemTasksPanel() {
         </div>
       </div>
 
-      <div aria-busy={tasksQuery.isFetching}>
+      <div
+        aria-busy={tasksQuery.isFetching}
+        className='min-h-0 flex-1 overflow-y-auto'
+      >
         {loading ? (
           <div className='space-y-2 p-5'>
             {Array.from({ length: 4 }).map((_, i) => (

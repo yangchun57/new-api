@@ -38,7 +38,7 @@ export function SettingsSection({
   const suppressHeader = useSuppressSettingsSectionHeader()
 
   return (
-    <Card className={cn('flex flex-col gap-0 p-5', className)}>
+    <Card className={cn('flex min-h-0 flex-1 flex-col gap-0 p-5', className)}>
       {!suppressHeader && (
         <CardHeader className='p-0 pb-4'>
           <h3
@@ -52,7 +52,9 @@ export function SettingsSection({
           </h3>
         </CardHeader>
       )}
-      <CardContent className='p-0'>{children}</CardContent>
+      <CardContent className='min-h-0 flex-1 overflow-y-auto p-0'>
+        {children}
+      </CardContent>
     </Card>
   )
 }

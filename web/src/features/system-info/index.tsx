@@ -28,7 +28,7 @@ export function SystemInfo() {
   const { t } = useTranslation()
 
   return (
-    <SectionPageLayout>
+    <SectionPageLayout fixedContent>
       <SectionPageLayout.Title>
         <span className='inline-flex min-w-0 items-center gap-2'>
           <span className='truncate'>{t('System Info')}</span>
@@ -38,7 +38,7 @@ export function SystemInfo() {
         </span>
       </SectionPageLayout.Title>
       <SectionPageLayout.Content>
-        <div className='space-y-6'>
+        <div className='flex h-full min-h-0 flex-col gap-6'>
           <SystemInstancesPanel />
           <SystemTasksPanel />
         </div>

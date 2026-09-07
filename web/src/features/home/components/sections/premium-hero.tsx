@@ -18,11 +18,10 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { CherryStudio } from '@lobehub/icons'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, BookOpen } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
-import { useStatus } from '@/hooks/use-status'
 
 import { HeroTerminalDemo } from '../hero-terminal-demo'
 
@@ -46,39 +45,6 @@ const MoreIcon = () => (
 
 export function PremiumHero(props: HeroProps) {
   const { t } = useTranslation()
-  const { status } = useStatus()
-  const docsUrl =
-    (status?.docs_link as string | undefined) || 'https://docs.newapi.pro'
-
-  const renderDocsButton = () => {
-    const className =
-      'pl-cta-secondary group inline-flex h-11 items-center gap-1.5 rounded-full border border-[#E5E8EE] bg-white px-5 pl-font-display text-[13px] font-semibold text-[#0A0E1A] hover:bg-[#F7F8FA]'
-    const isExternal = docsUrl.startsWith('http')
-    if (isExternal) {
-      return (
-        <Button
-          variant='outline'
-          className={className}
-          render={
-            <a href={docsUrl} target='_blank' rel='noopener noreferrer' />
-          }
-        >
-          <BookOpen className='size-4 text-[#5A6478] transition-colors group-hover:text-[#0A0E1A]' />
-          <span>{t('Docs')}</span>
-        </Button>
-      )
-    }
-    return (
-      <Button
-        variant='outline'
-        className={className}
-        render={<Link to={docsUrl} />}
-      >
-        <BookOpen className='size-4 text-[#5A6478] transition-colors group-hover:text-[#0A0E1A]' />
-        <span>{t('Docs')}</span>
-      </Button>
-    )
-  }
 
   return (
     <section className='relative isolate overflow-hidden bg-[#F7F8FA] px-6 pt-28 pb-20 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28'>
@@ -128,7 +94,6 @@ export function PremiumHero(props: HeroProps) {
                   {t('Go to Dashboard')}
                   <ArrowRight className='ml-1 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
                 </Button>
-                {renderDocsButton()}
               </>
             ) : (
               <>
@@ -146,7 +111,6 @@ export function PremiumHero(props: HeroProps) {
                 >
                   {t('View Pricing')}
                 </Button>
-                {renderDocsButton()}
               </>
             )}
           </div>

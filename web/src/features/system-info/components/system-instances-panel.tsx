@@ -629,7 +629,7 @@ export function SystemInstancesPanel() {
     <>
       <section
         data-slot='card'
-        className='group/card overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
+        className='group/card flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
       >
         <div className='flex flex-col gap-3 border-b border-[#E5E8EE] px-5 py-4 sm:flex-row sm:items-center sm:justify-between'>
           <div className='min-w-0'>
@@ -697,7 +697,12 @@ export function SystemInstancesPanel() {
           </div>
         </div>
 
-        <div aria-busy={instancesQuery.isFetching}>{instancesContent}</div>
+        <div
+          aria-busy={instancesQuery.isFetching}
+          className='min-h-0 flex-1 overflow-y-auto'
+        >
+          {instancesContent}
+        </div>
       </section>
 
       <ConfirmDialog
