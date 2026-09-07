@@ -12,6 +12,7 @@ web/dist
 web/node_modules
 .env
 one-api
+密码等.txt
 new-api
 /__debug_bin*
 .DS_Store
