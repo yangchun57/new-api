@@ -330,6 +330,14 @@ func SetUserDistributionEnabled(userId int, enabled bool) error {
 	return DB.Model(&User{}).Where("id = ?", userId).Update("distribution_enabled", enabled).Error
 }
 
+// SetUserDistributionVisible 控制用户「我的分销」页面与钱包推荐计划的显示。
+func SetUserDistributionVisible(userId int, visible bool) error {
+	if userId <= 0 {
+		return errors.New("用户 ID 为空")
+	}
+	return DB.Model(&User{}).Where("id = ?", userId).Update("distribution_visible", visible).Error
+}
+
 // SetUserDistributionGroup 将用户分配到指定分销分组；groupId 为 0 时归入默认分组。
 func SetUserDistributionGroup(userId int, groupId int) error {
 	if userId <= 0 {

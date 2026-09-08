@@ -85,6 +85,29 @@ func SetUserDistributionEnabled(c *gin.Context) {
 	common.ApiSuccess(c, nil)
 }
 
+type SetUserDistributionVisibleRequest struct {
+	UserId  int  `json:"user_id"`
+	Visible bool `json:"visible"`
+}
+
+// SetUserDistributionVisible 管理员控制指定用户的「我的分销」页面与钱包推荐计划显示。
+func SetUserDistributionVisible(c *gin.Context) {
+	var req SetUserDistributionVisibleRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		common.ApiError(c, err)
+		return
+	}
+	if req.UserId <= 0 {
+		common.ApiErrorMsg(c, "用户 ID 非法")
+		return
+	}
+	if err := model.SetUserDistributionVisible(req.UserId, req.Visible); err != nil {
+		common.ApiError(c, err)
+		return
+	}
+	common.ApiSuccess(c, nil)
+}
+
 // DeductDistributionCommission 管理员人工扣减指定分销用户的佣金，余额不足部分记为负资产。
 func DeductDistributionCommission(c *gin.Context) {
 	var req DeductDistributionCommissionRequest

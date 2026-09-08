@@ -41,6 +41,7 @@ import { useTranslation } from 'react-i18next'
 
 import type { SidebarData } from '@/components/layout/types'
 import { ROLE } from '@/lib/roles'
+import { useAuthStore } from '@/stores/auth-store'
 
 /**
  * Root navigation groups for the application sidebar.
@@ -50,6 +51,39 @@ import { ROLE } from '@/lib/roles'
  */
 export function useSidebarData(): SidebarData {
   const { t } = useTranslation()
+  const distributionVisible = useAuthStore(
+    (s) => s.auth.user?.distribution_visible
+  )
+
+  const personalItems: SidebarData['navGroups'][number]['items'] = [
+    {
+      title: t('Wallet'),
+      url: '/wallet',
+      icon: Wallet,
+    },
+    {
+      title: t('Profile'),
+      url: '/profile',
+      icon: User,
+    },
+  ]
+
+  if (distributionVisible === true) {
+    personalItems.splice(1, 0, {
+      title: t('My Distribution'),
+      icon: Share2,
+      items: [
+        {
+          title: t('Overview'),
+          url: '/distribution',
+        },
+        {
+          title: t('Invited Users'),
+          url: '/distribution/invitees',
+        },
+      ],
+    })
+  }
 
   return {
     navGroups: [
@@ -110,32 +144,7 @@ export function useSidebarData(): SidebarData {
       {
         id: 'personal',
         title: t('Personal'),
-        items: [
-          {
-            title: t('Wallet'),
-            url: '/wallet',
-            icon: Wallet,
-          },
-          {
-            title: t('My Distribution'),
-            icon: Share2,
-            items: [
-              {
-                title: t('Overview'),
-                url: '/distribution',
-              },
-              {
-                title: t('Invited Users'),
-                url: '/distribution/invitees',
-              },
-            ],
-          },
-          {
-            title: t('Profile'),
-            url: '/profile',
-            icon: User,
-          },
-        ],
+        items: personalItems,
       },
       {
         id: 'admin',

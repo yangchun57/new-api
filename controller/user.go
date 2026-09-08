@@ -557,6 +557,7 @@ func buildSelfUserData(user *model.User) map[string]interface{} {
 		"stripe_customer":         user.StripeCustomer,
 		"distribution_group_id":   user.DistributionGroupId,
 		"distribution_group_name": distributionGroupName,
+		"distribution_visible":    user.DistributionVisible,
 		"distribution_debt":       user.DistributionDebt,
 		"distribution_frozen":     user.DistributionFrozen,
 		"sidebar_modules":         userSetting.SidebarModules, // 正确提取sidebar_modules字段

@@ -16,10 +16,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import z from 'zod'
 
 import { MyDistribution } from '@/features/distribution/user'
+import { useAuthStore } from '@/stores/auth-store'
 
 const myDistributionSearchSchema = z.object({
   page: z.number().optional().catch(1),
@@ -28,5 +29,11 @@ const myDistributionSearchSchema = z.object({
 
 export const Route = createFileRoute('/_authenticated/distribution/')({
   validateSearch: myDistributionSearchSchema,
+  beforeLoad: () => {
+    const { auth } = useAuthStore.getState()
+    if (auth.user?.distribution_visible !== true) {
+      throw redirect({ to: '/wallet' })
+    }
+  },
   component: MyDistribution,
 })

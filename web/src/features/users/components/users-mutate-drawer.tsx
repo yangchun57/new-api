@@ -52,6 +52,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
 import {
   Sheet,
   SheetClose,
@@ -444,6 +445,29 @@ export function UsersMutateDrawer({
                           />
                         </FormControl>
                         <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name='distribution_visible'
+                    render={({ field }) => (
+                      <FormItem className='flex items-center justify-between rounded-xl border border-[#E5E8EE] bg-white p-3'>
+                        <div className='space-y-0.5'>
+                          <FormLabel>{t('Distribution')}</FormLabel>
+                          <FormDescription>
+                            {t(
+                              'Show the My Distribution page and the referral program in this user\u2019s wallet.'
+                            )}
+                          </FormDescription>
+                        </div>
+                        <FormControl>
+                          <Switch
+                            checked={field.value === true}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
                       </FormItem>
                     )}
                   />

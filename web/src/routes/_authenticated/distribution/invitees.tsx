@@ -16,10 +16,17 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { InvitedUsers } from '@/features/distribution/user/invited-users'
+import { useAuthStore } from '@/stores/auth-store'
 
 export const Route = createFileRoute('/_authenticated/distribution/invitees')({
+  beforeLoad: () => {
+    const { auth } = useAuthStore.getState()
+    if (auth.user?.distribution_visible !== true) {
+      throw redirect({ to: '/wallet' })
+    }
+  },
   component: InvitedUsers,
 })

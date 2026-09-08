@@ -109,6 +109,7 @@ type User struct {
 	StripeCustomer               string                     `json:"stripe_customer" gorm:"type:varchar(64);column:stripe_customer;index"`
 	DistributionGroupId          int                        `json:"distribution_group_id" gorm:"type:int;default:0;column:distribution_group_id;index"`
 	DistributionEnabled          bool                       `json:"distribution_enabled" gorm:"type:boolean;column:distribution_enabled"`
+	DistributionVisible          bool                       `json:"distribution_visible" gorm:"type:boolean;column:distribution_visible"`
 	DistributionDebt             int                        `json:"distribution_debt" gorm:"type:bigint;default:0;column:distribution_debt"`
 	DistributionFrozen           bool                       `json:"distribution_frozen" gorm:"type:boolean;column:distribution_frozen"`
 	DistributionSettledUsedQuota int                        `json:"distribution_settled_used_quota" gorm:"type:bigint;default:0;column:distribution_settled_used_quota"`
@@ -657,6 +658,7 @@ func (user *User) TransferAffQuotaToQuota(quota int) error {
 func (user *User) prepareForInsert(tx *gorm.DB) error {
 	user.Email = NormalizeEmail(user.Email)
 	user.DistributionEnabled = true
+	user.DistributionVisible = common.DistributionVisibleDefault
 	if user.DistributionGroupId <= 0 {
 		if def, err := defaultDistributionGroupTx(tx); err == nil && def != nil {
 			user.DistributionGroupId = def.Id
@@ -927,6 +929,7 @@ func (user *User) EditWithTx(tx *gorm.DB, updatePassword bool) error {
 		"display_name": newUser.DisplayName,
 		"group":        newUser.Group,
 		"remark":       newUser.Remark,
+		"distribution_visible": newUser.DistributionVisible,
 	}
 	if updatePassword {
 		updates["password"] = newUser.Password

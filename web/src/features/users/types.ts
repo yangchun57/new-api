@@ -53,6 +53,7 @@ export const userSchema = z.object({
   inviter_id: z.number().optional(),
   inviter_name: z.string().optional(),
   distribution_enabled: z.boolean().optional(),
+  distribution_visible: z.boolean().optional(),
   linux_do_id: z.string().optional(),
   status: userStatusSchema,
   role: userRoleSchema,
@@ -127,6 +128,7 @@ export interface UserFormData {
   quota?: number // Only used when updating user
   group?: string // Only used when updating user
   remark?: string // Only used when updating user
+  distribution_visible?: boolean // Only used when updating user
   admin_permissions?: AdminPermissionMatrix
 }
 

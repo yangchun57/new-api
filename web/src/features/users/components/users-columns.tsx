@@ -18,6 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import type { ColumnDef } from '@tanstack/react-table'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
 import { BadgeCell } from '@/components/data-table'
 import { GroupBadge } from '@/components/group-badge'
@@ -25,6 +26,7 @@ import { LongText } from '@/components/long-text'
 import { StatusBadge } from '@/components/status-badge'
 import { TableId } from '@/components/table-id'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Switch } from '@/components/ui/switch'
 import {
   Tooltip,
   TooltipContent,
@@ -38,12 +40,15 @@ import {
   USER_ROLES,
   isUserDeleted,
 } from '../constants'
+import { setUserDistributionVisible } from '../api'
 import type { User } from '../types'
 import { DataTableRowActions } from './data-table-row-actions'
 import { UserQuotaCell } from './user-quota-cell'
+import { useUsers } from './users-provider'
 
 export function useUsersColumns(): ColumnDef<User>[] {
   const { t } = useTranslation()
+  const { triggerRefresh } = useUsers()
   return [
     {
       id: 'select',
@@ -217,6 +222,40 @@ export function useUsersColumns(): ColumnDef<User>[] {
       enableSorting: false,
       size: 120,
       meta: { mobileOrder: 20 },
+    },
+    {
+      id: 'distribution',
+      accessorKey: 'distribution_visible',
+      header: t('Distribution'),
+      cell: ({ row }) => {
+        const user = row.original
+        const visible = user.distribution_visible === true
+        const handleToggle = async (checked: boolean) => {
+          try {
+            const result = await setUserDistributionVisible(user.id, checked)
+            if (result.success) {
+              triggerRefresh()
+            } else {
+              toast.error(
+                result.message || t('Failed to update distribution setting')
+              )
+            }
+          } catch {
+            toast.error(t('Failed to update distribution setting'))
+          }
+        }
+        return (
+          <Switch
+            checked={visible}
+            onCheckedChange={handleToggle}
+            disabled={isUserDeleted(user)}
+            aria-label={t('Distribution')}
+          />
+        )
+      },
+      enableSorting: false,
+      size: 120,
+      meta: { mobileHidden: true },
     },
     {
       id: 'invite_info',

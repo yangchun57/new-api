@@ -350,6 +350,7 @@ func SetApiRouter(router *gin.Engine) {
 			distributionRoute.POST("/assign_group", controller.SetUserDistributionGroup)
 			distributionRoute.POST("/freeze", controller.SetUserDistributionFrozen)
 			distributionRoute.POST("/enabled", controller.SetUserDistributionEnabled)
+			distributionRoute.POST("/visible", controller.SetUserDistributionVisible)
 			distributionRoute.POST("/deduct", controller.DeductDistributionCommission)
 			distributionRoute.POST("/deduct_all", controller.DeductAllDistributionCommission)
 			distributionRoute.POST("/settle", controller.TriggerDistributionSettlement)

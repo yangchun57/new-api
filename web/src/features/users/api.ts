@@ -158,6 +158,21 @@ export async function resetUserTwoFA(id: number): Promise<ApiResponse> {
 }
 
 /**
+ * Toggle whether the user's distribution page and wallet referral program are visible.
+ */
+export async function setUserDistributionVisible(
+  userId: number,
+  visible: boolean
+): Promise<ApiResponse> {
+  const res = await api.post(
+    '/api/distribution/visible',
+    { user_id: userId, visible },
+    { skipBusinessError: true }
+  )
+  return res.data
+}
+
+/**
  * Get all available groups
  */
 export async function getGroups(): Promise<ApiResponse<string[]>> {
