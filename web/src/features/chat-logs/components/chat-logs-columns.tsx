@@ -136,16 +136,18 @@ export function useChatLogsColumns(isAdmin: boolean): ColumnDef<ChatLog>[] {
   if (isAdmin) {
     columns.splice(1, 0, {
       accessorKey: 'user_id',
-      header: t('User'),
+      header: t('Username'),
       cell: ({ row }) => {
-        const userId = row.getValue('user_id') as number
+        const userId = row.original.user_id
+        const userName = row.original.user_name
+        if (userName) {
+          return <span className='text-[13px] text-[#0A0E1A]'>{userName}</span>
+        }
         if (userId === 0) {
           return <span className='text-[13px] text-[#8A93A4]'>-</span>
         }
         return (
-          <span className='font-mono text-[12px] text-[#0A0E1A]'>
-            {t('User {{id}}', { id: userId })}
-          </span>
+          <span className='font-mono text-[12px] text-[#0A0E1A]'>#{userId}</span>
         )
       },
       size: 120,

@@ -131,6 +131,7 @@ export function useSidebarData(): SidebarData {
             title: t('Conversation Records'),
             url: '/chat-logs',
             icon: MessagesSquare,
+            requiredRole: ROLE.ADMIN,
           },
           {
             title: t('Task Logs'),

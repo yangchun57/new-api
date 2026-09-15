@@ -16,6 +16,7 @@ import (
 type ChatLog struct {
 	Id                int    `gorm:"primaryKey" json:"id"`
 	UserId            int    `gorm:"index" json:"user_id"`
+	UserName          string `json:"user_name" gorm:"-"`
 	TokenName         string `gorm:"index" json:"token_name"`
 	ModelName         string `gorm:"index" json:"model_name"`
 	ChannelId         int    `json:"channel_id"`
@@ -143,8 +144,49 @@ func GetAllChatLogs(params ChatLogQueryParams) (logs []*ChatLog, total int64, er
 	if err = tx.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
-	err = tx.Order("created_at desc, id desc").Limit(params.Num).Offset(params.StartIdx).Find(&logs).Error
-	return logs, total, err
+	if err = tx.Order("created_at desc, id desc").Limit(params.Num).Offset(params.StartIdx).Find(&logs).Error; err != nil {
+		return nil, 0, err
+	}
+	attachChatLogUserNames(logs)
+	return logs, total, nil
+}
+
+// attachChatLogUserNames 批量解析会话记录所属用户的展示名称，避免逐条查询。
+func attachChatLogUserNames(logs []*ChatLog) {
+	if len(logs) == 0 {
+		return
+	}
+	idSet := make(map[int]struct{})
+	for _, log := range logs {
+		if log.UserId != 0 {
+			idSet[log.UserId] = struct{}{}
+		}
+	}
+	if len(idSet) == 0 {
+		return
+	}
+	ids := make([]int, 0, len(idSet))
+	for id := range idSet {
+		ids = append(ids, id)
+	}
+	var users []User
+	if err := DB.Model(&User{}).Where("id IN ?", ids).Select("id", "username", "display_name").Find(&users).Error; err != nil {
+		common.SysError("failed to resolve chat log user names: " + err.Error())
+		return
+	}
+	nameById := make(map[int]string, len(users))
+	for _, u := range users {
+		name := u.Username
+		if name == "" {
+			name = u.DisplayName
+		}
+		nameById[u.Id] = name
+	}
+	for _, log := range logs {
+		if name, ok := nameById[log.UserId]; ok {
+			log.UserName = name
+		}
+	}
 }
 
 func GetUserChatLogs(userId int, params ChatLogQueryParams) (logs []*ChatLog, total int64, err error) {

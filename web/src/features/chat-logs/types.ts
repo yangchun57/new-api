@@ -21,6 +21,7 @@ import { z } from 'zod'
 export const chatLogSchema = z.object({
   id: z.number(),
   user_id: z.number(),
+  user_name: z.string().optional(),
   token_name: z.string(),
   model_name: z.string(),
   channel_id: z.number(),
