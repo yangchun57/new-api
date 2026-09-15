@@ -101,9 +101,11 @@ var LogConsumeEnabled = true
 // ChatLogEnabled 是否启用会话正文留存（chat_logs 表）。
 // ChatLogMaxBodyKB 单条正文留存上限（KB），超出部分截断。
 // ChatLogRetentionDays 会话正文留存天数，<=0 表示不自动清理。
+// ChatLogAttachmentsEnabled 是否在会话正文中留存附件（含 base64），可在系统设置-运维中开关。
 var ChatLogEnabled = false
 var ChatLogMaxBodyKB = 64
 var ChatLogRetentionDays = 0
+var ChatLogAttachmentsEnabled = true
 
 var TLSInsecureSkipVerify bool
 var InsecureTLSConfig = &tls.Config{InsecureSkipVerify: true}

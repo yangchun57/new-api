@@ -14,27 +14,28 @@ import (
 // 每一次 relay 请求会写入若干行：请求中的各条消息（system/user/assistant/tool）
 // 以及 AI 的完整回复（role=assistant）。
 type ChatLog struct {
-	Id                int    `gorm:"primaryKey" json:"id"`
-	UserId            int    `gorm:"index" json:"user_id"`
-	UserName          string `json:"user_name" gorm:"-"`
-	TokenName         string `gorm:"index" json:"token_name"`
-	ModelName         string `gorm:"index" json:"model_name"`
-	ChannelId         int    `json:"channel_id"`
-	Group             string `json:"group"`
-	RequestId         string `gorm:"index" json:"request_id"`
-	UpstreamRequestId string `json:"upstream_request_id"`
-	ConversationId    string `gorm:"index" json:"conversation_id"`
-	Seq               int    `json:"seq"`
-	Role              string `json:"role"`
-	Content           string `gorm:"type:text" json:"content"`
-	PromptTokens      int    `json:"prompt_tokens"`
-	CompletionTokens  int    `json:"completion_tokens"`
-	Quota             int    `json:"quota"`
-	IsStream          bool   `json:"is_stream"`
-	Status            int    `json:"status"`
-	LatencyMs         int    `json:"latency_ms"`
-	Ip                string `json:"ip"`
-	CreatedAt         int64  `gorm:"index" json:"created_at"`
+	Id                int       `gorm:"primaryKey" json:"id"`
+	UserId            int       `gorm:"index" json:"user_id"`
+	UserName          string    `json:"user_name" gorm:"-"`
+	TokenName         string    `gorm:"index" json:"token_name"`
+	ModelName         string    `gorm:"index" json:"model_name"`
+	ChannelId         int       `json:"channel_id"`
+	Group             string    `json:"group"`
+	RequestId         string    `gorm:"index" json:"request_id"`
+	UpstreamRequestId string    `json:"upstream_request_id"`
+	ConversationId    string    `gorm:"index" json:"conversation_id"`
+	Seq               int       `json:"seq"`
+	Role              string    `json:"role"`
+	Content           string    `gorm:"type:text" json:"content"`
+	PromptTokens      int       `json:"prompt_tokens"`
+	CompletionTokens  int       `json:"completion_tokens"`
+	Quota             int       `json:"quota"`
+	IsStream          bool      `json:"is_stream"`
+	Status            int       `json:"status"`
+	LatencyMs         int       `json:"latency_ms"`
+	Ip                string    `json:"ip"`
+	Attachments       JSONValue `json:"attachments,omitempty" gorm:"type:text"`
+	CreatedAt         int64     `gorm:"index" json:"created_at"`
 }
 
 // ChatLog 状态取值，避免 0 值歧义。

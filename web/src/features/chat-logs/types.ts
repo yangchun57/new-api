@@ -18,6 +18,15 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { z } from 'zod'
 
+export const chatLogAttachmentSchema = z.object({
+  type: z.string(),
+  url: z.string().optional(),
+  mime_type: z.string().optional(),
+  file_name: z.string().optional(),
+})
+
+export type ChatLogAttachment = z.infer<typeof chatLogAttachmentSchema>
+
 export const chatLogSchema = z.object({
   id: z.number(),
   user_id: z.number(),
@@ -39,6 +48,7 @@ export const chatLogSchema = z.object({
   status: z.number(),
   latency_ms: z.number(),
   ip: z.string(),
+  attachments: z.array(chatLogAttachmentSchema).optional(),
   created_at: z.number(),
 })
 

@@ -80,12 +80,14 @@ import type { LogCleanupTask } from '../types'
 
 const logSettingsSchema = z.object({
   LogConsumeEnabled: z.boolean(),
+  ChatLogAttachmentsEnabled: z.boolean(),
 })
 
 type LogSettingsFormValues = z.infer<typeof logSettingsSchema>
 
 type LogSettingsSectionProps = {
   defaultEnabled: boolean
+  defaultAttachmentsEnabled: boolean
 }
 
 type ServerLogInfo = {
@@ -141,6 +143,7 @@ function isActiveLogCleanupTask(task: LogCleanupTask | null) {
 
 export function LogSettingsSection({
   defaultEnabled,
+  defaultAttachmentsEnabled,
 }: LogSettingsSectionProps) {
   const { t } = useTranslation()
   const updateOption = useUpdateOption()
@@ -148,6 +151,7 @@ export function LogSettingsSection({
     resolver: zodResolver(logSettingsSchema),
     defaultValues: {
       LogConsumeEnabled: defaultEnabled,
+      ChatLogAttachmentsEnabled: defaultAttachmentsEnabled,
     },
   })
 
@@ -174,8 +178,11 @@ export function LogSettingsSection({
   }, [])
 
   useEffect(() => {
-    form.reset({ LogConsumeEnabled: defaultEnabled })
-  }, [defaultEnabled, form])
+    form.reset({
+      LogConsumeEnabled: defaultEnabled,
+      ChatLogAttachmentsEnabled: defaultAttachmentsEnabled,
+    })
+  }, [defaultEnabled, defaultAttachmentsEnabled, form])
 
   useEffect(() => {
     fetchServerLogInfo()
@@ -257,11 +264,18 @@ export function LogSettingsSection({
   }, [logCleanupActive, logCleanupTaskId, t])
 
   const onSubmit = async (values: LogSettingsFormValues) => {
-    if (values.LogConsumeEnabled === defaultEnabled) return
-    await updateOption.mutateAsync({
-      key: 'LogConsumeEnabled',
-      value: values.LogConsumeEnabled,
-    })
+    if (values.LogConsumeEnabled !== defaultEnabled) {
+      await updateOption.mutateAsync({
+        key: 'LogConsumeEnabled',
+        value: values.LogConsumeEnabled,
+      })
+    }
+    if (values.ChatLogAttachmentsEnabled !== defaultAttachmentsEnabled) {
+      await updateOption.mutateAsync({
+        key: 'ChatLogAttachmentsEnabled',
+        value: values.ChatLogAttachmentsEnabled,
+      })
+    }
   }
 
   const handleRequestCleanLogs = () => {
@@ -353,6 +367,30 @@ export function LogSettingsSection({
                   <FormDescription>
                     {t(
                       'Track per-request consumption to power usage analytics. Keeping this on increases database writes.'
+                    )}
+                  </FormDescription>
+                </SettingsSwitchContent>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </SettingsSwitchItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='ChatLogAttachmentsEnabled'
+            render={({ field }) => (
+              <SettingsSwitchItem>
+                <SettingsSwitchContent>
+                  <FormLabel>{t('Store chat attachments')}</FormLabel>
+                  <FormDescription>
+                    {t(
+                      'Save images, files, and audio sent to the AI in conversation records so they can be reviewed later. Enabling this stores base64 data and can significantly increase database size.'
                     )}
                   </FormDescription>
                 </SettingsSwitchContent>

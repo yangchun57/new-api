@@ -102,8 +102,122 @@ func FinishChatLogCapture(c *gin.Context, info *relaycommon.RelayInfo, capture *
 }
 
 type chatLogMessage struct {
-	Role    string
-	Content string
+	Role        string
+	Content     string
+	Attachments []chatLogAttachment
+}
+
+// chatLogAttachment 描述会话消息中的附件（图片/文件/音频/视频）。
+// Url 可能是外链、data URL（base64）或 file_id。
+type chatLogAttachment struct {
+	Type     string `json:"type"`
+	Url      string `json:"url,omitempty"`
+	MimeType string `json:"mime_type,omitempty"`
+	FileName string `json:"file_name,omitempty"`
+}
+
+func attachmentTypeFromMime(mime string) string {
+	switch {
+	case strings.HasPrefix(mime, "image/"):
+		return "image"
+	case strings.HasPrefix(mime, "audio/"):
+		return "audio"
+	case strings.HasPrefix(mime, "video/"):
+		return "video"
+	default:
+		return "file"
+	}
+}
+
+func openAIMessageAttachments(m *dto.Message) []chatLogAttachment {
+	var attachments []chatLogAttachment
+	for _, mc := range m.ParseContent() {
+		switch mc.Type {
+		case dto.ContentTypeImageURL:
+			if img := mc.GetImageMedia(); img != nil && img.Url != "" {
+				attachments = append(attachments, chatLogAttachment{Type: "image", Url: img.Url, MimeType: img.MimeType})
+			}
+		case dto.ContentTypeInputAudio:
+			if audio := mc.GetInputAudio(); audio != nil && audio.Data != "" {
+				attachment := chatLogAttachment{Type: "audio"}
+				if audio.Format != "" {
+					attachment.MimeType = "audio/" + audio.Format
+					attachment.Url = "data:" + attachment.MimeType + ";base64," + audio.Data
+				} else {
+					attachment.Url = audio.Data
+				}
+				attachments = append(attachments, attachment)
+			}
+		case dto.ContentTypeFile:
+			if file := mc.GetFile(); file != nil {
+				attachment := chatLogAttachment{Type: "file", FileName: file.FileName}
+				if file.FileData != "" {
+					attachment.Url = "data:;base64," + file.FileData
+				} else {
+					attachment.Url = file.FileId
+				}
+				if attachment.Url != "" || attachment.FileName != "" {
+					attachments = append(attachments, attachment)
+				}
+			}
+		case dto.ContentTypeVideoUrl:
+			if video := mc.GetVideoUrl(); video != nil && video.Url != "" {
+				attachments = append(attachments, chatLogAttachment{Type: "video", Url: video.Url})
+			}
+		}
+	}
+	return attachments
+}
+
+func claudeMessageAttachments(m *dto.ClaudeMessage) []chatLogAttachment {
+	var attachments []chatLogAttachment
+	parts, err := m.ParseContent()
+	if err != nil {
+		return attachments
+	}
+	for _, part := range parts {
+		if part.Type != "image" && part.Type != "document" {
+			continue
+		}
+		if part.Source == nil {
+			continue
+		}
+		url := part.Source.Url
+		mime := part.Source.MediaType
+		if url == "" {
+			data, ok := part.Source.Data.(string)
+			if !ok || data == "" {
+				continue
+			}
+			if mime != "" {
+				url = "data:" + mime + ";base64," + data
+			} else {
+				url = "data:;base64," + data
+			}
+		}
+		attachments = append(attachments, chatLogAttachment{Type: part.Type, Url: url, MimeType: mime})
+	}
+	return attachments
+}
+
+func geminiMessageAttachments(parts []dto.GeminiPart) []chatLogAttachment {
+	var attachments []chatLogAttachment
+	for _, part := range parts {
+		if part.InlineData != nil && part.InlineData.Data != "" {
+			mime := part.InlineData.MimeType
+			attachment := chatLogAttachment{Type: attachmentTypeFromMime(mime), MimeType: mime}
+			if mime != "" {
+				attachment.Url = "data:" + mime + ";base64," + part.InlineData.Data
+			} else {
+				attachment.Url = "data:;base64," + part.InlineData.Data
+			}
+			attachments = append(attachments, attachment)
+		}
+		if part.FileData != nil && part.FileData.FileUri != "" {
+			attachments = append(attachments, chatLogAttachment{Type: "file", Url: part.FileData.FileUri, MimeType: part.FileData.MimeType})
+		}
+	}
+	return attachments
 }
 
 func extractChatLogMessages(request dto.Request) []chatLogMessage {
@@ -115,14 +229,18 @@ func extractChatLogMessages(request dto.Request) []chatLogMessage {
 		messages := make([]chatLogMessage, 0, len(req.Messages))
 		for _, m := range req.Messages {
 			content := m.StringContent()
-			if content == "" {
+			var attachments []chatLogAttachment
+			if common.ChatLogAttachmentsEnabled {
+				attachments = openAIMessageAttachments(&m)
+			}
+			if content == "" && len(attachments) == 0 {
 				continue
 			}
 			role := m.Role
 			if role == "" {
 				role = "user"
 			}
-			messages = append(messages, chatLogMessage{Role: role, Content: content})
+			messages = append(messages, chatLogMessage{Role: role, Content: content, Attachments: attachments})
 		}
 		return messages
 	case *dto.ClaudeRequest:
@@ -134,14 +252,18 @@ func extractChatLogMessages(request dto.Request) []chatLogMessage {
 		}
 		for _, m := range req.Messages {
 			content := m.GetStringContent()
-			if content == "" {
+			var attachments []chatLogAttachment
+			if common.ChatLogAttachmentsEnabled {
+				attachments = claudeMessageAttachments(&m)
+			}
+			if content == "" && len(attachments) == 0 {
 				continue
 			}
 			role := m.Role
 			if role == "" {
 				role = "user"
 			}
-			messages = append(messages, chatLogMessage{Role: role, Content: content})
+			messages = append(messages, chatLogMessage{Role: role, Content: content, Attachments: attachments})
 		}
 		return messages
 	case *dto.GeminiChatRequest:
@@ -153,24 +275,44 @@ func extractChatLogMessages(request dto.Request) []chatLogMessage {
 		}
 		for _, content := range req.Contents {
 			text := geminiPartsText(content.Parts)
-			if text == "" {
+			var attachments []chatLogAttachment
+			if common.ChatLogAttachmentsEnabled {
+				attachments = geminiMessageAttachments(content.Parts)
+			}
+			if text == "" && len(attachments) == 0 {
 				continue
 			}
 			role := content.Role
 			if role == "" {
 				role = "user"
 			}
-			messages = append(messages, chatLogMessage{Role: role, Content: text})
+			messages = append(messages, chatLogMessage{Role: role, Content: text, Attachments: attachments})
 		}
 		return messages
 	case *dto.OpenAIResponsesRequest:
 		inputs := req.ParseInput()
+		var attachments []chatLogAttachment
 		messages := make([]chatLogMessage, 0, len(inputs))
 		for _, in := range inputs {
+			if common.ChatLogAttachmentsEnabled {
+				if in.ImageUrl != "" {
+					attachments = append(attachments, chatLogAttachment{Type: "image", Url: in.ImageUrl})
+				}
+				if in.FileUrl != "" {
+					attachments = append(attachments, chatLogAttachment{Type: "file", Url: in.FileUrl})
+				}
+			}
 			if in.Text == "" {
 				continue
 			}
 			messages = append(messages, chatLogMessage{Role: "user", Content: in.Text})
+		}
+		if len(attachments) > 0 {
+			if len(messages) == 0 {
+				messages = append(messages, chatLogMessage{Role: "user", Attachments: attachments})
+			} else {
+				messages[0].Attachments = append(messages[0].Attachments, attachments...)
+			}
 		}
 		return messages
 	}
@@ -295,6 +437,11 @@ func buildChatLogRows(c *gin.Context, info *relaycommon.RelayInfo, messages []ch
 		row.Seq = i
 		row.Role = msg.Role
 		row.Content = msg.Content
+		if len(msg.Attachments) > 0 {
+			if b, err := common.Marshal(msg.Attachments); err == nil {
+				row.Attachments = model.JSONValue(b)
+			}
+		}
 		rows = append(rows, &row)
 	}
 

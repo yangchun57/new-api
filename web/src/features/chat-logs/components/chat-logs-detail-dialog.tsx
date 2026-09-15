@@ -27,7 +27,7 @@ import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { formatTimestampToDate } from '@/lib/format'
 
 import { getChatLogRoleVariant } from '../constants'
-import type { ChatLog } from '../types'
+import type { ChatLog, ChatLogAttachment } from '../types'
 import { useChatLogs } from './chat-logs-provider'
 
 function DetailRow(props: {
@@ -45,6 +45,61 @@ function DetailRow(props: {
       >
         {props.value}
       </span>
+    </div>
+  )
+}
+
+function AttachmentList({ attachments }: { attachments: ChatLogAttachment[] }) {
+  return (
+    <div className='flex flex-col gap-2'>
+      {attachments.map((attachment, index) => {
+        const type = attachment.type
+        const key = attachment.url || attachment.file_name || `${type}-${index}`
+        if (type === 'image' && attachment.url) {
+          return (
+            <img
+              key={key}
+              src={attachment.url}
+              alt={attachment.file_name || 'image'}
+              className='max-h-64 w-auto max-w-full rounded-lg border border-[#E5E8EE] object-contain'
+            />
+          )
+        }
+        if (type === 'audio' && attachment.url) {
+          return (
+            <audio key={key} controls src={attachment.url} className='w-full' />
+          )
+        }
+        if (type === 'video' && attachment.url) {
+          return (
+            <video
+              key={key}
+              controls
+              src={attachment.url}
+              className='max-h-64 w-auto max-w-full rounded-lg'
+            />
+          )
+        }
+        const label = attachment.file_name || attachment.type
+        if (attachment.url) {
+          return (
+            <a
+              key={key}
+              href={attachment.url}
+              target='_blank'
+              rel='noreferrer'
+              className='text-[13px] break-all text-[#3B82F6] underline'
+            >
+              {label}
+            </a>
+          )
+        }
+        return (
+          <span key={key} className='text-[13px] break-all text-[#5A6478]'>
+            {label}
+          </span>
+        )
+      })}
     </div>
   )
 }
@@ -158,6 +213,17 @@ export function ChatLogsDetailDialog() {
               </p>
             </div>
           </div>
+
+          {log.attachments && log.attachments.length > 0 && (
+            <div className='space-y-1.5'>
+              <Label className='text-[13px] font-medium text-[#0A0E1A]'>
+                {t('Attachments')}
+              </Label>
+              <div className='min-w-0 overflow-hidden rounded-xl border border-[#E5E8EE] bg-[#F7F8FA] p-4'>
+                <AttachmentList attachments={log.attachments} />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </Dialog>
