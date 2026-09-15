@@ -17,6 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import type { ColumnDef } from '@tanstack/react-table'
+import { Paperclip } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { StatusBadge } from '@/components/status-badge'
@@ -75,13 +76,26 @@ export function useChatLogsColumns(isAdmin: boolean): ColumnDef<ChatLog>[] {
       header: t('Content'),
       cell: ({ row }) => {
         const content = row.getValue('content') as string
-        if (!content) {
-          return <span className='text-[13px] text-[#8A93A4]'>-</span>
-        }
+        const attachmentCount = row.original.attachments?.length ?? 0
         return (
-          <span className='text-[13px] leading-snug text-[#0A0E1A] line-clamp-2'>
-            {content}
-          </span>
+          <div className='flex min-w-0 flex-col gap-1'>
+            {content ? (
+              <span className='text-[13px] leading-snug text-[#0A0E1A] line-clamp-2'>
+                {content}
+              </span>
+            ) : (
+              <span className='text-[13px] text-[#8A93A4]'>-</span>
+            )}
+            {attachmentCount > 0 && (
+              <span
+                className='inline-flex w-fit items-center gap-1 rounded-md bg-[#EEF1F6] px-1.5 py-0.5 text-[11px] font-medium text-[#5A6478]'
+                aria-label={t('Attachments')}
+              >
+                <Paperclip className='size-3' aria-hidden='true' />
+                {attachmentCount}
+              </span>
+            )}
+          </div>
         )
       },
       size: 400,
