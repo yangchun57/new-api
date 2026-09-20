@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"strings"
 	"sync"
+	"unicode/utf8"
 
 	"github.com/QuantumNous/new-api/common"
 	"github.com/QuantumNous/new-api/model"
@@ -41,10 +42,23 @@ func (w *ChatLogCapture) append(p []byte) {
 	}
 	remaining := w.maxBytes - w.buf.Len()
 	if len(p) > remaining {
-		w.buf.Write(p[:remaining])
+		w.buf.Write(trimPartialUTF8(p[:remaining]))
 	} else {
 		w.buf.Write(p)
 	}
+}
+
+// trimPartialUTF8 去掉末尾不完整的多字节 UTF-8 字符，
+// 避免按字节截断时把正文末尾切成非法字节（显示为 ♦）。
+func trimPartialUTF8(b []byte) []byte {
+	for len(b) > 0 {
+		r, size := utf8.DecodeLastRune(b)
+		if r != utf8.RuneError || size > 1 {
+			return b
+		}
+		b = b[:len(b)-1]
+	}
+	return b
 }
 
 func (w *ChatLogCapture) Write(p []byte) (int, error) {

@@ -89,6 +89,8 @@ func InitEnv() {
 	ChatLogEnabled = GetEnvOrDefaultBool("CHAT_LOG_ENABLED", false)
 	ChatLogMaxBodyKB = GetEnvOrDefault("CHAT_LOG_MAX_BODY_KB", 64)
 	ChatLogRetentionDays = GetEnvOrDefault("CHAT_LOG_RETENTION_DAYS", 0)
+	RequestCharsetFallbackEnabled = GetEnvOrDefaultBool("REQUEST_CHARSET_FALLBACK_ENABLED", true)
+	RequestCharsetFallbackCharset = GetEnvOrDefaultString("REQUEST_CHARSET_FALLBACK_CHARSET", "gb18030")
 	IsMasterNode = os.Getenv("NODE_TYPE") != "slave"
 	initNodeNameIdentity()
 	TLSInsecureSkipVerify = GetEnvOrDefaultBool("TLS_INSECURE_SKIP_VERIFY", false)

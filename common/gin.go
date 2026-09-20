@@ -52,6 +52,7 @@ func GetRequestBody(c *gin.Context) (io.Seeker, error) {
 			if err != nil {
 				return nil, err
 			}
+			bs = transcodeRequestBody(c, bs)
 			c.Set(KeyBodyStorage, bs)
 			return bs, nil
 		}
@@ -77,6 +78,7 @@ func GetRequestBody(c *gin.Context) (io.Seeker, error) {
 	}
 
 	// 缓存存储对象
+	storage = transcodeRequestBody(c, storage)
 	c.Set(KeyBodyStorage, storage)
 
 	return storage, nil

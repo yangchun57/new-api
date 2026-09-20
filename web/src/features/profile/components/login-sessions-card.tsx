@@ -26,14 +26,6 @@ import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import {
   Empty,
   EmptyDescription,
   EmptyHeader,
@@ -42,6 +34,7 @@ import {
 } from '@/components/ui/empty'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
+import { TitledCard } from '@/components/ui/titled-card'
 import { clearAuthenticatedClientState } from '@/lib/api'
 import type { LoginSession } from '@/stores/auth-store'
 
@@ -171,31 +164,31 @@ export function LoginSessionsCard() {
 
   return (
     <>
-      <Card data-card-hover='false'>
-        <CardHeader>
-          <CardTitle>{t('Login sessions')}</CardTitle>
-          <CardDescription>
-            {t('Review and sign out devices currently using your account.')}
-          </CardDescription>
-          <CardAction>
-            <Button
-              type='button'
-              variant='outline'
-              size='sm'
-              disabled={!hasOtherSessions || revokeOthersMutation.isPending}
-              onClick={() => setConfirmOthers(true)}
-            >
-              <HugeiconsIcon
-                icon={Logout01Icon}
-                data-icon='inline-start'
-                strokeWidth={2}
-              />
-              {t('Sign out other sessions')}
-            </Button>
-          </CardAction>
-        </CardHeader>
-        <CardContent>{sessionsContent}</CardContent>
-      </Card>
+      <TitledCard
+        disableHoverEffect
+        title={t('Login sessions')}
+        description={t(
+          'Review and sign out devices currently using your account.'
+        )}
+        action={
+          <Button
+            type='button'
+            variant='outline'
+            size='sm'
+            disabled={!hasOtherSessions || revokeOthersMutation.isPending}
+            onClick={() => setConfirmOthers(true)}
+          >
+            <HugeiconsIcon
+              icon={Logout01Icon}
+              data-icon='inline-start'
+              strokeWidth={2}
+            />
+            {t('Sign out other sessions')}
+          </Button>
+        }
+      >
+        {sessionsContent}
+      </TitledCard>
 
       <LoginSessionDialogs
         revokeTarget={revokeTarget}

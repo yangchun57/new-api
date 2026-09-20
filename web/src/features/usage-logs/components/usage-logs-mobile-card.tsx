@@ -140,7 +140,7 @@ function SummaryField<TData>({
       className={cn('min-w-0 rounded-md bg-[#F7F8FA] px-2 py-1.5', className)}
     >
       {showLabel ? (
-        <div className='pl-font-mono mb-1 select-none text-[11px] font-medium leading-none text-[#8A93A4]'>
+        <div className='pl-font-mono mb-1 text-[11px] leading-none font-medium text-[#8A93A4] select-none'>
           {label}
         </div>
       ) : null}
@@ -168,7 +168,7 @@ function MobileLogTimeStatus({
 
   return (
     <div className='space-y-1'>
-      <div className='text-[12px] leading-tight tabular-nums text-[#8A93A4]'>
+      <div className='text-[12px] leading-tight text-[#8A93A4] tabular-nums'>
         {formatTimestampToDate(timestamp)}
       </div>
       <div
@@ -178,10 +178,7 @@ function MobileLogTimeStatus({
         )}
       >
         <span
-          className={cn(
-            'size-1.5 shrink-0 rounded-full',
-            dotColorMap[variant]
-          )}
+          className={cn('size-1.5 shrink-0 rounded-full', dotColorMap[variant])}
           aria-hidden='true'
         />
         <span>{t(config.label)}</span>
@@ -218,7 +215,7 @@ function MobileTokensField({ log }: { log: UsageLog }) {
   return (
     <div className='min-w-0 rounded-md bg-[#F7F8FA] px-2 py-1.5'>
       <div className='flex flex-col gap-0.5'>
-        <span className='text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
+        <span className='text-[13px] font-semibold text-[#0A0E1A] tabular-nums'>
           {promptTokens.toLocaleString()} / {completionTokens.toLocaleString()}
         </span>
         {showCache ? (
@@ -233,9 +230,7 @@ function MobileTokensField({ log }: { log: UsageLog }) {
             ) : null}
           </div>
         ) : (
-          <span className='text-[11px] leading-none text-[#B8BFCC]'>
-            —
-          </span>
+          <span className='text-[11px] leading-none text-[#B8BFCC]'>—</span>
         )}
       </div>
     </div>
@@ -317,7 +312,12 @@ function CommonLogsCard<TData>({
 
   const modelCell = cells.get('model_name')
   const quotaCell = cells.get('quota')
+  const conversationCell = cells.get('conversation')
   const rowData = cells.get('created_at')?.row.original as UsageLog | undefined
+  const showConversation =
+    Boolean(conversationCell) &&
+    rowData?.type === LOG_TYPE_ENUM.CONSUME &&
+    Boolean(rowData.request_id)
 
   return (
     <div className='space-y-2.5'>
@@ -364,6 +364,14 @@ function CommonLogsCard<TData>({
           cell={cells.get('content')}
           className='col-span-2 bg-transparent px-0 py-0'
         />
+        {showConversation && (
+          <div className='col-span-2 flex justify-end'>
+            <CompactCell
+              cell={conversationCell}
+              className='[&_button]:max-w-none'
+            />
+          </div>
+        )}
       </div>
     </div>
   )

@@ -20,8 +20,8 @@ import { SystemBehaviorSection } from '../general/system-behavior-section'
 import { EmailSettingsSection } from '../integrations/email-settings-section'
 import { MonitoringSettingsSection } from '../integrations/monitoring-settings-section'
 import { WorkerSettingsSection } from '../integrations/worker-settings-section'
-import { DistributionSettlementSection } from '../maintenance/distribution-settlement-section'
 import { DistributionSettingsSection } from '../maintenance/distribution-settings-section'
+import { DistributionSettlementSection } from '../maintenance/distribution-settlement-section'
 import { LogSettingsSection } from '../maintenance/log-settings-section'
 import { PerformanceSection } from '../maintenance/performance-section'
 import { UpdateCheckerSection } from '../maintenance/update-checker-section'
@@ -38,6 +38,7 @@ const OPERATIONS_SECTIONS = [
           DefaultCollapseSidebar: settings.DefaultCollapseSidebar,
           DemoSiteEnabled: settings.DemoSiteEnabled,
           SelfUseModeEnabled: settings.SelfUseModeEnabled,
+          RequestCharsetFallbackEnabled: settings.RequestCharsetFallbackEnabled,
         }}
       />
     ),

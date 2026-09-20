@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next'
 import { GroupBadge } from '@/components/group-badge'
 import { StatusBadge, type StatusBadgeProps } from '@/components/status-badge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   Popover,
   PopoverContent,
@@ -35,12 +36,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { ConversationRecordDialog } from '@/features/chat-logs/components/conversation-record-dialog'
 import { getUserAvatarFallback, getUserAvatarStyle } from '@/lib/avatar'
 import { formatBillingCurrencyFromUSD } from '@/lib/currency'
 import { formatLogQuota, formatTimestampToDate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
-import { LOG_TYPE_ALL_VALUE } from '../../constants'
+import { LOG_TYPE_ALL_VALUE, LOG_TYPE_ENUM } from '../../constants'
 import type { UsageLog } from '../../data/schema'
 import {
   formatModelName,
@@ -296,7 +298,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
 
         return (
           <div className='flex min-w-0 flex-col gap-0.5'>
-            <span className='truncate text-[12px] tabular-nums text-[#8A93A4]'>
+            <span className='truncate text-[12px] text-[#8A93A4] tabular-nums'>
               {formatTimestampToDate(timestamp)}
             </span>
             <StatusBadge
@@ -387,7 +389,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                           render={
                             <button
                               type='button'
-                              className='inline-flex size-5 shrink-0 items-center justify-center rounded-full text-[#8A93A4] transition-colors hover:text-[#0A0E1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E4BFF]/30'
+                              className='inline-flex size-5 shrink-0 items-center justify-center rounded-full text-[#8A93A4] transition-colors hover:text-[#0A0E1A] focus-visible:ring-2 focus-visible:ring-[#2E4BFF]/30 focus-visible:outline-none'
                               aria-label={t('Retry Chain')}
                               onClick={(e) => e.stopPropagation()}
                             />
@@ -404,8 +406,10 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                           className='w-64 text-[12px]'
                         >
                           <div className='flex flex-col gap-1'>
-                            <p className='text-[13px] font-medium text-[#0A0E1A]'>{t('Retry Chain')}</p>
-                            <p className='break-all font-mono text-[12px] text-[#5A6478]'>
+                            <p className='text-[13px] font-medium text-[#0A0E1A]'>
+                              {t('Retry Chain')}
+                            </p>
+                            <p className='font-mono text-[12px] break-all text-[#5A6478]'>
                               {channelChain}
                             </p>
                           </div>
@@ -457,7 +461,9 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                     )}
                     {affinity && (
                       <div className='border-t border-[#E5E8EE] pt-1 text-[12px]'>
-                        <p className='text-[13px] font-medium text-[#0A0E1A]'>{t('Channel Affinity')}</p>
+                        <p className='text-[13px] font-medium text-[#0A0E1A]'>
+                          {t('Channel Affinity')}
+                        </p>
                         <p className='text-[#5A6478]'>
                           {t('Rule')}: {affinity.rule_name || '-'}
                         </p>
@@ -499,7 +505,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                 setUserInfoDialogOpen(true)
               }}
             >
-              <Avatar className='size-6 max-sm:hidden ring-1 ring-[#E5E8EE]'>
+              <Avatar className='size-6 ring-1 ring-[#E5E8EE] max-sm:hidden'>
                 <AvatarFallback
                   className={cn(
                     'text-[11px] font-semibold',
@@ -563,7 +569,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
                   copyText={sensitiveVisible ? tokenName : undefined}
                   size='sm'
                   showDot={false}
-                  className='h-6 max-w-full gap-1.5 overflow-hidden rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-2 py-0.5 text-[13px] font-medium text-[#0A0E1A] [font-family:var(--font-body)]'
+                  className='h-6 max-w-full gap-1.5 overflow-hidden rounded-md border border-[#E5E8EE] bg-[#F7F8FA] px-2 py-0.5 [font-family:var(--font-body)] text-[13px] font-medium text-[#0A0E1A]'
                 />
               </TooltipTrigger>
               {sensitiveVisible && tokenName.length > 16 && (
@@ -586,7 +592,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
               ) : null}
               {group && groupRatio != null ? ' ' : null}
               {groupRatio != null ? (
-                <span className='relative top-px align-baseline tabular-nums text-[#8A93A4]'>
+                <span className='relative top-px align-baseline text-[#8A93A4] tabular-nums'>
                   {formatRatioCompact(groupRatio)}x
                 </span>
               ) : null}
@@ -667,7 +673,7 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
 
         return (
           <div className='flex flex-col gap-0.5'>
-            <span className='text-[13px] font-semibold tabular-nums text-[#0A0E1A]'>
+            <span className='text-[13px] font-semibold text-[#0A0E1A] tabular-nums'>
               {promptTokens.toLocaleString()} /{' '}
               {completionTokens.toLocaleString()}
             </span>
@@ -788,6 +794,43 @@ export function useCommonLogsColumns(isAdmin: boolean): ColumnDef<UsageLog>[] {
       maxSize: 200,
     }
   )
+
+  // Conversation content is admin-only: regular users never see the entry point.
+  if (isAdmin) {
+    columns.push({
+      id: 'conversation',
+      header: t('Conversation Record'),
+      cell: function ConversationCell({ row }) {
+        const [dialogOpen, setDialogOpen] = useState(false)
+        const log = row.original
+        if (log.type !== LOG_TYPE_ENUM.CONSUME || !log.request_id) return null
+
+        return (
+          <>
+            <Button
+              type='button'
+              variant='outline'
+              size='sm'
+              className='h-7 px-2 text-[12px]'
+              onClick={(event) => {
+                event.stopPropagation()
+                setDialogOpen(true)
+              }}
+            >
+              {t('View')}
+            </Button>
+            <ConversationRecordDialog
+              requestId={log.request_id}
+              open={dialogOpen}
+              onOpenChange={setDialogOpen}
+            />
+          </>
+        )
+      },
+      size: 90,
+      maxSize: 110,
+    })
+  }
 
   return columns
 }

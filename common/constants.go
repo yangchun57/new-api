@@ -107,6 +107,13 @@ var ChatLogMaxBodyKB = 64
 var ChatLogRetentionDays = 0
 var ChatLogAttachmentsEnabled = true
 
+// RequestCharsetFallbackEnabled 是否在 JSON 请求体不是合法 UTF-8 时，
+// 按 RequestCharsetFallbackCharset 指定的旧编码整体转码为 UTF-8。
+// 默认开启；若客户端编码并非 GBK/GB18030/Big5，可设为 false 关闭。
+// RequestCharsetFallbackCharset 旧编码名称，支持 gb18030/gbk/big5，默认 gb18030。
+var RequestCharsetFallbackEnabled = true
+var RequestCharsetFallbackCharset = "gb18030"
+
 var TLSInsecureSkipVerify bool
 var InsecureTLSConfig = &tls.Config{InsecureSkipVerify: true}
 

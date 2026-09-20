@@ -16,14 +16,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import type { TFunction } from 'i18next'
-
 import type { StatusBadgeProps } from '@/components/status-badge'
-
-export const CHAT_LOG_STATUS = {
-  SUCCESS: 1,
-  FAILED: 2,
-} as const
 
 export const CHAT_LOG_ROLE_VARIANTS: Record<
   string,
@@ -39,18 +32,3 @@ export const CHAT_LOG_ROLE_VARIANTS: Record<
 export function getChatLogRoleVariant(role: string) {
   return CHAT_LOG_ROLE_VARIANTS[role]?.variant ?? 'neutral'
 }
-
-export function getChatLogRoleOptions(t: TFunction) {
-  return [
-    { label: t('User'), value: 'user' },
-    { label: t('Assistant'), value: 'assistant' },
-    { label: t('System'), value: 'system' },
-    { label: t('Tool'), value: 'tool' },
-  ]
-}
-
-// i18n keys; use t(ERROR_MESSAGES.xxx) when displaying.
-export const ERROR_MESSAGES = {
-  LOAD_FAILED: 'Failed to load chat logs',
-  SEARCH_FAILED: 'Failed to search chat logs',
-} as const

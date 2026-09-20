@@ -40,10 +40,3 @@ export async function getAllChatLogs(
   const res = await api.get(`/api/chat-log/?${buildQueryParams(params)}`)
   return res.data
 }
-
-export async function getUserChatLogs(
-  params: Omit<GetChatLogsParams, 'user_id'> = {}
-): Promise<GetChatLogsResponse> {
-  const res = await api.get(`/api/chat-log/self?${buildQueryParams(params)}`)
-  return res.data
-}

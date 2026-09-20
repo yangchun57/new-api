@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 	"testing"
+	"unicode/utf8"
 
 	"github.com/QuantumNous/new-api/relaykit/dto"
 	"github.com/QuantumNous/new-api/relaykit/types"
@@ -142,6 +143,24 @@ func TestExtractChatLogReply_Stream_RejectsNonDataLines(t *testing.T) {
 	got := extractStreamReply(types.RelayFormatOpenAI, body)
 
 	assert.Equal(t, "ok", got)
+}
+
+func TestChatLogCapture_TruncatesAtRuneBoundary(t *testing.T) {
+	capture := &ChatLogCapture{maxBytes: 4}
+
+	capture.append([]byte("ab中"))
+
+	assert.True(t, utf8.Valid(capture.Bytes()))
+	assert.Equal(t, "ab", string(capture.Bytes()))
+}
+
+func TestChatLogCapture_KeepsContentThatFits(t *testing.T) {
+	capture := &ChatLogCapture{maxBytes: 10}
+
+	capture.append([]byte("ab\xe4"))
+	capture.append([]byte("\xb8\xadcd"))
+
+	assert.Equal(t, "ab中cd", string(capture.Bytes()))
 }
 
 func TestExtractChatLogMessages_Responses(t *testing.T) {
