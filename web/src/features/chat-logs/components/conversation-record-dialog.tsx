@@ -172,8 +172,35 @@ export function ConversationRecordDialog({
   const logs = [...(data ?? [])].sort((a, b) => a.seq - b.seq)
   const first = logs[0]
 
+  // conversation_id 只在客户端请求头带了 X-Conversation-Id 时才有值，为空则不展示。
+  const meta: { label: string; value: string }[] = []
+  if (first?.conversation_id) {
+    meta.push({ label: t('Conversation ID'), value: first.conversation_id })
+  }
+  if (first?.request_id) {
+    meta.push({ label: t('Request ID'), value: first.request_id })
+  }
+  if (first?.token_name) {
+    meta.push({ label: t('Token'), value: first.token_name })
+  }
+  if (first?.group) {
+    meta.push({ label: t('Group'), value: first.group })
+  }
+
   let body = (
     <div className='space-y-2.5'>
+      {meta.length > 0 && (
+        <div className='grid gap-1 rounded-xl border border-[#E5E8EE] bg-[#F7F8FA] p-3 text-[12px]'>
+          {meta.map((item) => (
+            <div key={item.label} className='flex min-w-0 gap-2'>
+              <span className='w-24 shrink-0 text-[#8A93A4]'>{item.label}</span>
+              <span className='min-w-0 font-mono break-all text-[#5A6478]'>
+                {item.value}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       {logs.map((log) => (
         <MessageBlock key={log.id} log={log} />
       ))}
