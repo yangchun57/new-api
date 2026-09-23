@@ -26,6 +26,8 @@ export interface LoginPayload {
   username: string
   password: string
   turnstile?: string
+  captcha_id?: string
+  captcha_code?: string
 }
 
 export interface TwoFAPayload {
@@ -85,6 +87,11 @@ export interface ApiResponse<T = unknown> {
   data?: T
 }
 
+export interface CaptchaResponse {
+  captcha_id: string
+  captcha_image: string
+}
+
 // ============================================================================
 // System Status
 // ============================================================================
@@ -96,6 +103,7 @@ export interface SystemStatus {
     version?: string
     system_name?: string
     logo?: string
+    home_banners?: string[]
     github_oauth?: boolean
     github_client_id?: string
     discord_oauth?: boolean
@@ -118,6 +126,7 @@ export interface SystemStatus {
     WeChatAccountQRCodeImageURL?: string
     turnstile_check?: boolean
     turnstile_site_key?: string
+    captcha_enabled?: boolean
     email_verification?: boolean
     self_use_mode_enabled?: boolean
     display_in_currency?: boolean
@@ -141,6 +150,7 @@ export interface SystemStatus {
   version?: string
   system_name?: string
   logo?: string
+  home_banners?: string[]
   github_oauth?: boolean
   github_client_id?: string
   discord_oauth?: boolean
@@ -163,6 +173,7 @@ export interface SystemStatus {
   WeChatAccountQRCodeImageURL?: string
   turnstile_check?: boolean
   turnstile_site_key?: string
+  captcha_enabled?: boolean
   email_verification?: boolean
   self_use_mode_enabled?: boolean
   display_in_currency?: boolean

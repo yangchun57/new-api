@@ -24,6 +24,10 @@ common.already_exists: "已存在"
 common.name_cannot_be_empty: "名稱不能為空"
 common.batch_too_many: "批次請求數量過多，最多 {{.Max}} 條"
 
+# File upload messages
+file.invalid_image: "圖片檔案無效，僅支援 PNG、JPEG、GIF 或 WebP 格式"
+file.image_too_large: "圖片大小不能超過 {{.Max}}MB"
+
 # Auth middleware messages
 auth.not_logged_in: "無權進行此操作，未登入且未提供 access token"
 auth.access_token_invalid: "無權進行此操作，access token 無效"
@@ -70,6 +74,7 @@ user.register_disabled: "管理員關閉了新使用者註冊"
 user.password_register_disabled: "管理員關閉了通過密碼進行註冊，請使用第三方帳號驗證的形式進行註冊"
 user.username_or_password_empty: "使用者名或密碼為空"
 user.username_or_password_error: "使用者名或密碼錯誤，或使用者已被封禁"
+user.captcha_error: "驗證碼錯誤或已過期"
 user.email_or_password_empty: "信箱位址或密碼為空！"
 user.exists: "使用者名已存在，或已註銷"
 user.not_exists: "使用者不存在"

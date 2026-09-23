@@ -28,8 +28,10 @@ import (
 )
 
 type LoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username    string `json:"username"`
+	Password    string `json:"password"`
+	CaptchaId   string `json:"captcha_id"`
+	CaptchaCode string `json:"captcha_code"`
 }
 
 var (
@@ -46,6 +48,10 @@ func Login(c *gin.Context) {
 	err := common.DecodeJson(c.Request.Body, &loginRequest)
 	if err != nil {
 		common.ApiErrorI18n(c, i18n.MsgInvalidParams)
+		return
+	}
+	if common.CaptchaEnabled && !common.VerifyCaptcha(loginRequest.CaptchaId, loginRequest.CaptchaCode) {
+		common.ApiErrorI18n(c, i18n.MsgUserCaptchaError)
 		return
 	}
 	username := loginRequest.Username

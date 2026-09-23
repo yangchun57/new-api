@@ -30,6 +30,7 @@ import type {
   TwoFAPayload,
   RegisterPayload,
   ApiResponse,
+  CaptchaResponse,
 } from './types'
 
 // ============================================================================
@@ -48,10 +49,25 @@ export async function login(payload: LoginPayload) {
     {
       username: payload.username,
       password: payload.password,
+      captcha_id: payload.captcha_id ?? '',
+      captcha_code: payload.captcha_code ?? '',
     },
     { skipAuthRefresh: true }
   )
   return res.data
+}
+
+// Fetch an image captcha challenge
+export async function getCaptcha(): Promise<CaptchaResponse | null> {
+  const res = await api.get<ApiResponse<CaptchaResponse>>('/api/user/captcha', {
+    skipErrorHandler: true,
+    skipAuthRefresh: true,
+    disableDuplicate: true,
+  })
+  if (res.data?.success && res.data.data) {
+    return res.data.data
+  }
+  return null
 }
 
 // Two-factor authentication login

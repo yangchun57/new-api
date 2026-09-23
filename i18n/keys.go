@@ -28,6 +28,12 @@ const (
 	MsgBatchTooMany      = "common.batch_too_many"
 )
 
+// File upload messages
+const (
+	MsgFileInvalidImage  = "file.invalid_image"
+	MsgFileImageTooLarge = "file.image_too_large"
+)
+
 // Auth middleware messages
 const (
 	MsgAuthNotLoggedIn           = "auth.not_logged_in"
@@ -81,6 +87,7 @@ const (
 	MsgUserPasswordRegisterDisabled  = "user.password_register_disabled"
 	MsgUserUsernameOrPasswordEmpty   = "user.username_or_password_empty"
 	MsgUserUsernameOrPasswordError   = "user.username_or_password_error"
+	MsgUserCaptchaError              = "user.captcha_error"
 	MsgUserEmailOrPasswordEmpty      = "user.email_or_password_empty"
 	MsgUserExists                    = "user.exists"
 	MsgUserNotExists                 = "user.not_exists"

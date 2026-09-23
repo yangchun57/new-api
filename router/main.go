@@ -13,6 +13,10 @@ import (
 )
 
 func SetRouter(router *gin.Engine, assets WebAssets) {
+	if _, err := common.EnsureHomeBannerDir(); err != nil {
+		common.SysError("failed to create home banner directory: " + err.Error())
+	}
+	router.Static(common.HomeBannerURLPrefix, common.GetHomeBannerDir())
 	SetApiRouter(router)
 	SetDashboardRouter(router)
 	SetRelayRouter(router)

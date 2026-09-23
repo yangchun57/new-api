@@ -33,6 +33,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
+import { BannerGalleryField } from '../components/banner-gallery-field'
 import { FormDirtyIndicator } from '../components/form-dirty-indicator'
 import { FormNavigationGuard } from '../components/form-navigation-guard'
 import {
@@ -49,6 +50,7 @@ const _systemInfoSchema = z.object({
   SystemName: z.string().min(1),
   ServerAddress: z.string().optional(),
   Logo: z.string().url().optional().or(z.literal('')),
+  HomeBanners: z.array(z.string()),
   Footer: z.string().optional(),
   About: z.string().optional(),
   HomePageContent: z.string().optional(),
@@ -77,6 +79,9 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
     SystemName: normalizeValue(defaultValues.SystemName),
     ServerAddress: normalizeValue(defaultValues.ServerAddress),
     Logo: normalizeValue(defaultValues.Logo),
+    HomeBanners: Array.isArray(defaultValues.HomeBanners)
+      ? defaultValues.HomeBanners
+      : [],
     Footer: normalizeValue(defaultValues.Footer),
     About: normalizeValue(defaultValues.About),
     HomePageContent: normalizeValue(defaultValues.HomePageContent),
@@ -92,6 +97,7 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
     }),
     ServerAddress: z.string().optional(),
     Logo: z.string().url().optional().or(z.literal('')),
+    HomeBanners: z.array(z.string()),
     Footer: z.string().optional(),
     About: z.string().optional(),
     HomePageContent: z.string().optional(),
@@ -111,6 +117,13 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
       defaultValues: normalizedDefaults,
       onSubmit: async (_data, changedFields) => {
         for (const [key, value] of Object.entries(changedFields)) {
+          if (key === 'HomeBanners') {
+            await updateOption.mutateAsync({
+              key,
+              value: JSON.stringify(Array.isArray(value) ? value : []),
+            })
+            continue
+          }
           let v = normalizeValue(value)
           if (key === 'ServerAddress') {
             v = v.replace(/\/+$/, '')
@@ -259,6 +272,28 @@ export function SystemInfoSection({ defaultValues }: SystemInfoSectionProps) {
                       <FormDescription>
                         {t(
                           'Content displayed on the home page (supports Markdown)'
+                        )}
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </SettingsFormGridItem>
+
+              <SettingsFormGridItem span='full'>
+                <FormField
+                  control={form.control}
+                  name='HomeBanners'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('Home Banners')}</FormLabel>
+                      <BannerGalleryField
+                        value={field.value ?? []}
+                        onChange={field.onChange}
+                      />
+                      <FormDescription>
+                        {t(
+                          'Banners displayed as a carousel at the top of the home page. Upload images or paste image URLs. PNG, JPEG, GIF or WebP, up to 5MB each.'
                         )}
                       </FormDescription>
                       <FormMessage />

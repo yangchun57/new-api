@@ -39,6 +39,14 @@ export type UpdateOptionResponse = {
   message: string
 }
 
+export type UploadBannerResponse = {
+  success: boolean
+  message: string
+  data?: {
+    url: string
+  }
+}
+
 export type ConfirmPaymentComplianceResponse = {
   success: boolean
   message: string
@@ -110,6 +118,7 @@ export type SiteSettings = {
   Notice: string
   SystemName: string
   Logo: string
+  HomeBanners: string[]
   Footer: string
   About: string
   HomePageContent: string
@@ -157,6 +166,7 @@ export type AuthSettings = {
   TurnstileCheckEnabled: boolean
   TurnstileSiteKey: string
   TurnstileSecretKey: string
+  CaptchaEnabled: boolean
   'passkey.enabled': boolean
   'passkey.rp_display_name': string
   'passkey.rp_id': string

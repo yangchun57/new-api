@@ -23,20 +23,20 @@ import { PublicLayout } from '@/components/layout'
 import { Footer } from '@/components/layout/components/footer'
 import { RichContent } from '@/components/rich-content'
 import { useTheme } from '@/context/theme-provider'
-import { useStatus } from '@/hooks/use-status'
 import { isLikelyHtml } from '@/lib/content-format'
+import { useAuthStore } from '@/stores/auth-store'
 
-import { HomeBanner } from './components/home-banner'
-import { useHomePageContent } from './hooks'
+import { CTA, Features, HowItWorks, Stats } from './components';
+import { PremiumHero } from './components/sections/premium-hero';
+import { useHomePageContent } from './hooks';
 
 export function Home() {
   const { i18n, t } = useTranslation()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const { resolvedTheme } = useTheme()
-  const { status } = useStatus()
+  const { auth } = useAuthStore()
+  const isAuthenticated = !!auth.user
   const { content, isLoaded, isUrl } = useHomePageContent()
-  const rawBanners = status?.home_banners ?? status?.data?.home_banners
-  const bannerUrls = Array.isArray(rawBanners) ? rawBanners : []
 
   const syncIframePreferences = useCallback(() => {
     try {
@@ -123,15 +123,11 @@ export function Home() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      {bannerUrls.length > 0 ? (
-        <HomeBanner imageUrls={bannerUrls} />
-      ) : (
-        <div className='flex min-h-[60vh] items-center justify-center px-4 pt-20'>
-          <span className='text-muted-foreground text-sm'>
-            {t('No banner uploaded yet')}
-          </span>
-        </div>
-      )}
+      <PremiumHero isAuthenticated={isAuthenticated} />
+      <Stats />
+      <Features />
+      <HowItWorks />
+      <CTA isAuthenticated={isAuthenticated} />
       <Footer />
     </PublicLayout>
   )

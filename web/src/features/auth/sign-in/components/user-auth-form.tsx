@@ -45,6 +45,7 @@ import { LegalConsent } from '@/features/auth/components/legal-consent'
 import { OAuthProviders } from '@/features/auth/components/oauth-providers'
 import { loginFormSchema } from '@/features/auth/constants'
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect'
+import { useCaptcha } from '@/features/auth/hooks/use-captcha'
 import { useTurnstile } from '@/features/auth/hooks/use-turnstile'
 import { beginPasskeyLogin, finishPasskeyLogin } from '@/features/auth/passkey'
 import type { AuthFormProps } from '@/features/auth/types'
@@ -81,6 +82,7 @@ export function UserAuthForm({
   const [isWeChatDialogOpen, setIsWeChatDialogOpen] = useState(false)
   const [isWeChatSubmitting, setIsWeChatSubmitting] = useState(false)
   const [turnstileWidgetKey, setTurnstileWidgetKey] = useState(0)
+  const [captchaCode, setCaptchaCode] = useState('')
   const legalConsentErrorMessage = t('Please agree to the legal terms first')
   const loginFailedMessage = t('Login failed')
 
@@ -99,6 +101,14 @@ export function UserAuthForm({
     setTurnstileToken,
     validateTurnstile,
   } = useTurnstile()
+  const {
+    isCaptchaEnabled,
+    captchaId,
+    captchaImage,
+    isCaptchaLoading,
+    refreshCaptcha,
+    validateCaptcha,
+  } = useCaptcha()
   const { handleLoginSuccess, redirectTo2FA } = useAuthRedirect()
   const setPending2FAFlowToken = useAuthStore(
     (state) => state.auth.setPending2FAFlowToken
@@ -166,8 +176,11 @@ export function UserAuthForm({
     }
 
     if (!validateTurnstile()) return
+    if (!validateCaptcha(captchaCode)) return
 
     const submittedTurnstileToken = turnstileToken
+    const submittedCaptchaId = captchaId
+    const submittedCaptchaCode = captchaCode
     if (isTurnstileEnabled) {
       setTurnstileToken('')
       setTurnstileWidgetKey((current) => current + 1)
@@ -179,6 +192,8 @@ export function UserAuthForm({
         username: data.username,
         password: data.password,
         turnstile: submittedTurnstileToken,
+        captcha_id: submittedCaptchaId,
+        captcha_code: submittedCaptchaCode,
       })
 
       if (res.success) {
@@ -202,6 +217,10 @@ export function UserAuthForm({
       toast.error(error instanceof Error ? error.message : loginFailedMessage)
     } finally {
       setIsLoading(false)
+      if (isCaptchaEnabled) {
+        setCaptchaCode('')
+        void refreshCaptcha()
+      }
     }
   }
 
@@ -409,6 +428,38 @@ export function UserAuthForm({
                 </FormItem>
               )}
             />
+
+            {isCaptchaEnabled && (
+              <div className='grid gap-2'>
+                <FormLabel className={labelCls}>{t('Captcha')}</FormLabel>
+                <div className='flex items-center gap-3'>
+                  <Input
+                    value={captchaCode}
+                    onChange={(event) => setCaptchaCode(event.target.value)}
+                    placeholder={t('Enter the captcha')}
+                    autoComplete='off'
+                    className={inputCls}
+                  />
+                  <button
+                    type='button'
+                    onClick={() => void refreshCaptcha()}
+                    aria-label={t('Click to refresh the captcha')}
+                    title={t('Click to refresh the captcha')}
+                    className='flex h-11 w-[118px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
+                  >
+                    {isCaptchaLoading || !captchaImage ? (
+                      <Loader2 className='h-4 w-4 animate-spin text-[#8A93A4]' />
+                    ) : (
+                      <img
+                        src={captchaImage}
+                        alt={t('Captcha')}
+                        className='h-11 w-[118px] object-cover'
+                      />
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
 
             <Button
               type='submit'

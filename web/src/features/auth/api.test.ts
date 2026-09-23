@@ -16,12 +16,12 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 
-import type { RefreshOutcome } from '@/lib/api'
+import { api, type RefreshOutcome } from '@/lib/api'
 import type { AuthBundle } from '@/stores/auth-store'
 
-import { executeLogout } from './api'
+import { executeLogout, login } from './api'
 
 const bundle: AuthBundle = {
   access_token: 'access-token',
@@ -49,6 +49,32 @@ function mismatchError() {
     },
   }
 }
+
+describe('login payload', () => {
+  test('sends the captcha challenge together with the credentials', async () => {
+    const postSpy = vi
+      .spyOn(api, 'post')
+      .mockResolvedValue({ data: { success: true, message: '' } } as never)
+
+    await login({
+      username: 'alice',
+      password: 'secret',
+      captcha_id: 'captcha-1',
+      captcha_code: 'AB2C',
+    })
+
+    expect(postSpy).toHaveBeenCalledWith(
+      '/api/user/login?turnstile=',
+      {
+        username: 'alice',
+        password: 'secret',
+        captcha_id: 'captcha-1',
+        captcha_code: 'AB2C',
+      },
+      { skipAuthRefresh: true }
+    )
+  })
+})
 
 describe('logout coordination', () => {
   test('returns an unsuccessful response without pretending to sign out', async () => {

@@ -27,6 +27,7 @@ import type {
   SystemTaskResponse,
   UpdateOptionRequest,
   UpdateOptionResponse,
+  UploadBannerResponse,
   UpstreamChannelsResponse,
   UpstreamRatiosResponse,
 } from './types'
@@ -39,6 +40,20 @@ export async function getSystemOptions() {
 export async function updateSystemOption(request: UpdateOptionRequest) {
   const res = await api.put<UpdateOptionResponse>('/api/option/', request)
   return res.data
+}
+
+export async function uploadHomeBanner(file: File): Promise<string> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const res = await api.post<UploadBannerResponse>(
+    '/api/file/banner',
+    formData,
+    { skipBusinessError: true }
+  )
+  if (res.data?.success && res.data.data?.url) {
+    return res.data.data.url
+  }
+  throw new Error(res.data?.message || 'Failed to upload banner')
 }
 
 export async function confirmPaymentCompliance() {

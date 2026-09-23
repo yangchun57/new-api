@@ -15,6 +15,8 @@ var Version = "v0.0.0"            // this hard coding will be replaced automatic
 var SystemName = "New API"
 var Footer = ""
 var Logo = ""
+var HomeBanner = ""
+var HomeBanners = []string{}
 var TopUpLink = ""
 
 // var ChatLink = ""
@@ -73,6 +75,7 @@ var LinuxDOOAuthEnabled = false
 var WeChatAuthEnabled = false
 var TelegramOAuthEnabled = false
 var TurnstileCheckEnabled = false
+var CaptchaEnabled = true
 var RegisterEnabled = true
 
 var EmailDomainRestrictionEnabled = false // 是否启用邮箱域名限制

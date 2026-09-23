@@ -24,6 +24,10 @@ common.already_exists: "已存在"
 common.name_cannot_be_empty: "名称不能为空"
 common.batch_too_many: "批量请求数量过多，最多 {{.Max}} 条"
 
+# File upload messages
+file.invalid_image: "图片文件无效，仅支持 PNG、JPEG、GIF 或 WebP 格式"
+file.image_too_large: "图片大小不能超过 {{.Max}}MB"
+
 # Auth middleware messages
 auth.not_logged_in: "无权进行此操作，未登录且未提供 access token"
 auth.access_token_invalid: "无权进行此操作，access token 无效"
@@ -70,6 +74,7 @@ user.register_disabled: "管理员关闭了新用户注册"
 user.password_register_disabled: "管理员关闭了通过密码进行注册，请使用第三方账户验证的形式进行注册"
 user.username_or_password_empty: "用户名或密码为空"
 user.username_or_password_error: "用户名或密码错误，或用户已被封禁"
+user.captcha_error: "验证码错误或已过期"
 user.email_or_password_empty: "邮箱地址或密码为空！"
 user.exists: "用户名已存在，或已注销"
 user.not_exists: "用户不存在"
