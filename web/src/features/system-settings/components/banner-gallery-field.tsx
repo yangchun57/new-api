@@ -26,7 +26,7 @@ import { Input } from '@/components/ui/input'
 
 import { uploadHomeBanner } from '../api'
 
-export const MAX_HOME_BANNERS = 20
+const MAX_HOME_BANNERS = 20
 const MAX_BANNER_SIZE = 5 * 1024 * 1024
 const ALLOWED_BANNER_TYPES = new Set([
   'image/png',

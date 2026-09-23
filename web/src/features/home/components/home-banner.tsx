@@ -72,7 +72,7 @@ export function HomeBanner(props: HomeBannerProps) {
         onFocusCapture={() => setIsPaused(true)}
         onBlurCapture={() => setIsPaused(false)}
       >
-        <CarouselContent className='-ml-0'>
+        <CarouselContent className='ml-0'>
           {images.map((url, index) => (
             <CarouselItem key={url} className='pl-0'>
               <img
