@@ -43,6 +43,7 @@ import { LegalConsent } from '@/features/auth/components/legal-consent'
 import { OAuthProviders } from '@/features/auth/components/oauth-providers'
 import { registerFormSchema } from '@/features/auth/constants'
 import { useAuthRedirect } from '@/features/auth/hooks/use-auth-redirect'
+import { useCaptcha } from '@/features/auth/hooks/use-captcha'
 import { useEmailVerification } from '@/features/auth/hooks/use-email-verification'
 import { useTurnstile } from '@/features/auth/hooks/use-turnstile'
 import {
@@ -74,6 +75,7 @@ export function SignUpForm({
   const [isWeChatDialogOpen, setIsWeChatDialogOpen] = useState(false)
   const [isWeChatSubmitting, setIsWeChatSubmitting] = useState(false)
   const [turnstileWidgetKey, setTurnstileWidgetKey] = useState(0)
+  const [captchaCode, setCaptchaCode] = useState('')
   const legalConsentErrorMessage = t('Please agree to the legal terms first')
 
   const { status } = useStatus()
@@ -84,6 +86,14 @@ export function SignUpForm({
     setTurnstileToken,
     validateTurnstile,
   } = useTurnstile()
+  const {
+    isCaptchaEnabled,
+    captchaId,
+    captchaImage,
+    isCaptchaLoading,
+    refreshCaptcha,
+    validateCaptcha,
+  } = useCaptcha()
   const { redirectToLogin, handleLoginSuccess } = useAuthRedirect()
   const {
     isSending: isSendingCode,
@@ -164,6 +174,10 @@ export function SignUpForm({
     }
 
     if (!validateTurnstile()) return
+    if (!validateCaptcha(captchaCode)) return
+
+    const submittedCaptchaId = captchaId
+    const submittedCaptchaCode = captchaCode
 
     setIsLoading(true)
     try {
@@ -174,6 +188,8 @@ export function SignUpForm({
         verification_code: verificationCode || undefined,
         aff_code: getAffiliateCode(),
         turnstile: turnstileToken,
+        captcha_id: submittedCaptchaId,
+        captcha_code: submittedCaptchaCode,
       })
 
       if (res?.success) {
@@ -186,6 +202,10 @@ export function SignUpForm({
       // Errors are handled by global interceptor
     } finally {
       setIsLoading(false)
+      if (isCaptchaEnabled) {
+        setCaptchaCode('')
+        void refreshCaptcha()
+      }
     }
   }
 
@@ -362,6 +382,38 @@ export function SignUpForm({
               </Button>
             </div>
           </>
+        )}
+
+        {isCaptchaEnabled && (
+          <div className='grid gap-2'>
+            <Label className={labelCls}>{t('Captcha')}</Label>
+            <div className='flex items-center gap-3'>
+              <Input
+                value={captchaCode}
+                onChange={(event) => setCaptchaCode(event.target.value)}
+                placeholder={t('Enter the captcha')}
+                autoComplete='off'
+                className={inputCls}
+              />
+              <button
+                type='button'
+                onClick={() => void refreshCaptcha()}
+                aria-label={t('Click to refresh the captcha')}
+                title={t('Click to refresh the captcha')}
+                className='flex h-11 w-[118px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#E5E8EE] bg-white shadow-sm'
+              >
+                {isCaptchaLoading || !captchaImage ? (
+                  <Loader2 className='h-4 w-4 animate-spin text-[#8A93A4]' />
+                ) : (
+                  <img
+                    src={captchaImage}
+                    alt={t('Captcha')}
+                    className='h-11 w-[118px] object-cover'
+                  />
+                )}
+              </button>
+            </div>
+          </div>
         )}
 
         {isTurnstileEnabled && (

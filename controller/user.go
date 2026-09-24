@@ -34,6 +34,12 @@ type LoginRequest struct {
 	CaptchaCode string `json:"captcha_code"`
 }
 
+type RegisterRequest struct {
+	model.User
+	CaptchaId   string `json:"captcha_id"`
+	CaptchaCode string `json:"captcha_code"`
+}
+
 var (
 	errUserPasswordUnset    = errors.New("user password is not set")
 	errOriginalPasswordFail = errors.New("original password is incorrect")
@@ -218,12 +224,17 @@ func Register(c *gin.Context) {
 		common.ApiErrorI18n(c, i18n.MsgUserPasswordRegisterDisabled)
 		return
 	}
-	var user model.User
-	err := common.DecodeJson(c.Request.Body, &user)
+	var registerRequest RegisterRequest
+	err := common.DecodeJson(c.Request.Body, &registerRequest)
 	if err != nil {
 		common.ApiErrorI18n(c, i18n.MsgInvalidParams)
 		return
 	}
+	if common.CaptchaEnabled && !common.VerifyCaptcha(registerRequest.CaptchaId, registerRequest.CaptchaCode) {
+		common.ApiErrorI18n(c, i18n.MsgUserCaptchaError)
+		return
+	}
+	user := registerRequest.User
 	user.Username = strings.TrimSpace(user.Username)
 	user.Email = model.NormalizeEmail(user.Email)
 	if user.Username == "" {
