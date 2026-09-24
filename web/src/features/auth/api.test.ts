@@ -21,7 +21,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { api, type RefreshOutcome } from '@/lib/api'
 import type { AuthBundle } from '@/stores/auth-store'
 
-import { executeLogout, login } from './api'
+import { executeLogout, login, register } from './api'
 
 const bundle: AuthBundle = {
   access_token: 'access-token',
@@ -72,6 +72,32 @@ describe('login payload', () => {
         captcha_code: 'AB2C',
       },
       { skipAuthRefresh: true }
+    )
+  })
+})
+
+describe('register payload', () => {
+  test('sends the captcha challenge together with the registration data', async () => {
+    const postSpy = vi
+      .spyOn(api, 'post')
+      .mockResolvedValue({ data: { success: true, message: '' } } as never)
+
+    await register({
+      username: 'alice',
+      password: 'secret',
+      captcha_id: 'captcha-1',
+      captcha_code: 'AB2C',
+    })
+
+    expect(postSpy).toHaveBeenCalledWith(
+      '/api/user/register',
+      {
+        username: 'alice',
+        password: 'secret',
+        captcha_id: 'captcha-1',
+        captcha_code: 'AB2C',
+      },
+      { params: { turnstile: '' } }
     )
   })
 })
